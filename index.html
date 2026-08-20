@@ -1,49 +1,1846 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>M Aurora</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #14181d;
-      color: #f4f1ec;
-      font-family: Georgia, "Times New Roman", serif;
-      text-align: center;
-      padding: 24px;
-    }
-    .eyebrow {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: #b8a380;
-      margin-bottom: 20px;
-    }
-    h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 400; letter-spacing: 0.04em; }
-    .divider { width: 48px; height: 1px; background: #b8a380; margin: 28px auto; }
-    .note {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #c9c4bb;
-      max-width: 44ch;
-      margin: 0 auto;
-    }
-  </style>
+<!--
+M AURORA - HOMEPAGE REBUILD C: "FIRST LIGHT" (2026-08-21)
+MGM-treatment translation. Template: d:/Claude/repos/m-grand-minori/index-redesign-v2.html
+Brief (context/m-aurora/rebuild-direction.md, Variant C):
+
+FIDELITY  Direction-shift. Survives: teal #18B7C9 (all primary CTAs), deep teal #165063,
+aurora gradient #67C8A5->#18B7C9, warm off-white #FEFCF7, lockups, all CGI imagery,
+Montserrat body/UI, pill CTAs per the approved 2026-08-11 mockup language.
+New: Sora display face, dark dawn-teal ground (#0E2A33 / #113440), MGM v2 band structure.
+
+KEEP (SEO, verbatim)  Live title + meta description + OG set; H1 "M Aurora - New Serviced
+Apartment at Old Klang Road"; all six live H2s; H3 + H4 hierarchy; the five SEO prose
+blocks as section ledes with Show-more (content always in DOM); 12 USP items with the
+site's own icons; GreenRE Silver award; APDL legal block; PDPA consent wording; budget
+dropdown; social links; 360 VR links stay external.
+
+FIX  Auto-popup killed (announcement bar instead); four floaters replaced by one sticky
+bar (Register + WhatsApp); unit data surfaced on-page (was buried on /floor-plans/);
+bottom-only form -> drawer + quick form high on page; Montserrat-only flat hierarchy ->
+Sora display scale; prose walls -> editorial ledes on conversion modules.
+
+ADD  Announce marquee; L7b hero (location-first: lockup, location, price, facts) + dual
+CTA; trust strip; unit tabs + locked-price calculator (4.3% p.a., loan + tenure sliders);
+quick register; facilities category tabs from the published plan legends (46 items);
+gallery + lightbox; location connectivity panel (no invented distances); developer band;
+FAQ accordion (ADDITIVE - needs client sign-off) + FAQPage JSON-LD; visit/register split;
+lead drawer with unit context; capture-safe reveals + counters.
+
+DATA HONESTY  All five types published on /floor-plans/ (verified 2026-08-21). Per-type
+pricing still unpublished: cards show project from-price RM339K* with a visible flag.
+Facility names from the published plan legends only. No invented distances. No rebates
+or packages anywhere. Phone fields carry no +60 prefix (standing rule 2026-08-02).
+
+REVISION R14 (client feedback 2026-08-21, round 2): calculator price is selectable (MGM
+cp-pick dropdown, synced with the tabs and unit card); estimated-monthly output centred
+with the rate note right-aligned; permit cnote removed from the calculator (permit text
+stays in the footer legal); developer uses the colour Mah Sing logo and the MGM heading;
+mobile section rail added (MGM rail pattern, appears past the hero, scrollspy-centred);
+facility lists carry their plan legend numbers; location visual replaced with the client
+map (_loc-map.png, zoomable) and the panel now carries the client-supplied lists: Access
+1-7 and Transit 1-3 numbered to match the map markers, plus Malls / Schools / Parks /
+Health with real distances. Hero art resolution: the live site serves no larger files
+(1000-1920px ceiling, -scaled probes 404); request original renders from Mah Sing.
+
+REVISION R13 (client feedback 2026-08-21): hero lockup restored above the eyebrow;
+eyebrow = "Open for Sale"; client-supplied lighter scrim; Grand Entrance added as hero
+slide 2 (4-slide carousel); trust strip removed; Layouts + quick form moved directly
+below the hero; section ledes shortened to first sentence with the remainder inside
+Show more (verbatim text preserved in DOM for SEO); tabs/chips/cards squared to the MGM
+box style and the layouts card full-bleed on mobile; lightbox upgraded with wheel /
+pinch / drag / button zoom; developer and footer rebuilt to the MGM v2 patterns (contact
+merged into the footer); all forms name/phone/email only (budget select removed, noted
+as a deviation from the live form); WhatsApp buttons removed.
+
+VERSION  Predawn Indigo (2026-08-21): ground palette sampled from the hero banner's own
+upper sky (_inbox hero-banner-v2-maurora.jpg) so the page continues the artwork's dawn:
+night #111838, bands #1A2148, dark #0B102A, indigo-tinted hairlines, body cream #DCE0F2.
+Brand teal #18B7C9 CTAs, mint accents and the aurora gradient are unchanged. Sibling of
+2026-08-21_Homepage_rebuild-C.html (dawn-teal ground) for palette comparison.
+
+MOCKUP SAFETY  robots noindex until production; no GTM/GA4 IDs (dataLayer stub only);
+forms are demo-only (no live POST). Production head should restore index,follow.
+
+CLIENT FEEDBACK ROUND, Justin 2026-08-21 (MGM mobile hero as reference):
+mobile hero rebuilt on the MGM pattern (flat ground top, width-fit art anchored bottom,
+text clear of the towers, both CTAs at the base); visible H1 shortened to "New Serviced
+Apartment" (the full SEO phrase stays in title, meta description and the Welcome H2);
+hero cards = Starting from RM339K* + Freehold; spec pill strip removed (stats live in
+the trust strip); all CTA radius 8px; announcement bar auto-cycle restored (marquee
+finding waived as a client decision; pauses on hover, off under prefers-reduced-motion).
+
+EDITORIAL HERO ROUND (client reference 2026-08-21): serif display face (Bodoni Moda)
+replaces Sora across headings; hero rebuilt to the attached editorial reference in
+Aurora's own palette: letterspaced eyebrow, serif sentence-case headline (the live
+site's own H3 "The New Heights of Living at Old Klang Road", verbatim), prose sub from
+live copy + permit facts, square CTAs (radius 0, DESIGN.md updated), full-bleed art
+with scrim on both viewports, and an auto-carousel (6s, cross-fade): The Towers /
+50m Lap Pool / Show Unit Type A (all the site's own imagery). Pauses on hover and
+when the tab is hidden; no auto-advance under prefers-reduced-motion; ?slide=N for
+state captures. The reference's own figures (42-storey / 648 residences / 2029) were
+NOT copied: all facts remain Aurora's published data.
+
+TOWER EMPHASIS ROUND (approved 2026-08-21): in-hero lockup hidden on mobile (nav and the
+artwork's podium signage carry the name; frees ~110px for the towers); permit-sourced
+tower callouts with hairline pointers (Tower A 747 units / Tower B 797 units, 46 storeys
+each; left=A right=B ASSUMED, confirm with client); artwork on its own layer with a
+transform-only 24s settle drift (off under prefers-reduced-motion).
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Klang Road New Serviced Apartment Project | M Aurora</title>
+<meta name="description" content="Explore M Aurora, a new freehold serviced apartment project at Old Klang Road. Inspired by The Promise Of Dawn and designed to meet the needs of every family. Learn more">
+<link rel="canonical" href="https://m-aurora.com.my/">
+<meta name="robots" content="noindex"><!-- mockup only: production restores index, follow -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Old Klang Road New Serviced Apartment Project | M Aurora">
+<meta property="og:description" content="Explore M Aurora, a new freehold serviced apartment project at Old Klang Road. Inspired by The Promise Of Dawn and designed to meet the needs of every family. Learn more">
+<meta property="og:url" content="https://m-aurora.com.my/">
+<meta property="og:site_name" content="M Aurora Old Klang Road, Kuala Lumpur | by Mah Sing">
+<meta property="og:image" content="https://m-aurora.com.my/wp-content/uploads/2025/01/favicon-maurora.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://m-aurora.com.my/wp-content/uploads/2025/01/favicon-maurora-150x150.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://m-aurora.com.my/","url":"https://m-aurora.com.my/","name":"Old Klang Road New Serviced Apartment Project | M Aurora","isPartOf":{"@id":"https://m-aurora.com.my/#website"},"description":"Explore M Aurora, a new freehold serviced apartment project at Old Klang Road. Inspired by The Promise Of Dawn and designed to meet the needs of every family.","inLanguage":"en-US"},
+{"@type":"WebSite","@id":"https://m-aurora.com.my/#website","url":"https://m-aurora.com.my/","name":"M Aurora Old Klang Road, Kuala Lumpur | by Mah Sing","inLanguage":"en-US"},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is M Aurora freehold or leasehold?","acceptedAnswer":{"@type":"Answer","text":"M Aurora is a freehold serviced apartment development on Old Klang Road, Kuala Lumpur. Unlike leasehold projects with tenure restrictions, its freehold status promises enduring value in an area poised for continuous growth."}},
+{"@type":"Question","name":"What unit types and sizes are available at M Aurora?","acceptedAnswer":{"@type":"Answer","text":"Five layouts: Type A (1+1 bedroom, 1 bathroom, 556 sq ft), Type B (2 bedrooms, 2 bathrooms, 737 sq ft), Type C (3 bedrooms with balcony, 2 bathrooms, 858 sq ft), Type D (3 bedrooms with balcony, 3 bathrooms, 916 sq ft) and Type E (4 bedrooms with balcony, 3 bathrooms, 1,019 sq ft), with flexibility to combine rooms and create dual-key spaces."}},
+{"@type":"Question","name":"How much does a unit at M Aurora cost?","acceptedAnswer":{"@type":"Answer","text":"Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B. Per-type price lists are available from the sales team."}},
+{"@type":"Question","name":"When will M Aurora be completed?","acceptedAnswer":{"@type":"Answer","text":"The expected date of completion is September 2030, per the advertising and sales permit."}},
+{"@type":"Question","name":"How many car parks does each unit get?","acceptedAnswer":{"@type":"Answer","text":"Each unit comes with 1 to 3 car parks, per the advertising and sales permit."}},
+{"@type":"Question","name":"What facilities does M Aurora offer?","acceptedAnswer":{"@type":"Answer","text":"46 named facilities across the Ground and Level 8 podium plans and the Sky Lounge plan, including a 50m lap pool, gym, yoga studio, co-working space, glamping dome, Aurora Garden and a multi-purpose hall. M Aurora has been awarded the Silver Provisional GreenRE Certification."}},
+{"@type":"Question","name":"Who is the developer of M Aurora?","acceptedAnswer":{"@type":"Answer","text":"Major Land Development Sdn. Bhd., a wholly-owned subsidiary of Mah Sing Group Berhad, one of Malaysia's most established property developers with over 79 completed projects nationwide."}}
+]}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#18B7C9;--teal2:#12A0B0;--deep:#165063;
+  --night:#111838;--night2:#1A2148;--night3:#232B58;--dark:#0B102A;
+  --cream:#FEFCF7;--cream2:#DCE0F2;--lime:#D0DA7A;
+  --ink:#1A1A1A;--ink2:#4A5A5E;--muted:#9DA6C8;
+  --grad:linear-gradient(90deg,#67C8A5 0%,#18B7C9 100%);
+  --mull:rgba(150,160,220,.18);
+  --fd:"Bodoni Moda",Georgia,serif;
+  --fb:"Montserrat",'Segoe UI',sans-serif;
+  --pad:24px;--max:1200px;
+  --safe:env(safe-area-inset-bottom,0px);
+}
+@media(min-width:768px){:root{--pad:36px}}
+@media(min-width:1024px){:root{--pad:48px}}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--fb);color:var(--cream);background:var(--night);overflow-x:hidden;
+  padding-bottom:calc(70px + var(--safe));font-size:16px;line-height:1.7}
+@media(min-width:1024px){body{padding-bottom:0}}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+[hidden]{display:none!important}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font:600 12px/1.6 var(--fb);letter-spacing:.2em;text-transform:uppercase;
+  color:#8FE0D0;display:inline-block}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+h1,h2,h3{font-family:var(--fd);font-weight:600;line-height:1.16;text-wrap:balance;color:var(--cream)}
+h2{font-size:clamp(27px,4.4vw,46px)}
+h3{font-size:clamp(19px,2.4vw,24px)}
+.em{color:#5AD0DF}
+.copy{font-size:16px;line-height:1.75;color:var(--cream2);max-width:62ch;font-weight:400}
+.copy a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.copy a:hover{color:#5AD0DF}
+.sec{padding:64px 0;position:relative;overflow:hidden}
+@media(min-width:1024px){.sec{padding:104px 0}}
+.sec-alt{background:linear-gradient(180deg,var(--night2) 0%,var(--night) 100%)}
+.sec-light{background:var(--cream);color:var(--ink)}
+.sec-light h2,.sec-light h3{color:var(--deep)}
+.sec-light .copy{color:var(--ink2)}
+.sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;max-width:680px}
+.sec-head.center{margin-inline:auto;text-align:center;align-items:center}
+.sec-head h2::after{content:'';display:block;width:72px;height:3px;border-radius:2px;
+  background:var(--grad);margin-top:16px}
+.sec-head.center h2::after{margin-inline:auto}
+/* capture params (house convention): ?clean=1 hides fixed chrome for full-page shots */
+html.clean .ld,html.clean .ld-backdrop,html.clean .sticky,html.clean .wa-float,
+html.clean .to-top,html.clean .mm,html.clean .mm-backdrop{display:none!important}
+section[id]{scroll-margin-top:96px}
+
+/* buttons: Aurora pill language (approved 2026-08-11 mockup) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font:700 14px/1.3 var(--fb);letter-spacing:.02em;padding:16px 28px;border-radius:0;
+  transition:transform .18s,box-shadow .18s,background .18s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(6,9,24,.45)}
+.btn-p:hover{background:var(--teal2);transform:translateY(-1px)}
+.btn-o{border:1.5px solid rgba(24,183,201,.55);color:var(--cream);
+  background:rgba(11,16,42,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.btn-o:hover{background:rgba(24,183,201,.16);border-color:var(--teal)}
+.btn-wa{background:#0E7568;color:#fff}
+.btn-wa:hover{background:#0B665A}
+
+/* reveals: JS-optional + capture-safe (IO + post-load force sweep) */
+html.js .rv{opacity:0;transform:translate3d(0,22px,0);
+  transition:opacity .7s ease,transform .75s cubic-bezier(.22,1,.36,1)}
+html.js .rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}}
+
+/* ===== ANNOUNCE MARQUEE ===== */
+.ann{background:linear-gradient(90deg,#116273 0%,#0F4C5C 100%);color:var(--cream);height:40px;
+  font:600 12.5px/1.4 var(--fb);letter-spacing:.04em;overflow:hidden;white-space:nowrap;
+  display:flex;align-items:center}
+.ann-track{display:inline-flex;align-items:center;height:100%;animation:marq 56s linear infinite;will-change:transform}
+.ann-track:hover{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.ann-track{animation:none}}
+.ann-item{display:inline-flex;align-items:center;gap:14px;padding-right:14px}
+.ann-sep{opacity:.5;color:#8FE0D0}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ===== NAV ===== */
+.nav{position:sticky;top:0;display:grid;grid-template-columns:1fr auto;align-items:center;
+  padding:16px var(--pad);background:transparent;z-index:100;margin-bottom:-78px;
+  transition:background .25s ease,box-shadow .25s ease,padding .25s ease}
+@media(min-width:1024px){.nav{grid-template-columns:auto minmax(0,1fr) auto;margin-bottom:-86px}}
+.nav.is-scrolled{background:rgba(11,16,42,.92);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);box-shadow:0 2px 18px rgba(0,0,0,.25);
+  padding:11px var(--pad);border-bottom:1px solid var(--mull)}
+.nav-logo{display:flex;align-items:center;gap:14px}
+.nav-logo img.lk{height:34px;width:auto}
+.nav-logo img.ms{height:18px;width:auto;opacity:.9}
+@media(min-width:1024px){.nav-logo img.lk{height:42px}.nav-logo img.ms{height:22px}}
+.nav-rail{display:none}
+@media(min-width:1024px){
+  .nav-rail{display:flex;overflow-x:auto;scrollbar-width:none;margin:0 22px;-webkit-overflow-scrolling:touch}
+  .nav-rail::-webkit-scrollbar{display:none}
+  .nav-rail a:first-child{margin-left:auto}
+  .nav-rail a:last-child{margin-right:auto}
+  .nav-rail a{flex:none;position:relative;padding:11px 11px;font:600 11.5px/1.3 var(--fb);
+    letter-spacing:.07em;text-transform:uppercase;color:rgba(254,252,247,.76);white-space:nowrap;transition:color .2s}
+  .nav-rail a::after{content:"";position:absolute;left:11px;right:11px;bottom:3px;height:2px;
+    background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .nav-rail a.on{color:var(--cream)}
+  .nav-rail a.on::after{transform:scaleX(1)}
+  .nav-rail a:hover{color:var(--cream)}
+}
+.nav-right{display:flex;align-items:center;gap:12px;justify-self:end}
+.nav-reg{display:none}
+@media(min-width:1024px){.nav-reg{display:inline-flex;padding:12px 24px;font-size:13px}}
+.hamburger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  width:44px;height:44px;padding:8px;position:relative;z-index:101}
+@media(min-width:1024px){.hamburger{display:none}}
+.hamburger span{display:block;width:22px;height:2px;background:var(--cream);border-radius:1px;
+  transition:transform .32s cubic-bezier(.7,0,.3,1),opacity .2s;transform-origin:center}
+.hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* mobile menu drawer */
+.mm-backdrop{position:fixed;inset:0;background:rgba(11,16,42,.6);backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);opacity:0;pointer-events:none;z-index:998;transition:opacity .3s ease}
+.mm-backdrop.open{opacity:1;pointer-events:auto}
+.mm{position:fixed;top:0;right:0;bottom:0;width:min(360px,86vw);
+  background:linear-gradient(180deg,var(--night2) 0%,var(--dark) 100%);z-index:999;
+  display:flex;flex-direction:column;transform:translateX(100%);
+  transition:transform .36s cubic-bezier(.22,.61,.36,1);box-shadow:-20px 0 50px rgba(0,0,0,.4)}
+.mm.open{transform:translateX(0)}
+.mm-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;
+  border-bottom:1px solid var(--mull)}
+.mm-head img{height:32px;width:auto}
+.mm-close{width:40px;height:40px;border-radius:50%;background:rgba(254,252,247,.08);
+  font-size:22px;line-height:1;color:var(--cream);display:flex;align-items:center;justify-content:center;
+  transition:background .2s}
+.mm-close:hover{background:rgba(24,183,201,.3)}
+.mm-nav{flex:1;overflow-y:auto;padding:12px 20px 24px}
+.mm-nav a{display:block;padding:15px 8px;font:600 13px/1.4 var(--fb);letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cream);border-bottom:1px solid var(--mull);transition:color .2s}
+.mm-nav a:hover{color:var(--teal)}
+.mm-foot{padding:16px 20px calc(18px + var(--safe));border-top:1px solid var(--mull)}
+.mm-foot .btn{width:100%}
+body.mm-open .sticky{display:none}
+
+/* ===== HERO: editorial serif hero with auto-carousel (client reference 2026-08-21) ===== */
+.hero{position:relative;overflow:hidden}
+.hero-media{position:relative;width:100%;min-height:min(calc(100svh - 40px),210vw);
+  background:var(--night);display:flex;flex-direction:column;overflow:hidden}
+@media(min-width:1024px){.hero-media{min-height:calc(100svh - 40px);display:block}}
+.hero-art{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
+  background-position:center 30%;background-size:cover;background-repeat:no-repeat;
+  transition:opacity 1.2s ease;transform-origin:50% 60%}
+.hero-art.on{opacity:1}
+@keyframes heroDrift{from{transform:scale(1.05)}to{transform:scale(1)}}
+@media(prefers-reduced-motion:no-preference){html.js .hero-art.on{animation:heroDrift 7.5s ease-out both}}
+.hs-1{background-image:url('_hero-vertical.jpg');background-position:center 35%}
+.hs-2{background-image:url('_gal-entrance.jpg')}
+.hs-3{background-image:url('_gal-lap-pool.jpg')}
+.hs-4{background-image:url('_hero-showunit.jpg');background-position:center 60%}
+@media(min-width:1024px){.hs-1{background-image:url('_hero.jpg');background-position:right 42%}}
+.hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,16,42,.4) 0%,rgba(11,16,42,.2) 26%,rgba(11,16,42,.46) 50%,rgba(11,16,42,.84) 100%,var(--night) 100%)}
+@media(min-width:1024px){.hero-scrim{
+  background:linear-gradient(90deg,rgba(11,16,42,.92) 0%,rgba(11,16,42,.66) 40%,rgba(11,16,42,.14) 68%,rgba(11,16,42,.06) 100%),
+  linear-gradient(180deg,transparent 84%,var(--night) 100%)}}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:flex-end;
+  width:100%;max-width:var(--max);margin:0 auto;padding:140px var(--pad) 78px}
+@media(min-width:1024px){.hero-body{position:absolute;inset:0;justify-content:center;padding:120px var(--pad) 90px}}
+.hero-inner{width:100%;max-width:620px;text-align:left}
+.h-eyebrow{display:block;font:600 11.5px/1.6 var(--fb);letter-spacing:.3em;text-transform:uppercase;
+  color:#8FE0D0;margin-bottom:18px;text-shadow:0 1px 8px rgba(0,0,0,.75)}
+.hero h1{font:500 clamp(34px,6vw,62px)/1.14 var(--fd);letter-spacing:.005em;color:var(--cream);
+  margin-bottom:18px;text-shadow:0 2px 18px rgba(0,0,0,.6);text-wrap:balance}
+.hero h1 em{font-style:normal;color:#5AD0DF;white-space:nowrap}
+.h-sub{display:none}
+@media(min-width:1024px){.h-sub{display:block;font:400 16px/1.75 var(--fb);color:var(--cream2);
+  margin-bottom:24px;max-width:52ch;text-shadow:0 1px 10px rgba(0,0,0,.75)}}
+.h-cards{display:inline-grid;grid-template-columns:auto auto;margin:0 0 28px;
+  border-block:1px solid rgba(254,252,247,.18);padding:14px 0}
+.h-card{padding:2px 28px 2px 0}
+.h-card+.h-card{border-left:1px solid rgba(254,252,247,.22);padding-left:28px}
+.h-card-lab{font:600 11.5px/1.5 var(--fb);letter-spacing:.14em;text-transform:uppercase;
+  color:#8FE0D0;margin-bottom:5px}
+.h-card-val{font:500 clamp(24px,3vw,30px)/1.15 var(--fd);color:var(--cream);white-space:nowrap}
+.h-card-val sup{font-size:.5em;color:#8FE0D0}
+.h-card-sub{display:none}
+@media(min-width:1024px){.h-card-sub{display:block;font:400 12.5px/1.5 var(--fb);color:var(--cream2);
+  margin-top:5px;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.65)}}
+.hero-ctas{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+@media(min-width:560px){.hero-ctas{flex-direction:row;max-width:none}}
+.hero-ctas .btn{min-width:208px;justify-content:center}
+/* slide controls */
+.h-slides{position:absolute;right:var(--pad);bottom:16px;z-index:3;display:flex;align-items:center;gap:14px}
+@media(min-width:1024px){.h-slides{bottom:26px}}
+.h-slide-cap{font:600 11.5px/1.4 var(--fb);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--cream2);text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.h-dots{display:flex;gap:6px}
+.h-dot{position:relative;width:34px;height:28px;padding:0}
+.h-dot::after{content:'';position:absolute;left:2px;right:2px;top:12.5px;height:3px;
+  background:rgba(254,252,247,.35);transition:background .3s}
+.h-dot.on::after{background:#8FE0D0}
+.h-dot:hover::after{background:var(--cream)}
+
+/* ===== TRUST STRIP ===== */
+.trust{background:var(--dark);padding:22px var(--pad);overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;border-top:1px solid var(--mull);border-bottom:1px solid var(--mull)}
+.trust::-webkit-scrollbar{display:none}
+.trust-in{display:flex;gap:30px;min-width:max-content}
+@media(min-width:768px){.trust-in{justify-content:center;min-width:auto;gap:52px}}
+.tr-item{text-align:center;min-width:78px}
+.tr-num{font:600 23px/1.2 var(--fd);color:#8FE0D0}
+@media(min-width:1024px){.tr-num{font-size:27px}}
+.tr-lab{font:500 12px/1.5 var(--fb);color:var(--muted);letter-spacing:.04em;white-space:nowrap;text-transform:uppercase}
+
+/* ===== DAWN STORY (split) ===== */
+.dawn-split{display:grid;gap:0;border-bottom:1px solid var(--mull)}
+@media(min-width:1024px){.dawn-split{grid-template-columns:5fr 7fr}}
+.dawn-img{position:relative;min-height:300px;background:url('_facade.jpg') center 30%/cover no-repeat}
+.dawn-img::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,16,42,0) 55%,rgba(11,16,42,.6) 100%)}
+@media(min-width:1024px){.dawn-img{min-height:600px}
+  .dawn-img::after{background:linear-gradient(90deg,rgba(11,16,42,0) 60%,rgba(26,33,72,.85) 100%)}}
+.dawn-body{padding:56px var(--pad);display:flex;flex-direction:column;justify-content:center;gap:16px}
+@media(min-width:1024px){.dawn-body{padding:80px 64px}}
+.dawn-body h3.promise{font:600 12px/1.6 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--cream2)}
+.dawn-body h3.promise b{display:block;font:600 clamp(21px,2.6vw,30px)/1.25 var(--fd);letter-spacing:.02em;
+  color:#5AD0DF;margin-top:6px;text-transform:none}
+
+/* show-more prose (content always in DOM) */
+html.js .more-wrap[data-collapsed="true"] .more-body{display:none}
+.more-wrap .more-body>p{margin-top:14px}
+.more-btn{display:none}
+html.js .more-btn{display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  font:700 12px/1.4 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--teal);
+  border-bottom:2px solid rgba(24,183,201,.5);padding-bottom:3px}
+.more-btn:hover{color:#5AD0DF}
+.sec-light .more-btn{color:#0E7A8A;border-bottom-color:rgba(14,122,138,.4)}
+
+/* ===== USP GRID ===== */
+.usp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--mull);
+  border:1px solid var(--mull)}
+@media(min-width:760px){.usp-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.usp-grid{grid-template-columns:repeat(4,1fr)}}
+.usp{background:var(--night2);padding:24px 18px;display:flex;flex-direction:column;gap:12px;
+  transition:background .25s}
+.usp:hover{background:var(--night3)}
+.usp img{width:44px;height:44px;object-fit:contain}
+.usp h4{font:600 13.5px/1.45 var(--fb);color:var(--cream)}
+.award{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;
+  margin-top:28px;padding:22px 24px;border:1px solid var(--mull);
+  background:linear-gradient(90deg,rgba(103,200,165,.08),rgba(24,183,201,.08))}
+.award img{width:64px;height:64px;object-fit:contain}
+.award p{font:500 14px/1.6 var(--fb);color:var(--cream2);text-align:center}
+.award p b{display:block;font:600 17px/1.4 var(--fd);color:#8FE0D0}
+
+/* ===== LAYOUTS: tabs + unit card + calculator ===== */
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:12px 0 18px}
+@media(min-width:640px){.tabs{display:flex;flex-wrap:wrap;gap:8px}}
+.tab{position:relative;min-width:0;border:1.5px solid rgba(24,183,201,.32);border-radius:999px;
+  padding:11px 4px;font:700 12px/1.3 var(--fb);color:var(--cream2);transition:all .18s ease;
+  text-align:center;min-height:44px}
+@media(min-width:640px){.tab{padding:11px 22px;font-size:12.5px}}
+.tab em{display:none;font-style:normal;font-size:11px;font-weight:500;opacity:.9;margin-top:1px}
+@media(min-width:640px){.tab em{display:block}}
+.tab:hover{border-color:rgba(24,183,201,.7)}
+.tab[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.unit{display:grid;border:1px solid var(--mull);background:var(--night2);border-radius:18px;overflow:hidden}
+@media(min-width:1024px){.unit{grid-template-columns:1.02fr .98fr}}
+.unit-plan{position:relative;background:#fff;display:flex;align-items:center;justify-content:center;
+  padding:48px 16px 20px;min-height:400px;cursor:zoom-in;touch-action:pan-y;overscroll-behavior-x:contain;
+  border-bottom:1px solid var(--mull)}
+@media(min-width:1024px){.unit-plan{border-bottom:none;border-right:1px solid var(--mull);min-height:580px;padding:56px 30px 26px}}
+.unit-plan img{width:auto;height:auto;max-width:100%;max-height:60vh}
+@media(min-width:1024px){.unit-plan img{max-height:500px}}
+.unit-badge{position:absolute;top:12px;left:12px;background:var(--deep);color:#fff;
+  font:700 12px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:4px}
+.unit-zoom{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:6px;
+  background:rgba(22,80,99,.92);border-radius:999px;padding:7px 12px;
+  font:600 12px/1.4 var(--fb);color:#fff;pointer-events:none}
+.unit-zoom svg{flex:none;color:#8FE0D0}
+.unit-info{padding:24px 22px 26px}
+@media(min-width:1024px){.unit-info{padding:40px;align-self:center}}
+.unit-info h3{font-size:clamp(26px,3vw,34px)}
+.unit-cfg{font:400 13.5px/1.6 var(--fb);color:var(--muted);margin:4px 0 18px}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);border-block:1px solid var(--mull);
+  padding:12px 0;margin-bottom:16px;text-align:center}
+.specs>div{padding:0 8px}
+.specs>div+div{border-left:1px solid var(--mull)}
+.specs .n{font:600 16px/1.4 var(--fd);color:var(--cream)}
+@media(min-width:1024px){.specs .n{font-size:19px}}
+.specs .l{font:600 12px/1.7 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.price-row{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.price-from{font:600 12px/1.6 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.price-from b{display:block;font:600 clamp(28px,3.4vw,38px)/1.1 var(--fd);letter-spacing:0;
+  color:var(--cream);text-transform:none}
+.price-from b sup{font-size:.45em;color:#8FE0D0}
+.calc-link{flex:none;font:700 12px/1.4 var(--fb);color:var(--teal);
+  border-bottom:2px solid rgba(24,183,201,.5);padding:0 0 3px;min-height:44px;display:inline-flex;align-items:flex-end}
+.calc-link:hover{color:#5AD0DF}
+.price-flag{font:400 13px/1.55 var(--fb);color:var(--muted);margin-bottom:16px}
+.unit-acts{display:grid;gap:11px}
+@media(min-width:520px){.unit-acts{grid-template-columns:1fr auto}}
+.unit-acts .btn{width:100%}
+/* calculator attached under the card */
+.calc{border:1px solid var(--mull);border-top:none;background:var(--night2);
+  border-radius:0 0 18px 18px;margin-top:-14px;padding:32px 22px 24px}
+@media(min-width:1024px){.calc{padding:40px 40px 30px;display:grid;grid-template-columns:auto 1fr 1fr;gap:26px 40px;align-items:center}}
+.calc h3{font:600 17px/1.4 var(--fd);color:#8FE0D0;margin-bottom:16px}
+@media(min-width:1024px){.calc h3{grid-column:1/-1;margin-bottom:0}}
+.cprice{display:flex;flex-direction:column;gap:4px;margin-bottom:18px}
+@media(min-width:1024px){.cprice{margin-bottom:0}}
+.cprice .l{font:600 12px/1.6 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cprice b{font:600 25px/1.2 var(--fd);color:var(--cream)}
+.cprice span{font:500 12px/1.5 var(--fb);color:#8FE0D0}
+.cfield{margin-bottom:18px}
+@media(min-width:1024px){.cfield{margin-bottom:0}}
+.cfield label{display:flex;justify-content:space-between;gap:12px;font:600 12px/1.6 var(--fb);
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+.cfield output{color:var(--cream);font-weight:600;letter-spacing:0;text-transform:none;font-size:12.5px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer;color:var(--cream)}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:rgba(24,183,201,.28)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;margin-top:-7.5px;
+  border-radius:50%;background:#fff;border:4px solid var(--teal)}
+input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:rgba(24,183,201,.28)}
+input[type=range]::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#fff;border:4px solid var(--teal)}
+.cout{background:var(--teal);color:#fff;border-radius:14px;padding:18px 22px;margin-top:4px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+@media(min-width:1024px){.cout{grid-column:1/-1;margin-top:4px}}
+.cout .l{font:700 12px/1.5 var(--fb);letter-spacing:.1em;text-transform:uppercase;opacity:.95}
+.cout .v{font:600 clamp(28px,4vw,36px)/1.1 var(--fd);margin-top:3px}
+.cout .d{font:500 12.5px/1.55 var(--fb);opacity:.95;text-align:right;max-width:210px}
+.cnote{font:400 12.5px/1.65 var(--fb);color:var(--muted);margin-top:14px}
+@media(min-width:1024px){.cnote{grid-column:1/-1;margin-top:0}}
+
+/* ===== QUICK REGISTER ===== */
+.qx{display:grid;gap:28px}
+@media(min-width:1024px){.qx{grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}}
+.qx-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.qx-points span{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+  border:1px solid rgba(24,183,201,.4);font:600 12px/1.4 var(--fb);color:var(--cream2)}
+.qx-points svg{flex:none;color:#8FE0D0}
+.qx-trust{display:none;gap:30px;margin-top:26px;padding-top:20px;border-top:1px solid var(--mull)}
+@media(min-width:1024px){.qx-trust{display:flex}}
+.qx-trust b{display:block;font:600 21px/1.3 var(--fd);color:#8FE0D0}
+.qx-trust i{font:700 12px/1.6 var(--fb);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-style:normal}
+.form-card{background:var(--cream);color:var(--ink);border-radius:18px;padding:28px 24px;
+  box-shadow:0 24px 60px rgba(6,9,24,.5)}
+@media(min-width:1024px){.form-card{padding:36px 38px}}
+.field{margin-bottom:13px;text-align:left}
+.f-label{display:block;font:700 12px/1.5 var(--fb);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--deep);margin-bottom:7px}
+option{color:var(--ink);background:#fff}
+.f-input,select.f-input{width:100%;background:#fff;border:1.5px solid rgba(22,80,99,.28);border-radius:10px;
+  color:var(--ink);font:500 16px/1.4 var(--fb);padding:13px 15px;-webkit-appearance:none;appearance:none}
+select.f-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23165063' stroke-width='2.4'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.f-input::placeholder{color:#8FA3A9}
+.f-input:focus{outline:2px solid var(--teal);outline-offset:1px}
+.f-consent{font:400 12px/1.65 var(--fb);color:var(--ink2);margin-top:12px;text-align:left}
+.f-consent a{color:#0E7A8A;font-weight:600;text-decoration:underline}
+.micro{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;
+  font:500 12px/1.5 var(--fb);color:var(--ink2);margin-top:12px}
+.form-err{display:none;font:500 12.5px/1.5 var(--fb);color:#B4372A;margin:6px 0 0}
+form.has-error .form-err{display:block}
+.form-card .btn{width:100%}
+.done{border:1.5px solid rgba(24,183,201,.4);background:rgba(24,183,201,.1);border-radius:12px;
+  padding:18px;font:600 14px/1.65 var(--fb);color:var(--deep)}
+
+/* ===== FACILITIES ===== */
+.fac-plan{position:relative;border:1px solid var(--mull);overflow:hidden;border-radius:16px;
+  cursor:zoom-in;background:var(--night2)}
+.fac-plan img{width:100%;height:auto}
+.fac-plan .cap{position:absolute;left:0;right:0;bottom:0;padding:34px 18px 14px;
+  background:linear-gradient(180deg,transparent,rgba(11,16,42,.9));
+  font:600 12.5px/1.4 var(--fb);color:var(--cream)}
+.fac-cats{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:20px 0 6px;-webkit-overflow-scrolling:touch}
+.fac-cats::-webkit-scrollbar{display:none}
+@media(min-width:1024px){.fac-cats{flex-wrap:wrap;overflow:visible}}
+.fac-cat{flex:none;border:1.5px solid rgba(24,183,201,.32);border-radius:999px;padding:10px 18px;
+  font:700 12px/1.3 var(--fb);color:var(--cream2);transition:all .18s;min-height:44px}
+.fac-cat:hover{border-color:rgba(24,183,201,.7)}
+.fac-cat[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.fac-detail{margin-top:14px;border:1px solid var(--mull);background:var(--night2);border-radius:16px;
+  padding:22px 20px;display:none}
+.fac-detail.open{display:block;animation:facFade .35s ease}
+@keyframes facFade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.fac-detail.open{animation:none}}
+.fac-detail-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.fac-detail-head h3{font-size:19px}
+.fac-detail-head span{font:600 12px/1.5 var(--fb);color:#8FE0D0;white-space:nowrap}
+.fac-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px 16px;list-style:none}
+@media(min-width:760px){.fac-list{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.fac-list{grid-template-columns:repeat(4,1fr)}}
+.fac-list li{font:400 13px/1.5 var(--fb);color:var(--cream2);padding-left:16px;position:relative}
+.fac-list li::before{content:'';position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:50%;background:var(--grad)}
+.fac-grid{display:grid;gap:14px;margin-top:26px;grid-template-columns:1fr}
+@media(min-width:1024px){.fac-grid{grid-template-columns:1.5fr 1fr;align-items:start}}
+
+/* ===== GALLERY ===== */
+.gal{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:12px;overflow-x:auto;
+  scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.gal::-webkit-scrollbar{display:none}
+@media(min-width:760px){.gal{grid-auto-columns:44%}}
+@media(min-width:1200px){.gal{grid-auto-columns:31%}}
+.gal figure{scroll-snap-align:start;margin:0;position:relative;cursor:zoom-in;
+  border:1px solid var(--mull);border-radius:14px;overflow:hidden;background:var(--night2)}
+.gal img{width:100%;height:240px;object-fit:cover;transition:transform .6s}
+@media(min-width:760px){.gal img{height:280px}}
+@media(prefers-reduced-motion:no-preference){.gal figure:hover img{transform:scale(1.045)}}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 16px 13px;
+  background:linear-gradient(180deg,transparent,rgba(11,16,42,.92));
+  font:600 13px/1.4 var(--fb);color:var(--cream)}
+.gal-hint{font:500 12.5px/1.5 var(--fb);color:var(--muted);margin-top:14px}
+
+/* ===== LOCATION ===== */
+.loc-grid{display:grid;gap:28px}
+@media(min-width:1024px){.loc-grid{grid-template-columns:1fr 1fr;gap:52px;align-items:start}}
+.loc-cats{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px}
+.loc-cat{border:1.5px solid rgba(24,183,201,.32);padding:9px 16px;border-radius:999px;
+  font:700 12px/1.3 var(--fb);color:var(--cream2);min-height:44px;transition:all .18s}
+.loc-cat:hover{border-color:rgba(24,183,201,.7)}
+.loc-cat[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.loc-list{border-top:1px solid var(--mull)}
+.loc-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;
+  border-bottom:1px solid var(--mull);font:400 14.5px/1.5 var(--fb);color:var(--cream2)}
+.loc-item b{font:600 12px/1.5 var(--fb);color:#8FE0D0;white-space:nowrap;letter-spacing:.03em}
+.loc-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:18px;border-top:1px solid var(--mull)}
+.loc-acts .btn{flex:1;min-width:130px;font-size:12.5px;padding:13px 16px}
+.loc-visual{position:relative;border-radius:16px;overflow:hidden;min-height:300px}
+.loc-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.loc-visual::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,16,42,0) 45%,rgba(11,16,42,.75) 100%)}
+.loc-visual .cap{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;
+  font:600 13px/1.5 var(--fb);color:var(--cream)}
+@media(min-width:1024px){.loc-visual{min-height:520px}}
+
+/* ===== DEVELOPER (light band) ===== */
+.dev{text-align:center;max-width:760px;margin:0 auto}
+.dev img{width:min(230px,58%);height:auto;margin:20px auto 18px}
+.dev .copy{margin:0 auto}
+.dev-stats{display:grid;grid-template-columns:repeat(3,1fr);max-width:640px;margin:30px auto 0;
+  border:1px solid rgba(22,80,99,.16);background:#fff;border-radius:14px;overflow:hidden}
+.dev-stat{padding:20px 12px;text-align:center}
+.dev-stat+.dev-stat{border-left:1px solid rgba(22,80,99,.14)}
+.dev-stat b{display:block;font:600 clamp(22px,3vw,30px)/1.15 var(--fd);color:var(--deep)}
+.dev-stat span{display:block;font:600 12px/1.6 var(--fb);letter-spacing:.08em;text-transform:uppercase;
+  color:#5E7A82;margin-top:4px}
+
+/* ===== FAQ ===== */
+.faq{border-top:1px solid var(--mull);max-width:840px;margin:0 auto;padding-top:8px}
+.faq-item{border-bottom:1px solid var(--mull)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:19px 0;
+  text-align:left;font:600 15.5px/1.5 var(--fb);color:var(--cream);min-height:44px}
+.faq-q:hover{color:#8FE0D0}
+.faq-q i{flex:none;width:15px;height:15px;position:relative;transition:transform .3s}
+.faq-q i::before,.faq-q i::after{content:"";position:absolute;background:#8FE0D0;border-radius:1px}
+.faq-q i::before{inset:6.5px 0;height:2px}
+.faq-q i::after{inset:0 6.5px;width:2px;transition:opacity .3s}
+.faq-item.on .faq-q i{transform:rotate(180deg)}
+.faq-item.on .faq-q i::after{opacity:0}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s cubic-bezier(.4,0,.2,1)}
+html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
+@media(prefers-reduced-motion:reduce){.faq-a{transition:none}}
+.faq-a>div{overflow:hidden;min-height:0;font:400 14.5px/1.75 var(--fb);color:var(--cream2);max-width:70ch}
+.faq-a p{margin-bottom:12px}
+.faq-a p:last-child{margin-bottom:20px}
+.faq-a a{color:var(--teal);text-decoration:underline}
+
+/* ===== BOTTOM REGISTER (light band) ===== */
+.visit{display:grid;gap:0;border:1px solid rgba(22,80,99,.16);border-radius:18px;overflow:hidden;background:#fff}
+@media(min-width:1024px){.visit{grid-template-columns:1.05fr .95fr}}
+.visit-l{padding:36px 26px;display:flex;flex-direction:column;gap:16px;justify-content:center;
+  background:linear-gradient(160deg,#F4F3FB 0%,#EBEAF6 100%)}
+@media(min-width:1024px){.visit-l{padding:52px 48px}}
+.visit-l .copy{color:var(--ink2)}
+.visit-r{padding:28px 24px}
+@media(min-width:1024px){.visit-r{padding:40px 42px;align-self:center}}
+.visit-r .f-headline{font:600 19px/1.4 var(--fd);color:var(--deep);margin-bottom:16px}
+.visit-r .f-headline b{color:#0E7A8A}
+
+/* ===== CONTACT + FOOTER ===== */
+.git{background:var(--night2);padding:64px var(--pad);text-align:center;border-top:1px solid var(--mull)}
+.git-title{font:600 clamp(24px,3.4vw,34px)/1.2 var(--fd);color:var(--cream);margin-bottom:10px}
+.git-lab{font:500 13.5px/1.6 var(--fb);color:var(--muted);margin-bottom:18px}
+.git-phone{display:inline-block;font:600 clamp(26px,4vw,34px)/1.2 var(--fd);letter-spacing:1.5px;
+  color:#8FE0D0}
+.git-mail{display:block;font:500 14.5px/1.6 var(--fb);color:var(--cream2);margin-top:10px}
+.git-mail:hover{color:var(--teal)}
+.git-socials{display:flex;justify-content:center;gap:14px;margin-top:28px}
+.soc{width:44px;height:44px;border:1px solid rgba(24,183,201,.35);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:var(--cream);transition:all .2s}
+.soc:hover{border-color:var(--teal);background:rgba(24,183,201,.14)}
+.soc svg{width:16px;height:16px;fill:currentColor}
+.footer{background:var(--dark);color:var(--muted);padding:40px var(--pad) 34px;
+  font:300 11px/1.7 var(--fb);border-top:1px solid rgba(254,252,247,.05)}
+.ft-top{display:grid;gap:24px;max-width:var(--max);margin:0 auto 26px;padding-bottom:26px;
+  border-bottom:1px solid rgba(254,252,247,.08);align-items:center;justify-items:center}
+@media(min-width:768px){.ft-top{grid-template-columns:auto 1fr;justify-items:start}}
+.ft-top img{height:36px;width:auto}
+.ft-links{display:flex;gap:20px;flex-wrap:wrap;font:600 12px/1.5 var(--fb);letter-spacing:.06em;
+  text-transform:uppercase}
+@media(min-width:768px){.ft-links{justify-self:end}}
+.ft-links a{color:var(--cream2)}
+.ft-links a:hover{color:var(--teal)}
+.ft-legal{max-width:var(--max);margin:0 auto;font:300 10.5px/1.75 var(--fb);color:#7E959B}
+.ft-legal p{margin-bottom:9px}
+.ft-legal p:last-child{margin-bottom:0}
+
+/* ===== LEAD DRAWER ===== */
+.ld-backdrop{position:fixed;inset:0;background:rgba(6,9,24,.6);opacity:0;pointer-events:none;
+  transition:opacity .3s ease;z-index:1100}
+.ld-backdrop.open{opacity:1;pointer-events:auto}
+.ld{position:fixed;top:0;right:0;width:500px;max-width:100vw;height:100vh;background:var(--cream);
+  color:var(--ink);box-shadow:-24px 0 64px rgba(0,0,0,.35);transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.32,.72,0,1);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  z-index:1101;display:flex;flex-direction:column}
+.ld.open{transform:translateX(0)}
+@media(max-width:768px){
+  .ld{width:100%;height:auto;max-height:92vh;top:auto;bottom:0;border-radius:22px 22px 0 0;transform:translateY(100%)}
+  .ld.open{transform:translateY(0)}
+}
+.ld-close{position:absolute;top:18px;right:18px;width:40px;height:40px;background:#E7EEEA;border-radius:50%;
+  color:var(--deep);display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:2}
+.ld-close:hover{background:#D4E4E0}
+.ld-inner{padding:30px 32px 38px;flex:1}
+@media(max-width:768px){.ld-inner{padding:24px 22px 30px}}
+.ld-grab{width:44px;height:4px;border-radius:2px;background:#CBDBD6;margin:0 auto 16px}
+@media(min-width:769px){.ld-grab{display:none}}
+.ld-unit{display:none;align-items:center;gap:9px;margin:0 0 14px;padding:10px 14px;border-radius:10px;
+  background:rgba(24,183,201,.12);border:1px solid rgba(24,183,201,.32)}
+.ld-unit.on{display:flex}
+.ld-unit .k{font:600 12px/1.5 var(--fb);letter-spacing:.05em;text-transform:uppercase;color:var(--ink2)}
+.ld-unit .v{font:700 13.5px/1.5 var(--fb);color:var(--deep)}
+.ld h2{font:600 clamp(23px,3vw,29px)/1.2 var(--fd);color:var(--deep);padding-right:36px;margin-bottom:10px}
+.ld-sub{font:400 13.5px/1.6 var(--fb);color:var(--ink2);margin-bottom:18px}
+.rlabel{font:700 12px/1.5 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:#0E7A8A;margin-bottom:10px}
+.receive{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.receive .r{display:inline-flex;align-items:center;gap:7px;border:1.5px solid rgba(24,183,201,.42);
+  border-radius:999px;padding:8px 12px;font:600 12px/1.4 var(--fb);color:var(--deep)}
+.receive svg{flex:none;color:var(--teal)}
+
+/* ===== STICKY BAR + FLOATS ===== */
+.sticky{position:fixed;bottom:0;left:0;right:0;z-index:999;display:grid;grid-template-columns:1.4fr 1fr;gap:9px;
+  background:rgba(11,16,42,.96);border-top:1px solid var(--mull);
+  padding:10px 14px calc(10px + var(--safe));
+  opacity:0;pointer-events:none;transform:translateY(100%);transition:opacity .3s,transform .3s}
+.sticky.on{opacity:1;pointer-events:auto;transform:translateY(0)}
+@media(min-width:1024px){.sticky{display:none}}
+.sticky .btn{padding:14px 10px;font-size:13px}
+.wa-float{position:fixed;right:20px;bottom:92px;z-index:998;display:none;width:54px;height:54px;
+  border-radius:50%;background:#0E7568;color:#fff;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .2s;opacity:0;pointer-events:none}
+.wa-float.on{opacity:1;pointer-events:auto}
+.wa-float:hover{transform:scale(1.06)}
+@media(min-width:1024px){.wa-float{display:flex;bottom:92px;right:24px}}
+.wa-float svg{width:24px;height:24px;fill:#fff}
+.to-top{position:fixed;right:20px;bottom:calc(84px + var(--safe));width:44px;height:44px;border-radius:50%;
+  background:var(--deep);color:#fff;z-index:998;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .25s,transform .25s}
+.to-top.on{opacity:1;pointer-events:auto;transform:translateY(0)}
+@media(min-width:1024px){.to-top{right:24px;bottom:24px}}
+.to-top svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== LIGHTBOX ===== */
+.lb{position:fixed;inset:0;background:rgba(6,9,24,.95);z-index:1300;display:none;
+  align-items:center;justify-content:center;padding:18px}
+.lb.on{display:flex}
+.lb img{max-width:94vw;max-height:88vh;width:auto;height:auto;border-radius:8px}
+.lb-x{position:absolute;top:16px;right:16px;width:44px;height:44px;border:1px solid rgba(24,183,201,.4);
+  background:rgba(26,33,72,.85);color:var(--cream);border-radius:10px;font-size:19px;
+  display:flex;align-items:center;justify-content:center}
+.lb-cap{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  font:500 12.5px/1.5 var(--fb);color:var(--cream2)}
+
+@media(max-width:374px){
+  .hero h1{font-size:24px}
+  .h-card-val{font-size:22px}
+  .tr-num{font-size:19px}
+  .tab{font-size:12px}
+}
+
+/* ===== REVISION R13 (client feedback 2026-08-21) ===== */
+.h-lk{display:block;width:78px;height:auto;margin-bottom:16px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+@media(min-width:1024px){.h-lk{width:96px}}
+/* box styling across selectors, chips and cards (MGM reference) */
+.tab,.fac-cat,.loc-cat{border-radius:2px}
+.qx-points span,.receive .r{border-radius:2px}
+.form-card{border-radius:2px}
+.h-dot::after{border-radius:0}
+/* layouts card full-bleed on mobile, MGM pattern */
+@media(max-width:1023px){
+  .unit{margin:0 calc(var(--pad) * -1);border-radius:0;border-left:none;border-right:none}
+  .calc{margin-left:calc(var(--pad) * -1);margin-right:calc(var(--pad) * -1);border-radius:0;border-left:none;border-right:none}
+  .unit-plan{min-height:340px;padding:46px 12px 14px}
+}
+/* developer band */
+.dev-logo{display:block;width:min(240px,60%);height:auto;margin:22px auto 18px}
+/* footer: logo | contact | socials */
+.ft-top{grid-template-columns:1fr;justify-items:center;text-align:center}
+@media(min-width:768px){.ft-top{grid-template-columns:1fr 1.2fr 1fr;align-items:center;justify-items:stretch}}
+.ft-lab{font:500 13px/1.6 var(--fb);color:var(--muted);margin-bottom:8px}
+.ft-phone{display:inline-block;font:600 clamp(24px,3vw,30px)/1.2 var(--fd);letter-spacing:1.5px;color:#8FE0D0}
+.ft-phone:hover{color:#5AD0DF}
+.ft-mail{display:block;font:500 13.5px/1.6 var(--fb);color:var(--cream2);margin-top:8px}
+.ft-mail:hover{color:var(--teal)}
+.ft-contact{text-align:center}
+.ft-socials{display:flex;gap:12px;justify-content:center}
+@media(min-width:768px){.ft-socials{justify-content:flex-end}}
+.ft-logo img{height:36px;width:auto}
+/* sticky: single register CTA */
+.sticky{grid-template-columns:1fr}
+/* lightbox zoom chrome */
+.lb-bar{position:absolute;top:14px;right:14px;display:flex;gap:8px;z-index:3}
+.lb-btn{min-width:44px;height:44px;padding:0 12px;border:1px solid rgba(24,183,201,.4);
+  background:rgba(17,24,56,.85);color:var(--cream);border-radius:2px;font-size:18px;
+  display:inline-flex;align-items:center;justify-content:center;font-family:var(--fb)}
+.lb-btn:hover{background:rgba(24,183,201,.25)}
+.lb-reset{font-size:12.5px;letter-spacing:.06em;font-weight:600}
+.lb-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;cursor:grab;touch-action:none}
+.lb-stage.dragging{cursor:grabbing}
+.lb-stage img{max-width:92vw;max-height:86vh;transform-origin:center center;user-select:none;-webkit-user-drag:none}
+.lb-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  font:500 11.5px/1.4 var(--fb);color:var(--muted)}
+
+/* ===== REVISION R14 (client feedback 2026-08-21, round 2) ===== */
+/* calculator price picker */
+.cp-pick{display:inline-flex;align-items:center;gap:10px;background:rgba(24,183,201,.12);
+  border:1px solid rgba(24,183,201,.42);border-radius:2px;padding:9px 13px;cursor:pointer;
+  color:var(--cream);transition:background .18s,border-color .18s;font-family:var(--fb);text-align:left}
+.cp-pick:hover{background:rgba(24,183,201,.2);border-color:var(--teal)}
+.cp-pick b{font:600 22px/1.2 var(--fd);color:var(--cream);white-space:nowrap}
+.cp-pick-t{font:600 12px/1.4 var(--fb);color:#8FE0D0;white-space:nowrap}
+.cp-pick-c{flex:none;color:#8FE0D0;transition:transform .2s}
+.cp-pick[aria-expanded="true"] .cp-pick-c{transform:rotate(180deg)}
+.cp-menu{margin-top:10px;display:grid;gap:6px;background:rgba(6,9,24,.85);
+  border:1px solid rgba(24,183,201,.38);border-radius:2px;padding:8px;max-width:420px}
+.cp-menu[hidden]{display:none}
+.cp-opt{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;width:100%;
+  background:transparent;border:1px solid transparent;border-radius:2px;padding:10px 11px;cursor:pointer;
+  text-align:left;font-family:var(--fb);transition:background .16s,border-color .16s;color:var(--cream)}
+.cp-opt:hover{background:rgba(24,183,201,.14);border-color:rgba(24,183,201,.35)}
+.cp-opt[aria-selected="true"]{background:rgba(24,183,201,.2);border-color:var(--teal)}
+.cp-opt-k{font:700 12.5px/1.4 var(--fb);color:var(--cream)}
+.cp-opt-d{font:400 12px/1.5 var(--fb);color:var(--muted)}
+.cp-opt-p{font:600 14px/1.3 var(--fd);color:#8FE0D0}
+/* estimated monthly: centred price, right-aligned note */
+.cout{display:block;text-align:center}
+.cout .v{margin-top:4px}
+.cout .d{margin:12px 0 0 auto;text-align:right;max-width:none}
+/* developer colour logo */
+.dev-logo{width:min(300px,72%);margin:18px auto 16px}
+/* mobile section rail */
+.rail{position:fixed;top:var(--nav-h,64px);left:0;right:0;z-index:55;background:rgba(6,9,24,.94);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--mull);
+  transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease}
+.rail.on{transform:none;opacity:1;pointer-events:auto}
+@media(min-width:1024px){.rail{display:none}}
+body.mm-open .rail{display:none}
+html.clean .rail{display:none!important}
+.rail-in{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 10px}
+.rail-in::-webkit-scrollbar{display:none}
+.rail-in a{flex:none;position:relative;padding:13px 13px;font:600 11.5px/1.3 var(--fb);letter-spacing:.07em;
+  text-transform:uppercase;color:rgba(254,252,247,.66);white-space:nowrap}
+.rail-in a::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:var(--grad);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.rail-in a.on{color:var(--cream)}
+.rail-in a.on::after{transform:scaleX(1)}
+/* facilities legend numbers */
+.fac-list li{padding-left:0;display:flex;align-items:baseline;gap:10px}
+.fac-list li::before{display:none}
+.fac-list li i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--grad);
+  color:#07242B;font:700 11.5px/22px var(--fb);font-style:normal;text-align:center;
+  align-self:flex-start;transform:translateY(1px)}
+/* location map + numbered lists */
+.loc-visual{cursor:zoom-in;background:var(--night2);min-height:0}
+.loc-visual img{position:static;width:100%;height:auto;object-fit:contain}
+.loc-visual::after{display:none}
+.loc-visual .cap{background:rgba(6,9,24,.7);border-radius:6px;padding:7px 12px;left:12px;right:auto;bottom:12px}
+.loc-item i.ln{display:inline-flex;flex:none;width:20px;height:20px;border-radius:50%;
+  justify-content:center;align-items:center;font:700 11px/1 var(--fb);font-style:normal;
+  color:#fff;margin-right:9px;transform:translateY(3px)}
+.ln-access{background:#4761A8}
+.ln-transit{background:#A63D9E}
+.loc-item span{display:inline-flex;align-items:baseline}
+</style>
 </head>
 <body>
-  <main>
-    <p class="eyebrow">Mah Sing</p>
-    <h1>M Aurora</h1>
-    <div class="divider"></div>
-    <p class="note">This page is reserved for the M Aurora project site. The full site is launching soon.</p>
-  </main>
+
+<!-- ANNOUNCE (auto marquee). Claims: verifiable-only; PY-pending items excluded. -->
+<div class="ann" role="note" aria-label="Announcements">
+  <div class="ann-track">
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="siteNav" aria-label="Site">
+  <a href="#home" class="nav-logo" aria-label="M Aurora home">
+    <img class="lk" src="_logo-white.png" alt="M Aurora" width="360" height="240">
+    <img class="ms" src="_mahsing.png" alt="by Mah Sing" width="571" height="177">
+  </a>
+  <div class="nav-rail" aria-label="Sections">
+    <a href="#layouts" data-rail>Layouts</a>
+    <a href="#dawn" data-rail>Overview</a>
+    <a href="#facilities" data-rail>Facilities</a>
+    <a href="#gallery" data-rail>Gallery</a>
+    <a href="#location" data-rail>Location</a>
+    <a href="#developer" data-rail>Developer</a>
+    <a href="#faq" data-rail>FAQ</a>
+    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn btn-p nav-reg" data-open-lead="nav">Register Now</a>
+    <button class="hamburger" id="navHam" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile section rail: appears once the hero scrolls out (MGM rail pattern) -->
+<div class="rail" id="rail" aria-hidden="true">
+  <nav class="rail-in" id="railIn" aria-label="Section navigation">
+    <a href="#layouts" data-rail>Layouts</a>
+    <a href="#dawn" data-rail>Overview</a>
+    <a href="#facilities" data-rail>Facilities</a>
+    <a href="#gallery" data-rail>Gallery</a>
+    <a href="#location" data-rail>Location</a>
+    <a href="#developer" data-rail>Developer</a>
+    <a href="#faq" data-rail>FAQ</a>
+    <a href="#register-full" data-rail>Register</a>
+  </nav>
+</div>
+
+<!-- Mobile menu drawer -->
+<div class="mm-backdrop" id="mmBackdrop" aria-hidden="true"></div>
+<aside class="mm" id="mm" aria-label="Site navigation" aria-hidden="true">
+  <div class="mm-head">
+    <img src="_logo-white.png" alt="M Aurora">
+    <button class="mm-close" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="mm-nav">
+    <a href="#layouts">Floor Plans</a>
+    <a href="#dawn">Overview</a>
+    <a href="#facilities">Facilities</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#location">Location</a>
+    <a href="#developer">Developer</a>
+    <a href="#faq">FAQ</a>
+    <a href="#register-full">Register</a>
+    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR Tour</a>
+    <a href="https://m-aurora.com.my/blog/" target="_blank" rel="noopener">Blog</a>
+  </nav>
+  <div class="mm-foot">
+    <button type="button" class="btn btn-p" data-open-lead="mobile-menu">Register Now</button>
+  </div>
+</aside>
+
+<!-- HERO: editorial serif hero, auto-carousel (Towers / 50m Lap Pool / Show Unit Type A).
+     Headline is the live site's own H3, verbatim. Facts in the sub are live copy + permit.
+     Sub paragraph and card sub-lines are desktop-only (client feedback 2026-08-21: mobile
+     text was blocking the imagery). Tower callouts removed at client request same day. -->
+<section class="hero" id="home">
+  <div class="hero-media" id="heroMedia" data-slide="1">
+    <div class="hero-art hs-1 on" aria-hidden="true"></div>
+    <div class="hero-art hs-2" aria-hidden="true"></div>
+    <div class="hero-art hs-3" aria-hidden="true"></div>
+    <div class="hero-art hs-4" aria-hidden="true"></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-body">
+      <div class="hero-inner">
+        <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="360" height="240">
+        <span class="h-eyebrow">Open for Sale</span>
+        <h1>The New Heights of Living at <em>Old Klang Road</em></h1>
+        <p class="h-sub">Two modern 46-storey freehold towers across 5.2 acres of prime land: 1,544 residences from 556 to 1,019 sq ft, with Mid Valley, KLCC and Bangsar within easy access.</p>
+        <div class="h-cards">
+          <div class="h-card">
+            <div class="h-card-lab">Starting from</div>
+            <div class="h-card-val num">RM339K<sup>*</sup></div>
+            <div class="h-card-sub">Type A &middot; 556 sq ft</div>
+          </div>
+          <div class="h-card">
+            <div class="h-card-lab">Tenure</div>
+            <div class="h-card-val">Freehold</div>
+            <div class="h-card-sub num">556&ndash;1,019 sq ft</div>
+          </div>
+        </div>
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-p" data-open-lead="hero">Register Interest</button>
+          <a class="btn btn-o" href="#layouts">View Layouts</a>
+        </div>
+      </div>
+    </div>
+    <div class="h-slides">
+      <span class="h-slide-cap" id="hCap">The Towers</span>
+      <div class="h-dots" role="tablist" aria-label="Hero slides">
+        <button class="h-dot on" data-hs="1" aria-label="The Towers"></button>
+        <button class="h-dot" data-hs="2" aria-label="Grand Entrance"></button>
+        <button class="h-dot" data-hs="3" aria-label="50m Lap Pool"></button>
+        <button class="h-dot" data-hs="4" aria-label="Show Unit Type A"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- LAYOUTS: live H2 block 3 verbatim as lede; tabs + card + locked-price calculator.
+     All five types published on /floor-plans/ (verified 2026-08-21). Per-type pricing pending. -->
+<section class="sec sec-alt" id="layouts">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Unit Layouts A to E</span>
+      <h2>A Freehold Old Klang Road Service Apartment Designed for <span class="em">Every Lifestyle</span></h2>
+      <p class="copy">At M Aurora, space is more than just square footage. It is about finding the right fit for your way of life.</p>
+      <div class="more-wrap" data-collapsed="true">
+        <div class="more-body">
+          <p class="copy">With built-up sizes ranging from 556 to 1,019 sq ft, units come in 1+1 to 4-bedroom layouts to suit a wide range of needs: 1+1-bedroom units for urban professionals, 2-bedroom units for couples, 3-bedroom units for growing families, and 4-bedroom units ideal for multi-generational living.</p>
+          <p class="copy">This consideration extends to every aspect of the development. The speed ramp parking system enhances daily convenience by improving traffic flow, reducing bottlenecks and making arrivals and departures smoother. Thoughtful details like these have been carefully considered to provide a comfortable and practical living environment from the moment you step inside.</p>
+        </div>
+        <button type="button" class="more-btn" aria-expanded="false">Show more
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="tabs rv" id="tabs" role="tablist" aria-label="Unit layouts">
+      <button class="tab" role="tab" data-type="A" aria-selected="true">Type A<em>1+1 Bed</em></button>
+      <button class="tab" role="tab" data-type="B" aria-selected="false">Type B<em>2 Bed</em></button>
+      <button class="tab" role="tab" data-type="C" aria-selected="false">Type C<em>3 Bed</em></button>
+      <button class="tab" role="tab" data-type="D" aria-selected="false">Type D<em>3 Bed</em></button>
+      <button class="tab" role="tab" data-type="E" aria-selected="false">Type E<em>4 Bed</em></button>
+    </div>
+
+    <div class="unit rv">
+      <div class="unit-plan" id="planWrap">
+        <span class="unit-badge">Open for Sale</span>
+        <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
+        <img id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
+      </div>
+      <div class="unit-info">
+        <h3>Type <span id="uName">A</span></h3>
+        <p class="unit-cfg" id="uCfg">1+1 bedroom, for urban professionals</p>
+        <div class="specs">
+          <div><div class="n" id="uBed">1+1</div><div class="l">Bedroom</div></div>
+          <div><div class="n" id="uBath">1</div><div class="l">Bathroom</div></div>
+          <div><div class="n num" id="uSize">556</div><div class="l">Sq Ft</div></div>
+          <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
+        </div>
+        <div class="price-row">
+          <div class="price-from">Project pricing from<b class="num">RM339K<sup>*</sup></b></div>
+          <button class="calc-link" type="button" id="calcJump">Calc my instalment</button>
+        </div>
+        <p class="price-flag" id="uFlag">Type A published at RM339,000*. Per-type pricing for B to E on request.</p>
+        <div class="unit-acts">
+          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
+          <a class="btn btn-o" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">360&deg; Virtual Tour</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc rv" id="calc">
+      <h3>Estimate your monthly instalment</h3>
+      <div class="cprice">
+        <span class="l">Property price</span>
+        <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <b class="num" id="cPrice">RM 339,000*</b>
+          <span class="cp-pick-t">Type <span id="cType">A</span></span>
+          <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="cp-menu" id="cpMenu" role="listbox" aria-label="Unit type" hidden></div>
+      </div>
+      <div class="cfield">
+        <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 305,100 &middot; 90%</output></label>
+        <input type="range" id="cLoan" min="50" max="90" step="1" value="90">
+      </div>
+      <div class="cfield">
+        <label for="cTen">Loan tenure <output id="cTenOut" for="cTen">35 years</output></label>
+        <input type="range" id="cTen" min="10" max="35" step="1" value="35">
+      </div>
+      <div class="cout">
+        <div class="l">Estimated monthly from</div>
+        <div class="v num" id="cMy">RM 1,406</div>
+        <div class="d">At 4.3% p.a. over the selected tenure. Indicative only, subject to bank approval.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK REGISTER: high on page, one step. -->
+<section class="sec" id="register">
+  <div class="wrap">
+    <div class="qx rv">
+      <div>
+        <span class="eyebrow">Fast track</span>
+        <h2>Get the price list <span class="em">in one step</span></h2>
+        <p class="copy">Full pricing, current availability and the payment schedule for all five layouts, sent to you directly. No obligation.</p>
+        <div class="qx-points">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>All 5 floor plans</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Current availability</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Loan guidance</span>
+        </div>
+        <div class="qx-trust">
+          <div><b>Freehold</b><i>Tenure</i></div>
+          <div><b class="num">5</b><i>Unit layouts</i></div>
+          <div><b class="num">556&ndash;1,019</b><i>Sq ft range</i></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <form class="js-form" data-form="quick" novalidate>
+          <div class="field"><label class="f-label" for="q-name">Full name</label>
+            <input class="f-input" id="q-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+          <div class="field"><label class="f-label" for="q-phone">Phone number</label>
+            <input class="f-input" id="q-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+          <div class="field"><label class="f-label" for="q-email">Email</label>
+            <input class="f-input" id="q-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+          <p class="form-err" data-form-error></p>
+          <button class="btn btn-p" type="submit">Send me the price list</button>
+          <p class="f-consent">By clicking 'Submit', I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+          <div class="micro"><span>No spam</span><span>We reply by WhatsApp</span><span>Unsubscribe anytime</span></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAWN STORY: live H2 block 1 verbatim (Welcome...) + brand intro. Split layout. -->
+<section class="sec" id="dawn" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">A New Dawn Awaits</span>
+      <h2>Welcome to M Aurora &ndash; A New Freehold Serviced Apartment in <span class="em">Old Klang Road</span></h2>
+      <h3 style="font:600 15px/1.6 var(--fb);color:var(--muted)">The New Heights of Living at Old Klang Road</h3>
+    </div>
+  </div>
+  <div class="dawn-split rv">
+    <div class="dawn-img" role="img" aria-label="M Aurora twin towers at dawn"></div>
+    <div class="dawn-body">
+      <h3 class="promise">Inspired by <b>The Promise of Dawn</b></h3>
+      <p class="copy">Inspired by the magnificent and breathtaking Northern Lights, M AURORA kindles the hope of a new dawn where light, elegance, and positive energy form the very soul of its community.</p>
+      <p class="copy">Located on Old Klang Road, Kuala Lumpur, this freehold serviced residence features two modern 46-storey towers set across 5.2 acres of prime land. Offering ample amenities, exceptional accessibility, top-tier security, and a variety of unit layouts, M AURORA provides a home tailored to diverse needs in a stunning and awe-inspiring modern haven.</p>
+      <div class="more-wrap" data-collapsed="true">
+        <div class="more-body">
+          <p class="copy">M Aurora, the latest freehold serviced apartment, is now open for sale. It marks an exciting new chapter in Old Klang Road&rsquo;s development. This freehold serviced apartment comprises 1,544 units spread across two 46-storey towers on a 5.24-acre site, making it one of the most significant launches in the area this year. Positioned in a mature yet ever-growing neighborhood, this property redefines city living by focusing on long-term value and connectivity. Every aspect is carefully designed to complement future-ready living experiences with integrated smart space planning.</p>
+          <p class="copy">Unlike leasehold projects with tenure restrictions, M Aurora&rsquo;s freehold status promises enduring value in an area poised for continuous growth. With Old Klang Road undergoing continuous transformation, owning a home here means being part of a community that&rsquo;s moving forward.</p>
+          <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
+        </div>
+        <button type="button" class="more-btn" aria-expanded="false">Show more
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USP GRID: the 12 live H4 items with the site's own icons, + GreenRE award. -->
+<section class="sec" id="usp" aria-label="Key features">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow">Beauty and Wonder</span>
+      <h2>Twelve reasons the dawn <span class="em">breaks here</span></h2>
+    </div>
+    <h3 class="sr-only">Key features of M Aurora</h3>
+    <div class="usp-grid rv">
+      <div class="usp"><img src="_usp-1.png" alt=""><h4>Freehold</h4></div>
+      <div class="usp"><img src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
+      <div class="usp"><img src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
+      <div class="usp"><img src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
+      <div class="usp"><img src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
+      <div class="usp"><img src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
+      <div class="usp"><img src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
+      <div class="usp"><img src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
+      <div class="usp"><img src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
+      <div class="usp"><img src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
+      <div class="usp"><img src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
+      <div class="usp"><img src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
+    </div>
+    <div class="award rv">
+      <img src="_greenre.png" alt="GreenRE">
+      <p>M Aurora has been awarded<b>Silver Provisional GreenRE Certification</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES: live H2 block 2 verbatim as lede; category tabs from the published plan legends. -->
+<section class="sec sec-alt" id="facilities">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">46 Named Facilities</span>
+      <h2>Experience Exclusive Facilities for an Elevated <span class="em">Condo Living</span></h2>
+      <p class="copy">At M Aurora, elevated living is not just a concept, but an experience that integrates modern conveniences, wellness, and smart solutions.</p>
+      <div class="more-wrap" data-collapsed="true">
+        <div class="more-body">
+          <p class="copy">Imagine starting your morning with laps in a 50m lap pool, unwinding in the Jacuzzi or hydrotherapy seats after work, and spending weekends with family at the kid's pool and pool lounge. Beyond the water, the development also features a barbecue pavilion, glamping dome, yoga lawn, reflexology path, and viewing gardens, designed for leisure, connection, and mindful living.</p>
+          <p class="copy">For those who work and move, a co-working terrace and shuttle service adds practical value to daily routines. The development also integrates EV charging stations, an automated waste collection system, and a multi-tier security system for a safer, greener, and more efficient lifestyle. A dedicated concierge service adds a touch of exclusivity by providing personalized assistance for every owner&rsquo;s needs.</p>
+          <p class="copy">Beyond these conveniences, the Mah Sing Smart Community platform is introduced to further simplify everyday living by connecting residents to a digital ecosystem. With security, sustainability, and smart technology at its core, this development offers a living environment that adapts to evolving lifestyles.</p>
+        </div>
+        <button type="button" class="more-btn" aria-expanded="false">Show more
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="fac-grid rv">
+      <div>
+        <div class="fac-plan" data-full="_fac-plan-podium.jpg" data-cap="Ground &amp; L8 Podium Floor Facilities Plan" id="facPlanMain">
+          <img src="_fac-plan-podium.jpg" alt="Ground and Level 8 podium floor facilities plan">
+          <span class="cap">Ground &amp; L8 Podium Floor Facilities Plan &middot; tap to enlarge</span>
+        </div>
+      </div>
+      <div>
+        <div class="fac-plan" data-full="_fac-plan-sky.jpg" data-cap="Sky Lounge Facilities Plan" id="facPlanSky">
+          <img src="_fac-plan-sky.jpg" alt="Sky Lounge facilities plan">
+          <span class="cap">Sky Lounge Facilities Plan &middot; tap to enlarge</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fac-cats" role="tablist" aria-label="Facility categories">
+      <button class="fac-cat" role="tab" data-cat="water" aria-selected="true">Water &amp; Pool Deck</button>
+      <button class="fac-cat" role="tab" data-cat="fitness" aria-selected="false">Fitness &amp; Wellness</button>
+      <button class="fac-cat" role="tab" data-cat="gardens" aria-selected="false">Gardens &amp; Views</button>
+      <button class="fac-cat" role="tab" data-cat="social" aria-selected="false">Family &amp; Social</button>
+      <button class="fac-cat" role="tab" data-cat="sky" aria-selected="false">Sky Lounge</button>
+    </div>
+
+    <div class="fac-detail open" data-cat="water">
+      <div class="fac-detail-head"><h3>Water &amp; Pool Deck</h3><span>11 facilities &middot; numbers match the plan</span></div>
+      <ul class="fac-list">
+        <li><i>8</i>50m Lap Pool</li><li><i>9</i>Hydrotherapy Seat</li><li><i>10</i>Pool Lounge</li><li><i>11</i>Jacuzzi</li><li><i>12</i>Pool Seat</li><li><i>13</i>Pool Shower</li><li><i>14</i>Kid&rsquo;s Pool</li><li><i>15</i>Pool Slide</li><li><i>16</i>Mushroom Play</li><li><i>17</i>Tipping Bucket</li><li><i>18</i>Pool Deck</li>
+      </ul>
+    </div>
+    <div class="fac-detail" data-cat="fitness">
+      <div class="fac-detail-head"><h3>Fitness &amp; Wellness</h3><span>5 facilities</span></div>
+      <ul class="fac-list">
+        <li><i>19</i>Gym</li><li><i>20</i>Yoga Studio</li><li><i>27</i>Reflexology Path</li><li><i>28</i>Exercise Lawn</li><li><i>40</i>Multi-Purpose Hall / Badminton / Pickleball Court</li>
+      </ul>
+    </div>
+    <div class="fac-detail" data-cat="gardens">
+      <div class="fac-detail-head"><h3>Gardens &amp; Views</h3><span>11 facilities</span></div>
+      <ul class="fac-list">
+        <li><i>2</i>Aurora Garden</li><li><i>4</i>Green Dome</li><li><i>25</i>Courtyard Garden</li><li><i>26</i>Viewing Swing</li><li><i>29</i>Viewing Cabana</li><li><i>30</i>Herbs Garden</li><li><i>31</i>Skyline Seating</li><li><i>34</i>Viewing Terrace</li><li><i>35</i>Tea Garden Terrace</li><li><i>36</i>KOI Pond</li><li><i>37</i>Open Lawn</li>
+      </ul>
+    </div>
+    <div class="fac-detail" data-cat="social">
+      <div class="fac-detail-head"><h3>Family &amp; Social</h3><span>13 facilities</span></div>
+      <ul class="fac-list">
+        <li><i>1</i>Grand Entrance</li><li><i>3</i>Seating Alcove + Ribbon Bench</li><li><i>5</i>Taska</li><li><i>6</i>Tadika</li><li><i>7</i>Management Office</li><li><i>21</i>Co-Working Space</li><li><i>22</i>BBQ</li><li><i>23</i>Glamping Dome</li><li><i>24</i>Glamping Lawn</li><li><i>32</i>Karaoke Room</li><li><i>33</i>Games Room</li><li><i>38</i>Playground</li><li><i>39</i>Play Lawn</li>
+      </ul>
+    </div>
+    <div class="fac-detail" data-cat="sky">
+      <div class="fac-detail-head"><h3>The Sky Lounge</h3><span>6 facilities</span></div>
+      <ul class="fac-list">
+        <li><i>1</i>Function Space</li><li><i>2</i>Pre-function Room</li><li><i>3</i>Function Lawn</li><li><i>4</i>Sky View Lawn</li><li><i>5</i>Seating Corner</li><li><i>6</i>Pot Garden</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY: the site's own imagery, swipe row + lightbox. -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Artist impressions</span>
+      <h2>What the dawn will <span class="em">look like</span></h2>
+    </div>
+    <div class="gal rv" id="gal">
+      <figure><img src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
+      <figure><img src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
+      <figure><img src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
+      <figure><img src="_gal-sky-garden.jpg" alt="Sky garden"><figcaption>Sky Garden</figcaption></figure>
+      <figure><img src="_gal-kids-pool.jpg" alt="Kids pool"><figcaption>Kids Pool</figcaption></figure>
+      <figure><img src="_gal-playground.jpg" alt="Playground"><figcaption>Playground</figcaption></figure>
+      <figure><img src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
+      <figure><img src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
+    </div>
+    <p class="gal-hint rv">Swipe to see more &middot; tap any image to enlarge</p>
+  </div>
+</section>
+
+<!-- LOCATION: live H2 block 4 verbatim as lede; named connections only, no invented distances. -->
+<section class="sec sec-alt" id="location">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Old Klang Road, KL</span>
+      <h2>A New Project with Excellent Accessibility &amp; Amenities in <span class="em">Old Klang Road</span></h2>
+      <p class="copy">Location shapes everyday living, and this project places everything within reach.</p>
+      <div class="more-wrap" data-collapsed="true">
+        <div class="more-body">
+          <p class="copy">With direct links to highways such as NPE, KESAS, and KTM stations, the daily rush feels less like a hassle and more like a smooth transition between destinations. Mid Valley, KLCC, and Bangsar are all within easy access, which allows for a connected lifestyle without the usual commuting stress.</p>
+          <p class="copy">But true livability is only part of the equation. A well-established network of shopping malls, healthcare facilities, and educational institutions ensures that essentials aren&rsquo;t just nearby but are a part of the neighborhood&rsquo;s rhythm. Here, convenience isn&rsquo;t just about proximity, it is about curating a lifestyle where time is valued, and every aspect of daily living is thoughtfully considered.</p>
+        </div>
+        <button type="button" class="more-btn" aria-expanded="false">Show more
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="loc-grid rv">
+      <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map" role="button" tabindex="0" aria-label="Enlarge the location map">
+        <img src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
+        <span class="cap">Tap to enlarge &middot; numbers match the lists</span>
+      </div>
+      <div>
+        <div class="loc-cats" role="tablist" aria-label="Connectivity and amenity categories">
+          <button class="loc-cat" role="tab" data-loc="access" aria-selected="true">Access</button>
+          <button class="loc-cat" role="tab" data-loc="transit" aria-selected="false">Transit</button>
+          <button class="loc-cat" role="tab" data-loc="malls" aria-selected="false">Malls</button>
+          <button class="loc-cat" role="tab" data-loc="schools" aria-selected="false">Schools</button>
+          <button class="loc-cat" role="tab" data-loc="parks" aria-selected="false">Parks</button>
+          <button class="loc-cat" role="tab" data-loc="health" aria-selected="false">Health</button>
+        </div>
+        <div class="loc-list" id="locList"></div>
+        <div class="loc-acts">
+          <a class="btn btn-p" href="https://bit.ly/MA-waze" target="_blank" rel="noopener">Waze</a>
+          <a class="btn btn-o" href="https://www.google.com/maps/search/?api=1&amp;query=M+Aurora+Old+Klang+Road+Kuala+Lumpur" target="_blank" rel="noopener">Google Maps</a>
+          <a class="btn btn-o" href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR Tour</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPER: MGM dev2 pattern, dark band. Live copy verbatim. -->
+<section class="sec sec-alt" id="developer">
+  <div class="wrap">
+    <div class="dev rv">
+      <span class="eyebrow">The developer</span>
+      <h2>This project is built by :</h2>
+      <img class="dev-logo" src="_mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
+      <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ: ADDITIVE (live site has none). Facts-only answers; needs client sign-off before production. -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <span class="eyebrow">Good to know</span>
+      <h2>M Aurora, <span class="em">answered</span></h2>
+    </div>
+    <div class="faq rv" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q">Is M Aurora freehold or leasehold?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>M Aurora is a freehold serviced apartment development on Old Klang Road, Kuala Lumpur. Unlike leasehold projects with tenure restrictions, its freehold status promises enduring value in an area poised for continuous growth.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What unit types and sizes are available?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>Five layouts across two towers: Type A (1+1 bedroom, 1 bathroom, 556 sq ft), Type B (2 bedrooms, 2 bathrooms, 737 sq ft), Type C (3 bedrooms with balcony, 2 bathrooms, 858 sq ft), Type D (3 bedrooms with balcony, 3 bathrooms, 916 sq ft) and Type E (4 bedrooms with balcony, 3 bathrooms, 1,019 sq ft), with flexibility to combine rooms and create dual-key spaces. See the <a href="#layouts">floor plans</a> above.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How much does a unit cost?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B; the full permit detail is reproduced in the footer. Per-type price lists are available from the sales team, <a href="#register-full">register below</a> to receive one.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">When will M Aurora be completed?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>The expected date of completion is September 2030, per the advertising and sales permit.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How many car parks does each unit get?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>Each unit comes with 1 to 3 car parks, per the advertising and sales permit.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What facilities does M Aurora offer?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>46 named facilities across the Ground and Level 8 podium plans and the Sky Lounge plan, including a 50m lap pool, gym, yoga studio, co-working space, glamping dome, Aurora Garden and a multi-purpose hall for badminton and pickleball. M Aurora has been awarded the Silver Provisional GreenRE Certification. See the <a href="#facilities">full facilities list</a>.</p></div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Who is the developer of M Aurora?<i aria-hidden="true"></i></button>
+        <div class="faq-a"><div><p>Major Land Development Sdn. Bhd., a wholly-owned subsidiary of Mah Sing Group Berhad, one of Malaysia's most established property developers with over 79 completed projects nationwide.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM REGISTER: live H2 block 5 verbatim + the live form's budget dropdown + PDPA wording. -->
+<section class="sec sec-light" id="register-full" style="background:linear-gradient(180deg,#FEFCF7 0%,#EEEDF8 100%)">
+  <div class="wrap">
+    <div class="visit rv">
+      <div class="visit-l">
+        <span class="eyebrow">Now open for sale</span>
+        <h2>Own Your Ideal Home at <span style="color:#0E7A8A">M Aurora</span> Today!</h2>
+        <p class="copy">M Aurora is now open for sale, with prices starting from RM339,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
+        <div class="more-wrap" data-collapsed="true">
+          <div class="more-body">
+            <p class="copy">To help you find the right fit, explore the available <a href="#layouts" style="color:#0E7A8A">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" style="color:#0E7A8A">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
+            <p class="copy">With a refined aesthetic, flexible layouts, GreenRE Silver-certified sustainability, and a coveted freehold title in one of KL's most established corridors, M Aurora is poised to become a distinguished address for those who value both comfort and long-term value. Now is the time to make it yours.</p>
+          </div>
+          <button type="button" class="more-btn" aria-expanded="false">Show more
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="visit-r">
+        <p class="f-headline">Register now for <b>early bird privileges</b></p>
+        <form class="js-form" data-form="main" novalidate>
+          <div class="field"><label class="f-label" for="m-name">Full name</label>
+            <input class="f-input" id="m-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+          <div class="field"><label class="f-label" for="m-phone">Phone number</label>
+            <input class="f-input" id="m-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+          <div class="field"><label class="f-label" for="m-email">Email</label>
+            <input class="f-input" id="m-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+          <p class="form-err" data-form-error></p>
+          <button class="btn btn-p" type="submit">Submit</button>
+          <p class="f-consent">By clicking 'Submit', I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER: MGM pattern: logo, contact, socials, then the verbatim legal block. -->
+<footer class="footer" id="contact">
+  <div class="ft-top">
+    <div class="ft-logo"><img src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life."></div>
+    <div class="ft-contact">
+      <div class="ft-lab">For further enquiries, please contact:</div>
+      <a href="tel:0390783999" class="ft-phone num">03 9078 3999</a>
+      <a href="mailto:m-aurora@mahsing.com.my" class="ft-mail">m-aurora@mahsing.com.my</a>
+    </div>
+    <div class="ft-socials">
+    <a class="soc" href="https://www.facebook.com/mahsing/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.4 21v-8.1h2.7l.4-3.15h-3.1V7.74c0-.91.25-1.53 1.56-1.53h1.67V3.39A22.4 22.4 0 0 0 14.2 3.27c-2.42 0-4.07 1.48-4.07 4.19v2.29H7.42v3.15h2.71V21h3.27z"/></svg></a>
+    <a class="soc" href="https://www.instagram.com/mahsinggroup/?hl=en" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 5.67A4.17 4.17 0 1 0 12 16.17a4.17 4.17 0 0 0 0-8.34zm0 6.87a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4zm5.3-7.03a.97.97 0 1 1-1.95 0 .97.97 0 0 1 1.95 0z"/></svg></a>
+    <a class="soc" href="https://www.youtube.com/user/MahSingGroup" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.58 7.19a2.5 2.5 0 0 0-1.76-1.77C18.25 5 12 5 12 5s-6.25 0-7.82.42A2.5 2.5 0 0 0 2.42 7.2 26.15 26.15 0 0 0 2 12a26.15 26.15 0 0 0 .42 4.81 2.5 2.5 0 0 0 1.76 1.77C5.75 19 12 19 12 19s6.25 0 7.82-.42a2.5 2.5 0 0 0 1.76-1.77A26.15 26.15 0 0 0 22 12a26.15 26.15 0 0 0-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg></a>
+    <a class="soc" href="https://www.linkedin.com/company/mah-sing-group-berhad" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.34 18.34H5.67v-8h2.67v8zM7 9.17a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1zm11.34 9.17h-2.67v-3.89c0-.93-.02-2.12-1.29-2.12-1.3 0-1.5 1.01-1.5 2.05v3.96h-2.67v-8h2.56v1.09h.04c.36-.67 1.23-1.38 2.53-1.38 2.7 0 3.2 1.78 3.2 4.1v4.19z"/></svg></a>
+    </div>
+  </div>
+  <div class="ft-legal">
+    <p>Major Land Development Sdn. Bhd. 201101022598 (950737-K) (A wholly-owned subsidiary of Mah Sing Group Berhad) | Wisma Mah Sing, Penthouse Suite 1, No. 163 Jalan Sungai Besi, 57100 Kuala Lumpur. | Tel: +603 9221 8888 | Fax: +603 9221 8999 | Website: m-aurora.com.my | Email: m-aurora@mahsing.com.my</p>
+    <p>Developer License No: 13262/01-2028/0471(A) &bull; Validity Period: 17/1/2023 - 16/1/2028 &bull; Advertising &amp; Sales Permit No: 13262-2/03-2029/0221(N)-(S) &bull; Validity Period: 19/3/2026 &ndash; 18/3/2029 &bull; Building Plan Reference No: DBKL.JKB. BP S1 OSC 2026 0503(7) &bull; Expected Date of Completion: Sep 2030 &bull; Total Unit : 1544 units &bull; Tower A Total Unit: 747 &bull; Min Price: RM 495,360 &bull; Max Price: RM856,560 &bull; Tower B Total Unit: 797 &bull; Min Price: RM492,960 &bull; Max Price: RM768,960 &bull; Built-up : 556sf, 737sf, 858sf, 916sf and 1,019sf &bull; Type of Property: Suite Apartment &bull; Land Encumbrance: United Overseas Bank (M) Bhd &bull; No of Car Park per Unit: 1 to 3 units &bull; Approving Authority: DBKL &bull; Land Tenure: Freehold &bull; Restrictions: Nil &bull; This advertisement has been approved by National Housing Department. Approved development and advertisement information can be reviewed on the teduh portal at teduh.kpkt.gov.my</p>
+    <p>*Project from-price. Instalment estimates at 4.3% p.a. over the selected tenure, subject to bank approval. Prices subject to change.</p>
+  </div>
+</footer>
+
+<!-- LEAD DRAWER -->
+<div class="ld-backdrop" id="ldBackdrop" aria-hidden="true"></div>
+<aside class="ld" id="ld" role="dialog" aria-modal="true" aria-labelledby="ldTitle" aria-hidden="true">
+  <button type="button" class="ld-close" aria-label="Close form">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="ld-inner">
+    <div class="ld-grab" aria-hidden="true"></div>
+    <div class="ld-unit" id="ldUnit"><span class="k">Enquiring about</span><span class="v" id="ldUnitVal"></span></div>
+    <h2 id="ldTitle">Register &amp; get your price list</h2>
+    <p class="ld-sub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
+    <div class="rlabel">You'll receive</div>
+    <div class="receive">
+      <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Floor Plans</span>
+      <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Full Pricing</span>
+      <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Loan Assistance</span>
+    </div>
+    <form class="js-form" data-form="drawer" novalidate>
+      <div class="field"><label class="f-label" for="d-name">Full name</label>
+        <input class="f-input" id="d-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+      <div class="field"><label class="f-label" for="d-phone">Phone number</label>
+        <input class="f-input" id="d-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+      <div class="field"><label class="f-label" for="d-email">Email</label>
+        <input class="f-input" id="d-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+      <p class="form-err" data-form-error></p>
+      <button class="btn btn-p" type="submit" style="width:100%">Get my price list now</button>
+      <p class="f-consent">By clicking 'Submit', I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+      <div class="micro"><span>No spam</span><span>We reply by WhatsApp</span><span>Unsubscribe anytime</span></div>
+    </form>
+  </div>
+</aside>
+
+<!-- STICKY BAR (mobile) + FLOATS -->
+<div class="sticky" id="sticky">
+  <button type="button" class="btn btn-p" data-open-lead="sticky">Register Now</button>
+</div>
+<button class="to-top" id="toTop" aria-label="Scroll to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
+
+<!-- LIGHTBOX (zoom: wheel / pinch / drag / buttons) -->
+<div class="lb" id="lb" aria-hidden="true">
+  <div class="lb-stage" id="lbStage">
+    <img id="lbImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
+  </div>
+  <div class="lb-bar">
+    <button class="lb-btn" id="lbOut" aria-label="Zoom out">&minus;</button>
+    <button class="lb-btn lb-reset" id="lbReset" aria-label="Reset zoom">Reset</button>
+    <button class="lb-btn" id="lbIn" aria-label="Zoom in">+</button>
+    <button class="lb-btn" id="lbX" aria-label="Close">&#10005;</button>
+  </div>
+  <span class="lb-hint">Scroll or pinch to zoom &middot; drag to pan</span>
+  <span class="lb-cap" id="lbCap"></span>
+</div>
+
+<script>
+(function(){
+'use strict';
+document.documentElement.classList.add('js');
+var $=function(id){return document.getElementById(id);};
+
+/* capture params: ?clean=1 hides fixed chrome; ?drawer=1 opens the lead drawer */
+var _q=new URLSearchParams(location.search);
+if(_q.get('clean')==='1')document.documentElement.classList.add('clean');
+
+/* Mockup tracking stub: pushes to dataLayer only. Production wires GTM/GA4. */
+window.dataLayer=window.dataLayer||[];
+function track(p){try{window.dataLayer.push(p);}catch(e){}}
+
+/* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
+(function(){
+  var hm=$('heroMedia');if(!hm)return;
+  var arts=[hm.querySelector('.hs-1'),hm.querySelector('.hs-2'),hm.querySelector('.hs-3'),hm.querySelector('.hs-4')];
+  var dots=Array.prototype.slice.call(hm.querySelectorAll('.h-dot'));
+  var caps={1:'The Towers',2:'Grand Entrance',3:'50m Lap Pool',4:'Show Unit Type A'};
+  var cur=1,timer=null,reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function go(n){
+    cur=((n-1)%4+4)%4+1;
+    arts.forEach(function(a,i){a.classList.toggle('on',i===cur-1);});
+    dots.forEach(function(d){d.classList.toggle('on',+d.getAttribute('data-hs')===cur);});
+    hm.setAttribute('data-slide',String(cur));
+    $('hCap').textContent=caps[cur];
+  }
+  function start(){if(reduce||timer)return;timer=setInterval(function(){go(cur+1);},6000);}
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  dots.forEach(function(d){d.addEventListener('click',function(){go(+d.getAttribute('data-hs'));stop();start();});});
+  hm.addEventListener('mouseenter',stop);
+  hm.addEventListener('mouseleave',start);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else start();});
+  if(_q.get('slide'))go(+_q.get('slide'));
+  start();
+})();
+
+/* ============ Units + calculator: one controller, price locked to type ============
+   Sizes/bed/bath published on m-aurora.com.my/floor-plans/ (verified 2026-08-21).
+   Per-type pricing unpublished: project from-price RM339,000* for all types, flagged. */
+var UNITS={
+  A:{bed:'1+1',bath:'1',size:'556',price:339000,published:true,
+     cfg:'1+1 bedroom, for urban professionals',plan:'_plan-A.jpg',vt:'https://m-aurora.com.my/360-vr/#typeA'},
+  B:{bed:'2',bath:'2',size:'737',price:339000,published:false,
+     cfg:'2 bedrooms, for couples',plan:'_plan-B.jpg',vt:'https://m-aurora.com.my/360-vr/#typeB'},
+  C:{bed:'3',bath:'2',size:'858',price:339000,published:false,
+     cfg:'3 bedrooms with balcony, for growing families',plan:'_plan-C.jpg',vt:'https://m-aurora.com.my/360-vr/#typeC'},
+  D:{bed:'3',bath:'3',size:'916',price:339000,published:false,
+     cfg:'3 bedrooms with balcony, 3 bathrooms, for growing families',plan:'_plan-D.jpg',vt:'https://m-aurora.com.my/360-vr/#typeD'},
+  E:{bed:'4',bath:'3',size:'1,019',price:339000,published:false,
+     cfg:'4 bedrooms with balcony, ideal for multi-generational living',plan:'_plan-E.jpg',vt:'https://m-aurora.com.my/360-vr/#typeE'}
+};
+var ORDER=['A','B','C','D','E'],cur='A',RATE=0.043;
+var fmt=function(n){return Math.round(n).toLocaleString('en-MY');};
+function monthly(p,pct,y){var L=p*(pct/100),r=RATE/12,n=y*12;
+  return L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
+function render(){
+  var u=UNITS[cur];
+  $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
+  $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
+  $('uFlag').textContent=u.published
+    ?'Type A published at RM339,000*. Per-type pricing for B to E on request.'
+    :'Project from-price. Type '+cur+' pricing on request; register to receive the current list.';
+  var img=$('planImg');img.src=u.plan;
+  img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
+  var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
+  cta.textContent='Get the Type '+cur+' price & layout';
+  $('uVt').href=u.vt;
+  Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
+    t.setAttribute('aria-selected',String(t.getAttribute('data-type')===cur));});
+  Array.prototype.forEach.call(document.querySelectorAll('#cpMenu .cp-opt'),function(o){
+    o.setAttribute('aria-selected',String(o.getAttribute('data-type')===cur));});
+  calc();
+}
+function calc(){
+  var u=UNITS[cur],pct=+$('cLoan').value,yrs=+$('cTen').value,m=monthly(u.price,pct,yrs);
+  $('cPrice').textContent='RM '+fmt(u.price)+'*';$('cType').textContent=cur;
+  $('cLoanOut').innerHTML='RM '+fmt(u.price*pct/100)+' &middot; '+pct+'%';
+  $('cTenOut').textContent=yrs+' years';
+  $('cMy').textContent='RM '+fmt(m);
+}
+window.setType=function(t,src){if(UNITS[t]){cur=t;render();
+  track({event:'unit_select',unit_interest:'Type '+t,select_source:src||'tab'});}};
+Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(tab){
+  tab.addEventListener('click',function(){window.setType(tab.getAttribute('data-type'),'tab');});});
+['cLoan','cTen'].forEach(function(id){$(id).addEventListener('input',calc);});
+/* price picker: selecting a type drives the card and the calculator together */
+var cpPick=$('cpPick'),cpMenu=$('cpMenu');
+if(cpPick&&cpMenu){
+  cpMenu.innerHTML=ORDER.map(function(k){
+    var u=UNITS[k];
+    return '<button type="button" role="option" class="cp-opt" data-type="'+k+'" aria-selected="'+(k===cur)+'">'+
+      '<span class="cp-opt-k">Type '+k+'</span>'+
+      '<span class="cp-opt-d">'+u.bed+' bed &middot; '+u.size+' sq ft</span>'+
+      '<b class="cp-opt-p num">RM '+fmt(u.price)+'*</b></button>';
+  }).join('');
+  function cpClose(){cpMenu.hidden=true;cpPick.setAttribute('aria-expanded','false');}
+  cpPick.addEventListener('click',function(e){
+    e.stopPropagation();
+    var open=cpMenu.hidden;cpMenu.hidden=!open;cpPick.setAttribute('aria-expanded',String(open));
+  });
+  cpMenu.addEventListener('click',function(e){
+    var o=e.target.closest('.cp-opt');if(!o)return;
+    window.setType(o.getAttribute('data-type'),'calc_dropdown');cpClose();
+  });
+  document.addEventListener('click',function(e){
+    if(!cpMenu.hidden&&!cpMenu.contains(e.target)&&e.target!==cpPick)cpClose();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cpMenu.hidden)cpClose();});
+}
+var tabsEl=$('tabs');
+tabsEl.addEventListener('keydown',function(e){
+  if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
+  e.preventDefault();
+  var i=ORDER.indexOf(cur),next=ORDER[(i+(e.key==='ArrowRight'?1:-1)+ORDER.length)%ORDER.length];
+  window.setType(next,'keys');
+  var sel=tabsEl.querySelector('.tab[aria-selected="true"]');if(sel)sel.focus();
+});
+/* swipe the plan to change type; a horizontal drag suppresses the tap-to-zoom */
+(function(){
+  var stage=$('planWrap'),sx=0,sy=0,tracking=false;window._swiped=false;
+  function step(dir){var i=ORDER.indexOf(cur);window.setType(ORDER[(i+dir+ORDER.length)%ORDER.length],'swipe');}
+  stage.addEventListener('touchstart',function(e){if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;tracking=true;window._swiped=false;}},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(!tracking)return;tracking=false;
+    var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+    if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4){window._swiped=true;step(dx<0?1:-1);}
+  },{passive:true});
+})();
+$('calcJump').addEventListener('click',function(){$('calc').scrollIntoView({behavior:'smooth'});});
+
+/* ============ Lightbox with zoom (wheel / pinch / drag / buttons) ============ */
+var lbEl=$('lb'),lbImg=$('lbImg'),lbStage=$('lbStage');
+var lbZ={s:1,x:0,y:0,drag:false,sx:0,sy:0,pd:0,ps:1,moved:0};
+function lbApply(){lbImg.style.transform='translate('+lbZ.x+'px,'+lbZ.y+'px) scale('+lbZ.s+')';}
+function lbZoom(d){
+  if(d===0){lbZ.s=1;lbZ.x=0;lbZ.y=0;}
+  else{var n=lbZ.s*(d>0?1.3:.77);lbZ.s=Math.max(1,Math.min(6,n));
+    if(lbZ.s===1){lbZ.x=0;lbZ.y=0;}}
+  lbApply();
+}
+function openLb(src,alt,cap){lbImg.src=src;lbImg.alt=alt||'';$('lbCap').textContent=cap||'';
+  lbZoom(0);lbEl.classList.add('on');lbEl.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function closeLb(){lbEl.classList.remove('on');lbEl.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+$('lbX').addEventListener('click',closeLb);
+$('lbIn').addEventListener('click',function(){lbZoom(1);});
+$('lbOut').addEventListener('click',function(){lbZoom(-1);});
+$('lbReset').addEventListener('click',function(){lbZoom(0);});
+lbEl.addEventListener('click',function(e){if(e.target===lbEl)closeLb();});
+lbStage.addEventListener('click',function(e){if(e.target===lbStage&&lbZ.moved<6)closeLb();});
+document.addEventListener('keydown',function(e){
+  if(!lbEl.classList.contains('on'))return;
+  if(e.key==='Escape')closeLb();
+  else if(e.key==='+'||e.key==='=')lbZoom(1);
+  else if(e.key==='-')lbZoom(-1);
+  else if(e.key==='0')lbZoom(0);
+});
+lbStage.addEventListener('wheel',function(e){e.preventDefault();lbZoom(e.deltaY<0?1:-1);},{passive:false});
+lbStage.addEventListener('mousedown',function(e){
+  if(e.target.closest('.lb-bar'))return;
+  lbZ.drag=true;lbZ.moved=0;lbZ.sx=e.clientX-lbZ.x;lbZ.sy=e.clientY-lbZ.y;
+  lbStage.classList.add('dragging');e.preventDefault();
+});
+window.addEventListener('mousemove',function(e){
+  if(!lbZ.drag)return;
+  lbZ.moved+=2;lbZ.x=e.clientX-lbZ.sx;lbZ.y=e.clientY-lbZ.sy;lbApply();
+});
+window.addEventListener('mouseup',function(){lbZ.drag=false;lbStage.classList.remove('dragging');});
+lbStage.addEventListener('touchstart',function(e){
+  if(e.touches.length===1){lbZ.drag=true;lbZ.moved=0;
+    lbZ.sx=e.touches[0].clientX-lbZ.x;lbZ.sy=e.touches[0].clientY-lbZ.y;}
+  else if(e.touches.length===2){
+    var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;
+    lbZ.pd=Math.hypot(dx,dy);lbZ.ps=lbZ.s;lbZ.drag=false;}
+},{passive:true});
+lbStage.addEventListener('touchmove',function(e){
+  if(e.touches.length===1&&lbZ.drag&&lbZ.s>1){
+    lbZ.moved+=2;lbZ.x=e.touches[0].clientX-lbZ.sx;lbZ.y=e.touches[0].clientY-lbZ.sy;
+    lbApply();e.preventDefault();}
+  else if(e.touches.length===2){
+    var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY,
+        d=Math.hypot(dx,dy);
+    if(lbZ.pd){lbZ.s=Math.max(1,Math.min(6,lbZ.ps*(d/lbZ.pd)));if(lbZ.s===1){lbZ.x=0;lbZ.y=0;}}
+    lbApply();e.preventDefault();}
+},{passive:false});
+lbStage.addEventListener('touchend',function(){lbZ.drag=false;lbZ.pd=0;});
+$('planWrap').addEventListener('click',function(){
+  if(window._swiped){window._swiped=false;return;}
+  var i=$('planImg');openLb(i.src,i.alt,'Type '+cur+' floor plan');});
+['facPlanMain','facPlanSky','locMap'].forEach(function(id){
+  var el=$(id);if(!el)return;
+  el.addEventListener('click',function(){openLb(el.getAttribute('data-full'),el.querySelector('img').alt,el.getAttribute('data-cap'));});
+});
+Array.prototype.forEach.call(document.querySelectorAll('#gal figure'),function(f){
+  f.addEventListener('click',function(){var i=f.querySelector('img'),c=f.querySelector('figcaption');
+    openLb(i.src,i.alt,c?c.textContent:'');});
+});
+
+/* ============ Facilities category tabs ============ */
+Array.prototype.forEach.call(document.querySelectorAll('.fac-cat'),function(b){
+  b.addEventListener('click',function(){
+    var cat=b.getAttribute('data-cat');
+    Array.prototype.forEach.call(document.querySelectorAll('.fac-cat'),function(x){
+      x.setAttribute('aria-selected',String(x===b));});
+    Array.prototype.forEach.call(document.querySelectorAll('.fac-detail'),function(d){
+      d.classList.toggle('open',d.getAttribute('data-cat')===cat);});
+  });
+});
+
+/* ============ Location panel: client-supplied lists 2026-08-21; numbers match the map ============ */
+var PLACES={
+  access:[[1,'Jalan Klang Lama',''],[2,'New Pantai Expressway (NPE)',''],[3,'Federal Highway',''],
+    [4,'KESAS',''],[5,'Maju Expressway (MEX)',''],[6,'Salak Highway',''],
+    [7,'Kuala Lumpur \u2013 Seremban Expressway','']],
+  transit:[[1,'KTM, Jalan Templer','500m walk'],[2,'KTM, Petaling','600m walk'],
+    [3,'Future MRT3, Jalan Klang Lama','2.5km']],
+  malls:[[0,'Pearl Point Shopping Mall','1.7km'],[0,'Bloomsvale Shopping Gallery','2.2km'],
+    [0,'The Scott Garden','2.6km'],[0,'NSK Trade City','4km'],[0,'Amcorp Mall','4.3km'],
+    [0,'Mid Valley Megamall','6.8km']],
+  schools:[[0,'SMK Petaling','350m'],[0,'SJK(C) Yuk Chyun','1.4km'],[0,'Newton International College','1.6km'],
+    [0,'Kolej Kemahiran Tinggi Mara Petaling Jaya','1.8km'],[0,'SMK (P) Taman Petaling','2.1km'],
+    [0,'SJK(C) Choong Wen','2.6km']],
+  parks:[[0,'Sports Arena Sentosa','500m'],[0,'Kerinchi Hill Forest Park','3km'],
+    [0,'IWK Eco Park @ Pantai Dalam','3.5km'],[0,'Bukit Jalil Recreational Park','4.3km'],
+    [0,'National Stadium Bukit Jalil','6.3km']],
+  health:[[0,'Assunta Hospital','2.6km'],[0,'KMI Taman Desa Medical Centre','3.3km']]
+};
+function drawPlaces(cat){
+  $('locList').innerHTML=PLACES[cat].map(function(x){
+    var n=x[0]?'<i class="ln ln-'+cat+'">'+x[0]+'</i>':'';
+    var d=x[2]?'<b>'+x[2]+'</b>':'';
+    return '<div class="loc-item"><span>'+n+x[1]+'</span>'+d+'</div>';}).join('');
+}
+drawPlaces('access');
+Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(b){
+  b.addEventListener('click',function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(x){x.setAttribute('aria-selected','false');});
+    b.setAttribute('aria-selected','true');drawPlaces(b.getAttribute('data-loc'));});
+});
+
+/* ============ FAQ accordion ============ */
+Array.prototype.forEach.call(document.querySelectorAll('.faq-item'),function(item){
+  var q=item.querySelector('.faq-q');
+  q.addEventListener('click',function(){item.classList.toggle('on');});
+});
+
+/* ============ Show more (content always in DOM) ============ */
+Array.prototype.forEach.call(document.querySelectorAll('.more-wrap'),function(w){
+  var btn=w.querySelector('.more-btn');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var collapsed=w.getAttribute('data-collapsed')==='true';
+    w.setAttribute('data-collapsed',collapsed?'false':'true');
+    btn.firstChild.textContent=collapsed?'Show less ':'Show more ';
+    btn.setAttribute('aria-expanded',String(collapsed));
+  });
+});
+
+/* ============ Lead drawer with unit context ============ */
+var ld=$('ld'),ldBack=$('ldBackdrop'),lastFocus=null;
+function openLead(e){
+  if(e)e.preventDefault();
+  lastFocus=document.activeElement;
+  var srcEl=e&&e.currentTarget,source=srcEl?(srcEl.getAttribute('data-open-lead')||'page'):'page';
+  var unit=srcEl?(srcEl.getAttribute('data-unit')||''):'';
+  var uWrap=$('ldUnit'),uVal=$('ldUnitVal'),title=$('ldTitle');
+  if(unit){uVal.textContent=unit;uWrap.classList.add('on');
+    title.textContent='Get the '+unit+' price & layout';}
+  else{uWrap.classList.remove('on');title.textContent='Register & get your price list';}
+  ld.classList.add('open');ldBack.classList.add('open');
+  ld.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+  track({event:'lead_drawer_open',trigger_source:source,unit_interest:unit||'not specified'});
+  var first=ld.querySelector('input[name="name"]');
+  if(first)setTimeout(function(){first.focus();},240);
+}
+function closeLead(){
+  ld.classList.remove('open');ldBack.classList.remove('open');
+  ld.setAttribute('aria-hidden','true');document.body.style.overflow='';
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+Array.prototype.forEach.call(document.querySelectorAll('[data-open-lead]'),function(el){
+  el.addEventListener('click',openLead);});
+if(_q.get('drawer')==='1')window.addEventListener('load',function(){setTimeout(openLead,400);});
+ld.querySelector('.ld-close').addEventListener('click',closeLead);
+ldBack.addEventListener('click',closeLead);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&ld.classList.contains('open'))closeLead();});
+
+/* ============ Forms: demo-only; validation mirrors production rules ============
+   No +60 prefix (standing rule 2026-08-02): auto-dash formatting only. */
+function isEmail(v){return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test((v||'').trim());}
+function isMyPhone(v){var d=String(v||'').replace(/\D/g,'');return d.length>=9&&d.length<=11;}
+function fmtPhone(input){
+  var d=(input.value||'').replace(/\D/g,'');if(d.length>11)d=d.slice(0,11);
+  var out;
+  if(d.length===0)out='';
+  else if(d.length<=3)out=d;
+  else if(d.length<=7)out=d.slice(0,3)+'-'+d.slice(3);
+  else out=d.slice(0,3)+'-'+d.slice(3,7)+' '+d.slice(7);
+  input.value=out;
+}
+Array.prototype.forEach.call(document.querySelectorAll('input[data-my-phone]'),function(input){
+  input.addEventListener('input',function(){fmtPhone(input);input.setCustomValidity('');});
+  input.addEventListener('blur',function(){
+    if(input.value&&!isMyPhone(input.value))input.setCustomValidity('Please enter a valid Malaysian phone number (e.g. 012-345 6789).');
+    else input.setCustomValidity('');
+  });
+});
+Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form){
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var err=form.querySelector('[data-form-error]');
+    var name=(form.querySelector('[name="name"]')||{}).value||'';
+    var phone=(form.querySelector('[name="phone"]')||{}).value||'';
+    var email=(form.querySelector('[name="email"]')||{}).value||'';
+    var msg=null;
+    if(!name.trim()||!phone.trim()||!email.trim())msg='Please fill in your name, phone number and email.';
+    else if(!isEmail(email))msg='Please enter a valid email address (e.g. name@example.com).';
+    else if(!isMyPhone(phone))msg='Please enter a valid Malaysian phone number (e.g. 012-345 6789).';
+    if(msg){form.classList.add('has-error');if(err)err.textContent=msg;return;}
+    form.classList.remove('has-error');
+    track({event:'generate_lead',lead_type:'form_submission',
+      form_name:'M Aurora '+(form.getAttribute('data-form')||'form')+' (mockup demo)'});
+    var done=document.createElement('div');done.className='done';
+    done.textContent='Thank you. Our team will WhatsApp you the floor plans, full pricing and loan assistance shortly.';
+    form.parentNode.replaceChild(done,form);
+  });
+});
+
+/* ============ Nav scroll state + mobile menu ============ */
+var nav=$('siteNav');
+var lastState=null;
+function navState(){var s=window.scrollY>20;if(s===lastState)return;lastState=s;nav.classList.toggle('is-scrolled',s);}
+window.addEventListener('scroll',navState,{passive:true});navState();
+/* mobile section rail: fixed under the nav, shows past the hero (MGM pattern) */
+var rail=$('rail');
+function setNavH(){document.documentElement.style.setProperty('--nav-h',nav.offsetHeight+'px');}
+setNavH();window.addEventListener('resize',setNavH);
+window.addEventListener('scroll',function(){window.requestAnimationFrame(setNavH);},{passive:true});
+if(rail&&'IntersectionObserver' in window){
+  var heroEl=document.querySelector('.hero');
+  if(heroEl){new IntersectionObserver(function(es){
+    var past=!es[0].isIntersecting;
+    rail.classList.toggle('on',past);
+    rail.setAttribute('aria-hidden',String(!past));
+  },{rootMargin:'60px 0px 0px 0px'}).observe(heroEl);}
+}
+var ham=$('navHam'),mm=$('mm'),mmBack=$('mmBackdrop');
+function openMm(){mm.classList.add('open');mmBack.classList.add('open');
+  mm.setAttribute('aria-hidden','false');ham.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';document.body.classList.add('mm-open');}
+function closeMm(){mm.classList.remove('open');mmBack.classList.remove('open');
+  mm.setAttribute('aria-hidden','true');ham.setAttribute('aria-expanded','false');
+  document.body.style.overflow='';document.body.classList.remove('mm-open');}
+ham.addEventListener('click',function(){mm.classList.contains('open')?closeMm():openMm();});
+mm.querySelector('.mm-close').addEventListener('click',closeMm);
+mmBack.addEventListener('click',closeMm);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mm.classList.contains('open'))closeMm();});
+Array.prototype.forEach.call(mm.querySelectorAll('a[href^="#"]'),function(a){a.addEventListener('click',closeMm);});
+
+/* rail scrollspy */
+var railLinks=Array.prototype.slice.call(document.querySelectorAll('a[data-rail]'));
+if(railLinks.length&&'IntersectionObserver' in window){
+  var spy=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      railLinks.forEach(function(a){
+        var on=a.getAttribute('href')==='#'+e.target.id;
+        a.classList.toggle('on',on);
+        if(on){var sc=a.closest('.rail-in');
+          if(sc&&sc.scrollWidth>sc.clientWidth){
+            sc.scrollTo({left:Math.max(0,a.offsetLeft-sc.clientWidth/2+a.offsetWidth/2),behavior:'smooth'});}}
+      });
+    });
+  },{rootMargin:'-42% 0px -52% 0px'});
+  railLinks.forEach(function(a){var el=document.getElementById(a.getAttribute('href').slice(1));if(el)spy.observe(el);});
+}
+
+/* ============ Sticky bar, WA float, to-top ============ */
+var sticky=$('sticky'),toTop=$('toTop');
+var regFull=document.getElementById('register-full'),regQuick=document.getElementById('register');
+var formInView=false;
+function stickyState(){var s=window.scrollY>420;
+  sticky.classList.toggle('on',s&&!formInView);
+  toTop.classList.toggle('on',s);}
+window.addEventListener('scroll',stickyState,{passive:true});
+if('IntersectionObserver' in window){
+  var seen={};
+  var fio=new IntersectionObserver(function(es){
+    es.forEach(function(e){seen[e.target.id]=e.isIntersecting;});
+    formInView=!!(seen['register']||seen['register-full']);
+    stickyState();
+  },{threshold:.18});
+  if(regQuick)fio.observe(regQuick);if(regFull)fio.observe(regFull);
+}
+stickyState();
+toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+/* ============ Reveals: IO + post-load force sweep (capture-safe) ============ */
+var rvs=Array.prototype.slice.call(document.querySelectorAll('.rv'));
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  rvs.forEach(function(el){io.observe(el);});
+}else{rvs.forEach(function(el){el.classList.add('in');});}
+window.addEventListener('load',function(){
+  setTimeout(function(){rvs.forEach(function(el){el.classList.add('in');});},900);
+});
+
+/* counters: final value already in markup; animate only in a real viewport */
+if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  var cio=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;cio.unobserve(e.target);
+      var el=e.target,end=+el.getAttribute('data-count'),t0=null;
+      requestAnimationFrame(function step(ts){
+        if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1),v=Math.round(end*(1-Math.pow(1-p,3)));
+        el.textContent=v.toLocaleString('en-MY');if(p<1)requestAnimationFrame(step);
+      });
+    });
+  },{threshold:.6});
+  Array.prototype.forEach.call(document.querySelectorAll('[data-count]'),function(el){cio.observe(el);});
+}
+
+render();
+})();
+</script>
 </body>
 </html>
