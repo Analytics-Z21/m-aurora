@@ -34,6 +34,17 @@ pricing still unpublished: cards show project from-price RM339K* with a visible 
 Facility names from the published plan legends only. No invented distances. No rebates
 or packages anywhere. Phone fields carry no +60 prefix (standing rule 2026-08-02).
 
+REVISION R14 (client feedback 2026-08-21, round 2): calculator price is selectable (MGM
+cp-pick dropdown, synced with the tabs and unit card); estimated-monthly output centred
+with the rate note right-aligned; permit cnote removed from the calculator (permit text
+stays in the footer legal); developer uses the colour Mah Sing logo and the MGM heading;
+mobile section rail added (MGM rail pattern, appears past the hero, scrollspy-centred);
+facility lists carry their plan legend numbers; location visual replaced with the client
+map (_loc-map.png, zoomable) and the panel now carries the client-supplied lists: Access
+1-7 and Transit 1-3 numbered to match the map markers, plus Malls / Schools / Parks /
+Health with real distances. Hero art resolution: the live site serves no larger files
+(1000-1920px ceiling, -scaled probes 404); request original renders from Mah Sing.
+
 REVISION R13 (client feedback 2026-08-21): hero lockup restored above the eyebrow;
 eyebrow = "Open for Sale"; client-supplied lighter scrim; Grand Entrance added as hero
 slide 2 (4-slide carousel); trust strip removed; Layouts + quick form moved directly
@@ -738,6 +749,67 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
 .lb-stage img{max-width:92vw;max-height:86vh;transform-origin:center center;user-select:none;-webkit-user-drag:none}
 .lb-hint{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
   font:500 11.5px/1.4 var(--fb);color:var(--muted)}
+
+/* ===== REVISION R14 (client feedback 2026-08-21, round 2) ===== */
+/* calculator price picker */
+.cp-pick{display:inline-flex;align-items:center;gap:10px;background:rgba(24,183,201,.12);
+  border:1px solid rgba(24,183,201,.42);border-radius:2px;padding:9px 13px;cursor:pointer;
+  color:var(--cream);transition:background .18s,border-color .18s;font-family:var(--fb);text-align:left}
+.cp-pick:hover{background:rgba(24,183,201,.2);border-color:var(--teal)}
+.cp-pick b{font:600 22px/1.2 var(--fd);color:var(--cream);white-space:nowrap}
+.cp-pick-t{font:600 12px/1.4 var(--fb);color:#8FE0D0;white-space:nowrap}
+.cp-pick-c{flex:none;color:#8FE0D0;transition:transform .2s}
+.cp-pick[aria-expanded="true"] .cp-pick-c{transform:rotate(180deg)}
+.cp-menu{margin-top:10px;display:grid;gap:6px;background:rgba(6,9,24,.85);
+  border:1px solid rgba(24,183,201,.38);border-radius:2px;padding:8px;max-width:420px}
+.cp-menu[hidden]{display:none}
+.cp-opt{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;width:100%;
+  background:transparent;border:1px solid transparent;border-radius:2px;padding:10px 11px;cursor:pointer;
+  text-align:left;font-family:var(--fb);transition:background .16s,border-color .16s;color:var(--cream)}
+.cp-opt:hover{background:rgba(24,183,201,.14);border-color:rgba(24,183,201,.35)}
+.cp-opt[aria-selected="true"]{background:rgba(24,183,201,.2);border-color:var(--teal)}
+.cp-opt-k{font:700 12.5px/1.4 var(--fb);color:var(--cream)}
+.cp-opt-d{font:400 12px/1.5 var(--fb);color:var(--muted)}
+.cp-opt-p{font:600 14px/1.3 var(--fd);color:#8FE0D0}
+/* estimated monthly: centred price, right-aligned note */
+.cout{display:block;text-align:center}
+.cout .v{margin-top:4px}
+.cout .d{margin:12px 0 0 auto;text-align:right;max-width:none}
+/* developer colour logo */
+.dev-logo{width:min(300px,72%);margin:18px auto 16px}
+/* mobile section rail */
+.rail{position:fixed;top:var(--nav-h,64px);left:0;right:0;z-index:55;background:rgba(6,9,24,.94);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--mull);
+  transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease}
+.rail.on{transform:none;opacity:1;pointer-events:auto}
+@media(min-width:1024px){.rail{display:none}}
+body.mm-open .rail{display:none}
+html.clean .rail{display:none!important}
+.rail-in{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 10px}
+.rail-in::-webkit-scrollbar{display:none}
+.rail-in a{flex:none;position:relative;padding:13px 13px;font:600 11.5px/1.3 var(--fb);letter-spacing:.07em;
+  text-transform:uppercase;color:rgba(254,252,247,.66);white-space:nowrap}
+.rail-in a::after{content:'';position:absolute;left:13px;right:13px;bottom:0;height:2px;background:var(--grad);
+  transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.rail-in a.on{color:var(--cream)}
+.rail-in a.on::after{transform:scaleX(1)}
+/* facilities legend numbers */
+.fac-list li{padding-left:0;display:flex;align-items:baseline;gap:10px}
+.fac-list li::before{display:none}
+.fac-list li i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--grad);
+  color:#07242B;font:700 11.5px/22px var(--fb);font-style:normal;text-align:center;
+  align-self:flex-start;transform:translateY(1px)}
+/* location map + numbered lists */
+.loc-visual{cursor:zoom-in;background:var(--night2);min-height:0}
+.loc-visual img{position:static;width:100%;height:auto;object-fit:contain}
+.loc-visual::after{display:none}
+.loc-visual .cap{background:rgba(6,9,24,.7);border-radius:6px;padding:7px 12px;left:12px;right:auto;bottom:12px}
+.loc-item i.ln{display:inline-flex;flex:none;width:20px;height:20px;border-radius:50%;
+  justify-content:center;align-items:center;font:700 11px/1 var(--fb);font-style:normal;
+  color:#fff;margin-right:9px;transform:translateY(3px)}
+.ln-access{background:#4761A8}
+.ln-transit{background:#A63D9E}
+.loc-item span{display:inline-flex;align-items:baseline}
 </style>
 </head>
 <body>
@@ -775,6 +847,20 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
     </button>
   </div>
 </nav>
+
+<!-- Mobile section rail: appears once the hero scrolls out (MGM rail pattern) -->
+<div class="rail" id="rail" aria-hidden="true">
+  <nav class="rail-in" id="railIn" aria-label="Section navigation">
+    <a href="#layouts" data-rail>Layouts</a>
+    <a href="#dawn" data-rail>Overview</a>
+    <a href="#facilities" data-rail>Facilities</a>
+    <a href="#gallery" data-rail>Gallery</a>
+    <a href="#location" data-rail>Location</a>
+    <a href="#developer" data-rail>Developer</a>
+    <a href="#faq" data-rail>FAQ</a>
+    <a href="#register-full" data-rail>Register</a>
+  </nav>
+</div>
 
 <!-- Mobile menu drawer -->
 <div class="mm-backdrop" id="mmBackdrop" aria-hidden="true"></div>
@@ -906,8 +992,12 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
       <h3>Estimate your monthly instalment</h3>
       <div class="cprice">
         <span class="l">Property price</span>
-        <b class="num" id="cPrice">RM 339,000*</b>
-        <span>Locked to Type <span id="cType">A</span> &middot; change via the tabs above</span>
+        <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
+          <b class="num" id="cPrice">RM 339,000*</b>
+          <span class="cp-pick-t">Type <span id="cType">A</span></span>
+          <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="cp-menu" id="cpMenu" role="listbox" aria-label="Unit type" hidden></div>
       </div>
       <div class="cfield">
         <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 305,100 &middot; 90%</output></label>
@@ -918,10 +1008,10 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
         <input type="range" id="cTen" min="10" max="35" step="1" value="35">
       </div>
       <div class="cout">
-        <div><div class="l">Estimated monthly from</div><div class="v num" id="cMy">RM 1,406</div></div>
+        <div class="l">Estimated monthly from</div>
+        <div class="v num" id="cMy">RM 1,406</div>
         <div class="d">At 4.3% p.a. over the selected tenure. Indicative only, subject to bank approval.</div>
       </div>
-      <p class="cnote">*Project from-price. Approved permit pricing ranges RM492,960 to RM856,560 across Towers A and B; see the permit note in the footer. Not an offer.</p>
     </div>
   </div>
 </section>
@@ -1064,33 +1154,33 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
     </div>
 
     <div class="fac-detail open" data-cat="water">
-      <div class="fac-detail-head"><h3>Water &amp; Pool Deck</h3><span>11 facilities</span></div>
+      <div class="fac-detail-head"><h3>Water &amp; Pool Deck</h3><span>11 facilities &middot; numbers match the plan</span></div>
       <ul class="fac-list">
-        <li>50m Lap Pool</li><li>Hydrotherapy Seat</li><li>Pool Lounge</li><li>Jacuzzi</li><li>Pool Seat</li><li>Pool Shower</li><li>Kid&rsquo;s Pool</li><li>Pool Slide</li><li>Mushroom Play</li><li>Tipping Bucket</li><li>Pool Deck</li>
+        <li><i>8</i>50m Lap Pool</li><li><i>9</i>Hydrotherapy Seat</li><li><i>10</i>Pool Lounge</li><li><i>11</i>Jacuzzi</li><li><i>12</i>Pool Seat</li><li><i>13</i>Pool Shower</li><li><i>14</i>Kid&rsquo;s Pool</li><li><i>15</i>Pool Slide</li><li><i>16</i>Mushroom Play</li><li><i>17</i>Tipping Bucket</li><li><i>18</i>Pool Deck</li>
       </ul>
     </div>
     <div class="fac-detail" data-cat="fitness">
       <div class="fac-detail-head"><h3>Fitness &amp; Wellness</h3><span>5 facilities</span></div>
       <ul class="fac-list">
-        <li>Gym</li><li>Yoga Studio</li><li>Reflexology Path</li><li>Exercise Lawn</li><li>Multi-Purpose Hall / Badminton / Pickleball Court</li>
+        <li><i>19</i>Gym</li><li><i>20</i>Yoga Studio</li><li><i>27</i>Reflexology Path</li><li><i>28</i>Exercise Lawn</li><li><i>40</i>Multi-Purpose Hall / Badminton / Pickleball Court</li>
       </ul>
     </div>
     <div class="fac-detail" data-cat="gardens">
       <div class="fac-detail-head"><h3>Gardens &amp; Views</h3><span>11 facilities</span></div>
       <ul class="fac-list">
-        <li>Aurora Garden</li><li>Green Dome</li><li>Courtyard Garden</li><li>Herbs Garden</li><li>Tea Garden Terrace</li><li>KOI Pond</li><li>Open Lawn</li><li>Viewing Swing</li><li>Viewing Cabana</li><li>Skyline Seating</li><li>Viewing Terrace</li>
+        <li><i>2</i>Aurora Garden</li><li><i>4</i>Green Dome</li><li><i>25</i>Courtyard Garden</li><li><i>26</i>Viewing Swing</li><li><i>29</i>Viewing Cabana</li><li><i>30</i>Herbs Garden</li><li><i>31</i>Skyline Seating</li><li><i>34</i>Viewing Terrace</li><li><i>35</i>Tea Garden Terrace</li><li><i>36</i>KOI Pond</li><li><i>37</i>Open Lawn</li>
       </ul>
     </div>
     <div class="fac-detail" data-cat="social">
       <div class="fac-detail-head"><h3>Family &amp; Social</h3><span>13 facilities</span></div>
       <ul class="fac-list">
-        <li>Grand Entrance</li><li>Seating Alcove + Ribbon Bench</li><li>Taska</li><li>Tadika</li><li>Management Office</li><li>Co-Working Space</li><li>BBQ</li><li>Glamping Dome</li><li>Glamping Lawn</li><li>Karaoke Room</li><li>Games Room</li><li>Playground</li><li>Play Lawn</li>
+        <li><i>1</i>Grand Entrance</li><li><i>3</i>Seating Alcove + Ribbon Bench</li><li><i>5</i>Taska</li><li><i>6</i>Tadika</li><li><i>7</i>Management Office</li><li><i>21</i>Co-Working Space</li><li><i>22</i>BBQ</li><li><i>23</i>Glamping Dome</li><li><i>24</i>Glamping Lawn</li><li><i>32</i>Karaoke Room</li><li><i>33</i>Games Room</li><li><i>38</i>Playground</li><li><i>39</i>Play Lawn</li>
       </ul>
     </div>
     <div class="fac-detail" data-cat="sky">
       <div class="fac-detail-head"><h3>The Sky Lounge</h3><span>6 facilities</span></div>
       <ul class="fac-list">
-        <li>Function Space</li><li>Pre-function Room</li><li>Function Lawn</li><li>Sky View Lawn</li><li>Seating Corner</li><li>Pot Garden</li>
+        <li><i>1</i>Function Space</li><li><i>2</i>Pre-function Room</li><li><i>3</i>Function Lawn</li><li><i>4</i>Sky View Lawn</li><li><i>5</i>Seating Corner</li><li><i>6</i>Pot Garden</li>
       </ul>
     </div>
   </div>
@@ -1135,15 +1225,18 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
       </div>
     </div>
     <div class="loc-grid rv">
-      <div class="loc-visual">
-        <img src="_hero-vertical.jpg" alt="M Aurora towers on Old Klang Road at dawn">
-        <span class="cap">City-fringe address between Mid Valley, Bangsar and KLCC</span>
+      <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map" role="button" tabindex="0" aria-label="Enlarge the location map">
+        <img src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
+        <span class="cap">Tap to enlarge &middot; numbers match the lists</span>
       </div>
       <div>
-        <div class="loc-cats" role="tablist" aria-label="Connectivity categories">
-          <button class="loc-cat" role="tab" data-loc="highways" aria-selected="true">Highways</button>
+        <div class="loc-cats" role="tablist" aria-label="Connectivity and amenity categories">
+          <button class="loc-cat" role="tab" data-loc="access" aria-selected="true">Access</button>
           <button class="loc-cat" role="tab" data-loc="transit" aria-selected="false">Transit</button>
-          <button class="loc-cat" role="tab" data-loc="lifestyle" aria-selected="false">Lifestyle</button>
+          <button class="loc-cat" role="tab" data-loc="malls" aria-selected="false">Malls</button>
+          <button class="loc-cat" role="tab" data-loc="schools" aria-selected="false">Schools</button>
+          <button class="loc-cat" role="tab" data-loc="parks" aria-selected="false">Parks</button>
+          <button class="loc-cat" role="tab" data-loc="health" aria-selected="false">Health</button>
         </div>
         <div class="loc-list" id="locList"></div>
         <div class="loc-acts">
@@ -1161,8 +1254,8 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
   <div class="wrap">
     <div class="dev rv">
       <span class="eyebrow">The developer</span>
-      <h2>This project is built by <span class="em">Mah Sing</span></h2>
-      <img class="dev-logo" src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="300" height="91">
+      <h2>This project is built by :</h2>
+      <img class="dev-logo" src="_mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
       <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
     </div>
   </div>
@@ -1391,6 +1484,8 @@ function render(){
   $('uVt').href=u.vt;
   Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
     t.setAttribute('aria-selected',String(t.getAttribute('data-type')===cur));});
+  Array.prototype.forEach.call(document.querySelectorAll('#cpMenu .cp-opt'),function(o){
+    o.setAttribute('aria-selected',String(o.getAttribute('data-type')===cur));});
   calc();
 }
 function calc(){
@@ -1405,6 +1500,30 @@ window.setType=function(t,src){if(UNITS[t]){cur=t;render();
 Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(tab){
   tab.addEventListener('click',function(){window.setType(tab.getAttribute('data-type'),'tab');});});
 ['cLoan','cTen'].forEach(function(id){$(id).addEventListener('input',calc);});
+/* price picker: selecting a type drives the card and the calculator together */
+var cpPick=$('cpPick'),cpMenu=$('cpMenu');
+if(cpPick&&cpMenu){
+  cpMenu.innerHTML=ORDER.map(function(k){
+    var u=UNITS[k];
+    return '<button type="button" role="option" class="cp-opt" data-type="'+k+'" aria-selected="'+(k===cur)+'">'+
+      '<span class="cp-opt-k">Type '+k+'</span>'+
+      '<span class="cp-opt-d">'+u.bed+' bed &middot; '+u.size+' sq ft</span>'+
+      '<b class="cp-opt-p num">RM '+fmt(u.price)+'*</b></button>';
+  }).join('');
+  function cpClose(){cpMenu.hidden=true;cpPick.setAttribute('aria-expanded','false');}
+  cpPick.addEventListener('click',function(e){
+    e.stopPropagation();
+    var open=cpMenu.hidden;cpMenu.hidden=!open;cpPick.setAttribute('aria-expanded',String(open));
+  });
+  cpMenu.addEventListener('click',function(e){
+    var o=e.target.closest('.cp-opt');if(!o)return;
+    window.setType(o.getAttribute('data-type'),'calc_dropdown');cpClose();
+  });
+  document.addEventListener('click',function(e){
+    if(!cpMenu.hidden&&!cpMenu.contains(e.target)&&e.target!==cpPick)cpClose();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cpMenu.hidden)cpClose();});
+}
 var tabsEl=$('tabs');
 tabsEl.addEventListener('keydown',function(e){
   if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
@@ -1484,7 +1603,7 @@ lbStage.addEventListener('touchend',function(){lbZ.drag=false;lbZ.pd=0;});
 $('planWrap').addEventListener('click',function(){
   if(window._swiped){window._swiped=false;return;}
   var i=$('planImg');openLb(i.src,i.alt,'Type '+cur+' floor plan');});
-['facPlanMain','facPlanSky'].forEach(function(id){
+['facPlanMain','facPlanSky','locMap'].forEach(function(id){
   var el=$(id);if(!el)return;
   el.addEventListener('click',function(){openLb(el.getAttribute('data-full'),el.querySelector('img').alt,el.getAttribute('data-cap'));});
 });
@@ -1504,17 +1623,31 @@ Array.prototype.forEach.call(document.querySelectorAll('.fac-cat'),function(b){
   });
 });
 
-/* ============ Location panel: named connections from the live copy only ============ */
+/* ============ Location panel: client-supplied lists 2026-08-21; numbers match the map ============ */
 var PLACES={
-  highways:[['New Pantai Expressway (NPE)','Direct link'],['KESAS Highway','Direct link'],['Federal Highway','Nearby access']],
-  transit:[['KTM Komuter stations','Direct links'],['Old Klang Road corridor','City-fringe access']],
-  lifestyle:[['Mid Valley','Easy access'],['KLCC','Easy access'],['Bangsar','Easy access'],['Malls, healthcare & schools','Established network']]
+  access:[[1,'Jalan Klang Lama',''],[2,'New Pantai Expressway (NPE)',''],[3,'Federal Highway',''],
+    [4,'KESAS',''],[5,'Maju Expressway (MEX)',''],[6,'Salak Highway',''],
+    [7,'Kuala Lumpur \u2013 Seremban Expressway','']],
+  transit:[[1,'KTM, Jalan Templer','500m walk'],[2,'KTM, Petaling','600m walk'],
+    [3,'Future MRT3, Jalan Klang Lama','2.5km']],
+  malls:[[0,'Pearl Point Shopping Mall','1.7km'],[0,'Bloomsvale Shopping Gallery','2.2km'],
+    [0,'The Scott Garden','2.6km'],[0,'NSK Trade City','4km'],[0,'Amcorp Mall','4.3km'],
+    [0,'Mid Valley Megamall','6.8km']],
+  schools:[[0,'SMK Petaling','350m'],[0,'SJK(C) Yuk Chyun','1.4km'],[0,'Newton International College','1.6km'],
+    [0,'Kolej Kemahiran Tinggi Mara Petaling Jaya','1.8km'],[0,'SMK (P) Taman Petaling','2.1km'],
+    [0,'SJK(C) Choong Wen','2.6km']],
+  parks:[[0,'Sports Arena Sentosa','500m'],[0,'Kerinchi Hill Forest Park','3km'],
+    [0,'IWK Eco Park @ Pantai Dalam','3.5km'],[0,'Bukit Jalil Recreational Park','4.3km'],
+    [0,'National Stadium Bukit Jalil','6.3km']],
+  health:[[0,'Assunta Hospital','2.6km'],[0,'KMI Taman Desa Medical Centre','3.3km']]
 };
 function drawPlaces(cat){
-  $('locList').innerHTML=PLACES[cat].map(function(p){
-    return '<div class="loc-item"><span>'+p[0]+'</span><b>'+p[1]+'</b></div>';}).join('');
+  $('locList').innerHTML=PLACES[cat].map(function(x){
+    var n=x[0]?'<i class="ln ln-'+cat+'">'+x[0]+'</i>':'';
+    var d=x[2]?'<b>'+x[2]+'</b>':'';
+    return '<div class="loc-item"><span>'+n+x[1]+'</span>'+d+'</div>';}).join('');
 }
-drawPlaces('highways');
+drawPlaces('access');
 Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(b){
   b.addEventListener('click',function(){
     Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(x){x.setAttribute('aria-selected','false');});
@@ -1615,6 +1748,19 @@ var nav=$('siteNav');
 var lastState=null;
 function navState(){var s=window.scrollY>20;if(s===lastState)return;lastState=s;nav.classList.toggle('is-scrolled',s);}
 window.addEventListener('scroll',navState,{passive:true});navState();
+/* mobile section rail: fixed under the nav, shows past the hero (MGM pattern) */
+var rail=$('rail');
+function setNavH(){document.documentElement.style.setProperty('--nav-h',nav.offsetHeight+'px');}
+setNavH();window.addEventListener('resize',setNavH);
+window.addEventListener('scroll',function(){window.requestAnimationFrame(setNavH);},{passive:true});
+if(rail&&'IntersectionObserver' in window){
+  var heroEl=document.querySelector('.hero');
+  if(heroEl){new IntersectionObserver(function(es){
+    var past=!es[0].isIntersecting;
+    rail.classList.toggle('on',past);
+    rail.setAttribute('aria-hidden',String(!past));
+  },{rootMargin:'60px 0px 0px 0px'}).observe(heroEl);}
+}
 var ham=$('navHam'),mm=$('mm'),mmBack=$('mmBackdrop');
 function openMm(){mm.classList.add('open');mmBack.classList.add('open');
   mm.setAttribute('aria-hidden','false');ham.setAttribute('aria-expanded','true');
@@ -1634,7 +1780,13 @@ if(railLinks.length&&'IntersectionObserver' in window){
   var spy=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
-      railLinks.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});
+      railLinks.forEach(function(a){
+        var on=a.getAttribute('href')==='#'+e.target.id;
+        a.classList.toggle('on',on);
+        if(on){var sc=a.closest('.rail-in');
+          if(sc&&sc.scrollWidth>sc.clientWidth){
+            sc.scrollTo({left:Math.max(0,a.offsetLeft-sc.clientWidth/2+a.offsetWidth/2),behavior:'smooth'});}}
+      });
     });
   },{rootMargin:'-42% 0px -52% 0px'});
   railLinks.forEach(function(a){var el=document.getElementById(a.getAttribute('href').slice(1));if(el)spy.observe(el);});
