@@ -61,8 +61,15 @@ night #111838, bands #1A2148, dark #0B102A, indigo-tinted hairlines, body cream 
 Brand teal #18B7C9 CTAs, mint accents and the aurora gradient are unchanged. Sibling of
 2026-08-21_Homepage_rebuild-C.html (dawn-teal ground) for palette comparison.
 
-MOCKUP SAFETY  robots noindex until production; no GTM/GA4 IDs (dataLayer stub only);
-forms are demo-only (no live POST). Production head should restore index,follow.
+LEAD PATH LIVE (2026-08-21): GA4 G-YDYWK8B8S5 installed (client-supplied); all three
+forms POST natively to Salesforce Web-to-Lead (org 00D0o0000015t7i, Aurora's own field
+IDs read off the live site; ver2 campaign values "M Aurora Website 2 - Quick Form /
+Drawer / Register" follow the MGM ver2 convention, confirm with client). No captcha
+(MGM ver2 precedent, same org). n8n parallel capture fires per submission (webhook
+3f9d8704..., sheet "M Aurora ver2 - Form Captures", email alert to Justin). Native POST
+owns navigation; Salesforce redirects to /thank-you.html after the lead lands (the
+M Legasi no-iframe fix; the LIVE site posts natively too but gates on reCAPTCHA with a
+disabled submit, which ver2 drops). robots noindex until a real launch decision.
 
 CLIENT FEEDBACK ROUND, Justin 2026-08-21 (MGM mobile hero as reference):
 mobile hero rebuilt on the MGM pattern (flat ground top, width-fit art anchored bottom,
@@ -117,6 +124,15 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 {"@type":"Question","name":"What facilities does M Aurora offer?","acceptedAnswer":{"@type":"Answer","text":"46 named facilities across the Ground and Level 8 podium plans and the Sky Lounge plan, including a 50m lap pool, gym, yoga studio, co-working space, glamping dome, Aurora Garden and a multi-purpose hall. M Aurora has been awarded the Silver Provisional GreenRE Certification."}},
 {"@type":"Question","name":"Who is the developer of M Aurora?","acceptedAnswer":{"@type":"Answer","text":"Major Land Development Sdn. Bhd., a wholly-owned subsidiary of Mah Sing Group Berhad, one of Malaysia's most established property developers with over 79 completed projects nationwide."}}
 ]}]}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YDYWK8B8S5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YDYWK8B8S5');
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1036,11 +1052,18 @@ html.clean .rail{display:none!important}
         </div>
       </div>
       <div class="form-card">
-        <form class="js-form" data-form="quick" novalidate>
+        <form class="js-form" data-form="quick" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
+          <input type="hidden" name="oid" value="00D0o0000015t7i">
+          <input type="hidden" name="retURL" value="https://m-aurora-6we.pages.dev/thank-you.html">
+          <input type="hidden" name="00N2j000000e0hv" value="M Aurora Website 2">
+          <input type="hidden" name="00N2j000000e0hw" value="M Aurora">
+          <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website 2 - Quick Form">
+          <input type="hidden" name="00N2j000000e0hp" value="Website">
+          <input type="hidden" name="00N2j000000e0hR" value="1">
           <div class="field"><label class="f-label" for="q-name">Full name</label>
-            <input class="f-input" id="q-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+            <input class="f-input" id="q-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
           <div class="field"><label class="f-label" for="q-phone">Phone number</label>
-            <input class="f-input" id="q-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+            <input class="f-input" id="q-phone" name="mobile" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
           <div class="field"><label class="f-label" for="q-email">Email</label>
             <input class="f-input" id="q-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
           <p class="form-err" data-form-error></p>
@@ -1321,11 +1344,18 @@ html.clean .rail{display:none!important}
       </div>
       <div class="visit-r">
         <p class="f-headline">Register now for <b>early bird privileges</b></p>
-        <form class="js-form" data-form="main" novalidate>
+        <form class="js-form" data-form="main" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
+          <input type="hidden" name="oid" value="00D0o0000015t7i">
+          <input type="hidden" name="retURL" value="https://m-aurora-6we.pages.dev/thank-you.html">
+          <input type="hidden" name="00N2j000000e0hv" value="M Aurora Website 2">
+          <input type="hidden" name="00N2j000000e0hw" value="M Aurora">
+          <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website 2 - Register">
+          <input type="hidden" name="00N2j000000e0hp" value="Website">
+          <input type="hidden" name="00N2j000000e0hR" value="1">
           <div class="field"><label class="f-label" for="m-name">Full name</label>
-            <input class="f-input" id="m-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+            <input class="f-input" id="m-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
           <div class="field"><label class="f-label" for="m-phone">Phone number</label>
-            <input class="f-input" id="m-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+            <input class="f-input" id="m-phone" name="mobile" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
           <div class="field"><label class="f-label" for="m-email">Email</label>
             <input class="f-input" id="m-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
           <p class="form-err" data-form-error></p>
@@ -1377,11 +1407,18 @@ html.clean .rail{display:none!important}
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Full Pricing</span>
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Loan Assistance</span>
     </div>
-    <form class="js-form" data-form="drawer" novalidate>
+    <form class="js-form" data-form="drawer" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
+      <input type="hidden" name="oid" value="00D0o0000015t7i">
+          <input type="hidden" name="retURL" value="https://m-aurora-6we.pages.dev/thank-you.html">
+          <input type="hidden" name="00N2j000000e0hv" value="M Aurora Website 2">
+          <input type="hidden" name="00N2j000000e0hw" value="M Aurora">
+          <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website 2 - Drawer">
+          <input type="hidden" name="00N2j000000e0hp" value="Website">
+          <input type="hidden" name="00N2j000000e0hR" value="1">
       <div class="field"><label class="f-label" for="d-name">Full name</label>
-        <input class="f-input" id="d-name" name="name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+        <input class="f-input" id="d-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
       <div class="field"><label class="f-label" for="d-phone">Phone number</label>
-        <input class="f-input" id="d-phone" name="phone" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+        <input class="f-input" id="d-phone" name="mobile" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
       <div class="field"><label class="f-label" for="d-email">Email</label>
         <input class="f-input" id="d-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
       <p class="form-err" data-form-error></p>
@@ -1423,9 +1460,45 @@ var $=function(id){return document.getElementById(id);};
 var _q=new URLSearchParams(location.search);
 if(_q.get('clean')==='1')document.documentElement.classList.add('clean');
 
-/* Mockup tracking stub: pushes to dataLayer only. Production wires GTM/GA4. */
+/* Lead tracking: dataLayer push + direct gtag (G-YDYWK8B8S5), the MGM SITE-1 fix:
+   dataLayer alone reaches nothing without a GTM tag, so gtag is fired directly too. */
 window.dataLayer=window.dataLayer||[];
-function track(p){try{window.dataLayer.push(p);}catch(e){}}
+function track(p){try{
+  window.dataLayer.push(p);
+  if(typeof window.gtag==='function'){
+    var n=p.event,params={};
+    for(var k in p){if(k!=='event'&&p.hasOwnProperty(k))params[k]=p[k];}
+    window.gtag('event',n,params);
+  }
+}catch(e){}}
+
+/* n8n parallel capture (Phase 1 safety net, mirrors MGM). Failure here must
+   never block the Salesforce submission. Returns the submission_id or null. */
+var CAPTURE_WEBHOOK='https://n8n.srv1218666.hstgr.cloud/webhook/3f9d8704-907a-4f3f-ad4c-87b49ce311ff';
+function captureDiagnostic(form,formId){
+  try{
+    var sid=(window.crypto&&window.crypto.randomUUID)?window.crypto.randomUUID()
+      :'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+        var r=Math.random()*16|0,v=c==='x'?r:(r&0x3|0x8);return v.toString(16);});
+    var hidden=form.querySelector('input[name="submission_id"]');
+    if(!hidden){hidden=document.createElement('input');hidden.type='hidden';
+      hidden.name='submission_id';form.appendChild(hidden);}
+    hidden.value=sid;
+    var fd=new FormData(form),fields={};
+    fd.forEach(function(v,k){fields[k]=v;});
+    var q=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
+      if(q.get(k))fields[k]=q.get(k);});
+    var payload={submission_id:sid,timestamp:new Date().toISOString(),form_id:formId,
+      page_url:location.href,referrer:document.referrer||'',user_agent:navigator.userAgent,
+      fields:fields};
+    var blob=new Blob([JSON.stringify(payload)],{type:'text/plain'});
+    if(navigator.sendBeacon){navigator.sendBeacon(CAPTURE_WEBHOOK,blob);}
+    else{fetch(CAPTURE_WEBHOOK,{method:'POST',headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify(payload),keepalive:true,credentials:'omit'})['catch'](function(){});}
+    return sid;
+  }catch(err){return null;}
+}
 
 /* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
 (function(){
@@ -1685,6 +1758,7 @@ function openLead(e){
   else{uWrap.classList.remove('on');title.textContent='Register & get your price list';}
   ld.classList.add('open');ldBack.classList.add('open');
   ld.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+  window._drawerSource=source;
   track({event:'lead_drawer_open',trigger_source:source,unit_interest:unit||'not specified'});
   var first=ld.querySelector('input[name="name"]');
   if(first)setTimeout(function(){first.focus();},240);
@@ -1722,24 +1796,30 @@ Array.prototype.forEach.call(document.querySelectorAll('input[data-my-phone]'),f
     else input.setCustomValidity('');
   });
 });
+/* Submit: validate, fire the n8n parallel capture + GA4, then let the NATIVE POST
+   own the navigation. Salesforce redirects to thank-you.html only after it has the
+   lead (the M Legasi 2026-08-20 fix: no hidden iframe, no timed redirect, no race). */
 Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form){
   form.addEventListener('submit',function(e){
-    e.preventDefault();
     var err=form.querySelector('[data-form-error]');
-    var name=(form.querySelector('[name="name"]')||{}).value||'';
-    var phone=(form.querySelector('[name="phone"]')||{}).value||'';
+    var name=(form.querySelector('[name="last_name"]')||{}).value||'';
+    var phone=(form.querySelector('[name="mobile"]')||{}).value||'';
     var email=(form.querySelector('[name="email"]')||{}).value||'';
     var msg=null;
     if(!name.trim()||!phone.trim()||!email.trim())msg='Please fill in your name, phone number and email.';
     else if(!isEmail(email))msg='Please enter a valid email address (e.g. name@example.com).';
     else if(!isMyPhone(phone))msg='Please enter a valid Malaysian phone number (e.g. 012-345 6789).';
-    if(msg){form.classList.add('has-error');if(err)err.textContent=msg;return;}
+    if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
     form.classList.remove('has-error');
+    var fid=form.getAttribute('data-form')||'form';
+    var sid=captureDiagnostic(form,'aurora-'+fid);
     track({event:'generate_lead',lead_type:'form_submission',
-      form_name:'M Aurora '+(form.getAttribute('data-form')||'form')+' (mockup demo)'});
-    var done=document.createElement('div');done.className='done';
-    done.textContent='Thank you. Our team will WhatsApp you the floor plans, full pricing and loan assistance shortly.';
-    form.parentNode.replaceChild(done,form);
+      form_name:'M Aurora ver2 - '+fid,
+      lead_source:(fid==='drawer'?(window._drawerSource||'drawer'):fid),
+      submission_id:sid});
+    var btn=form.querySelector('button[type="submit"]');
+    if(btn){btn.disabled=true;btn.textContent='Sending...';}
+    return true;
   });
 });
 
