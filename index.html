@@ -30,7 +30,7 @@ FAQ accordion (ADDITIVE - needs client sign-off) + FAQPage JSON-LD; visit/regist
 lead drawer with unit context; capture-safe reveals + counters.
 
 DATA HONESTY  All five types published on /floor-plans/ (verified 2026-08-21). Per-type
-pricing still unpublished: cards show project from-price RM339K* with a visible flag.
+per-type pricing updated 2026-08-21 from the client price list (A 420k, B 516k, C 601k, D 616k, E 682k).
 Facility names from the published plan legends only. No invented distances. No rebates
 or packages anywhere. Phone fields carry no +60 prefix (standing rule 2026-08-02).
 
@@ -118,7 +118,7 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Is M Aurora freehold or leasehold?","acceptedAnswer":{"@type":"Answer","text":"M Aurora is a freehold serviced apartment development on Old Klang Road, Kuala Lumpur. Unlike leasehold projects with tenure restrictions, its freehold status promises enduring value in an area poised for continuous growth."}},
 {"@type":"Question","name":"What unit types and sizes are available at M Aurora?","acceptedAnswer":{"@type":"Answer","text":"Five layouts: Type A (1+1 bedroom, 1 bathroom, 556 sq ft), Type B (2 bedrooms, 2 bathrooms, 737 sq ft), Type C (3 bedrooms with balcony, 2 bathrooms, 858 sq ft), Type D (3 bedrooms with balcony, 3 bathrooms, 916 sq ft) and Type E (4 bedrooms with balcony, 3 bathrooms, 1,019 sq ft), with flexibility to combine rooms and create dual-key spaces."}},
-{"@type":"Question","name":"How much does a unit at M Aurora cost?","acceptedAnswer":{"@type":"Answer","text":"Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B. Per-type price lists are available from the sales team."}},
+{"@type":"Question","name":"How much does a unit at M Aurora cost?","acceptedAnswer":{"@type":"Answer","text":"Prices start from RM420,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B. Per-type price lists are available from the sales team."}},
 {"@type":"Question","name":"When will M Aurora be completed?","acceptedAnswer":{"@type":"Answer","text":"The expected date of completion is September 2030, per the advertising and sales permit."}},
 {"@type":"Question","name":"How many car parks does each unit get?","acceptedAnswer":{"@type":"Answer","text":"Each unit comes with 1 to 3 car parks, per the advertising and sales permit."}},
 {"@type":"Question","name":"What facilities does M Aurora offer?","acceptedAnswer":{"@type":"Answer","text":"46 named facilities across the Ground and Level 8 podium plans and the Sky Lounge plan, including a 50m lap pool, gym, yoga studio, co-working space, glamping dome, Aurora Garden and a multi-purpose hall. M Aurora has been awarded the Silver Provisional GreenRE Certification."}},
@@ -287,7 +287,7 @@ body.mm-open .sticky{display:none}
 .hero{position:relative;overflow:hidden}
 .hero-media{position:relative;width:100%;min-height:min(calc(100svh - 40px),210vw);
   background:var(--night);display:flex;flex-direction:column;overflow:hidden}
-@media(min-width:1024px){.hero-media{min-height:calc(100svh - 40px);display:block}}
+@media(min-width:1024px){.hero-media{min-height:calc(100svh - 40px)}}
 .hero-art{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;
   background-position:center 30%;background-size:cover;background-repeat:no-repeat;
   transition:opacity 1.2s ease;transform-origin:50% 60%}
@@ -306,7 +306,7 @@ body.mm-open .sticky{display:none}
   linear-gradient(180deg,transparent 84%,var(--night) 100%)}}
 .hero-body{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:flex-end;
   width:100%;max-width:var(--max);margin:0 auto;padding:140px var(--pad) 78px}
-@media(min-width:1024px){.hero-body{position:absolute;inset:0;justify-content:center;padding:120px var(--pad) 90px}}
+@media(min-width:1024px){.hero-body{justify-content:center;min-height:calc(100svh - 40px);padding:120px var(--pad) 110px}}
 .hero-inner{width:100%;max-width:620px;text-align:left}
 .h-eyebrow{display:block;font:600 11.5px/1.6 var(--fb);letter-spacing:.3em;text-transform:uppercase;
   color:#8FE0D0;margin-bottom:18px;text-shadow:0 1px 8px rgba(0,0,0,.75)}
@@ -826,6 +826,18 @@ html.clean .rail{display:none!important}
 .ln-access{background:#4761A8}
 .ln-transit{background:#A63D9E}
 .loc-item span{display:inline-flex;align-items:baseline}
+
+/* short desktop viewports (laptops ~768-840px): compact the hero so everything fits */
+@media(min-width:1024px) and (max-height:840px){
+  .h-lk{width:56px;margin-bottom:10px}
+  .h-eyebrow{margin-bottom:12px}
+  .hero h1{font-size:clamp(28px,4.8vh,44px);margin-bottom:12px}
+  .h-sub{display:none}
+  .h-cards{margin:0 0 18px;padding:9px 0}
+  .h-card-val{font-size:clamp(21px,2.6vh,26px)}
+  .h-card-sub{margin-top:3px}
+  .hero-body{padding-top:100px;padding-bottom:84px}
+}
 </style>
 </head>
 <body>
@@ -833,10 +845,10 @@ html.clean .rail{display:none!important}
 <!-- ANNOUNCE (auto marquee). Claims: verifiable-only; PY-pending items excluded. -->
 <div class="ann" role="note" aria-label="Announcements">
   <div class="ann-track">
-    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
-    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
-    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
-    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM339,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM420,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM420,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM420,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
+    <div class="ann-item">Open for Sale<span class="ann-sep">|</span>From RM420,000*<span class="ann-sep">|</span>Freehold Serviced Apartments<span class="ann-sep">|</span>Old Klang Road, Kuala Lumpur<span class="ann-sep">|</span>GreenRE Silver (Provisional)<span class="ann-sep">|</span></div>
   </div>
 </div>
 
@@ -922,7 +934,7 @@ html.clean .rail{display:none!important}
         <div class="h-cards">
           <div class="h-card">
             <div class="h-card-lab">Starting from</div>
-            <div class="h-card-val num">RM339K<sup>*</sup></div>
+            <div class="h-card-val num">RM420K<sup>*</sup></div>
             <div class="h-card-sub">Type A &middot; 556 sq ft</div>
           </div>
           <div class="h-card">
@@ -993,10 +1005,10 @@ html.clean .rail{display:none!important}
           <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
         </div>
         <div class="price-row">
-          <div class="price-from">Project pricing from<b class="num">RM339K<sup>*</sup></b></div>
+          <div class="price-from">Priced from<b class="num"><span id="uPrice">RM 420,000</span><sup>*</sup></b></div>
           <button class="calc-link" type="button" id="calcJump">Calc my instalment</button>
         </div>
-        <p class="price-flag" id="uFlag">Type A published at RM339,000*. Per-type pricing for B to E on request.</p>
+        <p class="price-flag" id="uFlag">*Per-type prices from the developer’s price list dated 21 Aug 2026, subject to change.</p>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
           <a class="btn btn-o" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">360&deg; Virtual Tour</a>
@@ -1009,14 +1021,14 @@ html.clean .rail{display:none!important}
       <div class="cprice">
         <span class="l">Property price</span>
         <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
-          <b class="num" id="cPrice">RM 339,000*</b>
+          <b class="num" id="cPrice">RM 420,000*</b>
           <span class="cp-pick-t">Type <span id="cType">A</span></span>
           <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
         <div class="cp-menu" id="cpMenu" role="listbox" aria-label="Unit type" hidden></div>
       </div>
       <div class="cfield">
-        <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 305,100 &middot; 90%</output></label>
+        <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 378,000 &middot; 90%</output></label>
         <input type="range" id="cLoan" min="50" max="90" step="1" value="90">
       </div>
       <div class="cfield">
@@ -1025,7 +1037,7 @@ html.clean .rail{display:none!important}
       </div>
       <div class="cout">
         <div class="l">Estimated monthly from</div>
-        <div class="v num" id="cMy">RM 1,406</div>
+        <div class="v num" id="cMy">RM 1,742</div>
         <div class="d">At 4.3% p.a. over the selected tenure. Indicative only, subject to bank approval.</div>
       </div>
     </div>
@@ -1302,7 +1314,7 @@ html.clean .rail{display:none!important}
       </div>
       <div class="faq-item">
         <button class="faq-q">How much does a unit cost?<i aria-hidden="true"></i></button>
-        <div class="faq-a"><div><p>Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B; the full permit detail is reproduced in the footer. Per-type price lists are available from the sales team, <a href="#register-full">register below</a> to receive one.</p></div></div>
+        <div class="faq-a"><div><p>Prices start from RM420,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B; the full permit detail is reproduced in the footer. Per-type price lists are available from the sales team, <a href="#register-full">register below</a> to receive one.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">When will M Aurora be completed?<i aria-hidden="true"></i></button>
@@ -1331,7 +1343,7 @@ html.clean .rail{display:none!important}
       <div class="visit-l">
         <span class="eyebrow">Now open for sale</span>
         <h2>Own Your Ideal Home at <span style="color:#0E7A8A">M Aurora</span> Today!</h2>
-        <p class="copy">M Aurora is now open for sale, with prices starting from RM339,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
+        <p class="copy">M Aurora is now open for sale, with prices starting from RM420,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
         <div class="more-wrap" data-collapsed="true">
           <div class="more-body">
             <p class="copy">To help you find the right fit, explore the available <a href="#layouts" style="color:#0E7A8A">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" style="color:#0E7A8A">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
@@ -1526,17 +1538,17 @@ function captureDiagnostic(form,formId){
 
 /* ============ Units + calculator: one controller, price locked to type ============
    Sizes/bed/bath published on m-aurora.com.my/floor-plans/ (verified 2026-08-21).
-   Per-type pricing unpublished: project from-price RM339,000* for all types, flagged. */
+   Per-type prices from the client price list dated 2026-08-21. */
 var UNITS={
-  A:{bed:'1+1',bath:'1',size:'556',price:339000,published:true,
+  A:{bed:'1+1',bath:'1',size:'556',price:420000,published:true,
      cfg:'1+1 bedroom, for urban professionals',plan:'_plan-A.jpg',vt:'https://m-aurora.com.my/360-vr/#typeA'},
-  B:{bed:'2',bath:'2',size:'737',price:339000,published:false,
+  B:{bed:'2',bath:'2',size:'737',price:516000,published:true,
      cfg:'2 bedrooms, for couples',plan:'_plan-B.jpg',vt:'https://m-aurora.com.my/360-vr/#typeB'},
-  C:{bed:'3',bath:'2',size:'858',price:339000,published:false,
+  C:{bed:'3',bath:'2',size:'858',price:601000,published:true,
      cfg:'3 bedrooms with balcony, for growing families',plan:'_plan-C.jpg',vt:'https://m-aurora.com.my/360-vr/#typeC'},
-  D:{bed:'3',bath:'3',size:'916',price:339000,published:false,
+  D:{bed:'3',bath:'3',size:'916',price:616000,published:true,
      cfg:'3 bedrooms with balcony, 3 bathrooms, for growing families',plan:'_plan-D.jpg',vt:'https://m-aurora.com.my/360-vr/#typeD'},
-  E:{bed:'4',bath:'3',size:'1,019',price:339000,published:false,
+  E:{bed:'4',bath:'3',size:'1,019',price:682000,published:true,
      cfg:'4 bedrooms with balcony, ideal for multi-generational living',plan:'_plan-E.jpg',vt:'https://m-aurora.com.my/360-vr/#typeE'}
 };
 var ORDER=['A','B','C','D','E'],cur='A',RATE=0.043;
@@ -1547,9 +1559,8 @@ function render(){
   var u=UNITS[cur];
   $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
-  $('uFlag').textContent=u.published
-    ?'Type A published at RM339,000*. Per-type pricing for B to E on request.'
-    :'Project from-price. Type '+cur+' pricing on request; register to receive the current list.';
+  $('uFlag').textContent='*Per-type prices from the developer’s price list dated 21 Aug 2026, subject to change.';
+  $('uPrice').textContent='RM '+fmt(u.price);
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
   var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
