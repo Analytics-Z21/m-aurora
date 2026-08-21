@@ -1005,10 +1005,9 @@ html.clean .rail{display:none!important}
           <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
         </div>
         <div class="price-row">
-          <div class="price-from">Priced from<b class="num"><span id="uPrice">RM 420,000</span><sup>*</sup></b></div>
+          <div class="price-from">Priced from<b class="num" id="uPrice">RM 420,000</b></div>
           <button class="calc-link" type="button" id="calcJump">Calc my instalment</button>
         </div>
-        <p class="price-flag" id="uFlag">*Per-type prices from the developer’s price list dated 21 Aug 2026, subject to change.</p>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
           <a class="btn btn-o" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">360&deg; Virtual Tour</a>
@@ -1021,7 +1020,7 @@ html.clean .rail{display:none!important}
       <div class="cprice">
         <span class="l">Property price</span>
         <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
-          <b class="num" id="cPrice">RM 420,000*</b>
+          <b class="num" id="cPrice">RM 420,000</b>
           <span class="cp-pick-t">Type <span id="cType">A</span></span>
           <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         </button>
@@ -1037,8 +1036,8 @@ html.clean .rail{display:none!important}
       </div>
       <div class="cout">
         <div class="l">Estimated monthly from</div>
-        <div class="v num" id="cMy">RM 1,742</div>
-        <div class="d">At 4.3% p.a. over the selected tenure. Indicative only, subject to bank approval.</div>
+        <div class="v num" id="cMy">RM 1,584</div>
+        <div class="d">Based on 3.6% p.a. interest rate</div>
       </div>
     </div>
   </div>
@@ -1551,7 +1550,7 @@ var UNITS={
   E:{bed:'4',bath:'3',size:'1,019',price:682000,published:true,
      cfg:'4 bedrooms with balcony, ideal for multi-generational living',plan:'_plan-E.jpg',vt:'https://m-aurora.com.my/360-vr/#typeE'}
 };
-var ORDER=['A','B','C','D','E'],cur='A',RATE=0.043;
+var ORDER=['A','B','C','D','E'],cur='A',RATE=0.036;
 var fmt=function(n){return Math.round(n).toLocaleString('en-MY');};
 function monthly(p,pct,y){var L=p*(pct/100),r=RATE/12,n=y*12;
   return L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
@@ -1559,7 +1558,6 @@ function render(){
   var u=UNITS[cur];
   $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
-  $('uFlag').textContent='*Per-type prices from the developer’s price list dated 21 Aug 2026, subject to change.';
   $('uPrice').textContent='RM '+fmt(u.price);
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
@@ -1574,7 +1572,7 @@ function render(){
 }
 function calc(){
   var u=UNITS[cur],pct=+$('cLoan').value,yrs=+$('cTen').value,m=monthly(u.price,pct,yrs);
-  $('cPrice').textContent='RM '+fmt(u.price)+'*';$('cType').textContent=cur;
+  $('cPrice').textContent='RM '+fmt(u.price);$('cType').textContent=cur;
   $('cLoanOut').innerHTML='RM '+fmt(u.price*pct/100)+' &middot; '+pct+'%';
   $('cTenOut').textContent=yrs+' years';
   $('cMy').textContent='RM '+fmt(m);
@@ -1592,7 +1590,7 @@ if(cpPick&&cpMenu){
     return '<button type="button" role="option" class="cp-opt" data-type="'+k+'" aria-selected="'+(k===cur)+'">'+
       '<span class="cp-opt-k">Type '+k+'</span>'+
       '<span class="cp-opt-d">'+u.bed+' bed &middot; '+u.size+' sq ft</span>'+
-      '<b class="cp-opt-p num">RM '+fmt(u.price)+'*</b></button>';
+      '<b class="cp-opt-p num">RM '+fmt(u.price)+'</b></button>';
   }).join('');
   function cpClose(){cpMenu.hidden=true;cpPick.setAttribute('aria-expanded','false');}
   cpPick.addEventListener('click',function(e){
