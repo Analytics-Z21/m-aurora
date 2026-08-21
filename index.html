@@ -1008,6 +1008,7 @@ html.clean .rail{display:none!important}
           <div class="price-from">Priced from<b class="num" id="uPrice">RM 420,000</b></div>
           <button class="calc-link" type="button" id="calcJump">Calc my instalment</button>
         </div>
+        <p class="price-flag" id="uFlag">Type A pricing on request; register to receive the current list.</p>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
           <a class="btn btn-o" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">360&deg; Virtual Tour</a>
@@ -1559,6 +1560,7 @@ function render(){
   $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
   $('uPrice').textContent='RM '+fmt(u.price);
+  $('uFlag').textContent='Type '+cur+' pricing on request; register to receive the current list.';
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
   var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
