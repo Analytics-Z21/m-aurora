@@ -23,7 +23,7 @@ bottom-only form -> drawer + quick form high on page; Montserrat-only flat hiera
 Sora display scale; prose walls -> editorial ledes on conversion modules.
 
 ADD  Announce marquee; L7b hero (location-first: lockup, location, price, facts) + dual
-CTA; trust strip; unit tabs + locked-price calculator (4.3% p.a., loan + tenure sliders);
+CTA; trust strip; unit tabs + locked-price calculator (3.6% p.a., loan + tenure sliders);
 quick register; facilities category tabs from the published plan legends (46 items);
 gallery + lightbox; location connectivity panel (no invented distances); developer band;
 FAQ accordion (ADDITIVE - needs client sign-off) + FAQPage JSON-LD; visit/register split;
@@ -181,6 +181,8 @@ h3{font-size:clamp(19px,2.4vw,24px)}
 .sec-light{background:var(--cream);color:var(--ink)}
 .sec-light h2,.sec-light h3{color:var(--deep)}
 .sec-light .copy{color:var(--ink2)}
+/* the default eyebrow mint is tuned for the night sections and washes out on cream */
+.sec-light .eyebrow{color:var(--deep)}
 .sec-head{display:flex;flex-direction:column;gap:12px;margin-bottom:36px;max-width:680px}
 .sec-head.center{margin-inline:auto;text-align:center;align-items:center}
 .sec-head h2::after{content:'';display:block;width:72px;height:3px;border-radius:2px;
@@ -225,14 +227,19 @@ html.js .rv.in{opacity:1;transform:none}
 .nav{position:sticky;top:0;display:grid;grid-template-columns:1fr auto;align-items:center;
   padding:16px var(--pad);background:transparent;z-index:100;margin-bottom:-78px;
   transition:background .25s ease,box-shadow .25s ease,padding .25s ease}
-@media(min-width:1024px){.nav{grid-template-columns:auto minmax(0,1fr) auto;margin-bottom:-86px}}
+@media(min-width:1024px){.nav{grid-template-columns:auto minmax(0,1fr) auto;margin-bottom:-92px}}
 .nav.is-scrolled{background:rgba(11,16,42,.92);backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);box-shadow:0 2px 18px rgba(0,0,0,.25);
   padding:11px var(--pad);border-bottom:1px solid var(--mull)}
 .nav-logo{display:flex;align-items:center;gap:14px}
-.nav-logo img.lk{height:34px;width:auto}
-.nav-logo img.ms{height:18px;width:auto;opacity:.9}
-@media(min-width:1024px){.nav-logo img.lk{height:42px}.nav-logo img.ms{height:22px}}
+.nav-logo img.lk{height:46px;width:auto}
+.nav-logo img.ms{height:24px;width:auto;opacity:.9}
+@media(min-width:1024px){.nav-logo img.lk{height:60px}.nav-logo img.ms{height:30px}}
+/* scrolled bar trims the lockup so the sticky header stays compact */
+.nav.is-scrolled .nav-logo img.lk{height:38px}
+.nav.is-scrolled .nav-logo img.ms{height:20px}
+@media(min-width:1024px){.nav.is-scrolled .nav-logo img.lk{height:46px}
+  .nav.is-scrolled .nav-logo img.ms{height:24px}}
 .nav-rail{display:none}
 @media(min-width:1024px){
   .nav-rail{display:flex;overflow-x:auto;scrollbar-width:none;margin:0 22px;-webkit-overflow-scrolling:touch}
@@ -430,16 +437,7 @@ html.js .more-btn{display:inline-flex;align-items:center;gap:7px;margin-top:14px
 .specs .n{font:600 16px/1.4 var(--fd);color:var(--cream)}
 @media(min-width:1024px){.specs .n{font-size:19px}}
 .specs .l{font:600 12px/1.7 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.price-row{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:8px;flex-wrap:wrap}
-.price-from{font:600 12px/1.6 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.price-from b{display:block;font:600 clamp(28px,3.4vw,38px)/1.1 var(--fd);letter-spacing:0;
-  color:var(--cream);text-transform:none}
-.price-from b sup{font-size:.45em;color:#8FE0D0}
-.calc-link{flex:none;font:700 12px/1.4 var(--fb);color:var(--teal);
-  border-bottom:2px solid rgba(24,183,201,.5);padding:0 0 3px;min-height:44px;display:inline-flex;align-items:flex-end}
-.calc-link:hover{color:#5AD0DF}
-.price-flag{font:400 13px/1.55 var(--fb);color:var(--muted);margin-bottom:16px}
-.unit-acts{display:grid;gap:11px}
+.unit-acts{display:grid;gap:11px;margin-top:18px}
 @media(min-width:520px){.unit-acts{grid-template-columns:1fr auto}}
 .unit-acts .btn{width:100%}
 /* calculator attached under the card */
@@ -553,6 +551,28 @@ form.has-error .form-err{display:block}
   background:linear-gradient(180deg,transparent,rgba(11,16,42,.92));
   font:600 13px/1.4 var(--fb);color:var(--cream)}
 .gal-hint{font:500 12.5px/1.5 var(--fb);color:var(--muted);margin-top:14px}
+/* desktop has no swipe gesture, so the row needs arrows and a real scrollbar */
+.gal-wrap{position:relative}
+.gal-nav{display:none}
+@media(min-width:1024px){
+  .gal{scrollbar-width:thin;scrollbar-color:rgba(24,183,201,.55) rgba(150,160,220,.14);padding-bottom:16px}
+  .gal::-webkit-scrollbar{display:block;height:8px}
+  .gal::-webkit-scrollbar-track{background:rgba(150,160,220,.14)}
+  .gal::-webkit-scrollbar-thumb{background:rgba(24,183,201,.55)}
+  .gal::-webkit-scrollbar-thumb:hover{background:rgba(24,183,201,.85)}
+  .gal-nav{position:absolute;top:calc(50% - 12px);transform:translateY(-50%);z-index:3;
+    display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;
+    border:1px solid rgba(24,183,201,.45);background:rgba(11,16,42,.82);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    color:var(--cream);border-radius:2px;
+    transition:background .2s,border-color .2s,opacity .2s}
+  .gal-nav:hover{background:rgba(24,183,201,.32);border-color:rgba(24,183,201,.85)}
+  .gal-nav svg{width:20px;height:20px}
+  .gal-prev{left:-26px}
+  .gal-next{right:-26px}
+  /* fully hidden, not dimmed: a ghosted arrow reads as a smudge over the end card */
+  .gal-nav[disabled]{opacity:0;pointer-events:none}
+}
 
 /* ===== LOCATION ===== */
 .loc-grid{display:grid;gap:28px}
@@ -723,8 +743,9 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
 }
 
 /* ===== REVISION R13 (client feedback 2026-08-21) ===== */
-.h-lk{display:block;width:78px;height:auto;margin-bottom:16px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
-@media(min-width:1024px){.h-lk{width:96px}}
+/* source lockup is 162x267, so 150px is the largest that never upscales past native */
+.h-lk{display:block;width:124px;height:auto;margin-bottom:18px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+@media(min-width:1024px){.h-lk{width:150px}}
 /* box styling across selectors, chips and cards (MGM reference) */
 .tab,.fac-cat,.loc-cat{border-radius:2px}
 .qx-points span,.receive .r{border-radius:2px}
@@ -829,7 +850,7 @@ html.clean .rail{display:none!important}
 
 /* short desktop viewports (laptops ~768-840px): compact the hero so everything fits */
 @media(min-width:1024px) and (max-height:840px){
-  .h-lk{width:56px;margin-bottom:10px}
+  .h-lk{width:112px;margin-bottom:10px}
   .h-eyebrow{margin-bottom:12px}
   .hero h1{font-size:clamp(28px,4.8vh,44px);margin-bottom:12px}
   .h-sub{display:none}
@@ -855,8 +876,8 @@ html.clean .rail{display:none!important}
 <!-- NAV -->
 <nav class="nav" id="siteNav" aria-label="Site">
   <a href="#home" class="nav-logo" aria-label="M Aurora home">
-    <img class="lk" src="_logo-white.png" alt="M Aurora" width="360" height="240">
-    <img class="ms" src="_mahsing.png" alt="by Mah Sing" width="571" height="177">
+    <img class="lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
+    <img class="ms" src="_mahsing.png" alt="by Mah Sing" width="461" height="146">
   </a>
   <div class="nav-rail" aria-label="Sections">
     <a href="#layouts" data-rail>Layouts</a>
@@ -927,7 +948,7 @@ html.clean .rail{display:none!important}
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-body">
       <div class="hero-inner">
-        <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="360" height="240">
+        <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
         <span class="h-eyebrow">Open for Sale</span>
         <h1>The New Heights of Living at <em>Old Klang Road</em></h1>
         <p class="h-sub">Two modern 46-storey freehold towers across 5.2 acres of prime land: 1,544 residences from 556 to 1,019 sq ft, with Mid Valley, KLCC and Bangsar within easy access.</p>
@@ -1004,11 +1025,6 @@ html.clean .rail{display:none!important}
           <div><div class="n num" id="uSize">556</div><div class="l">Sq Ft</div></div>
           <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
         </div>
-        <div class="price-row">
-          <div class="price-from">Priced from<b class="num" id="uPrice">RM 420,000</b></div>
-          <button class="calc-link" type="button" id="calcJump">Calc my instalment</button>
-        </div>
-        <p class="price-flag" id="uFlag">Type A pricing on request; register to receive the current list.</p>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
           <a class="btn btn-o" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">360&deg; Virtual Tour</a>
@@ -1228,6 +1244,7 @@ html.clean .rail{display:none!important}
       <span class="eyebrow">Artist impressions</span>
       <h2>What the dawn will <span class="em">look like</span></h2>
     </div>
+    <div class="gal-wrap">
     <div class="gal rv" id="gal">
       <figure><img src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
       <figure><img src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
@@ -1238,7 +1255,14 @@ html.clean .rail{display:none!important}
       <figure><img src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
       <figure><img src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
     </div>
-    <p class="gal-hint rv">Swipe to see more &middot; tap any image to enlarge</p>
+      <button class="gal-nav gal-prev" type="button" id="galPrev" aria-controls="gal" aria-label="Previous images">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="gal-nav gal-next" type="button" id="galNext" aria-controls="gal" aria-label="Next images">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+    </div>
+    <p class="gal-hint rv">Swipe or use the arrows &middot; tap any image to enlarge</p>
   </div>
 </section>
 
@@ -1398,7 +1422,6 @@ html.clean .rail{display:none!important}
   <div class="ft-legal">
     <p>Major Land Development Sdn. Bhd. 201101022598 (950737-K) (A wholly-owned subsidiary of Mah Sing Group Berhad) | Wisma Mah Sing, Penthouse Suite 1, No. 163 Jalan Sungai Besi, 57100 Kuala Lumpur. | Tel: +603 9221 8888 | Fax: +603 9221 8999 | Website: m-aurora.com.my | Email: m-aurora@mahsing.com.my</p>
     <p>Developer License No: 13262/01-2028/0471(A) &bull; Validity Period: 17/1/2023 - 16/1/2028 &bull; Advertising &amp; Sales Permit No: 13262-2/03-2029/0221(N)-(S) &bull; Validity Period: 19/3/2026 &ndash; 18/3/2029 &bull; Building Plan Reference No: DBKL.JKB. BP S1 OSC 2026 0503(7) &bull; Expected Date of Completion: Sep 2030 &bull; Total Unit : 1544 units &bull; Tower A Total Unit: 747 &bull; Min Price: RM 495,360 &bull; Max Price: RM856,560 &bull; Tower B Total Unit: 797 &bull; Min Price: RM492,960 &bull; Max Price: RM768,960 &bull; Built-up : 556sf, 737sf, 858sf, 916sf and 1,019sf &bull; Type of Property: Suite Apartment &bull; Land Encumbrance: United Overseas Bank (M) Bhd &bull; No of Car Park per Unit: 1 to 3 units &bull; Approving Authority: DBKL &bull; Land Tenure: Freehold &bull; Restrictions: Nil &bull; This advertisement has been approved by National Housing Department. Approved development and advertisement information can be reviewed on the teduh portal at teduh.kpkt.gov.my</p>
-    <p>*Project from-price. Instalment estimates at 4.3% p.a. over the selected tenure, subject to bank approval. Prices subject to change.</p>
   </div>
 </footer>
 
@@ -1559,8 +1582,6 @@ function render(){
   var u=UNITS[cur];
   $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
-  $('uPrice').textContent='RM '+fmt(u.price);
-  $('uFlag').textContent='Type '+cur+' pricing on request; register to receive the current list.';
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
   var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
@@ -1627,7 +1648,6 @@ tabsEl.addEventListener('keydown',function(e){
     if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4){window._swiped=true;step(dx<0?1:-1);}
   },{passive:true});
 })();
-$('calcJump').addEventListener('click',function(){$('calc').scrollIntoView({behavior:'smooth'});});
 
 /* ============ Lightbox with zoom (wheel / pinch / drag / buttons) ============ */
 var lbEl=$('lb'),lbImg=$('lbImg'),lbStage=$('lbStage');
@@ -1695,6 +1715,21 @@ Array.prototype.forEach.call(document.querySelectorAll('#gal figure'),function(f
   f.addEventListener('click',function(){var i=f.querySelector('img'),c=f.querySelector('figcaption');
     openLb(i.src,i.alt,c?c.textContent:'');});
 });
+
+/* ============ Gallery arrows (desktop: no swipe gesture) ============ */
+(function(){
+  var g=$('gal'),p=$('galPrev'),n=$('galNext');
+  if(!g||!p||!n)return;
+  function step(){var f=g.querySelector('figure');
+    return f?f.getBoundingClientRect().width+12:Math.round(g.clientWidth*.8);}
+  function sync(){var max=g.scrollWidth-g.clientWidth;
+    p.disabled=g.scrollLeft<=2;n.disabled=g.scrollLeft>=max-2;}
+  p.addEventListener('click',function(){g.scrollBy({left:-step(),behavior:'smooth'});});
+  n.addEventListener('click',function(){g.scrollBy({left:step(),behavior:'smooth'});});
+  g.addEventListener('scroll',sync,{passive:true});
+  window.addEventListener('resize',sync);
+  sync();
+})();
 
 /* ============ Facilities category tabs ============ */
 Array.prototype.forEach.call(document.querySelectorAll('.fac-cat'),function(b){
