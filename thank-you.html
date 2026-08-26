@@ -77,5 +77,45 @@ footer{padding:20px 24px;border-top:1px solid var(--mull);text-align:center;
   </div>
 </main>
 <footer>M Aurora &middot; Old Klang Road, Kuala Lumpur &middot; A development by Mah Sing Group Berhad</footer>
+<!-- lead_confirmed: the navigation-proof counterpart to generate_lead.
+     generate_lead fires on submit, before Salesforce has confirmed anything.
+     This page is only reachable via the Salesforce retURL redirect, which
+     Salesforce performs ONLY after it has accepted the lead, so the gap
+     between the two events is the submit-to-Salesforce drop-off, and this one
+     is directly comparable with the original site's thank-you-page event.
+
+     Fires via a readiness poll rather than a bare inline call: gtag.js is
+     async, so an inline call at parse time races its initialisation and was
+     observed firing only intermittently. The poll waits for a real gtag,
+     fires exactly once, and gives up after 6s. The dataLayer push is kept
+     unconditionally so any GTM tag can also pick the event up. -->
+<script>
+(function(){
+  var sent=false, tries=0;
+  var params={ lead_type:'form_submission', page_location:location.href };
+  try{
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission' });
+  }catch(e){}
+  function fire(){
+    if(sent) return true;
+    try{
+      if(typeof window.gtag==='function'){
+        window.gtag('event','lead_confirmed',params);
+        sent=true; return true;
+      }
+    }catch(e){ sent=true; return true; }
+    return false;
+  }
+  function poll(){
+    if(fire()) return;
+    if(++tries>30) return;              /* ~6s ceiling */
+    setTimeout(poll,200);
+  }
+  if(document.readyState==='complete') poll();
+  else window.addEventListener('load',poll);
+  setTimeout(poll,400);                 /* also try early, in case load is slow */
+})();
+</script>
 </body>
 </html>

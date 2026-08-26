@@ -1860,7 +1860,10 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
     if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
     form.classList.remove('has-error');
     var fid=form.getAttribute('data-form')||'form';
-    var sid=captureDiagnostic(form,'aurora-'+fid);
+    /* Standardised n8n form_id across all ver2 projects (2026-08-24), matching
+       M Legasi: quickRegisterForm / mainRegisterForm / leadFormDrawer. */
+    var FORM_IDS={quick:'quickRegisterForm',main:'mainRegisterForm',drawer:'leadFormDrawer'};
+    var sid=captureDiagnostic(form,FORM_IDS[fid]||fid);
     track({event:'generate_lead',lead_type:'form_submission',
       form_name:'M Aurora ver2 - '+fid,
       lead_source:(fid==='drawer'?(window._drawerSource||'drawer'):fid),
