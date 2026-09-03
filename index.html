@@ -100,6 +100,25 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Varify A/B testing. Install ID 6320 is DELIBERATELY the same as m-aurora.com.my,
+     the paired original site: a split URL test is one experiment spanning both URLs,
+     so this page must load the same Varify project to recognise the va-red exposure
+     handoff and record that this visitor was sent here as the variant arm.
+     Without this snippet the variant arm logs no exposure and only the control arm
+     is measurable.
+
+     No experiment targets ver2.m-aurora.com.my, so nothing on this page is altered and no
+     redirect fires. Varify's auto GTM container loads here but sends no GA4 hit:
+     verified 2026-09-04 by comparing collect requests with and without the snippet,
+     identical on all five ver2 sites.
+
+     Keep this hardcoded in the head. Do NOT move it into a GTM container. -->
+<script>
+  window.varify = window.varify || {};
+  window.varify.iid = 6320;
+</script>
+<script src="https://app.varify.io/varify.js"></script>
+
 <title>Old Klang Road New Serviced Apartment Project | M Aurora</title>
 <meta name="description" content="Explore M Aurora, a new freehold serviced apartment project at Old Klang Road. Inspired by The Promise Of Dawn and designed to meet the needs of every family. Learn more">
 <link rel="canonical" href="https://m-aurora.com.my/">
