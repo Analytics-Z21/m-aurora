@@ -29,6 +29,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+/* ---- Varify arm resolution (2026-09-11) ----------------------------------
+   Varify records the arm only where it assigns, on the original site. Measured:
+   a visitor redirected here keeps the assignment in localStorage, but if they
+   later return STRAIGHT to ver2 the Abtesting event does not fire again, so that
+   visit carries no arm signal. Property is a considered purchase, so those
+   delayed return visits are exactly where the leads are.
+
+   We read the assignment ourselves rather than waiting for Varify to re-fire:
+     1. ?va-red= on the redirect landing (base64 of "<expId>:<variationId>")
+     2. Varify's own localStorage key, which survives later direct visits
+   Format matches varify_abTestShort ("41731:62914" / "41731:Original") so it
+   lines up with the existing GA4 dimension. No assignment returns 'unassigned'
+   (direct traffic that never entered the experiment) so it can be excluded
+   rather than looking like a tracking failure.
+
+   Defined in the head and set as a user property BEFORE config, so even a
+   single-pageview bounce carries the arm and stays in the denominator. */
+  window.__arm = function () {
+    try {
+      var raw = new URLSearchParams(location.search).get('va-red');
+      if (raw) {
+        var b = raw.replace(/-/g, '+').replace(/_/g, '/');
+        while (b.length % 4) b += '=';
+        var d = atob(b);
+        if (/^\d+:.+/.test(d)) { try { sessionStorage.setItem('va_arm', d); } catch (e) {} return d; }
+      }
+      var cached = null; try { cached = sessionStorage.getItem('va_arm'); } catch (e) {}
+      if (cached) return cached;
+      var PFX = 'varify-experiment-';
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf(PFX) !== 0) continue;
+        var o = {}; try { o = JSON.parse(localStorage.getItem(k) || '{}'); } catch (e) {}
+        var v = (o.variationId === null || o.variationId === undefined) ? 'Original' : String(o.variationId);
+        return k.slice(PFX.length) + ':' + v;
+      }
+    } catch (e) {}
+    return 'unassigned';
+  };
+  gtag('set', 'user_properties', { experiment_arm: window.__arm() });
   gtag('config', 'G-YDYWK8B8S5');
 </script>
 <!-- Microsoft Clarity (project yjbcsxz8bt), installed 2026-09-17. Session recordings and
@@ -118,11 +158,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 (function(){
   var sent=false, tries=0;
-  var params={ lead_type:'form_submission', page_location:location.href };
+  /* Same arm resolution as index.html. This page is on the ver2 origin, so
+     Varify's localStorage key is readable here, which means a confirmed lead
+     carries its arm even when the visitor returned directly to ver2 and Varify
+     never re-fired. Also set as a user property so it attaches to the person. */
+  function armValue(){ try{ return window.__arm?window.__arm():'unassigned'; }catch(e){ return 'unassigned'; } }
+  var arm=armValue();
+  var params={ lead_type:'form_submission', page_location:location.href, experiment_arm:arm };
   try{
     window.dataLayer=window.dataLayer||[];
-    window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission' });
+    window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission', experiment_arm:arm });
   }catch(e){}
+
   function fire(){
     if(sent) return true;
     try{

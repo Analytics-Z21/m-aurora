@@ -168,6 +168,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
+/* ---- Varify arm resolution (2026-09-11) ----------------------------------
+   Varify records the arm only where it assigns, on the original site. Measured:
+   a visitor redirected here keeps the assignment in localStorage, but if they
+   later return STRAIGHT to ver2 the Abtesting event does not fire again, so that
+   visit carries no arm signal. Property is a considered purchase, so those
+   delayed return visits are exactly where the leads are.
+
+   We read the assignment ourselves rather than waiting for Varify to re-fire:
+     1. ?va-red= on the redirect landing (base64 of "<expId>:<variationId>")
+     2. Varify's own localStorage key, which survives later direct visits
+   Format matches varify_abTestShort ("41731:62914" / "41731:Original") so it
+   lines up with the existing GA4 dimension. No assignment returns 'unassigned'
+   (direct traffic that never entered the experiment) so it can be excluded
+   rather than looking like a tracking failure.
+
+   Defined in the head and set as a user property BEFORE config, so even a
+   single-pageview bounce carries the arm and stays in the denominator. */
+  window.__arm = function () {
+    try {
+      var raw = new URLSearchParams(location.search).get('va-red');
+      if (raw) {
+        var b = raw.replace(/-/g, '+').replace(/_/g, '/');
+        while (b.length % 4) b += '=';
+        var d = atob(b);
+        if (/^\d+:.+/.test(d)) { try { sessionStorage.setItem('va_arm', d); } catch (e) {} return d; }
+      }
+      var cached = null; try { cached = sessionStorage.getItem('va_arm'); } catch (e) {}
+      if (cached) return cached;
+      var PFX = 'varify-experiment-';
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (!k || k.indexOf(PFX) !== 0) continue;
+        var o = {}; try { o = JSON.parse(localStorage.getItem(k) || '{}'); } catch (e) {}
+        var v = (o.variationId === null || o.variationId === undefined) ? 'Original' : String(o.variationId);
+        return k.slice(PFX.length) + ':' + v;
+      }
+    } catch (e) {}
+    return 'unassigned';
+  };
+  gtag('set', 'user_properties', { experiment_arm: window.__arm() });
   gtag('config', 'G-YDYWK8B8S5');
 </script>
 <!-- Microsoft Clarity (project yjbcsxz8bt), installed 2026-09-17. Session recordings and
@@ -1617,9 +1657,15 @@ var $=function(id){return document.getElementById(id);};
 var _q=new URLSearchParams(location.search);
 if(_q.get('clean')==='1')document.documentElement.classList.add('clean');
 
+/* Arm value, resolved in the head (window.__arm) so page_view carries it too. */
+function armValue(){ try{ return window.__arm?window.__arm():'unassigned'; }catch(e){ return 'unassigned'; } }
+
 /* Lead tracking: dataLayer push + direct gtag (G-YDYWK8B8S5), the MGM SITE-1 fix:
    dataLayer alone reaches nothing without a GTM tag, so gtag is fired directly too. */
 window.dataLayer=window.dataLayer||[];
+
+/* The user property is set in the head, before config, so page_view carries it.
+   Register 'experiment_arm' as a User-scoped custom dimension in GA4 Admin. */
 function track(p){try{
   window.dataLayer.push(p);
   if(typeof window.gtag==='function'){
@@ -1647,6 +1693,7 @@ function captureDiagnostic(form,formId){
     ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
       if(q.get(k))fields[k]=q.get(k);});
     var payload={submission_id:sid,timestamp:new Date().toISOString(),form_id:formId,
+      experiment_arm:armValue(),
       page_url:location.href,referrer:document.referrer||'',user_agent:navigator.userAgent,
       fields:fields};
     var blob=new Blob([JSON.stringify(payload)],{type:'text/plain'});
@@ -1987,6 +2034,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
     track({event:'generate_lead',lead_type:'form_submission',
       form_name:'M Aurora ver2 - '+fid,
       lead_source:(fid==='drawer'?(window._drawerSource||'drawer'):fid),
+      experiment_arm:armValue(),
       submission_id:sid});
     var btn=form.querySelector('button[type="submit"]');
     if(btn){btn.disabled=true;btn.textContent='Sending...';}
