@@ -904,6 +904,58 @@ html.clean .rail{display:none!important}
   .h-card-sub{margin-top:3px}
   .hero-body{padding-top:100px;padding-bottom:84px}
 }
+
+/* ---- 360 VR tour modal ------------------------------------------------
+   Embeds the Act Studio 3DVista tours in-page instead of sending the user off
+   to m-aurora.com.my. Types A/B/C/E are served from the tour CDN and frame
+   cleanly; Type D and Aerial still sit on m-aurora.com.my behind
+   X-Frame-Options: SAMEORIGIN, so those fall back to a new tab until the CDN
+   copies land (see VRTOURS.embed below). */
+.vr{position:fixed;inset:0;background:rgba(6,9,24,.97);z-index:1400;display:none;
+  flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.vr.on{display:flex}
+.vr-bar{flex:0 0 auto;display:flex;align-items:center;gap:10px;
+  padding:12px;
+  border-bottom:1px solid var(--mull);background:rgba(17,24,56,.92)}
+.vr-ttl{font-family:var(--fd);font-size:15px;color:var(--cream);
+  white-space:nowrap;margin-right:2px}
+.vr-tabs{display:flex;gap:6px;overflow-x:auto;flex:1 1 auto;
+  scrollbar-width:none;-ms-overflow-style:none}
+.vr-tabs::-webkit-scrollbar{display:none}
+.vr-tab{flex:0 0 auto;min-height:36px;padding:0 13px;border-radius:8px;
+  border:1px solid rgba(24,183,201,.38);background:transparent;color:var(--cream2);
+  font-family:var(--fb);font-size:12.5px;font-weight:600;letter-spacing:.05em;
+  cursor:pointer;white-space:nowrap}
+.vr-tab:hover{background:rgba(24,183,201,.16)}
+.vr-tab[aria-selected="true"]{background:rgba(24,183,201,.28);
+  border-color:var(--teal);color:var(--cream)}
+.vr-x{flex:0 0 auto;width:40px;height:40px;border:1px solid rgba(24,183,201,.4);
+  background:rgba(26,33,72,.85);color:var(--cream);border-radius:10px;font-size:18px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer}
+.vr-x:hover{background:rgba(24,183,201,.25)}
+.vr-stage{flex:1 1 auto;position:relative;background:#000;min-height:0}
+.vr-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.vr-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);font-family:var(--fb);font-size:13px;letter-spacing:.04em;
+  pointer-events:none;transition:opacity .3s}
+.vr-stage.ready .vr-load{opacity:0}
+.vr-foot{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:12px 14px;
+  border-top:1px solid var(--mull);background:rgba(17,24,56,.92)}
+.vr-note{font-family:var(--fb);font-size:11.5px;color:var(--muted);letter-spacing:.03em}
+.vr-cta{flex:0 0 auto;min-height:38px;padding:0 16px;border-radius:8px;border:0;
+  background:var(--grad);color:var(--dark);font-family:var(--fb);font-size:12.5px;
+  font-weight:700;letter-spacing:.05em;cursor:pointer;display:flex;align-items:center}
+@media(max-width:600px){
+  .vr-ttl{display:none}
+  .vr-note{display:none}
+  .vr-cta{width:100%;justify-content:center}
+  /* six tabs do not fit a 390px bar, so the strip scrolls. Fade the right edge
+     so it reads as scrollable rather than clipped against the close button. */
+  .vr-tabs{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 20px),transparent)}
+}
 </style>
 </head>
 <body>
@@ -1534,6 +1586,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <span class="lb-cap" id="lbCap"></span>
 </div>
 
+<!-- 360 VR tour modal -->
+<div class="vr" id="vrLb" role="dialog" aria-modal="true" aria-hidden="true"
+     aria-label="360 degree virtual tour">
+  <div class="vr-bar">
+    <span class="vr-ttl">360&deg; Virtual Tour</span>
+    <div class="vr-tabs" id="vrTabs" role="tablist" aria-label="Choose a unit type"></div>
+    <button class="vr-x" id="vrX" type="button" aria-label="Close virtual tour">&#10005;</button>
+  </div>
+  <div class="vr-stage" id="vrStage">
+    <div class="vr-load" id="vrLoad">Loading the tour&hellip;</div>
+    <iframe id="vrFrame" title="360 degree virtual tour" allowfullscreen
+      allow="fullscreen; accelerometer; gyroscope; magnetometer; xr-spatial-tracking"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  <div class="vr-foot">
+    <span class="vr-note" id="vrNote"></span>
+    <button class="vr-cta" id="vrCta" type="button">Get this layout &amp; price</button>
+  </div>
+</div>
+
+
 <script>
 (function(){
 'use strict';
@@ -2016,6 +2089,101 @@ if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion
   },{threshold:.6});
   Array.prototype.forEach.call(document.querySelectorAll('[data-count]'),function(el){cio.observe(el);});
 }
+
+/* ---- 360 VR tour modal ------------------------------------------------
+   Tour sources verified 2026-09-24.
+   A/B/C/E: the Act Studio CDN (virtualtour.sgp1.digitaloceanspaces.com) sends no
+   X-Frame-Options and no CSP frame-ancestors, so they embed from any origin.
+   These are the same builds the m-aurora.com.my/360-vr/ page iframes, one
+   wrapper removed (the wrapper only adds an Act Studio credit footer).
+   D + Aerial: only exist at m-aurora.com.my/wp-content/themes/divi-child/,
+   which sends X-Frame-Options: SAMEORIGIN. A cross-origin frame is refused, so
+   embed:false sends them to a new tab. Flip to embed:true and swap the url once
+   Act Studio publishes them to the CDN. */
+var VRCDN='https://virtualtour.sgp1.digitaloceanspaces.com/';
+var VRTOURS={
+  A:{label:'Type A',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-a-vr360-virtual-tour/index.htm'},
+  B:{label:'Type B',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-b-vr360-virtual-tour/index.htm'},
+  C:{label:'Type C',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-c-vr360-virtual-tour/index.htm'},
+  D:{label:'Type D',embed:false,url:'https://m-aurora.com.my/360-vr/#typeD'},
+  E:{label:'Type E',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-e-vr360-virtual-tour/index.htm'},
+  AERIAL:{label:'Aerial',embed:false,url:'https://m-aurora.com.my/360-vr/'}
+};
+var VRORDER=['A','B','C','D','E','AERIAL'];
+var vrEl=$('vrLb'),vrFrame=$('vrFrame'),vrStage=$('vrStage'),vrTabs=$('vrTabs'),vrCur=null;
+
+(function vrBuildTabs(){
+  var html='';
+  for(var i=0;i<VRORDER.length;i++){
+    var k=VRORDER[i];
+    html+='<button class="vr-tab" type="button" role="tab" aria-selected="false" '+
+          'data-vr="'+k+'">'+VRTOURS[k].label+(VRTOURS[k].embed?'':' &#8599;')+'</button>';
+  }
+  vrTabs.innerHTML=html;
+})();
+
+function vrMark(){
+  Array.prototype.forEach.call(vrTabs.querySelectorAll('.vr-tab'),function(t){
+    t.setAttribute('aria-selected',String(t.getAttribute('data-vr')===vrCur));});
+}
+
+/* Opens the tour for a type. Blocked types go to a new tab so the user is never
+   left staring at a refused frame. */
+function openVr(type){
+  var t=VRTOURS[type];if(!t)return;
+  track({event:'virtual_tour_open',unit_type:type,tour_mode:t.embed?'modal':'new_tab'});
+  if(!t.embed){window.open(t.url,'_blank','noopener');return;}
+  vrCur=type;vrMark();
+  vrStage.classList.remove('ready');
+  $('vrNote').textContent=t.label+' show unit, drag to look around';
+  $('vrCta').setAttribute('data-unit',t.label);
+  vrFrame.src=t.url;
+  vrEl.classList.add('on');vrEl.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  $('vrX').focus();
+}
+function closeVr(){
+  vrEl.classList.remove('on');vrEl.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+  vrFrame.src='about:blank';   /* stop the tour rendering and free the memory */
+  vrStage.classList.remove('ready');vrCur=null;
+}
+vrFrame.addEventListener('load',function(){
+  if(vrFrame.src.indexOf('about:blank')===-1)vrStage.classList.add('ready');});
+$('vrX').addEventListener('click',closeVr);
+vrTabs.addEventListener('click',function(e){
+  var b=e.target.closest?e.target.closest('.vr-tab'):null;
+  if(b)openVr(b.getAttribute('data-vr'));});
+$('vrCta').addEventListener('click',function(){
+  var u=(vrCur&&VRTOURS[vrCur])?vrCur:cur,btn=$('vrCta');
+  /* openLead reads data-open-lead / data-unit off e.currentTarget, so hand it a
+     synthetic event rather than a string. The attribute is set here, not in the
+     markup, so the [data-open-lead] auto-binder never double-binds. */
+  btn.setAttribute('data-open-lead','vr_tour_'+u);
+  closeVr();
+  openLead({preventDefault:function(){},currentTarget:btn});
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&vrEl.classList.contains('on'))closeVr();});
+
+/* Intercept every existing 360 link so nothing leaves the site unnecessarily.
+   data-vr on the anchor wins; otherwise the #typeX hash decides; a bare
+   /360-vr/ link opens Type A. */
+Array.prototype.forEach.call(
+  document.querySelectorAll('a[href*="360-vr"],a[data-vr]'),function(a){
+    a.addEventListener('click',function(e){
+      var key=a.getAttribute('data-vr');
+      if(!key){
+        var m=/#type([A-E])/i.exec(a.getAttribute('href')||'');
+        key=m?m[1].toUpperCase():(a.id==='uVt'?cur:'A');
+      }
+      if(!VRTOURS[key]||!VRTOURS[key].embed){
+        track({event:'virtual_tour_open',unit_type:key||'unknown',tour_mode:'new_tab'});
+        return;                                      /* let the new tab happen */
+      }
+      e.preventDefault();openVr(key);
+    });
+  });
 
 render();
 })();
