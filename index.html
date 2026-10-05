@@ -1041,6 +1041,66 @@ html.clean .rail{display:none!important}
 .cout .l{color:#8FE0D0;opacity:1}
 .cout .v{color:var(--cream)}
 .cout .d{color:var(--cream2);opacity:1}
+/* DAWN VARIANT (2026-10-05, branch r3-dawn): Justin's direction. The page continues the hero artwork's
+   own sky, blue at the top to rose at the bottom (sampled from _hero.jpg: #2F56B4 / #986681 / #765E82;
+   his reference crop matches within a few points), and the ask is the sunrise.
+   - Grounds = the sky stops deepened until cream body text holds 7:1 (sky #2D51B1, periwinkle #425297,
+     lilac #4A5091, rose #6E4C62, mauve #694D67).
+   - Ask = sunrise orange #FF8A3D, navy label 8.0:1, 3.1:1 against every ground. On the cream form
+     surfaces it is #EE6A1F (3.0:1 against cream). Red was tested and rejected: 1.8:1 against the rose
+     grounds, and red is the form-error colour.
+   - Teal leaves the palette: --teal becomes lavender, --deep becomes deep dawn blue, secondary actions
+     are cream outlines, headline highlights are blush. Orange appears on asks and nowhere else. */
+:root{--dawn-sky:#2D51B1;--dawn-peri:#425297;--dawn-lilac:#4A5091;--dawn-rose:#6E4C62;--dawn-mauve:#694D67;
+  --dawn-deep:#1E2F6B;--blush:#F6C6D2;--sun:#FF8A3D;--sun-deep:#EE6A1F;--sun-hover:#FF9A55;
+  --teal:#DCE0F2;--teal2:#FEFCF7;--deep:#1E2F6B;--night:#2D51B1;
+  --night2:rgba(10,16,48,.26);--night3:rgba(10,16,48,.38);--mull:rgba(255,255,255,.16);
+  --grad:linear-gradient(90deg,#F6C6D2 0%,#DCE0F2 100%)}
+body{background:linear-gradient(180deg,var(--dawn-sky) 0%,var(--dawn-peri) 28%,var(--dawn-lilac) 50%,var(--dawn-rose) 80%,var(--dawn-mauve) 100%)}
+.sec-alt{background:transparent}
+.trust{background:rgba(10,16,48,.3)}
+.git{background:rgba(10,16,48,.2)}
+.footer{background:#3A2B44}
+.ann{background:var(--dawn-deep)}
+.nav.is-scrolled{background:rgba(30,47,107,.92)}
+.mm{background:linear-gradient(180deg,#2A4699 0%,#3B3F7A 60%,#4F3B5A 100%)}
+.mm-close:hover{background:rgba(255,255,255,.18)}
+.mm-nav a:hover{color:var(--blush)}
+/* hero: scrims tinted dawn blue instead of navy, so the artwork's sky runs into the page */
+.hero-scrim{background:linear-gradient(180deg,rgba(22,34,86,.38) 0%,rgba(22,34,86,.16) 26%,rgba(22,34,86,.4) 50%,rgba(30,50,128,.86) 92%,var(--dawn-sky) 100%)}
+@media(min-width:1024px){.hero-scrim{background:linear-gradient(90deg,rgba(22,34,86,.9) 0%,rgba(22,34,86,.62) 40%,rgba(22,34,86,.12) 68%,rgba(22,34,86,.05) 100%),linear-gradient(180deg,transparent 84%,var(--dawn-sky) 100%)}}
+/* the ask */
+.btn-p{background:var(--sun);color:#0B102A;box-shadow:0 10px 24px rgba(10,14,40,.32)}
+.btn-p:hover{background:var(--sun-hover);color:#0B102A}
+.form-card .btn-p,.ld .btn-p{background:var(--sun-deep)}
+.form-card .btn-p:hover,.ld .btn-p:hover{background:#F27A33}
+/* secondary actions and chips: cream, never orange */
+.btn-o,.nav-reg.quiet{border-color:rgba(254,252,247,.55)}
+.btn-o:hover{background:rgba(254,252,247,.12);border-color:var(--cream)}
+.tab,.fac-cat,.loc-cat{border-color:rgba(254,252,247,.26)}
+.tab:hover,.fac-cat:hover,.loc-cat:hover{border-color:rgba(254,252,247,.6)}
+/* accents: labels lavender, highlights blush */
+.eyebrow,.h-eyebrow,.h-card-lab,.calc h3,.cprice span,.fac-detail-head span,.loc-item b,.cp-pick-t,.cp-pick-c,
+.cp-opt-p,.tr-num,.award p b,.qx-trust b,.unit-zoom svg,.qx-points svg,.cout .l,.h-card-val sup,.ann-sep{color:var(--cream2)}
+.hero h1 em,.em,h2 em{color:var(--blush)}
+.more-btn{color:var(--cream);border-bottom-color:rgba(254,252,247,.45)}
+.more-btn:hover,.faq-q:hover,.ft-phone{color:var(--cream)}
+.faq-q i::before,.faq-q i::after{background:var(--cream2)}
+.h-dot.on::after{background:var(--cream)}
+.award{background:linear-gradient(90deg,rgba(246,198,210,.08),rgba(220,224,242,.08))}
+.cout{background:rgba(254,252,247,.07);border-color:rgba(254,252,247,.24)}
+.cp-pick{background:rgba(254,252,247,.07);border-color:rgba(254,252,247,.3)}
+.cp-opt:hover,.cp-opt[aria-selected="true"]{background:rgba(254,252,247,.12);border-color:rgba(254,252,247,.4)}
+.qx-points span{border-color:rgba(254,252,247,.25)}
+input[type=range]::-webkit-slider-runnable-track,input[type=range]::-moz-range-track{background:rgba(254,252,247,.24)}
+.soc,.lb-x,.lb-btn,.vr-x,.vr-tab{border-color:rgba(254,252,247,.38)}
+.soc:hover,.lb-btn:hover,.vr-x:hover,.vr-tab:hover{background:rgba(254,252,247,.14)}
+.vr-tab[aria-selected="true"]{background:rgba(254,252,247,.22);border-color:var(--cream)}
+.done{border-color:rgba(254,252,247,.4);background:rgba(254,252,247,.1)}
+/* cream form surfaces: blue ticks and focus ring, so the only warm colour there is the submit */
+.receive svg{color:var(--dawn-sky)}
+.f-input:focus{outline-color:var(--dawn-sky)}
+
 </style>
 </head>
 <body>
