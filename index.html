@@ -100,6 +100,8 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(max-width:1023px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
 <!-- Google Tag Manager (GTM-5GCDVKLC, client container, installed 2026-09-17 by request from PY).
      Placed as high in the head as GTM asks, above the Varify snippet: the GTM snippet is
      inline and injects gtm.js asynchronously, so it costs Varify nothing, whereas
@@ -1142,6 +1144,16 @@ h1,h2,h3,.hero h1,.ld h2,.calc h3,.cout .v,.sticky-p b{font-weight:700;font-vari
   .unit-cfg{margin:2px 0 14px}
   .unit-acts{margin-top:16px}
 }
+/* HERO SPEED (2026-10-05, review D10). Throttled phone (1.6 Mbps, 150 ms RTT, 4x CPU): hero painted
+   at a median 6.4 s, because all four slides (819 KB) and every image on the page (3.3 MB, none
+   lazy) downloaded before the load event and competed with slide 1. Slides are now WebP, slide 1 is
+   preloaded, slides 2-4 load after the page has loaded, and below-fold images are lazy. */
+.hs-1{background-image:url('_hero-vertical.webp')}
+@media(min-width:1024px){.hs-1{background-image:url('_hero.webp')}}
+.hs-2,.hs-3,.hs-4{background-image:none}
+html.hero-more .hs-2{background-image:url('_gal-entrance.webp')}
+html.hero-more .hs-3{background-image:url('_gal-lap-pool.webp')}
+html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 
 </style>
 </head>
@@ -1295,7 +1307,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="unit-plan" id="planWrap">
         <span class="unit-badge">Open for Sale</span>
         <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
-        <img id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
+        <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
       </div>
       <div class="unit-info">
         <div class="unit-head">
@@ -1427,21 +1439,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <h3 class="sr-only">Key features of M Aurora</h3>
     <div class="usp-grid rv">
-      <div class="usp"><img src="_usp-1.png" alt=""><h4>Freehold</h4></div>
-      <div class="usp"><img src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
-      <div class="usp"><img src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
-      <div class="usp"><img src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
-      <div class="usp"><img src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
-      <div class="usp"><img src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
-      <div class="usp"><img src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
-      <div class="usp"><img src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
-      <div class="usp"><img src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
-      <div class="usp"><img src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
-      <div class="usp"><img src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
-      <div class="usp"><img src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-1.png" alt=""><h4>Freehold</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
+      <div class="usp"><img loading="lazy" decoding="async" src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
     </div>
     <div class="award rv">
-      <img src="_greenre.png" alt="GreenRE">
+      <img loading="lazy" decoding="async" src="_greenre.png" alt="GreenRE">
       <p>M Aurora has been awarded<b>Silver Provisional GreenRE Certification</b></p>
     </div>
   </div>
@@ -1469,13 +1481,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fac-grid rv">
       <div>
         <div class="fac-plan" data-full="_fac-plan-podium.jpg" data-cap="Ground &amp; L8 Podium Floor Facilities Plan" id="facPlanMain">
-          <img src="_fac-plan-podium.jpg" alt="Ground and Level 8 podium floor facilities plan">
+          <img loading="lazy" decoding="async" src="_fac-plan-podium.jpg" alt="Ground and Level 8 podium floor facilities plan">
           <span class="cap">Ground &amp; L8 Podium Floor Facilities Plan &middot; tap to enlarge</span>
         </div>
       </div>
       <div>
         <div class="fac-plan" data-full="_fac-plan-sky.jpg" data-cap="Sky Lounge Facilities Plan" id="facPlanSky">
-          <img src="_fac-plan-sky.jpg" alt="Sky Lounge facilities plan">
+          <img loading="lazy" decoding="async" src="_fac-plan-sky.jpg" alt="Sky Lounge facilities plan">
           <span class="cap">Sky Lounge Facilities Plan &middot; tap to enlarge</span>
         </div>
       </div>
@@ -1531,14 +1543,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="gal-wrap">
     <div class="gal rv" id="gal">
-      <figure><img src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
-      <figure><img src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
-      <figure><img src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
-      <figure><img src="_gal-sky-garden.jpg" alt="Sky garden"><figcaption>Sky Garden</figcaption></figure>
-      <figure><img src="_gal-kids-pool.jpg" alt="Kids pool"><figcaption>Kids Pool</figcaption></figure>
-      <figure><img src="_gal-playground.jpg" alt="Playground"><figcaption>Playground</figcaption></figure>
-      <figure><img src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
-      <figure><img src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-sky-garden.jpg" alt="Sky garden"><figcaption>Sky Garden</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-kids-pool.jpg" alt="Kids pool"><figcaption>Kids Pool</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-playground.jpg" alt="Playground"><figcaption>Playground</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
     </div>
       <button class="gal-nav gal-prev" type="button" id="galPrev" aria-controls="gal" aria-label="Previous images">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
@@ -1570,7 +1582,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="loc-grid rv">
       <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map" role="button" tabindex="0" aria-label="Enlarge the location map">
-        <img src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
+        <img loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
         <span class="cap">Tap to enlarge &middot; numbers match the lists</span>
       </div>
       <div>
@@ -1599,7 +1611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dev rv">
       <span class="eyebrow">The developer</span>
       <h2>This project is built by :</h2>
-      <img class="dev-logo" src="_mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
+      <img loading="lazy" decoding="async" class="dev-logo" src="_mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
       <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
     </div>
   </div>
@@ -1691,7 +1703,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER: MGM pattern: logo, contact, socials, then the verbatim legal block. -->
 <footer class="footer" id="contact">
   <div class="ft-top">
-    <div class="ft-logo"><img src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life."></div>
+    <div class="ft-logo"><img loading="lazy" decoding="async" src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life."></div>
     <div class="ft-contact">
       <div class="ft-lab">For further enquiries, please contact:</div>
       <a href="tel:0390783999" class="ft-phone num">03 9078 3999</a>
@@ -1854,9 +1866,11 @@ function captureDiagnostic(form,formId){
   var hm=$('heroMedia');if(!hm)return;
   var arts=[hm.querySelector('.hs-1'),hm.querySelector('.hs-2'),hm.querySelector('.hs-3'),hm.querySelector('.hs-4')];
   var dots=Array.prototype.slice.call(hm.querySelectorAll('.h-dot'));
+  window.addEventListener('load',function(){setTimeout(function(){document.documentElement.classList.add('hero-more');},300);});
   var caps={1:'The Towers',2:'Grand Entrance',3:'50m Lap Pool',4:'Show Unit Type A'};
   var cur=1,timer=null,reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   function go(n){
+    document.documentElement.classList.add('hero-more');
     cur=((n-1)%4+4)%4+1;
     arts.forEach(function(a,i){a.classList.toggle('on',i===cur-1);});
     dots.forEach(function(d){d.classList.toggle('on',+d.getAttribute('data-hs')===cur);});
