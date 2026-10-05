@@ -221,7 +221,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --teal:#18B7C9;--teal2:#12A0B0;--deep:#165063;
@@ -1119,6 +1119,13 @@ input[type=range]::-webkit-slider-runnable-track,input[type=range]::-moz-range-t
 .cout .v{margin-top:2px}
 .cout .d{margin:4px 0 0;text-align:left;max-width:none}
 .cout .calc-cta{width:100%;margin-top:16px}
+/* HEADINGS, BOLDER (2026-10-05, Justin's review: "bold more the header, make it clearer"). The display
+   face drew at 500-600 and the browser picked Bodoni's large optical size, i.e. its finest hairlines,
+   which thin out on the gradient. 700 with the text optical size (opsz 18) keeps the face and thickens
+   the hairlines; compared side by side against 700 auto and 800. Same for the big figures. */
+h1,h2,h3,.hero h1,.ld h2,.calc h3,.cout .v,.sticky-p b{font-weight:700;font-variation-settings:'opsz' 18}
+/* drawer: "You'll receive:" as a bold sentence-case line, as on the Original's form */
+.rlabel{font:700 15px/1.4 var(--fb);letter-spacing:0;text-transform:none;color:var(--deep);margin-bottom:8px}
 
 </style>
 </head>
@@ -1355,7 +1362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input class="f-input" id="q-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
           <p class="form-err" data-form-error></p>
           <button class="btn btn-p" type="submit">Send me the price list</button>
-          <p class="f-consent">By submitting this form, I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+          <p class="f-consent">By submitting this form, I have read and agreed to the <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a>.</p>
           <div class="micro"><span>No spam</span><span>We reply by WhatsApp</span><span>Unsubscribe anytime</span></div>
         </form>
       </div>
@@ -1655,7 +1662,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input class="f-input" id="m-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
           <p class="form-err" data-form-error></p>
           <button class="btn btn-p" type="submit">Send me the price list</button>
-          <p class="f-consent">By submitting this form, I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+          <p class="f-consent">By submitting this form, I have read and agreed to the <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a>.</p>
         </form>
       </div>
     </div>
@@ -1695,7 +1702,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ld-unit" id="ldUnit"><span class="k">Enquiring about</span><span class="v" id="ldUnitVal"></span></div>
     <h2 id="ldTitle">Get your price list</h2>
     <p class="ld-sub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
-    <div class="rlabel">You'll receive</div>
+    <div class="rlabel">You'll receive:</div>
     <div class="receive">
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Floor Plans</span>
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Full Pricing</span>
@@ -1717,7 +1724,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input class="f-input" id="d-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
       <p class="form-err" data-form-error></p>
       <button class="btn btn-p" type="submit" style="width:100%">Get my price list now</button>
-      <p class="f-consent">By submitting this form, I hereby confirm that I understand &amp; accept your <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> of use of the website. I hereby agree and give consent to Mah Sing Group Berhad and/or the subsidiary companies within Mah Sing Group (&ldquo;Mah Sing&rdquo;) to collect my personal data provided in this Form for the purpose of communicating to me your products and services.</p>
+      <p class="f-consent">By submitting this form, I have read and agreed to the <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a>.</p>
       <div class="micro"><span>No spam</span><span>We reply by WhatsApp</span><span>Unsubscribe anytime</span></div>
     </form>
   </div>
