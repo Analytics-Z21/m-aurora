@@ -1194,6 +1194,33 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 .loc-scroll{position:relative;overflow:hidden}
 .loc-canvas{position:relative;transform-origin:0 0;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .loc-pin{transform:translate(-50%,-50%) scale(var(--inv,1))}
+.loc-canvas.gesturing{transition:none}
+/* MAP PINS (2026-10-05, Justin: rings were not obvious enough): a teardrop pin with its tip on the
+   marker, cream with a dot in the category colour; the picked one grows and turns blush. Kept the
+   same size at any zoom (counter-scaled about the tip). */
+.loc-pin{width:24px;height:32px;aspect-ratio:auto;border:0;border-radius:0;background:none;box-shadow:none;padding:0;
+  transform:translate(-50%,-100%) scale(var(--inv,1));transform-origin:50% 100%;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.loc-pin::after{inset:-8px -10px;border-radius:0}
+.loc-pin svg{display:block;width:100%;height:100%;transform-origin:50% 100%;transition:transform .15s ease-out}
+.loc-pin path{fill:var(--cream);stroke:rgba(10,16,48,.6);stroke-width:1}
+.loc-pin circle{fill:var(--c,#4761A8)}
+.loc-pin.on{border:0;background:none;box-shadow:none;z-index:2}
+.loc-pin.on svg{transform:scale(1.3)}
+.loc-pin.on path{fill:var(--blush)}
+.loc-pin .loc-tip{bottom:calc(100% + 6px)}
+.loc-pin.on .loc-tip{bottom:calc(130% + 6px)}
+@media(hover:hover) and (pointer:fine){.loc-pin:hover svg{transform:scale(1.12)}.loc-pin.on:hover svg{transform:scale(1.3)}}
+.loc-enlarge,.loc-reset{position:absolute;top:12px;z-index:4;display:inline-flex;align-items:center;gap:6px;
+  min-height:36px;padding:0 12px;border-radius:6px;background:rgba(6,9,24,.72);color:var(--cream);
+  font:600 12.5px/1 var(--fb);touch-action:manipulation}
+.loc-enlarge{right:12px}
+.loc-reset{left:12px}
+.loc-reset[hidden]{display:none}
+.loc-hint{position:absolute;left:12px;bottom:12px;z-index:4;padding:6px 10px;border-radius:6px;background:rgba(6,9,24,.72);
+  color:var(--cream2);font:500 12px/1.3 var(--fb);pointer-events:none;transition:opacity .3s}
+.loc-visual.used .loc-hint{opacity:0}
+@media(hover:hover) and (pointer:fine){.loc-hint{display:none}}
+.loc-visual{cursor:default}
 .loc-visual .cap{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.loc-canvas{transition:none}}
 @media(max-width:1023px){
@@ -1645,7 +1672,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="loc-pins" id="locPins"></div>
           </div>
         </div>
-        <span class="cap">Tap to enlarge</span>
+        <button type="button" class="loc-enlarge" id="locEnlarge" aria-label="Enlarge the map"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Enlarge</button>
+        <button type="button" class="loc-reset" id="locReset" hidden>Reset view</button>
+        <span class="loc-hint" aria-hidden="true">Pinch or double-tap to zoom</span>
       </div>
       <div>
         <div class="loc-cats" role="tablist" aria-label="Connectivity and amenity categories">
@@ -2064,6 +2093,8 @@ function closeLb(){lbEl.classList.remove('on');lbEl.setAttribute('aria-hidden','
 $('lbX').addEventListener('click',closeLb);
 /* registered before the [data-open-lead] binder, so the zoom closes first and the drawer then opens */
 $('lbAsk').addEventListener('click',closeLb);
+if($('locEnlarge'))$('locEnlarge').addEventListener('click',function(e){e.stopPropagation();var m=$('locMap');
+  openLb(m.getAttribute('data-full'),m.querySelector('img').alt,m.getAttribute('data-cap'));});
 $('lbIn').addEventListener('click',function(){lbZoom(1);});
 $('lbOut').addEventListener('click',function(){lbZoom(-1);});
 $('lbReset').addEventListener('click',function(){lbZoom(0);});
@@ -2108,7 +2139,7 @@ lbStage.addEventListener('touchend',function(){lbZ.drag=false;lbZ.pd=0;});
 $('planWrap').addEventListener('click',function(){
   if(window._swiped){window._swiped=false;return;}
   var i=$('planImg');openLb(i.src,i.alt,'Type '+cur+' floor plan');});
-['facPlanMain','facPlanSky','locMap'].forEach(function(id){
+['facPlanMain','facPlanSky'].forEach(function(id){
   var el=$(id);if(!el)return;
   el.addEventListener('click',function(){openLb(el.getAttribute('data-full'),el.querySelector('img').alt,el.getAttribute('data-cap'));});
 });
@@ -2171,6 +2202,8 @@ var PINS={access:[[53.08,39.59],[14.67,60.23],[16.75,37.88],[16.75,76.75],[82,38
   schools:[[30.83,62.75],[26.33,65.17],[45.33,53.41],[28.08,55.12],[31.33,49.91],[55.25,48.65]],
   parks:[[33.83,63.73],[37.42,40.84],[50.58,34.38],[55,85.91],[68.17,86]],
   health:[[21.83,45.06],[59.08,39.05]]};
+/* pin dot colours: access and transit match the list's numbered badges; the rest take the map's own icon colours */
+var PIN_COL={access:'#4761A8',transit:'#A63D9E',malls:'#2BA9CF',schools:'#7D859C',parks:'#3F8A55',health:'#C8202E'};
 var locCat='access';
 function drawPlaces(cat){
   locCat=cat;
@@ -2180,7 +2213,8 @@ function drawPlaces(cat){
     return '<button type="button" class="loc-item" data-i="'+i+'" aria-pressed="false"><span>'+n+x[1]+'</span>'+d+'</button>';}).join('');
   var box=$('locPins');
   if(box)box.innerHTML=(PINS[cat]||[]).map(function(p,i){var x=PLACES[cat][i];
-    return '<button type="button" class="loc-pin" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+x[1]+(x[2]?', '+x[2]:'')+'">'+
+    return '<button type="button" class="loc-pin" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%;--c:'+(PIN_COL[cat]||'#4761A8')+'" aria-label="'+x[1]+(x[2]?', '+x[2]:'')+'">'+
+      '<svg viewBox="0 0 24 32" aria-hidden="true"><path d="M12 31s10-10.4 10-18.5a10 10 0 0 0-20 0C2 20.6 12 31 12 31z"/><circle cx="12" cy="12.5" r="4.4"/></svg>'+
       '<span class="loc-tip">'+x[1]+(x[2]?' &middot; '+x[2]:'')+'</span></button>';}).join('');
   locFrame(cat);
 }
@@ -2205,10 +2239,24 @@ function locFrame(cat){
   var s=Math.max(1,Math.min(100/(x1-x0),100/(y1-y0),2.6));
   var tx=W/2-(x0+x1)/200*W*s,ty=H/2-(y0+y1)/200*H*s;
   tx=Math.min(0,Math.max(W-W*s,tx));ty=Math.min(0,Math.max(H-H*s,ty));
-  cv.style.transform='translate('+tx.toFixed(1)+'px,'+ty.toFixed(1)+'px) scale('+s.toFixed(3)+')';
-  cv.style.setProperty('--inv',(1/s).toFixed(4));
+  LZ.base={s:s,tx:tx,ty:ty};LZ.s=s;LZ.tx=tx;LZ.ty=ty;LZ.user=false;locApply(true);
   setTimeout(locClampTip,480);
 }
+/* shared zoom state: the category frame sets it, pinch / double-tap / drag move it */
+var LZ={s:1,tx:0,ty:0,user:false,base:{s:1,tx:0,ty:0}};
+function locApply(anim){
+  var sc=$('locScroll'),cv=sc&&sc.querySelector('.loc-canvas');if(!cv)return;
+  var W=sc.clientWidth,H=sc.clientHeight;
+  LZ.s=Math.max(1,Math.min(5,LZ.s));
+  LZ.tx=Math.min(0,Math.max(W-W*LZ.s,LZ.tx));LZ.ty=Math.min(0,Math.max(H-H*LZ.s,LZ.ty));
+  cv.classList.toggle('gesturing',!anim);
+  cv.style.transform='translate('+LZ.tx.toFixed(1)+'px,'+LZ.ty.toFixed(1)+'px) scale('+LZ.s.toFixed(3)+')';
+  cv.style.setProperty('--inv',(1/LZ.s).toFixed(4));
+  /* one finger drags the map only once the visitor has zoomed it; otherwise it scrolls the page */
+  sc.style.touchAction=LZ.user?'none':'pan-y';
+  var rb=$('locReset');if(rb)rb.hidden=!LZ.user;
+}
+function locResetView(){LZ.s=LZ.base.s;LZ.tx=LZ.base.tx;LZ.ty=LZ.base.ty;LZ.user=false;locApply(true);setTimeout(locClampTip,480);}
 function locPick(i,fromList){
   Array.prototype.forEach.call(document.querySelectorAll('#locPins .loc-pin'),function(p){p.classList.toggle('on',+p.getAttribute('data-i')===i);});
   Array.prototype.forEach.call(document.querySelectorAll('#locList .loc-item'),function(r){var on=+r.getAttribute('data-i')===i;r.classList.toggle('on',on);r.setAttribute('aria-pressed',String(on));});
@@ -2228,6 +2276,39 @@ $('locList').addEventListener('click',function(e){var r=e.target.closest('.loc-i
 if($('locScroll')){var limg=$('locScroll').querySelector('img');
   if(limg&&!limg.complete)limg.addEventListener('load',function(){locFrame(locCat);});
   window.addEventListener('resize',function(){locFrame(locCat);});}
+/* touch: two-finger pinch zooms 1x-5x around the fingers; double-tap zooms 2x on the spot, or back
+   to the category view if already zoomed; one finger drags once zoomed */
+(function(){var sc=$('locScroll');if(!sc)return;
+  var t0=null,pinch=null,moved=false,lastTap=0,lx=0,ly=0;
+  if($('locReset'))$('locReset').addEventListener('click',function(e){e.stopPropagation();locResetView();});
+  function pt(t){var r=sc.getBoundingClientRect();return {x:t.clientX-r.left,y:t.clientY-r.top};}
+  sc.addEventListener('touchstart',function(e){
+    $('locMap').classList.add('used');
+    if(e.touches.length===2){var a=pt(e.touches[0]),b=pt(e.touches[1]),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      pinch={d:Math.hypot(a.x-b.x,a.y-b.y)||1,s:LZ.s,px:(mx-LZ.tx)/LZ.s,py:(my-LZ.ty)/LZ.s};t0=null;e.preventDefault();return;}
+    if(e.touches.length===1){var p=pt(e.touches[0]);t0={x:p.x,y:p.y,tx:LZ.tx,ty:LZ.ty};moved=false;}
+  },{passive:false});
+  sc.addEventListener('touchmove',function(e){
+    if(pinch&&e.touches.length===2){var a=pt(e.touches[0]),b=pt(e.touches[1]),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+      LZ.s=Math.max(1,Math.min(5,pinch.s*Math.hypot(a.x-b.x,a.y-b.y)/pinch.d));
+      LZ.tx=mx-pinch.px*LZ.s;LZ.ty=my-pinch.py*LZ.s;LZ.user=true;locApply(false);e.preventDefault();return;}
+    if(!t0||e.touches.length!==1)return;
+    var p=pt(e.touches[0]),dx=p.x-t0.x,dy=p.y-t0.y;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;
+    if(LZ.user){LZ.tx=t0.tx+dx;LZ.ty=t0.ty+dy;locApply(false);e.preventDefault();}
+  },{passive:false});
+  sc.addEventListener('touchend',function(e){
+    if(pinch){if(e.touches.length<2){pinch=null;if(LZ.s<=1.02)LZ.user=false;locApply(true);
+        if(e.touches.length===1){var q=pt(e.touches[0]);t0={x:q.x,y:q.y,tx:LZ.tx,ty:LZ.ty};moved=true;}
+        setTimeout(locClampTip,60);}return;}
+    if(t0&&!moved&&e.changedTouches.length===1){var now=Date.now(),p=pt(e.changedTouches[0]);
+      if(now-lastTap<320&&Math.abs(p.x-lx)<30&&Math.abs(p.y-ly)<30){e.preventDefault();lastTap=0;
+        if(LZ.user&&LZ.s>LZ.base.s*1.2){locResetView();}
+        else{var px=(p.x-LZ.tx)/LZ.s,py=(p.y-LZ.ty)/LZ.s;LZ.s=Math.min(5,LZ.s*2);LZ.tx=p.x-px*LZ.s;LZ.ty=p.y-py*LZ.s;
+          LZ.user=true;locApply(true);setTimeout(locClampTip,480);}}
+      else{lastTap=now;lx=p.x;ly=p.y;}}
+    t0=null;setTimeout(locClampTip,60);
+  });
+})();
 if($('locPins'))$('locPins').addEventListener('click',function(e){var p=e.target.closest('.loc-pin');if(!p)return;
   e.stopPropagation();locPick(+p.getAttribute('data-i'),false);});
 
