@@ -1158,6 +1158,14 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
    developer band's own claim ("over 79 completed projects"). Wording needs Mah Sing's OK. */
 .h-trust{font:500 12.5px/1.5 var(--fb);color:var(--cream2);margin-top:12px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .ld-trust{font:600 12.5px/1.5 var(--fb);color:var(--deep);margin:-2px 0 14px}
+/* ZOOM ASK (2026-10-05, review D4/item 5): the ask sits bottom-centre in every zoom; caption and hint
+   move up above it, and the image leaves it room. Transforms keep the centring through hover/press. */
+.lb-ask{position:absolute;left:50%;bottom:calc(18px + var(--safe));transform:translateX(-50%);z-index:4;white-space:nowrap;padding:15px 26px}
+.lb-ask:hover{transform:translateX(-50%) translateY(-1px)}
+.lb-ask:active{transform:translateX(-50%) scale(.98)}
+.lb-cap{bottom:calc(84px + var(--safe))}
+.lb-hint{bottom:calc(108px + var(--safe));white-space:nowrap}
+.lb-stage img{max-height:calc(100vh - 210px)}
 
 </style>
 </head>
@@ -1787,6 +1795,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <span class="lb-hint">Scroll or pinch to zoom &middot; drag to pan</span>
   <span class="lb-cap" id="lbCap"></span>
+  <button type="button" class="btn btn-p lb-ask" id="lbAsk" data-open-lead="zoom">Get Price List Now</button>
 </div>
 
 <!-- 360 VR tour modal -->
@@ -1995,10 +2004,17 @@ function lbZoom(d){
     if(lbZ.s===1){lbZ.x=0;lbZ.y=0;}}
   lbApply();
 }
-function openLb(src,alt,cap){lbImg.src=src;lbImg.alt=alt||'';$('lbCap').textContent=cap||'';
+/* item 5 (2026-10-05): every zoom carries the ask. On a floor plan it names the type; elsewhere it is
+   the general price-list ask. Source is tagged plan_zoom / zoom on lead_drawer_open and generate_lead. */
+function lbAskFor(cap){var a=$('lbAsk');if(!a)return;var m=/^Type ([A-E]) floor plan/.exec(cap||'');
+  if(m){a.textContent='Get the Type '+m[1]+' price list';a.setAttribute('data-unit','Type '+m[1]);a.setAttribute('data-open-lead','plan_zoom');}
+  else{a.textContent='Get Price List Now';a.removeAttribute('data-unit');a.setAttribute('data-open-lead','zoom');}}
+function openLb(src,alt,cap){lbImg.src=src;lbImg.alt=alt||'';$('lbCap').textContent=cap||'';lbAskFor(cap);
   lbZoom(0);lbEl.classList.add('on');lbEl.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
 function closeLb(){lbEl.classList.remove('on');lbEl.setAttribute('aria-hidden','true');document.body.style.overflow='';}
 $('lbX').addEventListener('click',closeLb);
+/* registered before the [data-open-lead] binder, so the zoom closes first and the drawer then opens */
+$('lbAsk').addEventListener('click',closeLb);
 $('lbIn').addEventListener('click',function(){lbZoom(1);});
 $('lbOut').addEventListener('click',function(){lbZoom(-1);});
 $('lbReset').addEventListener('click',function(){lbZoom(0);});
@@ -2136,7 +2152,7 @@ function openLead(e){
   var unit=srcEl?(srcEl.getAttribute('data-unit')||''):'';
   var uWrap=$('ldUnit'),uVal=$('ldUnitVal'),title=$('ldTitle');
   if(unit){uVal.textContent=unit;uWrap.classList.add('on');
-    title.textContent='Get the '+unit+' price & layout';}
+    title.textContent='Get the '+unit+' price list';}
   else{uWrap.classList.remove('on');title.textContent='Get your price list';}
   ld.classList.add('open');ldBack.classList.add('open');
   ld.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
