@@ -1166,6 +1166,29 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 .lb-cap{bottom:calc(84px + var(--safe))}
 .lb-hint{bottom:calc(108px + var(--safe));white-space:nowrap}
 .lb-stage img{max-height:calc(100vh - 210px)}
+/* INTERACTIVE MAP (2026-10-05, review D17/item 13): rings on the chosen category's markers, sized to
+   the map so clustered markers (the schools near Petaling) do not swallow each other; the list rows
+   are the main control and the rings answer them. */
+.loc-visual img{display:block}
+.loc-pins{position:absolute;inset:0;z-index:1}
+.loc-pin{position:absolute;width:clamp(16px,4.6%,40px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  border:2px solid rgba(254,252,247,.85);background:rgba(254,252,247,.08);box-shadow:0 0 0 3px rgba(10,16,48,.35);
+  touch-action:manipulation;transition:transform .15s ease-out,background .15s,border-color .15s}
+.loc-pin::after{content:'';position:absolute;inset:-9px;border-radius:50%}
+.loc-pin.on{border-width:3px;border-color:var(--blush);background:rgba(246,198,210,.24);z-index:2;
+  box-shadow:0 0 0 4px rgba(246,198,210,.3),0 0 0 7px rgba(10,16,48,.35)}
+.loc-tip{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);white-space:nowrap;
+  font:600 12px/1.3 var(--fb);color:#0B102A;background:var(--cream);padding:6px 9px;border-radius:2px;
+  box-shadow:0 4px 14px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .15s ease-out}
+.loc-pin.on .loc-tip{opacity:1}
+.loc-tip{width:max-content;max-width:280px;white-space:normal;text-align:left}
+.loc-pins{z-index:3}
+/* caption moves to the map's empty top-right corner so it never sits on a marker */
+.loc-visual .cap{top:12px;right:12px;left:auto;bottom:auto}
+.loc-item{width:100%;text-align:left;cursor:pointer;transition:background .15s}
+.loc-item.on{background:rgba(254,252,247,.09)}
+.loc-item.on span{color:var(--cream)}
+@media(hover:hover) and (pointer:fine){.loc-item:hover{background:rgba(254,252,247,.05)}.loc-pin:hover{border-color:var(--cream)}}
 
 </style>
 </head>
@@ -1594,9 +1617,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
     <div class="loc-grid rv">
-      <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map" role="button" tabindex="0" aria-label="Enlarge the location map">
+      <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map">
         <img loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
-        <span class="cap">Tap to enlarge &middot; numbers match the lists</span>
+        <div class="loc-pins" id="locPins"></div>
+        <span class="cap">Tap to enlarge &middot; pick a place below</span>
       </div>
       <div>
         <div class="loc-cats" role="tablist" aria-label="Connectivity and amenity categories">
@@ -2112,11 +2136,40 @@ var PLACES={
     [0,'National Stadium Bukit Jalil','6.3km']],
   health:[[0,'Assunta Hospital','2.6km'],[0,'KMI Taman Desa Medical Centre','3.3km']]
 };
+/* item 13 (2026-10-05): the map answers the list. Every place in PLACES has its marker position on
+   _loc-map.png (1200x1114), as % of the image, in the same order; each was checked by drawing a ring
+   on the artwork. The chosen category's markers get rings; picking a place in the list (or tapping
+   its ring) highlights both and labels the marker. */
+var PINS={access:[[53.08,39.59],[14.67,60.23],[16.75,37.88],[16.75,76.75],[82,38.6],[85.42,46.68],[76,33.66]],
+  transit:[[30.92,57.99],[35.83,55.3],[48.42,48.11]],
+  malls:[[49.75,54.49],[31.42,69.93],[50.58,43.54],[67.83,53.59],[24,34.65],[53.17,19.21]],
+  schools:[[30.83,62.75],[26.33,65.17],[45.33,53.41],[28.08,55.12],[31.33,49.91],[55.25,48.65]],
+  parks:[[33.83,63.73],[37.42,40.84],[50.58,34.38],[55,85.91],[68.17,86]],
+  health:[[21.83,45.06],[59.08,39.05]]};
+var locCat='access';
 function drawPlaces(cat){
-  $('locList').innerHTML=PLACES[cat].map(function(x){
+  locCat=cat;
+  $('locList').innerHTML=PLACES[cat].map(function(x,i){
     var n=x[0]?'<i class="ln ln-'+cat+'">'+x[0]+'</i>':'';
     var d=x[2]?'<b>'+x[2]+'</b>':'';
-    return '<div class="loc-item"><span>'+n+x[1]+'</span>'+d+'</div>';}).join('');
+    return '<button type="button" class="loc-item" data-i="'+i+'" aria-pressed="false"><span>'+n+x[1]+'</span>'+d+'</button>';}).join('');
+  var box=$('locPins');
+  if(box)box.innerHTML=(PINS[cat]||[]).map(function(p,i){var x=PLACES[cat][i];
+    return '<button type="button" class="loc-pin" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+x[1]+(x[2]?', '+x[2]:'')+'">'+
+      '<span class="loc-tip">'+x[1]+(x[2]?' &middot; '+x[2]:'')+'</span></button>';}).join('');
+}
+function locPick(i,fromList){
+  Array.prototype.forEach.call(document.querySelectorAll('#locPins .loc-pin'),function(p){p.classList.toggle('on',+p.getAttribute('data-i')===i);});
+  Array.prototype.forEach.call(document.querySelectorAll('#locList .loc-item'),function(r){var on=+r.getAttribute('data-i')===i;r.classList.toggle('on',on);r.setAttribute('aria-pressed',String(on));});
+  /* keep the label inside the map frame whatever its length or the marker's position */
+  var onPin=document.querySelector('#locPins .loc-pin.on'),tip=onPin&&onPin.querySelector('.loc-tip');
+  if(tip){tip.style.marginLeft='0px';requestAnimationFrame(function(){
+    var mr=$('locMap').getBoundingClientRect(),tr=tip.getBoundingClientRect(),dx=0;
+    if(tr.left<mr.left+8)dx=mr.left+8-tr.left;else if(tr.right>mr.right-8)dx=mr.right-8-tr.right;
+    tip.style.marginLeft=dx+'px';});}
+  if(fromList){var pin=document.querySelector('#locPins .loc-pin.on'),navEl=document.getElementById('siteNav');
+    if(pin){var r=pin.getBoundingClientRect(),top=(navEl?navEl.offsetHeight:0)+50;
+      if(r.top<top||r.bottom>window.innerHeight-90)$('locMap').scrollIntoView({behavior:'smooth',block:'center'});}}
 }
 drawPlaces('access');
 Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(b){
@@ -2124,6 +2177,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(b){
     Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(x){x.setAttribute('aria-selected','false');});
     b.setAttribute('aria-selected','true');drawPlaces(b.getAttribute('data-loc'));});
 });
+$('locList').addEventListener('click',function(e){var r=e.target.closest('.loc-item');if(r)locPick(+r.getAttribute('data-i'),true);});
+if($('locPins'))$('locPins').addEventListener('click',function(e){var p=e.target.closest('.loc-pin');if(!p)return;
+  e.stopPropagation();locPick(+p.getAttribute('data-i'),false);});
 
 /* ============ FAQ accordion ============ */
 Array.prototype.forEach.call(document.querySelectorAll('.faq-item'),function(item){
