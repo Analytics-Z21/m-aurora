@@ -1126,6 +1126,22 @@ input[type=range]::-webkit-slider-runnable-track,input[type=range]::-moz-range-t
 h1,h2,h3,.hero h1,.ld h2,.calc h3,.cout .v,.sticky-p b{font-weight:700;font-variation-settings:'opsz' 18}
 /* drawer: "You'll receive:" as a bold sentence-case line, as on the Original's form */
 .rlabel{font:700 15px/1.4 var(--fb);letter-spacing:0;text-transform:none;color:var(--deep);margin-bottom:8px}
+/* CHANGE 1 (2026-10-05, dawn CRO review D1): the price ask straight under the Type tabs on phones.
+   Clarity 21 Sep-2 Oct mobile: the tabs took ~40% of taps while the card ask sat ~740px lower, under
+   the floor plan, and drew 0.9% (about 46:1). The card now reads type and from-price, specs, ask,
+   then the plan. Desktop keeps plan-left, info-right. The from-price repeats what the calculator
+   already shows for each type. */
+.unit-head{display:flex;justify-content:space-between;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
+.unit-from{font:500 13px/1.3 var(--fb);color:var(--cream2);white-space:nowrap}
+.unit-from b{font:700 21px/1.1 var(--fd);color:var(--cream);font-variation-settings:'opsz' 18}
+.unit-from sup{font-size:.6em}
+@media(max-width:1023px){
+  .unit{display:flex;flex-direction:column}
+  .unit-info{order:-1;padding:20px 22px 22px}
+  .unit-plan{border-bottom:none;border-top:1px solid var(--mull)}
+  .unit-cfg{margin:2px 0 14px}
+  .unit-acts{margin-top:16px}
+}
 
 </style>
 </head>
@@ -1282,7 +1298,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <img id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
       </div>
       <div class="unit-info">
-        <h3>Type <span id="uName">A</span></h3>
+        <div class="unit-head">
+          <h3>Type <span id="uName">A</span></h3>
+          <p class="unit-from">From <b class="num" id="uFrom">RM 339,000</b><sup>*</sup></p>
+        </div>
         <p class="unit-cfg" id="uCfg">1+1 bedroom, for urban professionals</p>
         <div class="specs">
           <div><div class="n" id="uBed">1+1</div><div class="l">Bedroom</div></div>
@@ -1291,7 +1310,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
         </div>
         <div class="unit-acts">
-          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price &amp; layout</button>
+          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price list</button>
           <a class="u-link" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">Take the 360&deg; virtual tour</a>
         </div>
       </div>
@@ -1880,7 +1899,8 @@ function render(){
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
   var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
-  cta.textContent='Get the Type '+cur+' price & layout';
+  cta.textContent='Get the Type '+cur+' price list';
+  var uf=$('uFrom');if(uf&&u.price){uf.textContent='RM '+fmt(u.price);}
   var cc=$('cCta');if(cc){cc.setAttribute('data-unit','Type '+cur);cc.textContent='Send me the Type '+cur+' price list';}
   $('uVt').href=u.vt;
   Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
