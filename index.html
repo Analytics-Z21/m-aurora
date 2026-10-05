@@ -1185,6 +1185,18 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 .loc-pins{z-index:3}
 /* caption moves to the map's empty top-right corner so it never sits on a marker */
 .loc-visual .cap{top:12px;right:12px;left:auto;bottom:auto}
+/* BIGGER MAP ON PHONES (2026-10-05, Justin: "the map still looks too small on mobile"). It went
+   full-bleed and renders at 1.5x the screen width inside a sideways scroller: markers and labels
+   come out ~1.7x larger (585px map vs 342px). It opens centred on M Aurora and picking a place pans
+   to its marker. Pins live inside the canvas, so they move with the image. Desktop unchanged. */
+.loc-canvas{position:relative}
+@media(max-width:1023px){
+  .loc-visual{margin:0 calc(var(--pad) * -1);border-radius:0}
+  .loc-scroll{overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .loc-scroll::-webkit-scrollbar{display:none}
+  .loc-canvas{width:150%}
+  .loc-visual .cap{pointer-events:none}
+}
 .loc-item{width:100%;text-align:left;cursor:pointer;transition:background .15s}
 .loc-item.on{background:rgba(254,252,247,.09)}
 .loc-item.on span{color:var(--cream)}
@@ -1618,9 +1630,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="loc-grid rv">
       <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map">
-        <img loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
-        <div class="loc-pins" id="locPins"></div>
-        <span class="cap">Tap to enlarge &middot; pick a place below</span>
+        <div class="loc-scroll" id="locScroll">
+          <div class="loc-canvas">
+            <img loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
+            <div class="loc-pins" id="locPins"></div>
+          </div>
+        </div>
+        <span class="cap">Swipe to explore &middot; tap to enlarge</span>
       </div>
       <div>
         <div class="loc-cats" role="tablist" aria-label="Connectivity and amenity categories">
@@ -2158,15 +2174,26 @@ function drawPlaces(cat){
     return '<button type="button" class="loc-pin" data-i="'+i+'" style="left:'+p[0]+'%;top:'+p[1]+'%" aria-label="'+x[1]+(x[2]?', '+x[2]:'')+'">'+
       '<span class="loc-tip">'+x[1]+(x[2]?' &middot; '+x[2]:'')+'</span></button>';}).join('');
 }
+/* keep the open label inside the visible map frame, whatever its length, the marker's position or
+   how far the phone map has been swiped */
+function locClampTip(){
+  var tip=document.querySelector('#locPins .loc-pin.on .loc-tip');if(!tip)return;
+  tip.style.marginLeft='0px';
+  var mr=$('locMap').getBoundingClientRect(),tr=tip.getBoundingClientRect(),dx=0;
+  if(tr.left<mr.left+8)dx=mr.left+8-tr.left;else if(tr.right>mr.right-8)dx=mr.right-8-tr.right;
+  tip.style.marginLeft=dx+'px';
+}
+/* phones: open the map centred on M Aurora (its badge sits at 33.6% across the artwork) */
+function locCentre(){var sc=$('locScroll');if(!sc||sc.scrollWidth<=sc.clientWidth+2)return;
+  sc.scrollLeft=Math.max(0,sc.scrollWidth*0.336-sc.clientWidth/2);}
 function locPick(i,fromList){
   Array.prototype.forEach.call(document.querySelectorAll('#locPins .loc-pin'),function(p){p.classList.toggle('on',+p.getAttribute('data-i')===i);});
   Array.prototype.forEach.call(document.querySelectorAll('#locList .loc-item'),function(r){var on=+r.getAttribute('data-i')===i;r.classList.toggle('on',on);r.setAttribute('aria-pressed',String(on));});
-  /* keep the label inside the map frame whatever its length or the marker's position */
-  var onPin=document.querySelector('#locPins .loc-pin.on'),tip=onPin&&onPin.querySelector('.loc-tip');
-  if(tip){tip.style.marginLeft='0px';requestAnimationFrame(function(){
-    var mr=$('locMap').getBoundingClientRect(),tr=tip.getBoundingClientRect(),dx=0;
-    if(tr.left<mr.left+8)dx=mr.left+8-tr.left;else if(tr.right>mr.right-8)dx=mr.right-8-tr.right;
-    tip.style.marginLeft=dx+'px';});}
+  /* on phones the map scrolls sideways: bring the picked marker to the middle of the frame */
+  var onPin=document.querySelector('#locPins .loc-pin.on'),sc=$('locScroll');
+  if(onPin&&sc&&sc.scrollWidth>sc.clientWidth+2){var pr=onPin.getBoundingClientRect(),sr=sc.getBoundingClientRect();
+    sc.scrollTo({left:Math.max(0,sc.scrollLeft+(pr.left+pr.width/2)-(sr.left+sr.width/2)),behavior:'smooth'});}
+  requestAnimationFrame(locClampTip);setTimeout(locClampTip,450);
   if(fromList){var pin=document.querySelector('#locPins .loc-pin.on'),navEl=document.getElementById('siteNav');
     if(pin){var r=pin.getBoundingClientRect(),top=(navEl?navEl.offsetHeight:0)+50;
       if(r.top<top||r.bottom>window.innerHeight-90)$('locMap').scrollIntoView({behavior:'smooth',block:'center'});}}
@@ -2178,6 +2205,10 @@ Array.prototype.forEach.call(document.querySelectorAll('.loc-cat'),function(b){
     b.setAttribute('aria-selected','true');drawPlaces(b.getAttribute('data-loc'));});
 });
 $('locList').addEventListener('click',function(e){var r=e.target.closest('.loc-item');if(r)locPick(+r.getAttribute('data-i'),true);});
+if($('locScroll')){var lsc=$('locScroll'),lraf=0;locCentre();
+  var limg=lsc.querySelector('img');if(limg&&!limg.complete)limg.addEventListener('load',locCentre);
+  window.addEventListener('resize',locCentre);
+  lsc.addEventListener('scroll',function(){if(lraf)return;lraf=requestAnimationFrame(function(){lraf=0;locClampTip();});},{passive:true});}
 if($('locPins'))$('locPins').addEventListener('click',function(e){var p=e.target.closest('.loc-pin');if(!p)return;
   e.stopPropagation();locPick(+p.getAttribute('data-i'),false);});
 
