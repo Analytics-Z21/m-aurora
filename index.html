@@ -1100,6 +1100,25 @@ input[type=range]::-webkit-slider-runnable-track,input[type=range]::-moz-range-t
 /* cream form surfaces: blue ticks and focus ring, so the only warm colour there is the submit */
 .receive svg{color:var(--dawn-sky)}
 .f-input:focus{outline-color:var(--dawn-sky)}
+/* HERO, ORIGINAL-STYLE (2026-10-05): the Original says it in three lines (freehold from the price, one
+   fact line, bedroom pills) and Clarity 21 Sep-2 Oct shows its bed labels drew 6.7% of mobile taps while
+   being plain text. Here each pill opens its layout tab. Replaces the lifestyle headline, the price and
+   tenure cards, the long sub and the View Layouts link: moved, not added. */
+.hero h1 sup{font-size:.42em;vertical-align:super;line-height:0}
+.h-fact{font:500 15px/1.5 var(--fb);color:var(--cream2);margin:-4px 0 16px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+@media(min-width:1024px){.h-fact{font-size:17px}}
+.h-beds{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 24px}
+.h-bed{min-height:44px;padding:0 13px;border:1.5px solid rgba(254,252,247,.42);border-radius:2px;
+  font:600 13.5px/1.2 var(--fb);color:var(--cream);background:rgba(10,16,48,.22);touch-action:manipulation;
+  transition:background .15s,border-color .15s,transform .1s}
+@media(hover:hover) and (pointer:fine){.h-bed:hover{border-color:var(--cream);background:rgba(254,252,247,.12)}}
+.h-bed:active{transform:scale(.97)}
+/* calculator: one card that reads top to bottom, the result then its ask, all left-aligned (was a
+   centred label, a right-aligned note and an outline button outside the card) */
+.cout{text-align:left;padding:20px 22px}
+.cout .v{margin-top:2px}
+.cout .d{margin:4px 0 0;text-align:left;max-width:none}
+.cout .calc-cta{width:100%;margin-top:16px}
 
 </style>
 </head>
@@ -1195,24 +1214,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-body">
       <div class="hero-inner">
         <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
-        <span class="h-eyebrow">Open for Sale</span>
-        <h1>The New Heights of Living at <em>Old Klang Road</em></h1>
-        <p class="h-sub">Two modern 46-storey freehold towers across 5.2 acres of prime land: 1,544 residences from 556 to 1,019 sq ft, with Mid Valley, KLCC and Bangsar within easy access.</p>
-        <div class="h-cards">
-          <div class="h-card">
-            <div class="h-card-lab">Starting from</div>
-            <div class="h-card-val num">RM339K<sup>*</sup></div>
-            <div class="h-card-sub">Type A &middot; 556 sq ft</div>
-          </div>
-          <div class="h-card">
-            <div class="h-card-lab">Tenure</div>
-            <div class="h-card-val">Freehold</div>
-            <div class="h-card-sub num">556&ndash;1,019 sq ft</div>
-          </div>
+        <span class="h-eyebrow">Open for Sale &middot; Old Klang Road</span>
+        <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
+        <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
+        <div class="h-beds" role="group" aria-label="See layouts by bedrooms">
+          <button type="button" class="h-bed" data-bed-type="A">1+1 bed</button>
+          <button type="button" class="h-bed" data-bed-type="B">2 bed</button>
+          <button type="button" class="h-bed" data-bed-type="C">3 bed</button>
+          <button type="button" class="h-bed" data-bed-type="E">4 bed</button>
         </div>
         <div class="hero-ctas">
           <button type="button" class="btn btn-p" data-open-lead="hero">Get Price List Now</button>
-          <a class="h-link" href="#layouts">View Layouts<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         </div>
       </div>
     </div>
@@ -1301,8 +1313,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="l">Estimated monthly from</div>
         <div class="v num" id="cMy">RM 1,279</div>
         <div class="d">Based on 3.6% p.a. interest rate</div>
+        <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calculator" data-unit="Type A">Send me the Type A price list</button>
       </div>
-      <button type="button" class="btn btn-o calc-cta" id="cCta" data-open-lead="calculator" data-unit="Type A">Send me the Type A price list</button>
     </div>
   </div>
 </section>
@@ -2215,6 +2227,17 @@ if(railLinks.length&&'IntersectionObserver' in window){
   },{rootMargin:'-42% 0px -52% 0px'});
   railLinks.forEach(function(a){var el=document.getElementById(a.getAttribute('href').slice(1));if(el)spy.observe(el);});
 }
+
+/* ============ Hero bed pills: open the matching layout tab ============ */
+Array.prototype.forEach.call(document.querySelectorAll('.h-bed'),function(b){
+  b.addEventListener('click',function(){
+    var t=document.querySelector('.tab[data-type="'+b.getAttribute('data-bed-type')+'"]');
+    var tabs=document.getElementById('tabs'),navEl=document.getElementById('siteNav');
+    if(t)t.click();
+    if(tabs){var y=tabs.getBoundingClientRect().top+window.scrollY-(navEl?navEl.offsetHeight:0)-64;
+      window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
+  });
+});
 
 /* ============ Sticky bar, WA float, to-top ============ */
 var sticky=$('sticky'),toTop=$('toTop');
