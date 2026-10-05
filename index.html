@@ -1154,6 +1154,10 @@ h1,h2,h3,.hero h1,.ld h2,.calc h3,.cout .v,.sticky-p b{font-weight:700;font-vari
 html.hero-more .hs-2{background-image:url('_gal-entrance.webp')}
 html.hero-more .hs-3{background-image:url('_gal-lap-pool.webp')}
 html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
+/* TRUST LINE (2026-10-05, review D9/item 11): one line at the hero ask and in the drawer, using the
+   developer band's own claim ("over 79 completed projects"). Wording needs Mah Sing's OK. */
+.h-trust{font:500 12.5px/1.5 var(--fb);color:var(--cream2);margin-top:12px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.ld-trust{font:600 12.5px/1.5 var(--fb);color:var(--deep);margin:-2px 0 14px}
 
 </style>
 </head>
@@ -1261,6 +1265,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-ctas">
           <button type="button" class="btn btn-p" data-open-lead="hero">Get Price List Now</button>
         </div>
+        <p class="h-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
       </div>
     </div>
     <div class="h-slides">
@@ -1733,6 +1738,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ld-unit" id="ldUnit"><span class="k">Enquiring about</span><span class="v" id="ldUnitVal"></span></div>
     <h2 id="ldTitle">Get your price list</h2>
     <p class="ld-sub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
+    <p class="ld-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
     <div class="rlabel">You'll receive:</div>
     <div class="receive">
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Floor Plans</span>
@@ -2291,13 +2297,19 @@ var formInView=false;
 var heroAsk=document.querySelector('[data-open-lead="hero"]'),navAsk=document.querySelector('.nav-reg');
 var hasIO='IntersectionObserver' in window;
 var heroAskInView=(function(){if(!heroAsk)return false;var r=heroAsk.getBoundingClientRect();return r.top>=0&&r.bottom<=window.innerHeight;})();
+/* item 12 (2026-10-05): the bar also steps aside while the unit-card or calculator ask is on screen,
+   so a view never carries two identical asks */
+var secAskInView={};
 function stickyState(){var s=window.scrollY>420;
   var askOff=hasIO?!heroAskInView:s;
-  sticky.classList.toggle('on',askOff&&!formInView);
+  var secOn=!!(secAskInView.uCta||secAskInView.cCta);
+  sticky.classList.toggle('on',askOff&&!formInView&&!secOn);
   if(navAsk)navAsk.classList.toggle('quiet',!askOff);
   toTop.classList.toggle('on',s);}
 window.addEventListener('scroll',stickyState,{passive:true});
 if(hasIO&&heroAsk){new IntersectionObserver(function(es){heroAskInView=es[0].isIntersecting;stickyState();},{threshold:.6}).observe(heroAsk);}
+if(hasIO){var sio=new IntersectionObserver(function(es){es.forEach(function(e){secAskInView[e.target.id]=e.isIntersecting;});stickyState();},{threshold:.6});
+  ['uCta','cCta'].forEach(function(id){var el=document.getElementById(id);if(el)sio.observe(el);});}
 if(hasIO){
   var seen={};
   var fio=new IntersectionObserver(function(es){
