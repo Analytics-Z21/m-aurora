@@ -1719,7 +1719,7 @@ var SECTION_BY_ID={siteNav:'nav',rail:'nav',mm:'mobile_menu',home:'hero',calc:'c
   gallery:'gallery',location:'location',faq:'faq','register-full':'form',contact:'footer',
   ld:'form',sticky:'sticky',vrLb:'virtual_tour'};
 /* rail = the mobile section rail under the nav (below 1024px); header = desktop nav */
-var NAV_SURFACE={siteNav:'header',rail:'rail',mm:'mobile_menu',contact:'footer'};
+var NAV_SURFACE={siteNav:'header',rail:'header',mm:'mobile_menu',contact:'footer'};  // rail reports as header, same as the other four ver2 sites
 function clip(s,n){s=String(s==null?'':s).replace(/\s+/g,' ').trim();return s.length>n?s.slice(0,n).trim():s;}
 function slug(s){return clip(s,60).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');}
 function landmark(el,map,useAttr){
