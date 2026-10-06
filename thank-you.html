@@ -190,5 +190,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   setTimeout(poll,400);                 /* also try early, in case load is slow */
 })();
 </script>
+<!-- Click tracking (GA4 event spec, 2026-10-06), same names and parameters as
+     index.html: contact_click for phone / WhatsApp / email / map / Waze links and
+     virtual_tour_open for the 360 link (opens the original site in a new tab).
+     dataLayer push + direct gtag. Capture phase, trusted clicks only, never
+     preventDefault or stopPropagation, errors swallowed. -->
+<script>
+(function(){
+  function z21Track(name,params){
+    try{
+      var o={event:name};
+      for(var k in params){ if(params.hasOwnProperty(k)) o[k]=params[k]; }
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push(o);
+      if(typeof window.gtag==='function') window.gtag('event',name,params);
+    }catch(e){}
+  }
+  function contactType(h){
+    h=String(h||'');
+    if(/^tel:/i.test(h)) return 'phone';
+    if(/^mailto:/i.test(h)) return 'email';
+    if(/wa\.me\/|api\.whatsapp\.com|web\.whatsapp\.com/i.test(h)) return 'whatsapp';
+    if(/waze/i.test(h)) return 'waze';
+    if(/google\.[a-z.]+\/maps|maps\.google\.|goo\.gl\/maps|maps\.app\.goo\.gl/i.test(h)) return 'map';
+    return '';
+  }
+  document.addEventListener('click',function(e){
+    try{
+      if(!e.isTrusted) return;
+      var a=(e.target&&e.target.closest)?e.target.closest('a[href]'):null;
+      if(!a) return;
+      var h=a.getAttribute('href')||'', ct=contactType(h);
+      if(ct){ z21Track('contact_click',{contact_type:ct,section:'thank_you'}); return; }
+      if(/360-vr/i.test(h)){
+        var m=/#type([A-E])/i.exec(h), p={tour_source:'thank_you',tour_mode:'new_tab'};
+        if(m){ p.unit_interest='Type '+m[1].toUpperCase(); p.unit_type=m[1].toUpperCase(); }
+        z21Track('virtual_tour_open',p);
+      }
+    }catch(err){}
+  },true);
+})();
+</script>
 </body>
 </html>

@@ -1209,6 +1209,7 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 .loc-pin.on path{fill:var(--blush)}
 .loc-pin .loc-tip{bottom:calc(100% + 6px)}
 .loc-pin.on .loc-tip{bottom:calc(130% + 6px)}
+.loc-pin.on .loc-tip.below{bottom:auto;top:calc(100% + 8px)}
 @media(hover:hover) and (pointer:fine){.loc-pin:hover svg{transform:scale(1.12)}.loc-pin.on:hover svg{transform:scale(1.3)}}
 .loc-enlarge,.loc-reset{position:absolute;top:12px;z-index:4;display:inline-flex;align-items:center;gap:6px;
   min-height:36px;padding:0 12px;border-radius:6px;background:rgba(6,9,24,.72);color:var(--cream);
@@ -1270,10 +1271,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#location" data-rail>Location</a>
     <a href="#developer" data-rail>Developer</a>
     <a href="#faq" data-rail>FAQ</a>
-    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR</a>
+    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="nav">360&deg; VR</a>
   </div>
   <div class="nav-right">
-    <a href="#" class="btn btn-p nav-reg quiet" data-open-lead="nav">Get Price List</a>
+    <a href="#" class="btn btn-p nav-reg quiet" data-open-lead="nav" data-cta-id="nav_register">Get Price List</a>
     <button class="hamburger" id="navHam" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1310,11 +1311,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="#developer">Developer</a>
     <a href="#faq">FAQ</a>
     <a href="#register">Price List</a>
-    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR Tour</a>
+    <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="nav">360&deg; VR Tour</a>
     <a href="https://m-aurora.com.my/blog/" target="_blank" rel="noopener">Blog</a>
   </nav>
   <div class="mm-foot">
-    <button type="button" class="btn btn-p" data-open-lead="mobile-menu">Get Price List Now</button>
+    <button type="button" class="btn btn-p" data-open-lead="mobile-menu" data-cta-id="mobile_menu_register">Get Price List Now</button>
   </div>
 </aside>
 
@@ -1342,7 +1343,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <button type="button" class="h-bed" data-bed-type="E">4 bed</button>
         </div>
         <div class="hero-ctas">
-          <button type="button" class="btn btn-p" data-open-lead="hero">Get Price List Now</button>
+          <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_register">Get Price List Now</button>
         </div>
         <p class="h-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
       </div>
@@ -1406,8 +1407,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
         </div>
         <div class="unit-acts">
-          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A">Get the Type A price list</button>
-          <a class="u-link" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener">Take the 360&deg; virtual tour</a>
+          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A" data-cta-id="units_get_price">Get the Type A price list</button>
+          <a class="u-link" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card">Take the 360&deg; virtual tour</a>
         </div>
       </div>
     </div>
@@ -1435,7 +1436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="l">Estimated monthly from</div>
         <div class="v num" id="cMy">RM 1,279</div>
         <div class="d">Based on 3.6% p.a. interest rate</div>
-        <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calculator" data-unit="Type A">Send me the Type A price list</button>
+        <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calculator" data-unit="Type A" data-cta-id="calc_get_price">Send me the Type A price list</button>
       </div>
     </div>
   </div>
@@ -1523,21 +1524,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <h3 class="sr-only">Key features of M Aurora</h3>
     <div class="usp-grid rv">
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-1.png" alt=""><h4>Freehold</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
-      <div class="usp"><img loading="lazy" decoding="async" src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-1.png" alt=""><h4>Freehold</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
+      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
     </div>
     <div class="award rv">
-      <img loading="lazy" decoding="async" src="_greenre.png" alt="GreenRE">
+      <img width="300" height="401" loading="lazy" decoding="async" src="_greenre.png" alt="GreenRE">
       <p>M Aurora has been awarded<b>Silver Provisional GreenRE Certification</b></p>
     </div>
   </div>
@@ -1565,13 +1566,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="fac-grid rv">
       <div>
         <div class="fac-plan" data-full="_fac-plan-podium.jpg" data-cap="Ground &amp; L8 Podium Floor Facilities Plan" id="facPlanMain">
-          <img loading="lazy" decoding="async" src="_fac-plan-podium.jpg" alt="Ground and Level 8 podium floor facilities plan">
+          <img width="686" height="680" loading="lazy" decoding="async" src="_fac-plan-podium.jpg" alt="Ground and Level 8 podium floor facilities plan">
           <span class="cap">Ground &amp; L8 Podium Floor Facilities Plan &middot; tap to enlarge</span>
         </div>
       </div>
       <div>
         <div class="fac-plan" data-full="_fac-plan-sky.jpg" data-cap="Sky Lounge Facilities Plan" id="facPlanSky">
-          <img loading="lazy" decoding="async" src="_fac-plan-sky.jpg" alt="Sky Lounge facilities plan">
+          <img width="1000" height="403" loading="lazy" decoding="async" src="_fac-plan-sky.jpg" alt="Sky Lounge facilities plan">
           <span class="cap">Sky Lounge Facilities Plan &middot; tap to enlarge</span>
         </div>
       </div>
@@ -1627,14 +1628,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="gal-wrap">
     <div class="gal rv" id="gal">
-      <figure><img loading="lazy" decoding="async" src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-sky-garden.jpg" alt="Sky garden"><figcaption>Sky Garden</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-kids-pool.jpg" alt="Kids pool"><figcaption>Kids Pool</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-playground.jpg" alt="Playground"><figcaption>Playground</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
-      <figure><img loading="lazy" decoding="async" src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-sky-garden.jpg" alt="Sky garden"><figcaption>Sky Garden</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-kids-pool.jpg" alt="Kids pool"><figcaption>Kids Pool</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-playground.jpg" alt="Playground"><figcaption>Playground</figcaption></figure>
+      <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-retail.jpg" alt="Retail shops"><figcaption>Retail Shops</figcaption></figure>
+      <figure><img width="1264" height="750" loading="lazy" decoding="async" src="_gal-entrance.jpg" alt="Grand entrance"><figcaption>Grand Entrance</figcaption></figure>
     </div>
       <button class="gal-nav gal-prev" type="button" id="galPrev" aria-controls="gal" aria-label="Previous images">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
@@ -1668,7 +1669,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="loc-visual" id="locMap" data-full="_loc-map.png" data-cap="M Aurora location map">
         <div class="loc-scroll" id="locScroll">
           <div class="loc-canvas">
-            <img loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
+            <img width="1200" height="1114" loading="lazy" decoding="async" src="_loc-map.png" alt="M Aurora location map with numbered highway and transit markers">
             <div class="loc-pins" id="locPins"></div>
           </div>
         </div>
@@ -1689,7 +1690,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="loc-acts">
           <a class="btn btn-o" href="https://bit.ly/MAurora-waze" target="_blank" rel="noopener">Waze</a>
           <a class="btn btn-o" href="https://www.google.com/maps/search/?api=1&amp;query=M+Aurora+Old+Klang+Road+Kuala+Lumpur" target="_blank" rel="noopener">Google Maps</a>
-          <a class="btn btn-o" href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener">360&deg; VR Tour</a>
+          <a class="btn btn-o" href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="location">360&deg; VR Tour</a>
         </div>
       </div>
     </div>
@@ -1726,7 +1727,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div class="faq-item">
         <button class="faq-q">How much does a unit cost?<i aria-hidden="true"></i></button>
-        <div class="faq-a"><div><p>Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B; the full permit detail is reproduced in the footer. Per-type price lists are available from the sales team, <a href="#register-full">register below</a> to receive one.</p></div></div>
+        <div class="faq-a"><div><p>Prices start from RM339,000*. Approved permit pricing ranges from RM492,960 to RM856,560 across Towers A and B; the full permit detail is reproduced in the footer. Per-type price lists are available from the sales team, <a href="#register-full" data-cta-id="faq_register">register below</a> to receive one.</p></div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">When will M Aurora be completed?<i aria-hidden="true"></i></button>
@@ -1758,7 +1759,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="copy">M Aurora is now open for sale, with prices starting from RM339,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
         <div class="more-wrap" data-collapsed="true">
           <div class="more-body">
-            <p class="copy">To help you find the right fit, explore the available <a href="#layouts" style="color:#0E7A8A">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" style="color:#0E7A8A">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
+            <p class="copy">To help you find the right fit, explore the available <a href="#layouts" style="color:#0E7A8A">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="inline" style="color:#0E7A8A">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
             <p class="copy">With a refined aesthetic, flexible layouts, GreenRE Silver-certified sustainability, and a coveted freehold title in one of KL's most established corridors, M Aurora is poised to become a distinguished address for those who value both comfort and long-term value. Now is the time to make it yours.</p>
           </div>
           <button type="button" class="more-btn" aria-expanded="false">Show more
@@ -1794,7 +1795,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER: MGM pattern: logo, contact, socials, then the verbatim legal block. -->
 <footer class="footer" id="contact">
   <div class="ft-top">
-    <div class="ft-logo"><img loading="lazy" decoding="async" src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life."></div>
+    <div class="ft-logo"><img width="300" height="91" loading="lazy" decoding="async" src="_mahsing-full-white.png" alt="Mah Sing. Reinvent Spaces. Enhance Life."></div>
     <div class="ft-contact">
       <div class="ft-lab">For further enquiries, please contact:</div>
       <a href="tel:0390783999" class="ft-phone num">03 9078 3999</a>
@@ -1856,7 +1857,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- STICKY BAR (mobile) + FLOATS -->
 <div class="sticky" id="sticky">
   <div class="sticky-p" aria-hidden="true"><span>From</span><b class="num">RM339K<sup>*</sup></b></div>
-  <button type="button" class="btn btn-p" data-open-lead="sticky">Get Price List Now</button>
+  <button type="button" class="btn btn-p" data-open-lead="sticky" data-cta-id="sticky_register">Get Price List Now</button>
 </div>
 <button class="to-top" id="toTop" aria-label="Scroll to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
 
@@ -1873,7 +1874,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <span class="lb-hint">Scroll or pinch to zoom &middot; drag to pan</span>
   <span class="lb-cap" id="lbCap"></span>
-  <button type="button" class="btn btn-p lb-ask" id="lbAsk" data-open-lead="zoom">Get Price List Now</button>
+  <button type="button" class="btn btn-p lb-ask" id="lbAsk" data-open-lead="zoom" data-cta-id="zoom_get_price">Get Price List Now</button>
 </div>
 
 <!-- 360 VR tour modal -->
@@ -1892,7 +1893,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
   <div class="vr-foot">
     <span class="vr-note" id="vrNote"></span>
-    <button class="vr-cta" id="vrCta" type="button">Get this layout &amp; price</button>
+    <button class="vr-cta" id="vrCta" type="button" data-cta-id="tour_get_price">Get this layout &amp; price</button>
   </div>
 </div>
 
@@ -1953,6 +1954,104 @@ function captureDiagnostic(form,formId){
     return sid;
   }catch(err){return null;}
 }
+
+/* ============ Click tracking (GA4 event spec, 2026-10-06) ============
+   cta_click, nav_click, contact_click, gallery_open, faq_open and
+   calculator_interact, all sent through track() (dataLayer + direct gtag).
+   Capture-phase listeners on document that never call preventDefault or
+   stopPropagation, ignore synthetic (untrusted) events and swallow their own
+   errors, so tracking can never break the drawer, the forms, Varify or the
+   nav. One click = one event from here; lead_drawer_open, unit_select and
+   virtual_tour_open are fired by their own controllers further down.
+   section = nearest data-section attribute, else the landmark id mapped here.
+   CTAs carry data-cta-id in the markup; form submit buttons deliberately don't. */
+var SECTION_BY_ID={siteNav:'nav',rail:'nav',mm:'mobile_menu',home:'hero',calc:'calculator',lb:'lightbox',
+  layouts:'units',register:'form',dawn:'overview',usp:'overview',facilities:'facilities',
+  gallery:'gallery',location:'location',faq:'faq','register-full':'form',contact:'footer',
+  ld:'form',sticky:'sticky',vrLb:'virtual_tour'};
+/* rail = the mobile section rail under the nav (below 1024px); header = desktop nav */
+var NAV_SURFACE={siteNav:'header',rail:'header',mm:'mobile_menu',contact:'footer'};  // rail reports as header, same as the other four ver2 sites
+function clip(s,n){s=String(s==null?'':s).replace(/\s+/g,' ').trim();return s.length>n?s.slice(0,n).trim():s;}
+function slug(s){return clip(s,60).toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');}
+function landmark(el,map,useAttr){
+  for(var n=el;n&&n.nodeType===1;n=n.parentNode){
+    if(useAttr){var ds=n.getAttribute('data-section');if(ds)return ds;}
+    if(n.id&&map.hasOwnProperty(n.id))return map[n.id];
+  }
+  return '';
+}
+function sectionOf(el){return landmark(el,SECTION_BY_ID,true)||'page';}
+function contactType(h){
+  h=String(h||'');
+  if(/^tel:/i.test(h))return 'phone';
+  if(/^mailto:/i.test(h))return 'email';
+  if(/wa\.me\/|api\.whatsapp\.com|web\.whatsapp\.com/i.test(h))return 'whatsapp';
+  if(/waze/i.test(h))return 'waze';
+  if(/google\.[a-z.]+\/maps|maps\.google\.|goo\.gl\/maps|maps\.app\.goo\.gl/i.test(h))return 'map';
+  return '';
+}
+var faqSent=[],calcSent={};
+function calcOnce(input){if(calcSent[input])return;calcSent[input]=true;
+  track({event:'calculator_interact',calc_input:input});}
+document.addEventListener('click',function(e){try{
+  if(!e.isTrusted)return;
+  var t=e.target;if(!t||!t.closest)return;
+  var a=t.closest('a[href]'),href=a?(a.getAttribute('href')||''):'',el,ct;
+  /* phone, WhatsApp, email, Google Maps, Waze */
+  ct=a?contactType(href):'';
+  if(ct){track({event:'contact_click',contact_type:ct,section:sectionOf(a)});return;}
+  /* 360 links: the tour controller fires virtual_tour_open */
+  if(a&&/360-vr/i.test(href))return;
+  /* lead / conversion CTAs */
+  el=t.closest('[data-cta-id],[data-open-lead]');
+  if(el){var sec=sectionOf(el),txt=clip(el.textContent,60);
+    track({event:'cta_click',cta_id:el.getAttribute('data-cta-id')||(sec+'_'+slug(txt)),
+      section:sec,cta_text:txt});
+    return;}
+  /* in-page nav: header, mobile rail, mobile menu, footer; the logo goes to top */
+  if(a&&href.charAt(0)==='#'){var surf=landmark(a,NAV_SURFACE,false);
+    if(surf){var logo=a.classList.contains('nav-logo');
+      track({event:'nav_click',nav_item:logo?'Logo':clip(a.textContent,40),
+        nav_target:(logo||href==='#'||href==='#home'||href==='#top')?'top':href,nav_surface:surf});}
+    return;}
+  /* image, floor plan, facilities plan and map enlargements (all open the lightbox) */
+  el=t.closest('#gal figure');
+  if(el){var figs=Array.prototype.slice.call(document.querySelectorAll('#gal figure')),
+      img=el.querySelector('img'),cap=el.querySelector('figcaption');
+    track({event:'gallery_open',gallery:'gallery',item_index:figs.indexOf(el)+1,
+      item_label:clip(cap?cap.textContent:(img?img.alt:''),60)});
+    return;}
+  el=t.closest('#planWrap');
+  if(el){if(window._swiped)return;   /* a swipe changes the type, it does not open the plan */
+    track({event:'gallery_open',gallery:'floorplan',item_index:ORDER.indexOf(cur)+1,
+      item_label:'Type '+cur+' floor plan'});
+    return;}
+  el=t.closest('#facPlanMain,#facPlanSky');
+  if(el){track({event:'gallery_open',gallery:'facilities',item_index:el.id==='facPlanMain'?1:2,
+      item_label:clip(el.getAttribute('data-cap'),60)});
+    return;}
+  /* the map is interactive in place since 2026-10-05: only the Enlarge button opens it full screen
+     (pins, list rows and gestures report map_select / map_zoom from the map controller) */
+  el=t.closest('#locEnlarge');
+  if(el){track({event:'gallery_open',gallery:'map',item_index:1,
+      item_label:clip(document.getElementById('locMap').getAttribute('data-cap'),60)});
+    return;}
+  /* FAQ: first open of each question per page view (capture runs before the toggle) */
+  el=t.closest('.faq-q');
+  if(el){var item=el.closest('.faq-item');
+    if(item&&!item.classList.contains('on')&&faqSent.indexOf(item)===-1){
+      faqSent.push(item);track({event:'faq_open',faq_question:clip(el.textContent,80)});}
+    return;}
+  /* calculator: the unit / price picker */
+  if(t.closest('#cpPick'))calcOnce('unit');
+}catch(err){}},true);
+/* calculator sliders: first trusted change of each per page view.
+   cLoan is the loan-margin slider (50 to 90%), i.e. the downpayment control. */
+document.addEventListener('input',function(e){try{
+  if(!e.isTrusted||!e.target)return;
+  if(e.target.id==='cLoan')calcOnce('downpayment');
+  else if(e.target.id==='cTen')calcOnce('tenure');
+}catch(err){}},true);
 
 /* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
 (function(){
@@ -2085,8 +2184,8 @@ function lbZoom(d){
 /* item 5 (2026-10-05): every zoom carries the ask. On a floor plan it names the type; elsewhere it is
    the general price-list ask. Source is tagged plan_zoom / zoom on lead_drawer_open and generate_lead. */
 function lbAskFor(cap){var a=$('lbAsk');if(!a)return;var m=/^Type ([A-E]) floor plan/.exec(cap||'');
-  if(m){a.textContent='Get the Type '+m[1]+' price list';a.setAttribute('data-unit','Type '+m[1]);a.setAttribute('data-open-lead','plan_zoom');}
-  else{a.textContent='Get Price List Now';a.removeAttribute('data-unit');a.setAttribute('data-open-lead','zoom');}}
+  if(m){a.textContent='Get the Type '+m[1]+' price list';a.setAttribute('data-unit','Type '+m[1]);a.setAttribute('data-open-lead','plan_zoom');a.setAttribute('data-cta-id','floorplan_zoom_get_price');}
+  else{a.textContent='Get Price List Now';a.removeAttribute('data-unit');a.setAttribute('data-open-lead','zoom');a.setAttribute('data-cta-id','zoom_get_price');}}
 function openLb(src,alt,cap){lbImg.src=src;lbImg.alt=alt||'';$('lbCap').textContent=cap||'';lbAskFor(cap);
   lbZoom(0);lbEl.classList.add('on');lbEl.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
 function closeLb(){lbEl.classList.remove('on');lbEl.setAttribute('aria-hidden','true');document.body.style.overflow='';}
@@ -2222,8 +2321,10 @@ function drawPlaces(cat){
    how far the phone map has been swiped */
 function locClampTip(){
   var tip=document.querySelector('#locPins .loc-pin.on .loc-tip');if(!tip)return;
-  tip.style.marginLeft='0px';
+  tip.style.marginLeft='0px';tip.classList.remove('below');
   var mr=$('locMap').getBoundingClientRect(),tr=tip.getBoundingClientRect(),dx=0;
+  /* a pin near the top edge has no room for its label above: put the label under the pin's tip */
+  if(tr.top<mr.top+8){tip.classList.add('below');tr=tip.getBoundingClientRect();}
   if(tr.left<mr.left+8)dx=mr.left+8-tr.left;else if(tr.right>mr.right-8)dx=mr.right-8-tr.right;
   tip.style.marginLeft=dx+'px';
 }
@@ -2257,7 +2358,13 @@ function locApply(anim){
   var rb=$('locReset');if(rb)rb.hidden=!LZ.user;
 }
 function locResetView(){LZ.s=LZ.base.s;LZ.tx=LZ.base.tx;LZ.ty=LZ.base.ty;LZ.user=false;locApply(true);setTimeout(locClampTip,480);}
+/* map_select per pick, map_zoom once per page view; params are already registered dimensions */
+function locZoomTrack(src){if(window._mapZoomSent||typeof track!=='function')return;window._mapZoomSent=1;
+  track({event:'map_zoom',gallery:'map',select_source:src});}
 function locPick(i,fromList){
+  var pl=(PLACES[locCat]||[])[i];
+  if(pl&&typeof track==='function')track({event:'map_select',gallery:'map',item_index:i+1,
+    item_label:String(pl[1]).slice(0,60),select_source:fromList?'list':'pin'});
   Array.prototype.forEach.call(document.querySelectorAll('#locPins .loc-pin'),function(p){p.classList.toggle('on',+p.getAttribute('data-i')===i);});
   Array.prototype.forEach.call(document.querySelectorAll('#locList .loc-item'),function(r){var on=+r.getAttribute('data-i')===i;r.classList.toggle('on',on);r.setAttribute('aria-pressed',String(on));});
   requestAnimationFrame(locClampTip);
@@ -2291,7 +2398,7 @@ if($('locScroll')){var limg=$('locScroll').querySelector('img');
   sc.addEventListener('touchmove',function(e){
     if(pinch&&e.touches.length===2){var a=pt(e.touches[0]),b=pt(e.touches[1]),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
       LZ.s=Math.max(1,Math.min(5,pinch.s*Math.hypot(a.x-b.x,a.y-b.y)/pinch.d));
-      LZ.tx=mx-pinch.px*LZ.s;LZ.ty=my-pinch.py*LZ.s;LZ.user=true;locApply(false);e.preventDefault();return;}
+      LZ.tx=mx-pinch.px*LZ.s;LZ.ty=my-pinch.py*LZ.s;LZ.user=true;locApply(false);locZoomTrack('pinch');e.preventDefault();return;}
     if(!t0||e.touches.length!==1)return;
     var p=pt(e.touches[0]),dx=p.x-t0.x,dy=p.y-t0.y;if(Math.abs(dx)+Math.abs(dy)>6)moved=true;
     if(LZ.user){LZ.tx=t0.tx+dx;LZ.ty=t0.ty+dy;locApply(false);e.preventDefault();}
@@ -2304,7 +2411,7 @@ if($('locScroll')){var limg=$('locScroll').querySelector('img');
       if(now-lastTap<320&&Math.abs(p.x-lx)<30&&Math.abs(p.y-ly)<30){e.preventDefault();lastTap=0;
         if(LZ.user&&LZ.s>LZ.base.s*1.2){locResetView();}
         else{var px=(p.x-LZ.tx)/LZ.s,py=(p.y-LZ.ty)/LZ.s;LZ.s=Math.min(5,LZ.s*2);LZ.tx=p.x-px*LZ.s;LZ.ty=p.y-py*LZ.s;
-          LZ.user=true;locApply(true);setTimeout(locClampTip,480);}}
+          LZ.user=true;locApply(true);locZoomTrack('double_tap');setTimeout(locClampTip,480);}}
       else{lastTap=now;lx=p.x;ly=p.y;}}
     t0=null;setTimeout(locClampTip,60);
   });
@@ -2372,6 +2479,10 @@ function isEmail(v){return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test((v||'').trim()
    Still no auto +60 and no auto 0 (standing rule 2026-08-02): the visitor's own prefix is kept while
    typing; on submit the number is normalised to 0xx-xxx xxxx so Salesforce gets one format. */
 var PHONE_MSG='Please enter a Malaysian mobile number (e.g. 012-345 6789).';
+/* PREVIEW GUARD (2026-10-07): on a preview host the forms never post, so client reviewers can try the
+   whole flow without creating a Salesforce lead, an n8n capture, a GA4 generate_lead or a Google Ads
+   conversion (the client's GTM fires one on the live thank-you page). Inert on ver2.m-aurora.com.my. */
+var IS_PREVIEW=/\.pages\.dev$|^localhost$|^127\./.test(location.hostname);
 function myNsn(v){var d=String(v||'').replace(/\D/g,'');if(d.indexOf('60')===0)d=d.slice(2);if(d.charAt(0)==='0')d=d.slice(1);return d;}
 function isMyPhone(v){return /^1[02346789]\d{7}$|^1[15]\d{8}$/.test(myNsn(v));}
 function fmtNsn(n){
@@ -2413,6 +2524,9 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
     if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
     form.classList.remove('has-error');
     var phEl=form.querySelector('[name="mobile"]');if(phEl)phEl.value='0'+fmtNsn(myNsn(phone));
+    if(IS_PREVIEW){e.preventDefault();form.classList.add('has-error');
+      if(err)err.textContent='Preview link: the form is switched off here, so nothing was sent. On the live site this sends your details to Mah Sing’s sales team.';
+      return;}
     var fid=form.getAttribute('data-form')||'form';
     /* Standardised n8n form_id across all ver2 projects (2026-08-24), matching
        M Legasi: quickRegisterForm / mainRegisterForm / leadFormDrawer. */
@@ -2483,7 +2597,8 @@ Array.prototype.forEach.call(document.querySelectorAll('.h-bed'),function(b){
   b.addEventListener('click',function(){
     var t=document.querySelector('.tab[data-type="'+b.getAttribute('data-bed-type')+'"]');
     var tabs=document.getElementById('tabs'),navEl=document.getElementById('siteNav');
-    if(t)t.click();
+    /* report the pill as its own unit_select source; fall back to the tab if setType is missing */
+    if(window.setType)window.setType(b.getAttribute('data-bed-type'),'hero_pill');else if(t)t.click();
     if(tabs){var y=tabs.getBoundingClientRect().top+window.scrollY-(navEl?navEl.offsetHeight:0)-64;
       window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
   });
@@ -2589,11 +2704,22 @@ function vrMark(){
     t.setAttribute('aria-selected',String(t.getAttribute('data-vr')===vrCur));});
 }
 
+/* virtual_tour_open. tour_source = where it was opened (nav, unit_card,
+   location, inline, or modal_tab for a type switch inside the open modal).
+   unit_interest only when the link itself names a unit: a bare /360-vr/ link
+   still shows Type A, but that is the default view, not the visitor's choice
+   (until 2026-10-06 those reported unit_type 'A'). unit_type, the bare letter,
+   is kept beside unit_interest with the same rule for continuity. */
+function vrTrack(key,source,specific,mode){
+  var p={event:'virtual_tour_open',tour_source:source||'inline',tour_mode:mode};
+  if(specific&&/^[A-E]$/.test(key)){p.unit_interest='Type '+key;p.unit_type=key;}
+  track(p);
+}
 /* Opens the tour for a type. Blocked types go to a new tab so the user is never
    left staring at a refused frame. */
-function openVr(type){
+function openVr(type,source,specific){
   var t=VRTOURS[type];if(!t)return;
-  track({event:'virtual_tour_open',unit_type:type,tour_mode:t.embed?'modal':'new_tab'});
+  vrTrack(type,source||'modal_tab',specific!==false,t.embed?'modal':'new_tab');
   if(!t.embed){window.open(t.url,'_blank','noopener');return;}
   vrCur=type;vrMark();
   vrStage.classList.remove('ready');
@@ -2630,20 +2756,23 @@ document.addEventListener('keydown',function(e){
 
 /* Intercept every existing 360 link so nothing leaves the site unnecessarily.
    data-vr on the anchor wins; otherwise the #typeX hash decides; a bare
-   /360-vr/ link opens Type A. */
+   /360-vr/ link opens Type A. data-tour-source on the anchor names the spot. */
 Array.prototype.forEach.call(
   document.querySelectorAll('a[href*="360-vr"],a[data-vr]'),function(a){
     a.addEventListener('click',function(e){
-      var key=a.getAttribute('data-vr');
+      var key=a.getAttribute('data-vr'),specific=!!key;
       if(!key){
         var m=/#type([A-E])/i.exec(a.getAttribute('href')||'');
-        key=m?m[1].toUpperCase():(a.id==='uVt'?cur:'A');
+        if(m){key=m[1].toUpperCase();specific=true;}
+        else if(a.id==='uVt'){key=cur;specific=true;}
+        else key='A';
       }
+      var src=a.getAttribute('data-tour-source')||'inline';
       if(!VRTOURS[key]||!VRTOURS[key].embed){
-        track({event:'virtual_tour_open',unit_type:key||'unknown',tour_mode:'new_tab'});
+        vrTrack(key,src,specific,'new_tab');
         return;                                      /* let the new tab happen */
       }
-      e.preventDefault();openVr(key);
+      e.preventDefault();openVr(key,src,specific);
     });
   });
 
