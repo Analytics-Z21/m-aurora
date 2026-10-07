@@ -1278,6 +1278,13 @@ html.js [data-stagger].rv.in>*{opacity:1;transform:none}
 /* hero: a larger headline where the screen allows it (the short-desktop and phone fold rules stand) */
 @media(min-width:1024px) and (min-height:841px){.hero h1{font-size:clamp(56px,6.6vw,100px);line-height:1.02}}
 @media(max-width:1023px){.hero h1{font-size:clamp(38px,10.4vw,46px);line-height:1.04}}
+/* iPhone SE-size screens with Safari's bars (~553px): the hero ask ended ~5px under the fold; a step down in the
+   headline and the gaps above the ask keeps it on the first screen (2026-10-07, after go-live) */
+@media(max-width:1023px) and (max-height:620px){
+  .hero h1{font-size:clamp(32px,9vw,38px)}
+  .h-fact{margin-bottom:12px}
+  .h-beds{margin-bottom:16px}
+}
 .h-bed{background:rgba(10,16,48,.42);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 
 /* facts band */
