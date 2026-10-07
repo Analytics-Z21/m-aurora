@@ -1222,6 +1222,258 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 .loc-visual.used .loc-hint{opacity:0}
 @media(hover:hover) and (pointer:fine){.loc-hint{display:none}}
 .loc-visual{cursor:default}
+/* =====================================================================================
+   R4 PREMIUM (2026-10-07, branch r4-premium; Justin: "the whole website still looks very static
+   and generic"). Direction: night to first light. Sections alternate deep night, the dawn sky and
+   warm paper, with full-bleed CGI between them; editorial type at a bigger scale with Bodoni
+   italics; the aurora gradient (#67C8A5 to #18B7C9, the client's own band) returns as a hairline
+   accent, which restores the "blue/green project colours" guardrail without competing with the
+   orange asks. Motion: staggered reveals that run as you scroll, scroll-linked parallax on the
+   CGI, counters. Restyle only: every id, hook and tracking attribute is untouched.
+   ===================================================================================== */
+:root{--night0:#0C1230;--paper:#F6F2EA;--ink-d:#151B3B;--ink-m:#4B5070;
+  --aurora:linear-gradient(90deg,#67C8A5 0%,#18B7C9 100%);--mint:#8FE0D0;--ease-out:cubic-bezier(.16,1,.3,1)}
+
+/* type: bigger, tighter, italics for the accent words */
+h2{font-size:clamp(34px,5.4vw,70px);line-height:1.03;letter-spacing:-.012em}
+.em,h2 em{font-style:italic}
+.sec{padding:clamp(64px,8vw,120px) 0}
+.sec-head{max-width:none;gap:18px;margin-bottom:clamp(40px,5vw,72px)}
+.sec-head h2::after{display:none}
+.sec-head .copy{font-size:17px;max-width:46ch}
+/* section label: a hairline of the aurora band instead of a kicker stacked on the heading */
+.eyebrow{position:relative;padding-left:46px;font-size:11.5px;letter-spacing:.26em}
+.eyebrow::before{content:'';position:absolute;left:0;top:50%;width:32px;height:1px;background:var(--aurora)}
+@media(min-width:1024px){
+  .sec-head{display:grid;grid-template-columns:minmax(200px,3fr) 9fr;column-gap:56px;align-items:start}
+  .sec-head>*{grid-column:2}
+  .sec-head>.eyebrow{grid-column:1;grid-row:1/span 6;margin-top:1.1em}
+  .sec-head.center{text-align:left;align-items:start;margin-inline:0}
+}
+.more-btn{border-bottom:0;padding-bottom:4px;background:var(--aurora) left bottom/100% 1px no-repeat}
+
+/* motion: reveals ease out longer; groups stagger */
+html.js .rv{transform:translate3d(0,32px,0);transition:opacity .9s var(--ease-out),transform 1s var(--ease-out)}
+html.js [data-stagger].rv{opacity:1;transform:none}
+html.js [data-stagger].rv>*{opacity:0;transform:translate3d(0,24px,0);
+  transition:opacity .8s var(--ease-out),transform .9s var(--ease-out);transition-delay:calc(var(--i,0) * 70ms)}
+html.js [data-stagger].rv.in>*{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html.js .rv,html.js [data-stagger].rv>*{opacity:1;transform:none;transition:none}}
+
+/* hero: a larger headline where the screen allows it (the short-desktop and phone fold rules stand) */
+@media(min-width:1024px) and (min-height:841px){.hero h1{font-size:clamp(56px,6.6vw,100px);line-height:1.02}}
+@media(max-width:1023px){.hero h1{font-size:clamp(38px,10.4vw,46px);line-height:1.04}}
+.h-bed{background:rgba(10,16,48,.42);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+
+/* facts band */
+.facts{background:var(--night0);border-block:1px solid rgba(255,255,255,.08);padding:clamp(44px,6vw,80px) 0}
+.facts-row{display:grid;grid-template-columns:repeat(2,1fr);gap:34px 18px}
+@media(min-width:900px){.facts-row{grid-template-columns:repeat(4,1fr);gap:24px}}
+.fact{position:relative;padding-left:18px}
+.fact::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:1px;background:var(--aurora)}
+.fact b{display:block;font:700 clamp(42px,6.2vw,80px)/1 var(--fd);font-variation-settings:'opsz' 18;color:var(--cream);letter-spacing:-.02em}
+.fact span{display:block;margin-top:12px;font:600 11.5px/1.4 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--cream2)}
+
+/* layouts and calculator on warm paper: the plans breathe and the page gets its first light break */
+#layouts{background:var(--paper);color:var(--ink-d)}
+#layouts h2,#layouts h3{color:var(--ink-d)}
+#layouts .em{color:var(--dawn-sky)}
+#layouts .copy,#layouts .eyebrow{color:var(--ink-m)}
+#layouts .more-btn{color:var(--ink-d)}
+#layouts .tab{color:var(--ink-d);border-color:rgba(21,27,59,.2)}
+#layouts .tab:hover{border-color:rgba(21,27,59,.55)}
+#layouts .tab[aria-selected="true"]{background:var(--ink-d);border-color:var(--ink-d);color:var(--cream)}
+#layouts .unit{background:#fff;border:1px solid rgba(21,27,59,.1);border-radius:4px;box-shadow:0 40px 80px -40px rgba(21,27,59,.3)}
+#layouts .unit-plan{border-color:rgba(21,27,59,.08)}
+#layouts .unit-cfg,#layouts .unit-from{color:var(--ink-m)}
+#layouts .unit-from b,#layouts .specs .n{color:var(--ink-d)}
+#layouts .specs{border-color:rgba(21,27,59,.12)}
+#layouts .specs>div+div{border-left-color:rgba(21,27,59,.12)}
+#layouts .specs .l{color:var(--ink-m)}
+#layouts .u-link{color:var(--ink-d)}
+#layouts .btn-p{background:var(--sun-deep)}
+#layouts .btn-p:hover{background:#F27A33}
+#layouts .calc{background:#fff;border:1px solid rgba(21,27,59,.1);border-top:none;border-radius:0 0 4px 4px}
+#layouts .calc h3{color:var(--ink-d)}
+#layouts .cprice .l,#layouts .cfield label,#layouts .cp-pick-t,#layouts .cp-pick-c{color:var(--ink-m)}
+#layouts .cprice b,#layouts .cp-pick b,#layouts .cfield output{color:var(--ink-d)}
+#layouts .cp-pick{background:rgba(21,27,59,.04);border-color:rgba(21,27,59,.18)}
+#layouts input[type=range]::-webkit-slider-runnable-track{background:rgba(21,27,59,.16)}
+#layouts input[type=range]::-moz-range-track{background:rgba(21,27,59,.16)}
+#layouts .cout{background:var(--paper);border-color:rgba(21,27,59,.12)}
+#layouts .cout .l,#layouts .cout .d{color:var(--ink-m)}
+#layouts .cout .v{color:var(--ink-d)}
+@media(max-width:1023px){#layouts .unit{border-radius:0}#layouts .calc{border-radius:0}}
+
+/* fast-track form: cinematic, over the grand entrance render (loads after the page) */
+#register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.74) 45%,rgba(12,18,48,.94) 100%)}
+html.hero-more #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.72) 45%,rgba(12,18,48,.94) 100%),url('_gal-entrance.webp') center 40%/cover no-repeat}
+#register .form-card{border-radius:4px;box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
+
+/* the story: a full-bleed facade with the copy on a glass card that overlaps it */
+#dawn .dawn-split{display:block;border:0;position:relative}
+.dawn-img{background-image:none}
+html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba(34,57,140,0) 24%),linear-gradient(0deg,var(--night0) 0%,rgba(12,18,48,0) 40%),url('_view.webp')}
+#dawn .dawn-img::after{display:none}
+#dawn .dawn-img{min-height:min(82vh,760px);background-position:center 35%;background-size:cover}
+#dawn .dawn-body{position:relative;z-index:2;max-width:620px;margin:-18vh 16px 0;padding:clamp(30px,4vw,56px);
+  background:rgba(12,18,48,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1)}
+@media(min-width:1024px){#dawn .dawn-body{margin:-30vh max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad))) 0 auto}}
+
+/* twelve reasons, as an editorial list */
+.usp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;border-top:1px solid rgba(255,255,255,.14)}
+@media(min-width:900px){.usp-list{grid-template-columns:1fr 1fr;column-gap:64px}}
+.usp-list li{display:grid;grid-template-columns:48px 1fr;align-items:baseline;gap:14px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.usp-list .n{font:italic 600 17px/1 var(--fd);color:rgba(254,252,247,.55)}
+.usp-list h4{font:600 clamp(19px,1.9vw,25px)/1.25 var(--fd);font-variation-settings:'opsz' 18;color:var(--cream)}
+.award{margin-top:clamp(40px,5vw,64px);border:1px solid rgba(255,255,255,.12);border-radius:4px;background:rgba(255,255,255,.03)}
+
+/* facilities plans on paper */
+.fac-plan{border-radius:4px;background:#fff}
+
+/* gallery: full-bleed, tall, captions in Bodoni italic */
+#gallery .gal-wrap{margin-inline:calc(50% - 50vw)}
+#gallery .gal{grid-auto-columns:80vw;gap:14px;padding:0 var(--pad);scroll-padding:0 var(--pad);cursor:grab}
+#gallery .gal.dragging{cursor:grabbing;scroll-snap-type:none}
+@media(min-width:1024px){#gallery .gal{grid-auto-columns:38vw;gap:22px;padding:0 max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad)))}}
+#gallery .gal img{height:min(64vh,600px);border-radius:4px}
+#gallery .gal figure{border-radius:4px;overflow:hidden}
+#gallery .gal figcaption{font:italic 600 clamp(20px,2vw,26px)/1.2 var(--fd);letter-spacing:0;text-transform:none}
+@media(hover:hover) and (pointer:fine){#gallery .gal figure img{transition:transform 1.2s var(--ease-out)}#gallery .gal figure:hover img{transform:scale(1.04)}}
+
+/* developer: a statement, not a box */
+#developer .dev{max-width:900px}
+#developer .dev h2{font-size:clamp(26px,3.4vw,42px)}
+
+/* FAQ questions in the display face */
+.faq-q{font:600 clamp(18px,1.7vw,22px)/1.35 var(--fd);font-variation-settings:'opsz' 18}
+
+/* scroll-linked parallax on the CGI, where the browser supports it (Chrome, Edge, Safari 26+) */
+@supports (animation-timeline: view()){
+  @media(prefers-reduced-motion:no-preference){
+    #dawn .dawn-img{animation:r4-par linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    #register{animation:r4-par-bg linear both;animation-timeline:view()}
+  }
+}
+@keyframes r4-par{from{background-position:center 15%}to{background-position:center 75%}}
+@keyframes r4-par-bg{from{background-position:center 0%,center 20%}to{background-position:center 0%,center 70%}}
+/* R4 v2: section rhythm. One continuous dawn wash down the page read as flat, so the dawn gradient
+   now marks three moments only (the hero, the story, the closing form) and everything else
+   alternates deep night and warm paper. Paper carries the plans, the developer and the answers;
+   night carries the imagery and the map. */
+body{background:var(--night0)}
+.hero-scrim{background:linear-gradient(180deg,rgba(22,34,86,.38) 0%,rgba(22,34,86,.16) 26%,rgba(22,34,86,.4) 50%,rgba(14,22,62,.88) 90%,var(--night0) 100%)}
+@media(min-width:1024px){.hero-scrim{background:linear-gradient(90deg,rgba(22,34,86,.9) 0%,rgba(22,34,86,.62) 40%,rgba(22,34,86,.12) 68%,rgba(22,34,86,.05) 100%),linear-gradient(180deg,transparent 80%,var(--night0) 100%)}}
+.facts{border-top:0}
+
+/* the story: night lifting into dawn blue behind the heading, then the view */
+#dawn{background:linear-gradient(180deg,var(--night0) 0%,#16235C 55%,#22398C 100%)}
+#dawn .dawn-split{background:var(--night0);border-bottom:0}
+.dawn-sub{font:500 16px/1.6 var(--fb);color:var(--cream2);letter-spacing:.01em}
+
+/* twelve reasons: flat night, the hairlines do the work */
+#usp{background:var(--night0)}
+
+/* facilities on paper, where the plans' white grounds sit naturally */
+#facilities{background:var(--paper);color:var(--ink-d)}
+#facilities h2,#facilities h3{color:var(--ink-d)}
+#facilities .em{color:var(--dawn-sky)}
+#facilities .copy,#facilities .eyebrow{color:var(--ink-m)}
+#facilities .more-btn{color:var(--ink-d)}
+#facilities .fac-plan{border-color:rgba(21,27,59,.1);box-shadow:0 34px 70px -40px rgba(21,27,59,.4)}
+#facilities .fac-cat{color:var(--ink-d);border-color:rgba(21,27,59,.2);border-radius:2px;background:transparent}
+#facilities .fac-cat:hover{border-color:rgba(21,27,59,.55)}
+#facilities .fac-cat[aria-selected="true"]{background:var(--ink-d);border-color:var(--ink-d);color:var(--cream)}
+#facilities .fac-detail{background:#fff;border-color:rgba(21,27,59,.1);border-radius:4px}
+#facilities .fac-detail-head span{color:var(--ink-m)}
+#facilities .fac-list li{color:var(--ink-d)}
+#facilities .fac-list li i{background:var(--ink-d);color:var(--cream)}
+
+/* gallery on night; arrows sit inside the viewport now the row is full-bleed */
+@media(min-width:1024px){
+  #gallery .gal-prev{left:24px}
+  #gallery .gal-next{right:24px}
+  #gallery .gal-nav{border-color:rgba(254,252,247,.35);background:rgba(12,18,48,.62)}
+  #gallery .gal-nav:hover{background:rgba(254,252,247,.16);border-color:var(--cream)}
+  #gallery .gal{scrollbar-color:rgba(254,252,247,.38) rgba(254,252,247,.08)}
+  #gallery .gal::-webkit-scrollbar-track{background:rgba(254,252,247,.08)}
+  #gallery .gal::-webkit-scrollbar-thumb{background:rgba(254,252,247,.38)}
+}
+#gallery .gal-hint{color:var(--cream2);opacity:.7}
+
+/* location: night deepening toward the map */
+#location{background:linear-gradient(180deg,var(--night0) 0%,#131B48 100%);border-top:1px solid rgba(255,255,255,.07)}
+
+/* developer and answers on paper: the red Mah Sing mark needs a light ground */
+#developer,#faq{background:var(--paper);color:var(--ink-d)}
+#developer{padding-bottom:0}
+#developer h2,#faq h2{color:var(--ink-d)}
+#developer .eyebrow,#faq .eyebrow{color:var(--ink-m)}
+#developer .copy{color:var(--ink-m)}
+#developer .copy a{color:var(--ink-d)}
+#faq .em{color:var(--dawn-sky)}
+#faq .faq,#faq .faq-item{border-color:rgba(21,27,59,.14)}
+#faq .faq-q{color:var(--ink-d)}
+#faq .faq-q:hover{color:var(--dawn-sky)}
+#faq .faq-q i::before,#faq .faq-q i::after{background:var(--ink-d)}
+#faq .faq-a>div{color:var(--ink-m)}
+#faq .faq-a a{color:var(--dawn-sky)}
+
+/* closing form: the dawn again, the card on paper, one orange */
+#register-full{background:linear-gradient(160deg,var(--dawn-sky) 0%,var(--dawn-lilac) 50%,var(--dawn-rose) 100%)}
+#register-full .visit{border:0;border-radius:4px;box-shadow:0 50px 100px -40px rgba(8,10,30,.6)}
+#register-full .visit-l{background:var(--paper)}
+#register-full .visit-l h2{color:var(--ink-d)}
+#register-full .em{color:var(--dawn-sky)}
+#register-full .eyebrow,#register-full .visit-l .copy{color:var(--ink-m)}
+#register-full .more-btn{color:var(--ink-d)}
+#register-full .f-headline{color:var(--ink-d)}
+#register-full .f-headline b{color:var(--dawn-sky)}
+#register-full .btn-p{background:var(--sun-deep);width:100%}
+#register-full .btn-p:hover{background:#F27A33}
+/* the closed menu and lead drawer sit just past the right edge; their shadows spilled ~70px into the
+   page (invisible on the dark wash, a grey smear on paper). Shadow only while open. */
+.mm:not(.open),.ld:not(.open){box-shadow:none}
+
+/* long section headings one step down, so a four-line heading never fills the first screen of its section */
+h2{font-size:clamp(34px,4.8vw,64px)}
+#layouts .sec-head h2,#dawn .sec-head h2,#facilities .sec-head h2,#location .sec-head h2{font-size:clamp(30px,3.9vw,52px);line-height:1.06}
+.sec-head{margin-bottom:clamp(32px,4vw,56px)}
+#register .qx .copy{margin-top:16px}
+
+/* the story on desktop: the view opens on the right, the interior side fades into night and the
+   copy card sits over it, so nothing covers the skyline */
+@media(min-width:1024px){
+  html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba(34,57,140,0) 24%),
+    linear-gradient(0deg,var(--night0) 0%,rgba(12,18,48,0) 40%),
+    linear-gradient(90deg,var(--night0) 0%,rgba(12,18,48,.86) 22%,rgba(12,18,48,0) 50%),url('_view.webp')}
+  #dawn .dawn-body{margin:-30vh auto 0 max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad)))}
+}
+
+/* facilities on desktop: the sky plan, the category tabs and the list share the right column beside
+   the podium plan, instead of a short thumbnail over an empty block and the list stacked below */
+@media(min-width:1024px){
+  #facilities .wrap{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:28px;align-items:start}
+  #facilities .sec-head{grid-column:1/-1}
+  #facilities .fac-grid{display:contents}
+  #facilities .fac-grid>div:first-child{grid-column:1;grid-row:2/span 3}
+  #facilities .fac-grid>div:last-child{grid-column:2;grid-row:2}
+  #facilities .fac-cats{grid-column:2;grid-row:3;flex-wrap:wrap;overflow:visible;padding:20px 0 0}
+  #facilities .fac-detail{grid-column:2;grid-row:4}
+  #facilities .fac-list{grid-template-columns:1fr 1fr}
+}
+@media(min-width:1024px){#facilities .fac-detail-head{flex-direction:column;align-items:flex-start;gap:4px}}
+/* phones: the story card overlaps the bright sky, so less glass (lint min 1.4:1 through .86) */
+@media(max-width:1023px){#dawn .dawn-body{background:rgba(12,18,48,.95)}}
+/* footer legal text to AA on the plum (was 4.1:1) */
+.ft-legal{color:#A3B3BA}
+/* one alignment for every section head, phone included */
+.sec-head.center{text-align:left;align-items:flex-start;margin-inline:0}
+/* the aurora hairline draws in as its heading reveals */
+@media(prefers-reduced-motion:no-preference){
+  html.js .rv .eyebrow::before{transform:scaleX(0);transform-origin:left center;transition:transform 1.1s var(--ease-out) .25s}
+  html.js .rv.in .eyebrow::before{transform:scaleX(1)}
+}
 .loc-visual .cap{pointer-events:none}
 @media(prefers-reduced-motion:reduce){.loc-canvas{transition:none}}
 @media(max-width:1023px){
@@ -1363,6 +1615,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- LAYOUTS: live H2 block 3 verbatim as lede; tabs + card + locked-price calculator.
      All five types published on /floor-plans/ (verified 2026-08-21). Per-type pricing pending. -->
+<!-- R4 FACTS: the page's own figures, set large; counters run once in view -->
+<section class="facts" id="facts" aria-label="M Aurora at a glance">
+  <div class="wrap facts-row rv" data-stagger>
+    <div class="fact"><b class="num" data-count="46">46</b><span>Storeys, two towers</span></div>
+    <div class="fact"><b class="num" data-count="5.2" data-dec="1">5.2</b><span>Acres of freehold land</span></div>
+    <div class="fact"><b class="num" data-count="1544">1,544</b><span>Residences</span></div>
+    <div class="fact"><b class="num" data-count="46">46</b><span>Named facilities</span></div>
+  </div>
+</section>
+
 <section class="sec sec-alt" id="layouts">
   <div class="wrap">
     <div class="sec-head rv">
@@ -1492,11 +1754,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sec-head rv">
       <span class="eyebrow">A New Dawn Awaits</span>
       <h2>Welcome to M Aurora &ndash; A New Freehold Serviced Apartment in <span class="em">Old Klang Road</span></h2>
-      <h3 style="font:600 15px/1.6 var(--fb);color:var(--muted)">The New Heights of Living at Old Klang Road</h3>
+      <h3 class="dawn-sub">The New Heights of Living at Old Klang Road</h3>
     </div>
   </div>
   <div class="dawn-split rv">
-    <div class="dawn-img" role="img" aria-label="M Aurora twin towers at dawn"></div>
+    <div class="dawn-img" role="img" aria-label="The view over Old Klang Road from an M Aurora balcony"></div>
     <div class="dawn-body">
       <h3 class="promise">Inspired by <b>The Promise of Dawn</b></h3>
       <p class="copy">Inspired by the magnificent and breathtaking Northern Lights, M AURORA kindles the hope of a new dawn where light, elegance, and positive energy form the very soul of its community.</p>
@@ -1523,20 +1785,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2>Twelve reasons the dawn <span class="em">breaks here</span></h2>
     </div>
     <h3 class="sr-only">Key features of M Aurora</h3>
-    <div class="usp-grid rv">
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-1.png" alt=""><h4>Freehold</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-9.png" alt=""><h4>Multi-tier Security</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-2.png" alt=""><h4>EV Charging Station</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-3.png" alt=""><h4>Speed Ramp design</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-8.png" alt=""><h4>GreenRE Certification</h4></div>
-      <div class="usp"><img width="110" height="110" loading="lazy" decoding="async" src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4></div>
-    </div>
+    <ol class="usp-list rv" data-stagger>
+      <li><span class="n">01</span><h4>Freehold</h4></li>
+      <li><span class="n">02</span><h4>Excellent Accessibility</h4></li>
+      <li><span class="n">03</span><h4>Multi-tier Security</h4></li>
+      <li><span class="n">04</span><h4>EV Charging Station</h4></li>
+      <li><span class="n">05</span><h4>Multigenerational Lifestyle Facilities</h4></li>
+      <li><span class="n">06</span><h4>Flexible space planning layout</h4></li>
+      <li><span class="n">07</span><h4>Speed Ramp design</h4></li>
+      <li><span class="n">08</span><h4>Automated Waste Collection System</h4></li>
+      <li><span class="n">09</span><h4>Mah Sing Smart Community</h4></li>
+      <li><span class="n">10</span><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></li>
+      <li><span class="n">11</span><h4>GreenRE Certification</h4></li>
+      <li><span class="n">12</span><h4>Qlassic Assessment</h4></li>
+    </ol>
     <div class="award rv">
       <img width="300" height="401" loading="lazy" decoding="async" src="_greenre.png" alt="GreenRE">
       <p>M Aurora has been awarded<b>Silver Provisional GreenRE Certification</b></p>
@@ -1627,7 +1889,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2>What the dawn will <span class="em">look like</span></h2>
     </div>
     <div class="gal-wrap">
-    <div class="gal rv" id="gal">
+    <div class="gal rv" id="gal" data-stagger>
       <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-lap-pool.jpg" alt="50m lap pool"><figcaption>50m Lap Pool</figcaption></figure>
       <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-aurora-garden.jpg" alt="Aurora Garden"><figcaption>Aurora Garden</figcaption></figure>
       <figure><img width="1000" height="588" loading="lazy" decoding="async" src="_gal-glamping.jpg" alt="Urban glamping dome"><figcaption>Urban Glamping</figcaption></figure>
@@ -1703,7 +1965,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="dev rv">
       <span class="eyebrow">The developer</span>
       <h2>This project is built by :</h2>
-      <img loading="lazy" decoding="async" class="dev-logo" src="_mahsing-colour.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
+      <img loading="lazy" decoding="async" class="dev-logo" src="_mahsing-colour-ink.webp" alt="Mah Sing. Reinvent Spaces. Enhance Life." width="571" height="177">
       <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
     </div>
   </div>
@@ -1750,16 +2012,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- BOTTOM REGISTER: live H2 block 5 verbatim + the live form's budget dropdown + PDPA wording. -->
-<section class="sec sec-light" id="register-full" style="background:linear-gradient(180deg,#FEFCF7 0%,#EEEDF8 100%)">
+<section class="sec sec-light" id="register-full">
   <div class="wrap">
     <div class="visit rv">
       <div class="visit-l">
         <span class="eyebrow">Now open for sale</span>
-        <h2>Own Your Ideal Home at <span style="color:#0E7A8A">M Aurora</span> Today!</h2>
+        <h2>Own Your Ideal Home at <span class="em">M Aurora</span> Today!</h2>
         <p class="copy">M Aurora is now open for sale, with prices starting from RM339,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
         <div class="more-wrap" data-collapsed="true">
           <div class="more-body">
-            <p class="copy">To help you find the right fit, explore the available <a href="#layouts" style="color:#0E7A8A">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="inline" style="color:#0E7A8A">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
+            <p class="copy">To help you find the right fit, explore the available <a href="#layouts">floor plans</a> and take a <a href="https://m-aurora.com.my/360-vr/" target="_blank" rel="noopener" data-tour-source="inline">360&deg; VR tour</a> to experience the space firsthand, all from the comfort of wherever you are.</p>
             <p class="copy">With a refined aesthetic, flexible layouts, GreenRE Silver-certified sustainability, and a coveted freehold title in one of KL's most established corridors, M Aurora is poised to become a distinguished address for those who value both comfort and long-term value. Now is the time to make it yours.</p>
           </div>
           <button type="button" class="more-btn" aria-expanded="false">Show more
@@ -2053,6 +2315,10 @@ document.addEventListener('input',function(e){try{
   else if(e.target.id==='cTen')calcOnce('tenure');
 }catch(err){}},true);
 
+/* R4: the Bodoni italic (accent words only, none on the first screen) loads after the page, so it never
+   competes for bandwidth with the upright face the hero headline paints in */
+window.addEventListener('load',function(){var l=document.createElement('link');l.rel='stylesheet';
+  l.href='https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&display=swap';document.head.appendChild(l);});
 /* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
 (function(){
   var hm=$('heroMedia');if(!hm)return;
@@ -2247,6 +2513,14 @@ Array.prototype.forEach.call(document.querySelectorAll('#gal figure'),function(f
     openLb(i.src,i.alt,c?c.textContent:'');});
 });
 
+/* R4: gallery drags with a mouse; a drag never opens the lightbox */
+(function(){var g=document.getElementById('gal');if(!g||!window.matchMedia('(pointer:fine)').matches)return;
+  var down=false,x0=0,s0=0,moved=0;
+  g.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse')return;down=true;moved=0;x0=e.clientX;s0=g.scrollLeft;g.classList.add('dragging');});
+  window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-x0;moved=Math.max(moved,Math.abs(dx));g.scrollLeft=s0-dx;});
+  window.addEventListener('pointerup',function(){if(!down)return;down=false;g.classList.remove('dragging');});
+  g.addEventListener('click',function(e){if(moved>6){e.stopPropagation();e.preventDefault();moved=0;}},true);
+})();
 /* ============ Gallery arrows (desktop: no swipe gesture) ============ */
 (function(){
   var g=$('gal'),p=$('galPrev'),n=$('galNext');
@@ -2648,19 +2922,24 @@ if('IntersectionObserver' in window){
   },{threshold:.1,rootMargin:'0px 0px -6% 0px'});
   rvs.forEach(function(el){io.observe(el);});
 }else{rvs.forEach(function(el){el.classList.add('in');});}
-window.addEventListener('load',function(){
+/* R4: the force sweep (capture safety) now runs only for automated browsers; real visitors get the
+   reveals as they scroll. Was: every reveal fired 0.9 s after load, so the page felt static. */
+if(navigator.webdriver||_q.get('clean')){window.addEventListener('load',function(){
   setTimeout(function(){rvs.forEach(function(el){el.classList.add('in');});},900);
-});
+});}
+/* stagger: children of [data-stagger] reveal one after another */
+Array.prototype.forEach.call(document.querySelectorAll('[data-stagger]'),function(g){
+  Array.prototype.forEach.call(g.children,function(c,i){c.style.setProperty('--i',Math.min(i,11));});});
 
 /* counters: final value already in markup; animate only in a real viewport */
 if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion:reduce)').matches){
   var cio=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;cio.unobserve(e.target);
-      var el=e.target,end=+el.getAttribute('data-count'),t0=null;
+      var el=e.target,end=+el.getAttribute('data-count'),dec=+(el.getAttribute('data-dec')||0),t0=null;
       requestAnimationFrame(function step(ts){
-        if(!t0)t0=ts;var p=Math.min((ts-t0)/1100,1),v=Math.round(end*(1-Math.pow(1-p,3)));
-        el.textContent=v.toLocaleString('en-MY');if(p<1)requestAnimationFrame(step);
+        if(!t0)t0=ts;var p=Math.min((ts-t0)/1400,1),v=end*(1-Math.pow(1-p,3));
+        el.textContent=v.toLocaleString('en-MY',{minimumFractionDigits:dec,maximumFractionDigits:dec});if(p<1)requestAnimationFrame(step);
       });
     });
   },{threshold:.6});
