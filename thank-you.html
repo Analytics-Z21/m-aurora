@@ -82,12 +82,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* SERIF: Boska (Indian Type Foundry, Fontshare licence, free for commercial use), self-hosted and
+   subset to Latin. Boska Bold for every serif use (Justin, 2026-10-07: "use Boska Bold"; the Bold file is
+   his). The Bold Italic is Boska's own from Fontshare, so accent words stay true italic at the same weight.
+   Both faces claim 100-900, so whatever weight an older rule asks for, the browser uses the real Bold and
+   never draws a faux bold or a faux italic. */
+@font-face{font-family:"Boska";src:url("_boska-700.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska";src:url("_boska-700i.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+/* Boska defaults to old-style figures (descending 3, 4, 9). Prices, sizes and the facts read as data, so lining
+   everywhere; .num keeps tabular widths for the counters. !important because every `font:` shorthand here
+   resets font-variant-numeric to normal. The font files are plain subsets, not modified. */
+*{font-variant-numeric:lining-nums!important}
+.num{font-variant-numeric:lining-nums tabular-nums!important}
 :root{--teal:#18B7C9;--teal2:#12A0B0;--night:#111838;--night2:#1A2148;--dark:#0B102A;
   --cream:#FEFCF7;--cream2:#DCE0F2;--muted:#9DA6C8;--mull:rgba(150,160,220,.18);
   --grad:linear-gradient(90deg,#67C8A5 0%,#18B7C9 100%);
-  --fd:"Bodoni Moda",Georgia,serif;--fb:"Montserrat",'Segoe UI',sans-serif}
+  --fd:"Boska",Georgia,serif;--fb:"Montserrat",'Segoe UI',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 html{font-size:16px}
 body{font-family:var(--fb);background:var(--night);color:var(--cream);min-height:100svh;
@@ -102,7 +114,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 
   display:flex;align-items:center;justify-content:center;background:rgba(24,183,201,.12)}
 .tick svg{width:28px;height:28px;stroke:#8FE0D0;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .eyebrow{font:600 12px/1.6 var(--fb);letter-spacing:.24em;text-transform:uppercase;color:#8FE0D0;margin-bottom:14px}
-h1{font:500 clamp(32px,6vw,52px)/1.15 var(--fd);margin-bottom:14px;text-wrap:balance}
+h1{font:700 clamp(32px,6vw,52px)/1.15 var(--fd);margin-bottom:14px;text-wrap:balance}
 h1 em{font-style:normal;color:#5AD0DF}
 .rule{width:72px;height:3px;border-radius:2px;background:var(--grad);margin:0 auto 20px}
 p{font:400 15.5px/1.75 var(--fb);color:var(--cream2);margin-bottom:10px}

@@ -102,6 +102,7 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="_boska-700.woff2" crossorigin>
 <!-- Google Tag Manager (GTM-5GCDVKLC, client container, installed 2026-09-17 by request from PY).
      Placed as high in the head as GTM asks, above the Varify snippet: the GTM snippet is
      inline and injects gtm.js asynchronously, so it costs Varify nothing, whereas
@@ -223,8 +224,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..800&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
+/* SERIF: Boska (Indian Type Foundry, Fontshare licence, free for commercial use), self-hosted and
+   subset to Latin. Boska Bold for every serif use (Justin, 2026-10-07: "use Boska Bold"; the Bold file is
+   his). The Bold Italic is Boska's own from Fontshare, so accent words stay true italic at the same weight.
+   Both faces claim 100-900, so whatever weight an older rule asks for, the browser uses the real Bold and
+   never draws a faux bold or a faux italic. */
+@font-face{font-family:"Boska";src:url("_boska-700.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska";src:url("_boska-700i.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+/* Boska defaults to old-style figures (descending 3, 4, 9). Prices, sizes and the facts read as data, so lining
+   everywhere; .num keeps tabular widths for the counters. !important because every `font:` shorthand here
+   resets font-variant-numeric to normal. The font files are plain subsets, not modified. */
+*{font-variant-numeric:lining-nums!important}
+.num{font-variant-numeric:lining-nums tabular-nums!important}
 :root{
   --teal:#18B7C9;--teal2:#12A0B0;--deep:#165063;
   --night:#111838;--night2:#1A2148;--night3:#232B58;--dark:#0B102A;
@@ -232,7 +245,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   --ink:#1A1A1A;--ink2:#4A5A5E;--muted:#9DA6C8;
   --grad:linear-gradient(90deg,#67C8A5 0%,#18B7C9 100%);
   --mull:rgba(150,160,220,.18);
-  --fd:"Bodoni Moda",Georgia,serif;
+  --fd:"Boska",Georgia,serif;
   --fb:"Montserrat",'Segoe UI',sans-serif;
   --pad:24px;--max:1200px;
   --safe:env(safe-area-inset-bottom,0px);
@@ -1225,7 +1238,7 @@ html.hero-more .hs-4{background-image:url('_hero-showunit.webp')}
 /* =====================================================================================
    R4 PREMIUM (2026-10-07, branch r4-premium; Justin: "the whole website still looks very static
    and generic"). Direction: night to first light. Sections alternate deep night, the dawn sky and
-   warm paper, with full-bleed CGI between them; editorial type at a bigger scale with Bodoni
+   warm paper, with full-bleed CGI between them; editorial type at a bigger scale with serif
    italics; the aurora gradient (#67C8A5 to #18B7C9, the client's own band) returns as a hairline
    accent, which restores the "blue/green project colours" guardrail without competing with the
    orange asks. Motion: staggered reveals that run as you scroll, scroll-linked parallax on the
@@ -1331,7 +1344,7 @@ html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba
 /* facilities plans on paper */
 .fac-plan{border-radius:4px;background:#fff}
 
-/* gallery: full-bleed, tall, captions in Bodoni italic */
+/* gallery: full-bleed, tall, captions in the serif italic */
 #gallery .gal-wrap{margin-inline:calc(50% - 50vw)}
 #gallery .gal{grid-auto-columns:80vw;gap:14px;padding:0 var(--pad);scroll-padding:0 var(--pad);cursor:grab}
 #gallery .gal.dragging{cursor:grabbing;scroll-snap-type:none}
@@ -2315,10 +2328,6 @@ document.addEventListener('input',function(e){try{
   else if(e.target.id==='cTen')calcOnce('tenure');
 }catch(err){}},true);
 
-/* R4: the Bodoni italic (accent words only, none on the first screen) loads after the page, so it never
-   competes for bandwidth with the upright face the hero headline paints in */
-window.addEventListener('load',function(){var l=document.createElement('link');l.rel='stylesheet';
-  l.href='https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..800&display=swap';document.head.appendChild(l);});
 /* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
 (function(){
   var hm=$('heroMedia');if(!hm)return;
