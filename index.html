@@ -2222,13 +2222,16 @@ window.dataLayer=window.dataLayer||[];
 
 /* The user property is set in the head, before config, so page_view carries it.
    Register 'experiment_arm' as a User-scoped custom dimension in GA4 Admin. */
+/* send_to (2026-10-08): the client's container GTM-5GCDVKLC loads a Google tag for Ads AW-18464741119 that is
+   combined with this GA4 stream. Once that second gtag runtime is up, an untargeted gtag('event') never reaches
+   G-YDYWK8B8S5 (0 of 5 loads in a live probe; 3 of 3 with send_to). The params are also copied BEFORE the
+   dataLayer push, so GTM's gtm.uniqueEventId stamp no longer leaks into GA4 as a junk "gtm" parameter. */
 function track(p){try{
+  var n=p.event,params={};
+  for(var k in p){if(k!=='event'&&p.hasOwnProperty(k))params[k]=p[k];}
+  params.send_to='G-YDYWK8B8S5';
   window.dataLayer.push(p);
-  if(typeof window.gtag==='function'){
-    var n=p.event,params={};
-    for(var k in p){if(k!=='event'&&p.hasOwnProperty(k))params[k]=p[k];}
-    window.gtag('event',n,params);
-  }
+  if(typeof window.gtag==='function') window.gtag('event',n,params);
 }catch(e){}}
 
 /* n8n parallel capture (Phase 1 safety net, mirrors MGM). Failure here must

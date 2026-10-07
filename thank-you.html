@@ -178,7 +178,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      never re-fired. Also set as a user property so it attaches to the person. */
   function armValue(){ try{ return window.__arm?window.__arm():'unassigned'; }catch(e){ return 'unassigned'; } }
   var arm=armValue();
-  var params={ lead_type:'form_submission', page_location:location.href, experiment_arm:arm };
+  /* send_to: see track() in index.html (2026-10-08). Without it the client's combined Ads tag swallows this event. */
+  var params={ lead_type:'form_submission', page_location:location.href, experiment_arm:arm, send_to:'G-YDYWK8B8S5' };
   try{
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission', experiment_arm:arm });
@@ -217,7 +218,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       for(var k in params){ if(params.hasOwnProperty(k)) o[k]=params[k]; }
       window.dataLayer=window.dataLayer||[];
       window.dataLayer.push(o);
-      if(typeof window.gtag==='function') window.gtag('event',name,params);
+      var g={send_to:'G-YDYWK8B8S5'};
+      for(var j in params){ if(params.hasOwnProperty(j)) g[j]=params[j]; }
+      if(typeof window.gtag==='function') window.gtag('event',name,g);
     }catch(e){}
   }
   function contactType(h){
