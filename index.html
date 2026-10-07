@@ -102,7 +102,7 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
-<link rel="preload" as="font" type="font/woff2" href="_boska-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="_boska-500.woff2" crossorigin>
 <!-- Google Tag Manager (GTM-5GCDVKLC, client container, installed 2026-09-17 by request from PY).
      Placed as high in the head as GTM asks, above the Varify snippet: the GTM snippet is
      inline and injects gtm.js asynchronously, so it costs Varify nothing, whereas
@@ -227,12 +227,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* SERIF: Boska (Indian Type Foundry, Fontshare licence, free for commercial use), self-hosted and
-   subset to Latin. Boska Bold for every serif use (Justin, 2026-10-07: "use Boska Bold"; the Bold file is
-   his). The Bold Italic is Boska's own from Fontshare, so accent words stay true italic at the same weight.
-   Both faces claim 100-900, so whatever weight an older rule asks for, the browser uses the real Bold and
-   never draws a faux bold or a faux italic. */
-@font-face{font-family:"Boska";src:url("_boska-700.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-/* the italic face is registered after page load (script at the hero carousel), so it never competes with the
+   subset to Latin. Headlines (h1, h2) in Boska Medium (Justin, 2026-10-07: "try headline use Boska Medium");
+   everything else serif in Boska Bold ("use Boska Bold"). Medium and Bold are his files; the two italics are
+   Boska's own from Fontshare so accent words stay true italic at the headline's weight. The ranges split at
+   550: anything asking up to 550 gets the real Medium, 551-900 the real Bold, never a faux weight. */
+@font-face{font-family:"Boska";src:url("_boska-500.woff2") format("woff2");font-weight:100 550;font-style:normal;font-display:swap}
+@font-face{font-family:"Boska";src:url("_boska-700.woff2") format("woff2");font-weight:551 900;font-style:normal;font-display:swap}
+/* the italic faces are registered after page load (script at the hero carousel), so they never compete with the
    hero image; the hero has no italics */
 /* Boska defaults to old-style figures (descending 3, 4, 9). Prices, sizes and the facts read as data, so lining
    everywhere; .num keeps tabular widths for the counters. !important because every `font:` shorthand here
@@ -1530,6 +1531,9 @@ h2{font-size:clamp(34px,4.8vw,64px)}
 .usp-ic{width:40px;height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.94}
 .usp-list .n{justify-self:end;padding:0 3px 0 8px}
 @media(max-width:599px){.usp-list li{grid-template-columns:36px 1fr auto;gap:14px}.usp-ic{width:34px;height:34px}}
+/* HEADLINES IN BOSKA MEDIUM (2026-10-07): h1 and h2 step down from 700 to 500; smaller serif (feature titles,
+   FAQ questions, facts, form headline, unit type) stays Bold where weight carries legibility */
+h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 </style>
 </head>
 <body>
@@ -2354,11 +2358,12 @@ document.addEventListener('input',function(e){try{
   else if(e.target.id==='cTen')calcOnce('tenure');
 }catch(err){}},true);
 
-/* R4: Boska Bold Italic (accent words only, none on the first screen) is registered after the page loads, so it
-   never competes for bandwidth with the hero image and the upright face */
+/* R4: the Boska italics (accent words only, none on the first screen) are registered after the page loads, so they
+   never compete for bandwidth with the hero image and the upright faces. Medium Italic serves the headlines. */
 window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)return;
-  var f=new FontFace('Boska','url(_boska-700i.woff2) format("woff2")',{style:'italic',weight:'100 900',display:'swap'});
-  f.load().then(function(x){document.fonts.add(x);}).catch(function(){});});
+  [['_boska-500i.woff2','100 550'],['_boska-700i.woff2','551 900']].forEach(function(d){
+    var f=new FontFace('Boska','url('+d[0]+') format("woff2")',{style:'italic',weight:d[1],display:'swap'});
+    f.load().then(function(x){document.fonts.add(x);}).catch(function(){});});});
 /* ============ Hero carousel: Towers / 50m Lap Pool / Show Unit Type A ============ */
 (function(){
   var hm=$('heroMedia');if(!hm)return;
