@@ -1505,6 +1505,24 @@ h2{font-size:clamp(34px,4.8vw,64px)}
 .loc-item.on span{color:var(--cream)}
 @media(hover:hover) and (pointer:fine){.loc-item:hover{background:rgba(254,252,247,.05)}.loc-pin:hover{border-color:var(--cream)}}
 
+/* PRICES IN SANS (2026-10-07, Justin: "all the pricing change to sans serif"). Every RM figure that was set in
+   the display serif moves to Montserrat; the serif stays on words and on the facts band. Montserrat sets wider
+   and taller than Boska, so each price steps down in size to hold the same visual weight. */
+.hero h1 em{font-family:var(--fb);font-weight:700;font-size:.8em;letter-spacing:-.025em}
+.unit-from b,.cprice b,.cp-pick b,.cprice b.cp-opt-p,.cout .v,.sticky-p b{font-family:var(--fb);font-weight:700;letter-spacing:-.01em}
+.unit-from b{font-size:18px}
+.cprice b,.cp-pick b{font-size:19px}
+.cprice b.cp-opt-p{font-size:17px}
+.cout .v{font-size:clamp(24px,3.2vw,30px)}
+.sticky-p b{font-size:15px}
+/* calculator price menu on paper: it kept the night popover from the dawn build, so after the R4 paper restyle the
+   option prices drew in ink on the dark menu and the picker's type letter drew pale on paper */
+#layouts .cp-menu{background:#fff;border:1px solid rgba(21,27,59,.14);box-shadow:0 24px 48px -24px rgba(21,27,59,.35)}
+#layouts .cp-opt{border-color:transparent}
+#layouts .cp-opt-k,#layouts .cprice b.cp-opt-p{color:var(--ink-d)}
+#layouts .cp-opt-d{color:var(--ink-m)}
+#layouts .cp-opt:hover,#layouts .cp-opt[aria-selected="true"]{background:rgba(21,27,59,.05);border-color:rgba(21,27,59,.22)}
+#layouts .cprice .cp-pick-t span{color:inherit}
 </style>
 </head>
 <body>
