@@ -1523,6 +1523,13 @@ h2{font-size:clamp(34px,4.8vw,64px)}
 #layouts .cp-opt-d{color:var(--ink-m)}
 #layouts .cp-opt:hover,#layouts .cp-opt[aria-selected="true"]{background:rgba(21,27,59,.05);border-color:rgba(21,27,59,.22)}
 #layouts .cprice .cp-pick-t span{color:inherit}
+/* twelve reasons with the client's own icons (Justin 2026-10-07: "add the icon ... make the icon white"):
+   icon leads, the number moves to the right edge. The PNGs are teal line art on transparency, so the
+   filter turns the strokes white without new files. */
+.usp-list li{grid-template-columns:44px 1fr auto;align-items:center;gap:18px}
+.usp-ic{width:40px;height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.94}
+.usp-list .n{justify-self:end;padding:0 3px 0 8px}
+@media(max-width:599px){.usp-list li{grid-template-columns:36px 1fr auto;gap:14px}.usp-ic{width:34px;height:34px}}
 </style>
 </head>
 <body>
@@ -1785,7 +1792,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">A New Dawn Awaits</span>
-      <h2>Welcome to M Aurora &ndash; A New Freehold Serviced Apartment in <span class="em">Old Klang Road</span></h2>
+      <h2>Welcome to M&nbsp;Aurora &ndash; A New Freehold Serviced Apartment in <span class="em">Old Klang Road</span></h2>
       <h3 class="dawn-sub">The New Heights of Living at Old Klang Road</h3>
     </div>
   </div>
@@ -1818,18 +1825,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <h3 class="sr-only">Key features of M Aurora</h3>
     <ol class="usp-list rv" data-stagger>
-      <li><span class="n">01</span><h4>Freehold</h4></li>
-      <li><span class="n">02</span><h4>Excellent Accessibility</h4></li>
-      <li><span class="n">03</span><h4>Multi-tier Security</h4></li>
-      <li><span class="n">04</span><h4>EV Charging Station</h4></li>
-      <li><span class="n">05</span><h4>Multigenerational Lifestyle Facilities</h4></li>
-      <li><span class="n">06</span><h4>Flexible space planning layout</h4></li>
-      <li><span class="n">07</span><h4>Speed Ramp design</h4></li>
-      <li><span class="n">08</span><h4>Automated Waste Collection System</h4></li>
-      <li><span class="n">09</span><h4>Mah Sing Smart Community</h4></li>
-      <li><span class="n">10</span><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4></li>
-      <li><span class="n">11</span><h4>GreenRE Certification</h4></li>
-      <li><span class="n">12</span><h4>Qlassic Assessment</h4></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-1.png" alt=""><h4>Freehold</h4><span class="n">01</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-5.png" alt=""><h4>Excellent Accessibility</h4><span class="n">02</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-9.png" alt=""><h4>Multi-tier Security</h4><span class="n">03</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-2.png" alt=""><h4>EV Charging Station</h4><span class="n">04</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-6.png" alt=""><h4>Multigenerational Lifestyle Facilities</h4><span class="n">05</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-10.png" alt=""><h4>Flexible space planning layout</h4><span class="n">06</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-3.png" alt=""><h4>Speed Ramp design</h4><span class="n">07</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-7.png" alt=""><h4>Automated Waste Collection System</h4><span class="n">08</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-11.png" alt=""><h4>Mah Sing Smart Community</h4><span class="n">09</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-4.png" alt=""><h4>Your One-Stop Professional Property Care Management Partner - M Concierge</h4><span class="n">10</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-8.png" alt=""><h4>GreenRE Certification</h4><span class="n">11</span></li>
+      <li><img class="usp-ic" width="110" height="110" loading="lazy" decoding="async" src="_usp-12.png" alt=""><h4>Qlassic Assessment</h4><span class="n">12</span></li>
     </ol>
     <div class="award rv">
       <img width="300" height="401" loading="lazy" decoding="async" src="_greenre.png" alt="GreenRE">
@@ -2008,7 +2015,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="sec-head center rv">
       <span class="eyebrow">Good to know</span>
-      <h2>M Aurora, <span class="em">answered</span></h2>
+      <h2>M&nbsp;Aurora, <span class="em">answered</span></h2>
     </div>
     <div class="faq rv" id="faqList">
       <div class="faq-item">
@@ -2049,7 +2056,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="visit rv">
       <div class="visit-l">
         <span class="eyebrow">Now open for sale</span>
-        <h2>Own Your Ideal Home at <span class="em">M Aurora</span> Today!</h2>
+        <h2>Own Your Ideal Home at <span class="em">M&nbsp;Aurora</span> Today!</h2>
         <p class="copy">M Aurora is now open for sale, with prices starting from RM339,000*. With built-up sizes from 556 to 1,019 sq ft* and layouts ranging from 1+1 to 4-bedroom configurations, there is truly something for every lifestyle and life stage.</p>
         <div class="more-wrap" data-collapsed="true">
           <div class="more-body">
