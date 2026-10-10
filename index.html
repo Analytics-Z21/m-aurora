@@ -1535,6 +1535,11 @@ h2{font-size:clamp(34px,4.8vw,64px)}
    FAQ questions, facts, form headline, unit type) stays Bold where weight carries legibility */
 h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 </style>
+<style>
+/* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
+.f-err{display:table;margin:6px 0 0;padding:3px 8px;border-radius:6px;background:#fdecea;color:#8c1d18;font-family:inherit;font-weight:600;font-size:14px;line-height:1.4;letter-spacing:0;text-transform:none;text-align:left}
+form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e!important}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -2824,8 +2829,11 @@ function fmtPhone(input){
   input.value=(intl?'+60 ':(d.charAt(0)==='0'?'0':''))+fmtNsn(n);
 }
 Array.prototype.forEach.call(document.querySelectorAll('input[data-my-phone]'),function(input){
-  input.addEventListener('input',function(){fmtPhone(input);input.setCustomValidity('');});
+  /* 10 Oct 2026: never reformatted while typing. Rewriting the value on every input event broke Android keyboards
+     that compose a number as a word (0123456789 arrived as 012-3012 3401 and passed as a wrong number). */
+  input.addEventListener('input',function(){input.setCustomValidity('');clearFieldErr(input);});
   input.addEventListener('blur',function(){
+    fmtPhone(input);
     if(input.value&&!isMyPhone(input.value))input.setCustomValidity(PHONE_MSG);
     else input.setCustomValidity('');
   });
@@ -2833,17 +2841,66 @@ Array.prototype.forEach.call(document.querySelectorAll('input[data-my-phone]'),f
 /* Submit: validate, fire the n8n parallel capture + GA4, then let the NATIVE POST
    own the navigation. Salesforce redirects to thank-you.html only after it has the
    lead (the M Legasi 2026-08-20 fix: no hidden iframe, no timed redirect, no race). */
+/* Per-field errors (10 Oct 2026): one message under each field that failed, the first scrolled to and focused,
+   and a GA4 form_error event with the field and reason only (never the value). */
+var FIELD_MSG={last_name:{empty:'Please enter your name.'},
+  mobile:{empty:'Please enter your phone number.',format:PHONE_MSG},
+  email:{empty:'Please enter your email.',format:'Please check your email, e.g. name@gmail.com.'}};
+function clearFieldErr(input){
+  if(!input)return;input.classList.remove('f-invalid');input.removeAttribute('aria-invalid');
+  if(input._z21Err&&input._z21Err.parentNode)input._z21Err.parentNode.removeChild(input._z21Err);input._z21Err=null;
+}
+function placeErr(input,el){
+  var par=input.parentNode,cs=null;try{cs=getComputedStyle(par);}catch(e0){}
+  if(cs&&/grid/.test(cs.display)){el.style.gridColumn='1 / -1';input.insertAdjacentElement('afterend',el);return;}
+  if(cs&&/flex/.test(cs.display)&&!/column/.test(cs.flexDirection)){
+    if(par.tagName==='FORM'){el.style.flexBasis='100%';input.insertAdjacentElement('afterend',el);}else par.insertAdjacentElement('afterend',el);return;}
+  input.insertAdjacentElement('afterend',el);
+}
+function fieldErrs(form){
+  var out=[];
+  Array.prototype.forEach.call(form.querySelectorAll('[name="last_name"],[name="mobile"],[name="email"]'),function(input){
+    clearFieldErr(input);
+    var v=(input.value||'').trim(),r=null;
+    if(!v)r='empty';else if(input.name==='email'&&!isEmail(v))r='format';else if(input.name==='mobile'&&!isMyPhone(v))r='format';
+    if(r)out.push({input:input,field:input.name,reason:r});
+  });
+  return out;
+}
+function showFieldErrs(form,bad,report){
+  bad.forEach(function(x){
+    x.input.classList.add('f-invalid');x.input.setAttribute('aria-invalid','true');
+    var el=document.createElement('p');el.className='f-err';el.setAttribute('role','alert');
+    el.textContent=FIELD_MSG[x.field][x.reason];x.input._z21Err=el;placeErr(x.input,el);
+  });
+  var first=bad[0].input;
+  try{first.scrollIntoView({block:'center',behavior:'smooth'});}catch(e1){}
+  try{first.focus({preventScroll:true});}catch(e2){}
+  form._z21Attempts=(form._z21Attempts||0)+1;
+  if(report){var ph=form.querySelector('[name="mobile"]');
+    try{track({event:'form_error',form_name:'M Aurora ver2 - '+(form.getAttribute('data-form')||'form'),
+      error_field:bad[0].field,error_reason:bad[0].reason,error_fields:bad.map(function(x){return x.field;}).join(','),
+      phone_digits:ph?String(ph.value||'').replace(/\D/g,'').length:undefined,attempt:form._z21Attempts});}catch(e3){}}
+}
+Array.prototype.forEach.call(document.querySelectorAll('form input[name="last_name"],form input[name="email"]'),function(i){
+  i.addEventListener('input',function(){clearFieldErr(i);});
+});
 Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form){
   form.addEventListener('submit',function(e){
     var err=form.querySelector('[data-form-error]');
     var name=(form.querySelector('[name="last_name"]')||{}).value||'';
     var phone=(form.querySelector('[name="mobile"]')||{}).value||'';
     var email=(form.querySelector('[name="email"]')||{}).value||'';
-    var msg=null;
-    if(!name.trim()||!phone.trim()||!email.trim())msg='Please fill in your name, phone number and email.';
-    else if(!isEmail(email))msg='Please enter a valid email address (e.g. name@example.com).';
-    else if(!isMyPhone(phone))msg=PHONE_MSG;
-    if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
+    var bad=null;
+    try{bad=fieldErrs(form);}catch(eF){bad=null;}
+    if(bad&&bad.length){e.preventDefault();form.classList.remove('has-error');if(err)err.textContent='';showFieldErrs(form,bad,!IS_PREVIEW);return;}
+    if(!bad){  /* fallback: the old single-message check, if the per-field path ever throws */
+      var msg=null;
+      if(!name.trim()||!phone.trim()||!email.trim())msg='Please fill in your name, phone number and email.';
+      else if(!isEmail(email))msg='Please enter a valid email address (e.g. name@example.com).';
+      else if(!isMyPhone(phone))msg=PHONE_MSG;
+      if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
+    }
     form.classList.remove('has-error');
     var phEl=form.querySelector('[name="mobile"]');if(phEl)phEl.value='0'+fmtNsn(myNsn(phone));
     if(IS_PREVIEW){e.preventDefault();form.classList.add('has-error');
