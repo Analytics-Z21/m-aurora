@@ -965,9 +965,9 @@ html.clean .rail{display:none!important}
 /* ---- 360 VR tour modal ------------------------------------------------
    Embeds the Act Studio 3DVista tours in-page instead of sending the user off
    to m-aurora.com.my. Types A/B/C/E are served from the tour CDN and frame
-   cleanly; Type D and Aerial still sit on m-aurora.com.my behind
-   X-Frame-Options: SAMEORIGIN, so those fall back to a new tab until the CDN
-   copies land (see VRTOURS.embed below). */
+   cleanly; Type D and Aerial are served from this site through
+   functions/vr/ (they sit on m-aurora.com.my behind X-Frame-Options:
+   SAMEORIGIN), so all six open in the modal (see VRTOURS below). */
 .vr{position:fixed;inset:0;background:rgba(6,9,24,.97);z-index:1400;display:none;
   flex-direction:column;
   padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -3057,18 +3057,20 @@ if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion
    X-Frame-Options and no CSP frame-ancestors, so they embed from any origin.
    These are the same builds the m-aurora.com.my/360-vr/ page iframes, one
    wrapper removed (the wrapper only adds an Act Studio credit footer).
-   D + Aerial: only exist at m-aurora.com.my/wp-content/themes/divi-child/,
-   which sends X-Frame-Options: SAMEORIGIN. A cross-origin frame is refused, so
-   embed:false sends them to a new tab. Flip to embed:true and swap the url once
-   Act Studio publishes them to the CDN. */
+   D + Aerial (re-checked 2026-10-16): only exist at
+   m-aurora.com.my/wp-content/themes/divi-child/, which sends X-Frame-Options:
+   SAMEORIGIN, and the CDN still has no copy. functions/vr/[[path]].js serves
+   those two folders from this site at /vr/type-d/ and /vr/aerial/, so they
+   frame like the others. embed:false (new tab) stays available as a fallback.
+   Swap to the CDN url and delete the function once Act Studio publishes them. */
 var VRCDN='https://virtualtour.sgp1.digitaloceanspaces.com/';
 var VRTOURS={
   A:{label:'Type A',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-a-vr360-virtual-tour/index.htm'},
   B:{label:'Type B',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-b-vr360-virtual-tour/index.htm'},
   C:{label:'Type C',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-c-vr360-virtual-tour/index.htm'},
-  D:{label:'Type D',embed:false,url:'https://m-aurora.com.my/360-vr/#typeD'},
+  D:{label:'Type D',embed:true,url:'/vr/type-d/index.html'},
   E:{label:'Type E',embed:true,url:VRCDN+'mah-sing-m-aurora-show-unit-type-e-vr360-virtual-tour/index.htm'},
-  AERIAL:{label:'Aerial',embed:false,url:'https://m-aurora.com.my/360-vr/'}
+  AERIAL:{label:'Aerial',embed:true,url:'/vr/aerial/index.html'}
 };
 var VRORDER=['A','B','C','D','E','AERIAL'];
 var vrEl=$('vrLb'),vrFrame=$('vrFrame'),vrStage=$('vrStage'),vrTabs=$('vrTabs'),vrCur=null;
@@ -3107,8 +3109,12 @@ function openVr(type,source,specific){
   if(!t.embed){window.open(t.url,'_blank','noopener');return;}
   vrCur=type;vrMark();
   vrStage.classList.remove('ready');
-  $('vrNote').textContent=t.label+' show unit, drag to look around';
-  $('vrCta').setAttribute('data-unit',t.label);
+  /* Aerial is not a unit type: generic note, and the price ask opens the
+     drawer without a unit (title "Get your price list"). */
+  var isUnit=/^[A-E]$/.test(type),cta=$('vrCta');
+  $('vrNote').textContent=isUnit?t.label+' show unit, drag to look around':'Aerial view of M Aurora, drag to look around';
+  if(isUnit){cta.setAttribute('data-unit',t.label);cta.textContent='Get this layout & price';}
+  else{cta.removeAttribute('data-unit');cta.textContent='Get the price list';}
   vrFrame.src=t.url;
   vrEl.classList.add('on');vrEl.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
