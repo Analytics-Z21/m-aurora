@@ -1577,6 +1577,12 @@ h2{font-size:clamp(34px,4.8vw,64px)}
 /* HEADLINES IN BOSKA MEDIUM (2026-10-07): h1 and h2 step down from 700 to 500; smaller serif (feature titles,
    FAQ questions, facts, form headline, unit type) stays Bold where weight carries legibility */
 h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
+/* Round 4 (16 Oct 2026, Justin): the pin line read as a footnote fourth in the hero; it replaces the "Open for Sale" eyebrow, larger and bolder,
+   pin 18 px in the site's accent, a deeper shadow so it holds over the photo */
+.hero .h-place{display:flex;align-items:center;gap:8px;margin:0 0 12px;font:600 15px/1.35 var(--fb);letter-spacing:.01em;text-shadow:0 1px 10px rgba(0,0,0,.85),0 0 2px rgba(0,0,0,.45)}
+.hero .h-place svg{flex:none;width:18px;height:18px}
+@media(min-width:1024px){.hero .h-place{font-size:16.5px;margin-bottom:16px}}
+@media(max-width:1023px) and (max-height:700px){.hero .h-place{margin-bottom:10px}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
@@ -1676,13 +1682,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-body">
       <div class="hero-inner">
         <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
-        <span class="h-eyebrow">Open for Sale</span>
-        <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
-        <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
+        <!-- Round 4 (16 Oct 2026, Justin): the place leads the hero copy in place of the "Open for Sale" eyebrow, larger so it reads at a glance -->
         <div class="h-place">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
           <span>Old Klang Road, Kuala Lumpur</span>
         </div>
+        <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
+        <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
         <div class="h-beds" role="group" aria-label="See layouts by bedrooms">
           <button type="button" class="h-bed" data-bed-type="A">1+1 bed</button>
           <button type="button" class="h-bed" data-bed-type="B">2 bed</button>
