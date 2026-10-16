@@ -1325,15 +1325,29 @@ html.js [data-stagger].rv.in>*{opacity:1;transform:none}
 html.hero-more #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.72) 45%,rgba(12,18,48,.94) 100%),url('_gal-entrance.webp') center 40%/cover no-repeat}
 #register .form-card{border-radius:4px;box-shadow:0 40px 90px -40px rgba(0,0,0,.6)}
 
-/* the story: a full-bleed facade with the copy on a glass card that overlaps it */
-#dawn .dawn-split{display:block;border:0;position:relative}
-.dawn-img{background-image:none}
-html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba(34,57,140,0) 24%),linear-gradient(0deg,var(--night0) 0%,rgba(12,18,48,0) 40%),url('_view.webp')}
-#dawn .dawn-img::after{display:none}
-#dawn .dawn-img{min-height:min(82vh,760px);background-position:center 35%;background-size:cover}
-#dawn .dawn-body{position:relative;z-index:2;max-width:620px;margin:-18vh 16px 0;padding:clamp(30px,4vw,56px);
-  background:rgba(12,18,48,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1)}
-@media(min-width:1024px){#dawn .dawn-body{margin:-30vh max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad))) 0 auto}}
+/* the story (16 Oct review, Justin): the balcony view over Old Klang Road IS the section's background, on phones
+   and desktop, with the heading and the copy card over it. No flat navy block above the image: only a neutral
+   darkening at the top and foot so the cream text reads over the sky. The image is landscape with the skyline on
+   the right, so phones crop to the right third (background-position 82%). */
+#dawn{position:relative;overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(48px,8vh,96px)}
+#dawn .wrap{position:relative;z-index:1}
+#dawn .sec-head{margin-bottom:0}
+#dawn .sec-head h2,#dawn .sec-head .eyebrow,#dawn .dawn-sub{text-shadow:0 2px 14px rgba(0,0,0,.55)}
+.dawn-bg{position:absolute;inset:0;z-index:0;background:var(--night0) url('_view.webp') 82% 40%/cover no-repeat}
+.dawn-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,28,.72) 0%,rgba(6,9,28,.42) 30%,rgba(6,9,28,.08) 52%,rgba(6,9,28,.3) 100%)}
+#dawn .dawn-split{display:block;border:0;position:relative;z-index:1;padding:0 16px}
+.dawn-img{display:none}
+#dawn .dawn-body{position:relative;max-width:620px;margin:0;padding:clamp(26px,4vw,52px);
+  background:rgba(12,18,48,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.1)}
+@media(min-width:1024px){
+  .dawn-bg{background-position:center 40%}
+  #dawn{min-height:min(calc(100vh - 70px),800px);padding:clamp(28px,4.5vh,56px) 0 clamp(24px,4vh,48px);gap:clamp(28px,5vh,64px)}
+  #dawn .sec-head h2{font-size:clamp(28px,2.7vw,40px)}
+  #dawn .dawn-body{padding:clamp(22px,3vh,34px) clamp(26px,2.4vw,38px);gap:10px;max-width:640px}
+  #dawn .dawn-body .copy{font-size:15px;line-height:1.55}
+  #dawn .dawn-split{padding:0 max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad)))}
+  #dawn .dawn-body{margin:0 0 0 auto}
+}
 
 /* twelve reasons, as an editorial list */
 .usp-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;border-top:1px solid rgba(255,255,255,.14)}
@@ -1366,11 +1380,11 @@ html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba
 /* scroll-linked parallax on the CGI, where the browser supports it (Chrome, Edge, Safari 26+) */
 @supports (animation-timeline: view()){
   @media(prefers-reduced-motion:no-preference){
-    #dawn .dawn-img{animation:r4-par linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    .dawn-bg{animation:r4-par linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
     #register{animation:r4-par-bg linear both;animation-timeline:view()}
   }
 }
-@keyframes r4-par{from{background-position:center 15%}to{background-position:center 75%}}
+@keyframes r4-par{from{background-position-y:22%}to{background-position-y:62%}}
 @keyframes r4-par-bg{from{background-position:center 0%,center 20%}to{background-position:center 0%,center 70%}}
 /* R4 v2: section rhythm. One continuous dawn wash down the page read as flat, so the dawn gradient
    now marks three moments only (the hero, the story, the closing form) and everything else
@@ -1382,8 +1396,7 @@ body{background:var(--night0)}
 .facts{border-top:0}
 
 /* the story: night lifting into dawn blue behind the heading, then the view */
-#dawn{background:linear-gradient(180deg,var(--night0) 0%,#16235C 55%,#22398C 100%)}
-#dawn .dawn-split{background:var(--night0);border-bottom:0}
+#dawn .dawn-split{background:transparent;border-bottom:0}
 .dawn-sub{font:500 16px/1.6 var(--fb);color:var(--cream2);letter-spacing:.01em}
 
 /* twelve reasons: flat night, the hairlines do the work */
@@ -1459,10 +1472,9 @@ h2{font-size:clamp(34px,4.8vw,64px)}
 /* the story on desktop: the view opens on the right, the interior side fades into night and the
    copy card sits over it, so nothing covers the skyline */
 @media(min-width:1024px){
-  html.hero-more .dawn-img{background-image:linear-gradient(180deg,#22398C 0%,rgba(34,57,140,0) 24%),
-    linear-gradient(0deg,var(--night0) 0%,rgba(12,18,48,0) 40%),
-    linear-gradient(90deg,var(--night0) 0%,rgba(12,18,48,.86) 22%,rgba(12,18,48,0) 50%),url('_view.webp')}
-  #dawn .dawn-body{margin:-30vh auto 0 max(var(--pad),calc((100vw - var(--max)) / 2 + var(--pad)))}
+  .dawn-bg::after{background:linear-gradient(180deg,rgba(6,9,28,.66) 0%,rgba(6,9,28,.3) 32%,rgba(6,9,28,.04) 55%,rgba(6,9,28,.26) 100%),
+    linear-gradient(90deg,rgba(6,9,28,.55) 0%,rgba(6,9,28,0) 42%)}
+  #dawn .dawn-body{margin:0 auto 0 0}
 }
 
 /* facilities on desktop: the sky plan, the category tabs and the list share the right column beside
@@ -1797,7 +1809,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- DAWN STORY: live H2 block 1 verbatim (Welcome...) + brand intro. Split layout. -->
-<section class="sec" id="dawn" style="padding-bottom:0">
+<section class="sec" id="dawn">
+  <div class="dawn-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">A New Dawn Awaits</span>
@@ -1806,13 +1819,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
   <div class="dawn-split rv">
-    <div class="dawn-img" role="img" aria-label="The view over Old Klang Road from an M Aurora balcony"></div>
     <div class="dawn-body">
       <h3 class="promise">Inspired by <b>The Promise of Dawn</b></h3>
       <p class="copy">Inspired by the magnificent and breathtaking Northern Lights, M AURORA kindles the hope of a new dawn where light, elegance, and positive energy form the very soul of its community.</p>
-      <p class="copy">Located on Old Klang Road, Kuala Lumpur, this freehold serviced residence features two modern 46-storey towers set across 5.2 acres of prime land. Offering ample amenities, exceptional accessibility, top-tier security, and a variety of unit layouts, M AURORA provides a home tailored to diverse needs in a stunning and awe-inspiring modern haven.</p>
       <div class="more-wrap" data-collapsed="true">
         <div class="more-body">
+      <p class="copy">Located on Old Klang Road, Kuala Lumpur, this freehold serviced residence features two modern 46-storey towers set across 5.2 acres of prime land. Offering ample amenities, exceptional accessibility, top-tier security, and a variety of unit layouts, M AURORA provides a home tailored to diverse needs in a stunning and awe-inspiring modern haven.</p>
           <p class="copy">M Aurora, the latest freehold serviced apartment, is now open for sale. It marks an exciting new chapter in Old Klang Road&rsquo;s development. This freehold serviced apartment comprises 1,544 units spread across two 46-storey towers on a 5.24-acre site, making it one of the most significant launches in the area this year. Positioned in a mature yet ever-growing neighborhood, this property redefines city living by focusing on long-term value and connectivity. Every aspect is carefully designed to complement future-ready living experiences with integrated smart space planning.</p>
           <p class="copy">Unlike leasehold projects with tenure restrictions, M Aurora&rsquo;s freehold status promises enduring value in an area poised for continuous growth. With Old Klang Road undergoing continuous transformation, owning a home here means being part of a community that&rsquo;s moving forward.</p>
           <p class="copy">Developed by Mah Sing Group, one of Malaysia's most established property developers with <a href="https://www.starproperty.my/developer/6/mah-sing-group#:~:text=Completed%20Projects%20(79%20Projects)" target="_blank" rel="noopener">over 79 completed projects nationwide</a>, M Aurora is more than just a residence. This development is a gateway to urban sophistication and lasting property appreciation.</p>
