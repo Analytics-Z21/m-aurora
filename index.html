@@ -1325,6 +1325,15 @@ html.js [data-stagger].rv.in>*{opacity:1;transform:none}
 #layouts .cout .l,#layouts .cout .d{color:var(--ink-m)}
 #layouts .cout .v{color:var(--ink-d)}
 @media(max-width:1023px){#layouts .unit{border-radius:0}#layouts .calc{border-radius:0}}
+/* Round 3 (16 Oct 2026, Justin): the 360 tour link (#uVt) is a pill at the foot of the plan box, as on M Aria, in the
+   ink of the selected tab. The box gains a bottom band so the pill never covers the drawing. #planWrap in the
+   selector so it outranks #layouts .u-link and the base .u-link link style the element still carries. */
+#planWrap{padding-bottom:72px}
+@media(min-width:1024px){#planWrap{padding-bottom:84px}}
+#planWrap .plan-vt{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:rgba(21,27,59,.92);color:var(--cream);opacity:1;font:600 13px/1.2 var(--fb);letter-spacing:.02em;text-decoration:none;white-space:nowrap;cursor:pointer;box-shadow:0 12px 24px -12px rgba(21,27,59,.7);transition:background .15s}
+@media(min-width:1024px){#planWrap .plan-vt{bottom:20px}}
+#planWrap .plan-vt svg{flex:none;color:var(--cream2)}
+@media(hover:hover) and (pointer:fine){#planWrap .plan-vt:hover{background:var(--ink-d)}}
 
 /* fast-track form: cinematic, over the grand entrance render (loads after the page) */
 #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.74) 45%,rgba(12,18,48,.94) 100%)}
@@ -1482,6 +1491,16 @@ h2{font-size:clamp(34px,4.8vw,64px)}
     linear-gradient(90deg,rgba(6,9,28,.55) 0%,rgba(6,9,28,0) 42%)}
   #dawn .dawn-body{margin:0 auto 0 0}
 }
+/* Round 3 (16 Oct 2026, Justin): the sub-heading and the italic accent read 1.97 to 2.84:1 over the grey sky. A
+   darkening behind the heading block only, anchored to the sub-heading: it holds behind the accent line and the
+   sub-heading and fades out 28px under it, so the skyline below the heading and around the card keeps its pixels.
+   On desktop it fades in from the heading column, so the balcony wall and curtain on the left keep theirs too. */
+#dawn .dawn-sub{position:relative}
+#dawn .dawn-sub::before{content:'';position:absolute;z-index:-1;left:-50vw;right:-50vw;bottom:-28px;height:300px;pointer-events:none;
+  background:linear-gradient(0deg,rgba(6,9,28,0) 0,rgba(6,9,28,.22) 12px,rgba(6,9,28,.42) 28px,rgba(6,9,28,.42) 150px,rgba(6,9,28,.2) 220px,rgba(6,9,28,0) 300px)}
+@media(min-width:1024px){#dawn .dawn-sub::before{left:-72px;
+  background:linear-gradient(0deg,rgba(6,9,28,0) 0,rgba(6,9,28,.26) 12px,rgba(6,9,28,.48) 28px,rgba(6,9,28,.48) 150px,rgba(6,9,28,.22) 220px,rgba(6,9,28,0) 300px);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 72px);mask-image:linear-gradient(90deg,transparent 0,#000 72px)}}
 
 /* facilities on desktop: the sky plan, the category tabs and the list share the right column beside
    the podium plan, instead of a short thumbnail over an empty block and the list stacked below */
@@ -1774,6 +1793,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="unit-badge">Open for Sale</span>
         <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
         <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
+        <!-- Round 3 (16 Oct 2026): the 360 tour link moved here from under the ask, as a pill at the foot of the plan
+             box (same id, href, data-tour-source and modal binding); the card keeps #uCta as its one filled ask -->
+        <a class="u-link plan-vt" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Take the 360&deg; virtual tour</a>
       </div>
       <div class="unit-info">
         <div class="unit-head">
@@ -1789,7 +1811,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A" data-cta-id="units_get_price">Get the Type A price list</button>
-          <a class="u-link" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card">Take the 360&deg; virtual tour</a>
         </div>
       </div>
     </div>
@@ -2584,8 +2605,10 @@ lbStage.addEventListener('touchmove',function(e){
     lbApply();e.preventDefault();}
 },{passive:false});
 lbStage.addEventListener('touchend',function(){lbZ.drag=false;lbZ.pd=0;});
-$('planWrap').addEventListener('click',function(){
+$('planWrap').addEventListener('click',function(e){
   if(window._swiped){window._swiped=false;return;}
+  /* Round 3 (16 Oct 2026): the 360 pill sits inside the plan box; its own handler opens the tour, so it is not an enlarge */
+  if(e&&e.target&&e.target.closest&&e.target.closest('#uVt'))return;
   var i=$('planImg');openLb(i.src,i.alt,'Type '+cur+' floor plan');});
 ['facPlanMain','facPlanSky'].forEach(function(id){
   var el=$(id);if(!el)return;
