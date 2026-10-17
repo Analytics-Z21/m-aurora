@@ -1623,6 +1623,23 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 /* under 360 px wide (a 320 px first-generation iPhone SE, folding-phone cover screens): the four bed chips keep one
    row, so the ask and the trust line stay inside the first screen there too */
 @media(max-width:359px){.hero .h-beds{gap:6px}.hero .h-bed{padding:0 9px;font-size:12.5px}}
+/* TRIAL hero-center (17 Oct 2026, Justin: "take M Aurora as sample, try the mobile: remove the shading and centre align
+   the text and logo"; "keep Sold directly by Mah Sing Group, over 79 completed projects in one sentence"). Phones only:
+   no scrim over the photo (the text keeps its own shadows); the mark, place, h1, fact, chips, ask, trust line and the
+   slide caption are centred; the trust line stays on one line across the screen less 16 px a side, its size following
+   the screen width (12.5 px max, about 11.6 px on a 390 phone). */
+@media(max-width:767px){
+  .hero-scrim{background:none}
+  .hero .hero-inner{text-align:center}
+  .hero .h-lk{align-self:center}
+  .hero .h-place{justify-content:center}
+  .hero .h-beds{justify-content:center}
+  .hero .h-trust{white-space:nowrap;text-wrap:nowrap;margin-left:calc(16px - var(--pad));margin-right:calc(16px - var(--pad));
+    font-size:min(12.5px,calc((100vw - 32px) / 31))}
+  .h-slides{left:0;right:0;justify-content:center}
+}
+/* under 360 px wide one line would need type under 10.5 px: the trust line wraps to two balanced lines there instead */
+@media(max-width:359px){.hero .h-trust{white-space:normal;text-wrap:balance;margin-left:0;margin-right:0;font-size:11.5px}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
