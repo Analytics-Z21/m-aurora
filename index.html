@@ -1583,6 +1583,46 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 .hero .h-place svg{flex:none;width:18px;height:18px}
 @media(min-width:1024px){.hero .h-place{font-size:16.5px;margin-bottom:16px}}
 @media(max-width:1023px) and (max-height:700px){.hero .h-place{margin-bottom:10px}}
+/* Round 5 (17 Oct 2026, Justin): the phone hero reads as the M Grand Minori round-6 hero does. Top, under the nav: the
+   M Aurora mark, place, h1, fact line and bed chips. Foot of the hero (the bottom of the first screen): the hero's own
+   ask, full width, with the trust line under it; the slide caption and dots stay under the trust line. The towers show
+   between them. The scrim darkens the copy band at the top and the foot and leaves the middle of the photo clear.
+   Tablet and desktop unchanged. */
+@media(max-width:767px){
+  .hero-body{justify-content:flex-start;padding-bottom:56px}
+  .hero .hero-inner{display:flex;flex-direction:column;align-items:stretch;flex:1 1 auto}
+  .hero .h-lk{align-self:flex-start}
+  .hero .h-beds{margin-bottom:16px}
+  .hero .hero-ctas{margin-top:auto;width:100%}
+  .hero .hero-ctas .btn{flex:1 1 100%;width:100%}
+  .hero .h-trust{margin-top:10px;text-wrap:balance}
+  .h-slides{bottom:12px}
+  .hero-scrim{background:linear-gradient(180deg,rgba(6,9,28,.46) 0,rgba(6,9,28,.68) 150px,rgba(6,9,28,.68) 395px,rgba(6,9,28,0) 460px),
+    linear-gradient(0deg,var(--night0) 0,rgba(6,9,28,.82) 100px,rgba(6,9,28,0) 170px)}
+}
+/* short phones (700 px tall or less, e.g. a 393x659 iPhone Safari screen): the mark steps down so the stack ends well
+   above the ask; 600 px or less (iPhone SE): the stack closes up under the nav and the foot tightens, so the ask, the
+   trust line and the slide dots all stay inside the first screen */
+@media(max-width:767px) and (max-height:700px){
+  .hero-body{padding-top:96px}
+  .hero .h-lk{width:52px;margin-bottom:12px}
+  .hero-scrim{background:linear-gradient(180deg,rgba(6,9,28,.46) 0,rgba(6,9,28,.68) 150px,rgba(6,9,28,.68) 355px,rgba(6,9,28,0) 420px),
+    linear-gradient(0deg,var(--night0) 0,rgba(6,9,28,.82) 100px,rgba(6,9,28,0) 170px)}
+}
+@media(max-width:767px) and (max-height:600px){
+  .hero-body{padding-top:88px;padding-bottom:44px}
+  .hero .h-lk{width:40px;margin-bottom:10px}
+  .hero h1{margin-bottom:12px}
+  .hero .h-fact{margin-bottom:8px}
+  .hero .h-beds{margin-bottom:12px}
+  .hero .h-trust{margin-top:8px}
+  .h-slides{bottom:8px}
+  .hero-scrim{background:linear-gradient(180deg,rgba(6,9,28,.46) 0,rgba(6,9,28,.68) 120px,rgba(6,9,28,.68) 315px,rgba(6,9,28,0) 380px),
+    linear-gradient(0deg,var(--night0) 0,rgba(6,9,28,.82) 92px,rgba(6,9,28,0) 160px)}
+}
+/* under 360 px wide (a 320 px first-generation iPhone SE, folding-phone cover screens): the four bed chips keep one
+   row, so the ask and the trust line stay inside the first screen there too */
+@media(max-width:359px){.hero .h-beds{gap:6px}.hero .h-bed{padding:0 9px;font-size:12.5px}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
@@ -3054,27 +3094,38 @@ var heroAsk=document.querySelector('[data-open-lead="hero"]'),navAsk=document.qu
 var hasIO='IntersectionObserver' in window;
 var heroAskInView=(function(){if(!heroAsk)return false;var r=heroAsk.getBoundingClientRect();return r.top>=0&&r.bottom<=window.innerHeight;})();
 /* item 12 (2026-10-05): the bar also steps aside while the unit-card or calculator ask is on screen,
-   so a view never carries two identical asks */
-var secAskInView={};
+   so a view never carries two identical asks.
+   Round 5 (17 Oct 2026, Justin: "when there is CTA for price hide the sticky"): widened to every in-page price ask,
+   each [data-open-lead] and each price or register [data-cta-id] outside the nav, the mobile menu, the rail, the bar,
+   the lead drawer and the footer: the hero ask, the unit card, the calculator, the FAQ's "register below" link (only
+   while its answer is open, as a closed answer clips it) and the zoom and 360 asks in their overlays. The bottom 72 px
+   the bar covers does not count, so an ask still under the bar keeps the bar until it clears. An ask in a closed
+   overlay never counts: IntersectionObserver ignores opacity and visibility, so checkVisibility decides when the bar
+   updates. The form rule stays, now judged against the screen rather than the section's own height (a tall form
+   section could be 130 px or more into view before it reached 18% of itself), and the footer (#contact: the phone,
+   email and permit lines, right under the full form) joins it. The nav ask still follows the hero ask alone. */
+var asks=Array.prototype.filter.call(document.querySelectorAll('[data-open-lead],[data-cta-id]'),function(el){
+  return !el.closest('#siteNav,#mm,#rail,#sticky,#ld,footer')&&(el.hasAttribute('data-open-lead')||/price|register/.test(el.getAttribute('data-cta-id')||''));});
+var askSeen=asks.map(function(a){var r=a.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<window.innerHeight-72;}),
+  formSecs=[regQuick,regFull,document.getElementById('contact')].filter(Boolean);
+function shown(el){return typeof el.checkVisibility!=='function'||el.checkVisibility({opacityProperty:true,visibilityProperty:true,checkOpacity:true,checkVisibilityCSS:true});}
+function askOnScreen(){for(var i=0;i<asks.length;i++){if(askSeen[i]&&shown(asks[i]))return true;}return false;}
+function formOnScreen(){var vh=window.innerHeight;return formSecs.some(function(el){var r=el.getBoundingClientRect(),v=Math.min(r.bottom,vh)-Math.max(r.top,0);
+  return v>0&&v>=.18*Math.min(r.height,vh);});}
 function stickyState(){var s=window.scrollY>420;
   var askOff=hasIO?!heroAskInView:s;
-  var secOn=!!(secAskInView.uCta||secAskInView.cCta);
-  sticky.classList.toggle('on',askOff&&!formInView&&!secOn);
+  formInView=formOnScreen();
+  sticky.classList.toggle('on',(hasIO?!askOnScreen():askOff)&&!formInView);
   if(navAsk)navAsk.classList.toggle('quiet',!askOff);
   toTop.classList.toggle('on',s);}
 window.addEventListener('scroll',stickyState,{passive:true});
 if(hasIO&&heroAsk){new IntersectionObserver(function(es){heroAskInView=es[0].isIntersecting;stickyState();},{threshold:.6}).observe(heroAsk);}
-if(hasIO){var sio=new IntersectionObserver(function(es){es.forEach(function(e){secAskInView[e.target.id]=e.isIntersecting;});stickyState();},{threshold:.6});
-  ['uCta','cCta'].forEach(function(id){var el=document.getElementById(id);if(el)sio.observe(el);});}
-if(hasIO){
-  var seen={};
-  var fio=new IntersectionObserver(function(es){
-    es.forEach(function(e){seen[e.target.id]=e.isIntersecting;});
-    formInView=!!(seen['register']||seen['register-full']);
-    stickyState();
-  },{threshold:.18});
-  if(regQuick)fio.observe(regQuick);if(regFull)fio.observe(regFull);
-}
+if(hasIO&&asks.length){var aio=new IntersectionObserver(function(es){es.forEach(function(e){askSeen[asks.indexOf(e.target)]=e.isIntersecting;});stickyState();},
+  {rootMargin:'0px 0px -72px 0px',threshold:0});
+  asks.forEach(function(a){aio.observe(a);});}
+/* the form sections' observer only re-checks the bar when layout moves without a scroll (fonts, show more) */
+if(hasIO){var fio=new IntersectionObserver(function(){stickyState();},{threshold:[0,.18,.5,1]});
+  formSecs.forEach(function(el){fio.observe(el);});}
 stickyState();
 toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
