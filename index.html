@@ -1629,7 +1629,6 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
    slide caption are centred; the trust line stays on one line across the screen less 16 px a side, its size following
    the screen width (12.5 px max, about 11.6 px on a 390 phone). */
 @media(max-width:767px){
-  .hero-scrim{background:none}
   .hero .hero-inner{text-align:center}
   .hero .h-lk{align-self:center}
   .hero .h-place{justify-content:center}
@@ -1640,6 +1639,24 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 }
 /* under 360 px wide one line would need type under 10.5 px: the trust line wraps to two balanced lines there instead */
 @media(max-width:359px){.hero .h-trust{white-space:normal;text-wrap:balance;margin-left:0;margin-right:0;font-size:11.5px}}
+/* TRIAL v2 (17 Oct 2026, research-led phone hero; record audit/m-aurora/2026-10-16_story-view-bg.md): one still image,
+   the towers at dusk (the slideshow does not start on phones; slides 2 to 4 are bright day and interior renders that no
+   light shading can carry text over, and few visitors see past slide 1); a light veil behind the copy (hung on the chips row)
+   and a floor fade behind the ask and trust line, both measured on that one image; the bed chips show their from-price under the label
+   (from data-from, so the button text and its tracking values are unchanged). */
+@media(max-width:767px){
+  .hs-2,.hs-3,.hs-4,.h-slides{display:none}
+  .hero-art.hs-1{opacity:1}
+  .hero-body{padding-bottom:28px}
+  .hero-scrim{background:linear-gradient(0deg,rgba(6,9,28,.7) 0,rgba(6,9,28,.7) 70px,rgba(6,9,28,0) 160px)}
+  /* the copy veil hangs on the chips row, so it always ends 40 px under the copy whatever the phone's height */
+  .hero .h-beds{position:relative}
+  .hero .h-beds::before{content:'';position:absolute;z-index:-1;left:-100vw;right:-100vw;bottom:-40px;height:200vh;pointer-events:none;
+    background:linear-gradient(0deg,rgba(6,9,28,0) 0,rgba(6,9,28,.55) 48px,rgba(6,9,28,.55) 100%)}
+  .hero .h-bed{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;gap:1px;min-height:52px;line-height:1.15}
+  .hero .h-bed[data-from]::after{content:attr(data-from);font:600 11.5px/1.2 var(--fb);letter-spacing:.01em;color:var(--blush)}
+}
+@media(max-width:767px) and (max-height:600px){.hero-body{padding-bottom:20px}.hero .h-bed{min-height:48px}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
@@ -1747,10 +1764,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
         <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
         <div class="h-beds" role="group" aria-label="See layouts by bedrooms">
-          <button type="button" class="h-bed" data-bed-type="A">1+1 bed</button>
-          <button type="button" class="h-bed" data-bed-type="B">2 bed</button>
-          <button type="button" class="h-bed" data-bed-type="C">3 bed</button>
-          <button type="button" class="h-bed" data-bed-type="E">4 bed</button>
+          <button type="button" class="h-bed" data-bed-type="A" data-from="RM339K">1+1 bed</button>
+          <button type="button" class="h-bed" data-bed-type="B" data-from="RM516K">2 bed</button>
+          <button type="button" class="h-bed" data-bed-type="C" data-from="RM601K">3 bed</button>
+          <button type="button" class="h-bed" data-bed-type="E" data-from="RM682K">4 bed</button>
         </div>
         <div class="hero-ctas">
           <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_register">Get Price List Now</button>
@@ -2502,7 +2519,9 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
     hm.setAttribute('data-slide',String(cur));
     $('hCap').textContent=caps[cur];
   }
-  function start(){if(reduce||timer)return;timer=setInterval(function(){go(cur+1);},6000);}
+  /* TRIAL v2: phones keep slide 1 (the towers at dusk) still */
+  var phoneStill=window.matchMedia('(max-width:767px)');
+  function start(){if(reduce||timer||phoneStill.matches)return;timer=setInterval(function(){go(cur+1);},6000);}
   function stop(){if(timer){clearInterval(timer);timer=null;}}
   dots.forEach(function(d){d.addEventListener('click',function(){go(+d.getAttribute('data-hs'));stop();start();});});
   hm.addEventListener('mouseenter',stop);
