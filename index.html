@@ -1657,6 +1657,53 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
   .hero .h-bed[data-from]::after{content:attr(data-from);font:600 11.5px/1.2 var(--fb);letter-spacing:.01em;color:var(--blush)}
 }
 @media(max-width:767px) and (max-height:600px){.hero-body{padding-bottom:20px}.hero .h-bed{min-height:48px}}
+/* TRIAL hero-kempas (17 Oct 2026): the phone hero in the Kempas Residences Block C pattern (MLDC, our build). Ribbon tags
+   top left over the photo; the copy stacks at the foot, left aligned: the h1 (verbatim), the place and fact lines as the
+   lead, the four bed types with their from-prices as Kempas's chamfered fact panel (still the tappable chips, now with a
+   chevron), one full-width ask, the trust line on one line. A dark fade hangs from just above the title, so the photo
+   above it stays clear at every phone height. No hero lockup (the nav carries it, as on Kempas) and no second button
+   (Aurora has no WhatsApp number, and a second hero button cut the price ask here before: 1.6 to 4.2 per 100 views when
+   View Layouts went). Ribbon colours are the dawn blue and blush: orange is the ask's alone on this site. */
+@media(min-width:768px){.hk-ribbon{display:none}}
+@media(max-width:767px){
+  .hk-ribbon{--tag-h:26px;position:absolute;top:104px;left:var(--pad);z-index:3;display:flex;align-items:flex-start;
+    font:600 12px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase}
+  .hk-tag{display:block;flex:0 0 auto}
+  .hk-tag-main{display:flex;align-items:stretch;height:var(--tag-h)}
+  .hk-tag-text{display:flex;align-items:center;line-height:1;padding:6px 12px;white-space:nowrap;background:var(--tag-c);color:var(--tag-t)}
+  .hk-tag-side{position:relative;width:calc(var(--tag-h) / 2);flex:0 0 calc(var(--tag-h) / 2)}
+  .hk-tag-sq{position:absolute;left:0;width:100%;height:50%;background:var(--tag-c)}
+  .hk-tag-side-l .hk-tag-sq{top:0}
+  .hk-tag-side-r .hk-tag-sq{bottom:0}
+  .hk-tag-a{--tag-c:var(--dawn-deep);--tag-t:var(--cream)}
+  .hk-tag-b{--tag-c:var(--blush);--tag-t:#0B102A}
+  .hk-tag + .hk-tag{margin-left:calc(-1 * var(--tag-h) / 2)}
+  /* the stack sits at the foot of the hero, Kempas order */
+  .hero .h-lk{display:none}
+  .hero .hero-inner{justify-content:flex-end;text-align:left}
+  .hero h1{order:-1;position:relative;text-align:left;font-size:clamp(34px,9.6vw,40px);line-height:1.08;margin:0 0 12px}
+  .hero h1::before{content:'';position:absolute;z-index:-1;left:-100vw;right:-100vw;top:-64px;height:200vh;pointer-events:none;
+    background:linear-gradient(180deg,rgba(6,9,28,0) 0,rgba(6,9,28,.86) 88px,rgba(6,9,28,.86) 100%)}
+  .hero .h-place{justify-content:flex-start;margin:0 0 4px}
+  .hero .h-fact{text-align:left;margin:0}
+  .hero .h-beds::before{content:none}
+  .hero-scrim{background:linear-gradient(180deg,rgba(6,9,28,.34) 0,rgba(6,9,28,0) 170px)}
+  /* the fact panel: the bed chips as a 2 x 2 chamfered grid, label in small caps, from-price below */
+  .hero .h-beds{--ch:12px;display:grid;grid-template-columns:1fr 1fr;gap:1px;margin:16px 0 0;padding:0;
+    background:rgba(220,224,242,.2);border:1px solid rgba(220,224,242,.22);
+    clip-path:polygon(var(--ch) 0,calc(100% - var(--ch)) 0,100% var(--ch),100% calc(100% - var(--ch)),calc(100% - var(--ch)) 100%,var(--ch) 100%,0 calc(100% - var(--ch)),0 var(--ch))}
+  .hero .h-bed{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:0;margin:0;padding:12px 34px 12px 14px;
+    border:0;border-radius:0;background:#0C1230 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='16' viewBox='0 0 10 16'%3E%3Cpath d='M2 2l6 6-6 6' fill='none' stroke='%23DCE0F2' stroke-opacity='.55' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 14px center;
+    -webkit-backdrop-filter:none;backdrop-filter:none;text-align:left;font:600 11.5px/1.2 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--blush)}
+  .hero .h-bed[data-from]::after{content:attr(data-from);font:600 20px/1.2 var(--fb);letter-spacing:0;text-transform:none;color:var(--cream)}
+  .hero .h-bed:active{transform:none;background-color:#141B42}
+  .hero .hero-ctas,.hero .hero-inner .hero-ctas{margin-top:16px!important}
+  .hero .h-trust{text-align:left;margin-left:0;margin-right:calc(16px - var(--pad));font-size:min(12.5px,calc((100vw - var(--pad) - 16px) / 31))}
+}
+/* short phones: the grid cells and the title tighten so the ribbon keeps clear of the stack */
+@media(max-width:767px) and (max-height:700px){.hero h1{font-size:clamp(30px,8.6vw,36px);margin-bottom:10px}.hero .h-bed{padding-top:10px;padding-bottom:10px}.hero .h-beds{margin-top:12px}}
+@media(max-width:767px) and (max-height:600px){.hk-ribbon{top:94px}.hero h1{font-size:30px}.hero .h-bed{padding-top:8px;padding-bottom:8px}.hero .h-bed[data-from]::after{font-size:18px}}
+@media(max-width:359px){.hero .h-trust{margin-right:0}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
@@ -1753,6 +1800,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-art hs-3" aria-hidden="true"></div>
     <div class="hero-art hs-4" aria-hidden="true"></div>
     <div class="hero-scrim" aria-hidden="true"></div>
+    <!-- TRIAL hero-kempas (17 Oct 2026, Justin: "can we try a hero banner like this", Kempas Residences Block C): ribbon tags, phones only -->
+    <div class="hk-ribbon" aria-label="Freehold, open for sale"><div class="hk-tag hk-tag-a"><div class="hk-tag-main"><div class="hk-tag-side hk-tag-side-l"><div class="hk-tag-sq"></div></div><div class="hk-tag-text">Freehold</div><div class="hk-tag-side hk-tag-side-r"><div class="hk-tag-sq"></div></div></div></div><div class="hk-tag hk-tag-b"><div class="hk-tag-main"><div class="hk-tag-side hk-tag-side-l"><div class="hk-tag-sq"></div></div><div class="hk-tag-text">Open for Sale</div><div class="hk-tag-side hk-tag-side-r"><div class="hk-tag-sq"></div></div></div></div></div>
     <div class="hero-body">
       <div class="hero-inner">
         <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
