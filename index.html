@@ -1634,6 +1634,39 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
   .hero .h-trust{white-space:nowrap;text-wrap:nowrap;margin-right:calc(16px - var(--pad));font-size:min(12.5px,calc((100vw - var(--pad) - 16px) / 31))}
 }
 @media(max-width:359px){.hero .h-trust{white-space:normal;text-wrap:balance;margin-right:0;font-size:11.5px}}
+/* TRIAL hero-gamuda (18 Oct 2026, Justin: from an iPhone 16 Pro Max the hero was squeezed short; reference Gamuda Cove,
+   "clean and clear about the projects ... it will be great if we have CTA as well"; "new hero design take M Aurora only").
+   Phones (767 px and under): the hero is no longer held to the screen. Top, on a clean night-to-dawn ground, centred: the
+   M Aurora mark, the place line, the h1 as a two-line display title with a hairline ornament under it, the fact line,
+   the bed chips, the ask and the one-line trust line. Below it the hero photos as their own full-width band (100vw; the
+   towers photo is 1000 x 1280, drawn from the bottom so only its empty top sky is cropped and the tower tops reach the
+   first screen), nothing over them, still cross-fading, with the round-6 backdrop gradient on the band and a 64 px fade
+   into its top. The ground reaches the towers photo's top sky colour (#274DB0) exactly where the band starts. */
+@media(max-width:767px){
+  .hero-media{min-height:0!important;background:linear-gradient(180deg,var(--night0) 0,#16297A calc(100% - 100vw - 220px),#274DB0 calc(100% - 100vw))}
+  .hero-art{top:auto!important;height:100vw}
+  .hs-1{background-position:center bottom!important}
+  /* the slow zoom lifts the photo's top edge a few px above the band's fade and draws a light line; the band needs no zoom */
+  html.js .hero-art.on{animation:none!important;transform:none!important}
+  .hero-scrim{top:auto!important;height:100vw;background:linear-gradient(180deg,#274DB0 0,rgba(39,77,176,0) 64px),
+    linear-gradient(180deg,rgba(22,34,86,.38) 0%,rgba(22,34,86,.16) 26%,rgba(22,34,86,.4) 50%,rgba(14,22,62,.88) 90%,var(--night0) 100%)!important}
+  .hero-body{justify-content:flex-start!important;padding:96px var(--pad) calc(100vw + 8px)!important}
+  .hero .hero-inner{flex:0 0 auto;align-items:center;text-align:center}
+  .hero .h-lk{align-self:center;width:58px;margin:0 0 14px}
+  .hero .h-place{justify-content:center;margin-bottom:10px}
+  .hero h1{text-align:center;font-size:clamp(40px,11.4vw,50px);line-height:1.04;margin:0 0 6px}
+  .hero h1 em{display:block}
+  .hero h1::after{content:'';display:block;width:184px;height:10px;margin:14px auto 0;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='184' height='10' viewBox='0 0 184 10'%3E%3Cpath d='M0 5h80M104 5h80' stroke='%23F6C6D2' stroke-opacity='.55'/%3E%3Cpath d='M92 0l5 5-5 5-5-5z' fill='%23F6C6D2'/%3E%3C/svg%3E") center/184px 10px no-repeat}
+  .hero .h-fact{text-align:center;margin:12px 0 16px}
+  .hero .h-beds{justify-content:center;margin:0 0 16px}
+  .hero .hero-ctas,.hero .hero-inner .hero-ctas{margin-top:0!important}
+  .hero .h-trust{text-align:center;margin-left:calc(16px - var(--pad));margin-right:calc(16px - var(--pad));font-size:min(12.5px,calc((100vw - 32px) / 31))}
+  .h-slides{left:0;right:0;justify-content:center}
+}
+@media(max-width:767px) and (max-height:700px){.hero-body{padding-top:90px!important}.hero .h-lk{width:50px;margin-bottom:10px}.hero h1{font-size:clamp(36px,10.4vw,44px)}.hero h1::after{margin-top:10px}}
+@media(max-width:767px) and (max-height:600px){.hero-body{padding-top:86px!important}.hero .h-lk{display:none}.hero .h-fact{margin:10px 0 12px}.hero .h-beds{margin-bottom:12px}}
+@media(max-width:359px){.hero .h-trust{margin-left:0;margin-right:0}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
