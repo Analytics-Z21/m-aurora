@@ -1690,6 +1690,15 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
   .hero .h-beds::before{content:'';position:absolute;z-index:-1;left:-100vw;right:-100vw;bottom:-40px;height:200vh;pointer-events:none;
     background:linear-gradient(0deg,rgba(8,12,38,0) 0,rgba(8,12,38,.6) 40px,rgba(8,12,38,.6) 100%)}
 }
+/* (19 Oct, Justin: "remove the top shade, keep the bottom shade only so the Get Price List Now is clear") phones: no veil
+   behind the top copy and no tint over the photo's top; the scrim is a bottom shade only, behind the ask, the trust line
+   and the slide caption (night at the foot, .85 at 120 px, clear by 240 px). The top copy keeps its own text shadow,
+   a touch firmer, as the only help over the photo. */
+@media(max-width:767px){
+  .hero .h-beds::before{content:none!important}
+  .hero-scrim{background:linear-gradient(0deg,var(--night0) 0,rgba(10,16,48,.85) 120px,rgba(10,16,48,0) 240px)!important}
+  .hero .h-place,.hero h1,.hero .h-fact{text-shadow:0 1px 3px rgba(0,0,0,.6),0 2px 18px rgba(0,0,0,.55)}
+}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
