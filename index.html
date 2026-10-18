@@ -1667,6 +1667,18 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 @media(max-width:767px) and (max-height:700px){.hero-body{padding-top:90px!important}.hero .h-lk{width:50px;margin-bottom:10px}.hero h1{font-size:clamp(36px,10.4vw,44px)}.hero h1::after{margin-top:10px}}
 @media(max-width:767px) and (max-height:600px){.hero-body{padding-top:86px!important}.hero .h-lk{display:none}.hero .h-fact{margin:10px 0 12px}.hero .h-beds{margin-bottom:12px}}
 @media(max-width:359px){.hero .h-trust{margin-left:0;margin-right:0}}
+/* SAMPLE hero-clean (19 Oct 2026, Justin, from his own edit of the hero-gamuda first screen: "I'm looking for a cleaner
+   layout"; "make the logo bigger so the M Aurora is clear"; "yes I removed the thin line"). Phones: no ornament under the
+   title; the M Aurora mark is the hero's lead, 96 px wide (158 px tall) so its AURORA lettering reads, 80 px at 700 px
+   tall or less and 56 px on iPhone SE-size screens (it was hidden there); the rest of the stack is the hero-gamuda one. */
+@media(max-width:767px){
+  .hero h1::after{content:none!important;display:none!important}
+  .hero h1{margin-bottom:10px}
+  .hero .h-fact{margin:8px 0 16px}
+  .hero .h-lk{display:block!important;width:96px!important;margin:0 0 18px!important}
+}
+@media(max-width:767px) and (max-height:700px){.hero .h-lk{width:80px!important;margin-bottom:14px!important}}
+@media(max-width:767px) and (max-height:600px){.hero .h-lk{width:56px!important;margin-bottom:10px!important}.hero-body{padding-top:84px!important}}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
