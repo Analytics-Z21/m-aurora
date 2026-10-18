@@ -1676,6 +1676,20 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 /* iPhone SE-size screens: the mark and the stat sub-lines step aside so the ask stays on screen */
 @media(max-width:767px) and (max-height:600px){.hero .h-lk{width:56px;margin-bottom:10px}.hero h1{font-size:30px}}
 @media(max-width:359px){.hero .h-trust{margin-left:0;margin-right:0}}
+/* SAMPLE hero-split (19 Oct 2026, Justin: "will it look more clean if we split to two sections, keep the Get Price List
+   at the bottom then the rest at the top?"). Phones: the copy group (mark, place, h1, fact, chips) sits at the top under
+   the nav and the ask with the trust line at the foot of the one-screen hero; the photo shows between them. The veil
+   behind the copy now hangs on the chips row (ends 40 px under it) instead of covering the whole stack; the round-6b
+   backdrop darkens the foot behind the ask. */
+@media(max-width:767px){
+  .hero-body{justify-content:flex-start!important}
+  .hero .hero-inner{flex:1 1 auto!important;display:flex;flex-direction:column}
+  .hero .hero-inner::before{content:none!important}
+  .hero .hero-ctas,.hero .hero-inner .hero-ctas{margin-top:auto!important}
+  .hero .h-beds{position:relative}
+  .hero .h-beds::before{content:'';position:absolute;z-index:-1;left:-100vw;right:-100vw;bottom:-40px;height:200vh;pointer-events:none;
+    background:linear-gradient(0deg,rgba(8,12,38,0) 0,rgba(8,12,38,.6) 40px,rgba(8,12,38,.6) 100%)}
+}
 </style>
 <style>
 /* Lead-form fix (10 Oct 2026): each error sits under the field that failed, on a light pill that reads on any ground. */
