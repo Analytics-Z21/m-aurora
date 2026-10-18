@@ -1647,6 +1647,10 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
   .hero-body{justify-content:flex-end!important;padding:96px var(--pad) 44px!important}
   .hero .hero-inner{flex:0 0 auto!important;align-items:center!important;text-align:center}
   .hero .h-lk{align-self:center!important;width:96px;margin:0 0 18px}
+  /* the logo file (162 x 267) keeps 26 px of empty canvas on its right for the sparkle's rays, so the M and the AURORA
+     lettering sit 18 px (11.1%) left of the file's centre; nudge the image by that share of its own width so the
+     lettering sits on the centre line with the h1 and the ask (the sparkle stays up and to the right of the M) */
+  .hero .h-lk{translate:11.1% 0}
   /* an even veil behind the copy only: it starts 72 px above the mark and is at full strength by the place line, so the
      towers above the copy stay clear and every line holds its contrast on all four slides */
   .hero .hero-inner{position:relative;z-index:0}
