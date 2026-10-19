@@ -1700,6 +1700,15 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
   .nav-logo img.lk{aspect-ratio:162/213;object-fit:cover;object-position:50% 0}
 }
 </style>
+<style>
+/* Gap fix (19 Oct 2026, Justin: "there is a gap between the announcement bar and the hero banner"). Round 12 made the
+   phone menu bar 88 px tall at the top (the 56 px project mark plus 16 px padding a side) and 79 px once scrolled, but
+   its pull-up stayed at the old -78 px, so the hero started 10 px under the 40 px announcement bar. Phones and small
+   tablets (767 px and under, where the 56 px mark applies): the pull-up equals the bar's own height in both states, so
+   the hero starts right under the announcement bar (and, at its height of the screen less 40 px, ends at the screen's
+   foot) and the page does not shift when the bar slims on scroll. */
+@media(max-width:767px){.nav{margin-bottom:-88px!important}.nav.is-scrolled{margin-bottom:-79px!important}}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
