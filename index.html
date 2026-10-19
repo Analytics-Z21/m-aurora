@@ -2802,7 +2802,10 @@ Array.prototype.forEach.call(document.querySelectorAll('#planWrap .plan-tog-b'),
   box.addEventListener('scroll',syncShotNav,{passive:true,capture:true});
   window.addEventListener('resize',syncShotNav);
   box.addEventListener('click',function(e){var bt=e.target.closest&&e.target.closest('.ushot');if(!bt)return;
-    var im=bt.querySelector('img');openLb(bt.getAttribute('data-full'),im.alt,im.alt);});
+    /* 20 Oct 2026: the caption is the short "Type A show unit, 1 of 4" (the room stays in the alt text and in GA4): the
+       caption is centred at half the screen's width, so a room-length caption wrapped into the zoom hint on phones */
+    var im=bt.querySelector('img'),all=box.querySelectorAll('.ushot'),i=Array.prototype.indexOf.call(all,bt);
+    openLb(bt.getAttribute('data-full'),im.alt,'Type '+cur+' show unit, '+(i+1)+' of '+all.length);});
 })();
 
 /* ============ Lightbox with zoom (wheel / pinch / drag / buttons) ============ */
