@@ -100,7 +100,7 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" as="image" type="image/webp" href="_hero-vertical-phone.webp" media="(max-width:767px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero-towers-phone.webp" media="(max-width:767px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(min-width:768px) and (max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="_boska-500.woff2" crossorigin>
@@ -3359,6 +3359,16 @@ render();
    _hero-vertical-phone.webp: 1.5x Lanczos resize with contrast +18%, brightness +8%, colour +10% and an unsharp mask;
    the building is not altered. 279 KB against 137 KB, about M Amaya's 266 KB hero. */
 @media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-vertical-phone.webp')!important}}
+</style>
+<style>
+/* 20 Oct 2026 (Justin: the zoomed tower still looked weird; research a better banner). Phones use a crop of the towers
+   from Mah Sing's own M Aurora flyer (310326_M-Aurora-Flyer_preview.pdf, page 1, 2480 x 3508: the same dusk render at
+   about 2.3x the tower pixels of the web file). The flyer's printed Freehold ribbon over the right tower's crown was
+   replaced with the same area of Mah Sing's 2560 x 1440 M Aurora banner (the same render, aligned by feature matching);
+   the printed AURORA / Old Klang Road lettering in the sky above was filled from the surrounding sky. The building is
+   otherwise untouched. Crop 1126 x 1760, drawn to cover the hero from the top: the towers fill the frame as the facade
+   does on M Amaya, at about 1.5x on a 3x screen (the zoomed web file was about 2.8x). */
+@media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-towers-phone.webp')!important;background-size:cover!important;background-position:50% 0!important}}
 </style>
 </body>
 </html>
