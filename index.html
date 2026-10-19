@@ -100,7 +100,8 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(max-width:1023px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero-vertical-phone.webp" media="(max-width:767px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(min-width:768px) and (max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="_boska-500.woff2" crossorigin>
 <!-- Google Tag Manager (GTM-5GCDVKLC, client container, installed 2026-09-17 by request from PY).
@@ -3354,6 +3355,10 @@ render();
    Phones: the towers photo is drawn at 160% of the hero's height, so the two towers fill the frame with their crowns
    just under the menu, as the facade does on M Amaya. */
 @media(max-width:767px){.hero .hero-art.hs-1{background-size:auto 160%!important;background-position:50% 45%!important}}
+/* 20 Oct 2026 (Justin: can we adjust the image so it holds up zoomed in?): phones get a tuned copy of the towers render,
+   _hero-vertical-phone.webp: 1.5x Lanczos resize with contrast +18%, brightness +8%, colour +10% and an unsharp mask;
+   the building is not altered. 279 KB against 137 KB, about M Amaya's 266 KB hero. */
+@media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-vertical-phone.webp')!important}}
 </style>
 </body>
 </html>
