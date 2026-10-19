@@ -1651,6 +1651,11 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
      lettering sit 18 px (11.1%) left of the file's centre; nudge the image by that share of its own width so the
      lettering sits on the centre line with the h1 and the ask (the sparkle stays up and to the right of the M) */
   .hero .h-lk{translate:11.1% 0}
+  /* the file keeps 54 px of empty canvas under AURORA; crop it (cover from the top at the 162:213 lettering box) so the gap
+     above the place line matches the other Clones */
+  .hero .h-lk{height:auto!important;aspect-ratio:162/213;object-fit:cover;object-position:50% 0}
+  /* Round 11 (19 Oct 2026, Justin): the shade as on the live site: no veil behind the copy, the live backdrop only */
+  .hero .hero-inner::before{content:none!important}
   /* an even veil behind the copy only: it starts 72 px above the mark and is at full strength by the place line, so the
      towers above the copy stay clear and every line holds its contrast on all four slides */
   .hero .hero-inner{position:relative;z-index:0}
