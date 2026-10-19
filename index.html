@@ -1687,6 +1687,18 @@ h1,h2,.hero h1,.ld h2,#developer .dev h2{font-weight:500}
 .f-err{display:table;margin:6px 0 0;padding:3px 8px;border-radius:6px;background:#fdecea;color:#8c1d18;font-family:inherit;font-weight:600;font-size:14px;line-height:1.4;letter-spacing:0;text-transform:none;text-align:left}
 form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e!important}
 </style>
+<style>
+/* 20 Oct 2026 (Justin: "I want all projects the same size, big and clear to see the project logo, and all projects to have
+   the Mah Sing logo"). Phones: the project mark is 56 px tall in the menu bar on every Clone (M Aria's size) and the
+   Mah Sing logo sits beside it at 26 px; the same at the top and in the scrolled bar. */
+@media(max-width:767px){
+  .nav-logo{display:flex!important;align-items:center;gap:12px}
+  .nav-logo img.lk{height:56px!important;width:auto!important;max-width:none!important}
+  .nav-logo img.ms{height:26px!important;width:auto!important;max-width:none!important}
+  /* the logo file keeps 54 px of empty canvas under AURORA: crop it so the lettering, not the canvas, is 56 px tall */
+  .nav-logo img.lk{aspect-ratio:162/213;object-fit:cover;object-position:50% 0}
+}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1796,7 +1808,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-ctas">
           <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_register">Get Price List Now</button>
         </div>
-        <p class="h-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
+        <!-- 20 Oct 2026 (Justin): the hero trust line removed -->
       </div>
     </div>
     <div class="h-slides">
@@ -3337,5 +3349,11 @@ Array.prototype.forEach.call(
 render();
 })();
 </script>
+<style>
+/* 20 Oct 2026 (Justin: "increase and zoom in the first hero image, the tower, so it looks the same as M Amaya").
+   Phones: the towers photo is drawn at 160% of the hero's height, so the two towers fill the frame with their crowns
+   just under the menu, as the facade does on M Amaya. */
+@media(max-width:767px){.hero .hero-art.hs-1{background-size:auto 160%!important;background-position:50% 45%!important}}
+</style>
 </body>
 </html>
