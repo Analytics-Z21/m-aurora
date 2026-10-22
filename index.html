@@ -100,7 +100,7 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" as="image" type="image/webp" href="_hero-towers-phone.webp" media="(max-width:767px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero-banner-tower-phone.webp" media="(max-width:767px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(min-width:768px) and (max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="_boska-500.woff2" crossorigin>
@@ -3520,6 +3520,15 @@ render();
    otherwise untouched. Crop 1126 x 1760, drawn to cover the hero from the top: the towers fill the frame as the facade
    does on M Amaya, at about 1.5x on a 3x screen (the zoomed web file was about 2.8x). */
 @media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-towers-phone.webp')!important;background-size:cover!important;background-position:50% 0!important}}
+</style>
+<style>
+/* Tower banner (22 Oct 2026, Justin: "this looks much nicer ... push all to live"). Phones only (tablet and desktop
+   unchanged): slide 1 is Mah Sing's new 1290 x 2800 tower banner, supplied 22 Oct, drawn at the height that puts
+   the crown about 20 px under the menu bar and the building's base just above the place line (never narrower than
+   the screen; on tall screens the strip under the banner's foot sits under the shade in the banner's own ground
+   colour). The big lockup is off on phones (the menu bar keeps the project mark), so the shade is cut back to the
+   copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
+@media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone.webp')!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:#192c1a!important;background-size:auto var(--ih)!important;background-position:50% calc(112px - 0.368 * var(--ih))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
 </style>
 </body>
 </html>
