@@ -100,10 +100,11 @@ transform-only 24s settle drift (off under prefers-reduced-motion).
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preload" as="image" type="image/webp" href="_hero-banner-tower-phone.webp" media="(max-width:767px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" href="_hero-banner-tower-phone-1080.webp" imagesrcset="_hero-banner-tower-phone-860.webp 2x, _hero-banner-tower-phone-1080.webp 3x" media="(max-width:767px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero-vertical.webp" media="(min-width:768px) and (max-width:1023px)" fetchpriority="high">
 <link rel="preload" as="image" type="image/webp" href="_hero.webp" media="(min-width:1024px)" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="_boska-500.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="_montserrat-latin.woff2" crossorigin>
 <!-- Google Tag Manager (GTM-5GCDVKLC, client container, installed 2026-09-17 by request from PY).
      Placed as high in the head as GTM asks, above the Varify snippet: the GTM snippet is
      inline and injects gtm.js asynchronously, so it costs Varify nothing, whereas
@@ -150,7 +151,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:site_name" content="M Aurora Old Klang Road, Kuala Lumpur | by Mah Sing">
 <meta property="og:image" content="https://m-aurora.com.my/wp-content/uploads/2025/01/favicon-maurora.png">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="https://m-aurora.com.my/wp-content/uploads/2025/01/favicon-maurora-150x150.png">
+<link rel="icon" href="_favicon.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"WebPage","@id":"https://m-aurora.com.my/","url":"https://m-aurora.com.my/","name":"Old Klang Road New Serviced Apartment Project | M Aurora","isPartOf":{"@id":"https://m-aurora.com.my/#website"},"description":"Explore M Aurora, a new freehold serviced apartment project at Old Klang Road. Inspired by The Promise Of Dawn and designed to meet the needs of every family.","inLanguage":"en-US"},
@@ -223,9 +224,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "yjbcsxz8bt");
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* SERIF: Boska (Indian Type Foundry, Fontshare licence, free for commercial use), self-hosted and
    subset to Latin. Headlines (h1, h2) in Boska Medium (Justin, 2026-10-07: "try headline use Boska Medium");
@@ -234,6 +232,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    550: anything asking up to 550 gets the real Medium, 551-900 the real Bold, never a faux weight. */
 @font-face{font-family:"Boska";src:url("_boska-500.woff2") format("woff2");font-weight:100 550;font-style:normal;font-display:swap}
 @font-face{font-family:"Boska";src:url("_boska-700.woff2") format("woff2");font-weight:551 900;font-style:normal;font-display:swap}
+/* 26 Oct 2026 (speed pass): Montserrat is self-hosted (SIL OFL, latin subset as Google served it), so the first paint no
+   longer waits on fonts.googleapis.com and fonts.gstatic.com. */
+@font-face{font-family:"Montserrat";src:url("_montserrat-latin.woff2") format("woff2");font-weight:300 700;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Montserrat";src:url("_montserrat-latin-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* the italic faces are registered after page load (script at the hero carousel), so they never compete with the
    hero image; the hero has no italics */
 /* Boska defaults to old-style figures (descending 3, 4, 9). Prices, sizes and the facts read as data, so lining
@@ -1350,6 +1352,11 @@ html.hero-more #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%
 #dawn .sec-head{margin-bottom:0}
 #dawn .sec-head h2,#dawn .sec-head .eyebrow,#dawn .dawn-sub{text-shadow:0 2px 14px rgba(0,0,0,.55)}
 .dawn-bg{position:absolute;inset:0;z-index:0;background:var(--night0) url('_view.webp') 82% 40%/cover no-repeat}
+/* 26 Oct 2026 (speed pass): the story background (_view.webp, 173 KB) sits far below the first screen, so it is fetched only once
+   #dawn comes within 800 px of the screen (script at the hero carousel adds .in). The rule is not scoped to html.js: that class is
+   set mid-body, after the browser may already have styled this element and started the download. Without JS the noscript
+   block in the head puts the image back, as before. */
+.dawn-bg:not(.in){background-image:none!important}
 .dawn-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,9,28,.72) 0%,rgba(6,9,28,.42) 30%,rgba(6,9,28,.08) 52%,rgba(6,9,28,.3) 100%)}
 #dawn .dawn-split{display:block;border:0;position:relative;z-index:1;padding:0 16px}
 .dawn-img{display:none}
@@ -1762,6 +1769,29 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
   #planWrap[data-view="photos"] .ushot-nav[disabled]{opacity:0;pointer-events:none}
 }
 </style>
+<style>
+/* 20 Oct 2026 (Justin: "increase and zoom in the first hero image, the tower, so it looks the same as M Amaya").
+   Phones: the towers photo is drawn at 160% of the hero's height, so the two towers fill the frame with their crowns
+   just under the menu, as the facade does on M Amaya. */
+@media(max-width:767px){.hero .hero-art.hs-1{background-size:auto 160%!important;background-position:50% 45%!important}}
+/* 26 Oct 2026 (speed pass): the 20 Oct _hero-vertical-phone.webp image rule is dropped here; the tower banner below always overrode it. */
+</style>
+<style>
+/* 26 Oct 2026 (speed pass): the 20 Oct flyer-crop image rule (_hero-towers-phone.webp) is dropped here; the tower banner below always overrode it. */
+@media(max-width:767px){.hero .hero-art.hs-1{background-size:cover!important;background-position:50% 0!important}}
+</style>
+<style>
+/* 26 Oct 2026 (speed pass): the banner is served at the screen's resolution, 860 px wide at 2x, 1080 px wide at 3x (image-set; the plain
+   1080 line is the fallback for browsers without image-set). Every other declaration below is unchanged. */
+/* Tower banner (22 Oct 2026, Justin: "this looks much nicer ... push all to live"). Phones only (tablet and desktop
+   unchanged): slide 1 is Mah Sing's new 1290 x 2800 tower banner, supplied 22 Oct, drawn at the height that puts
+   the crown about 20 px under the menu bar and the building's base just above the place line (never narrower than
+   the screen; on tall screens the strip under the banner's foot sits under the shade in the banner's own ground
+   colour). The big lockup is off on phones (the menu bar keeps the project mark), so the shade is cut back to the
+   copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
+@media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone-1080.webp')!important;background-image:image-set(url('_hero-banner-tower-phone-860.webp') 2x,url('_hero-banner-tower-phone-1080.webp') 3x)!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:#192c1a!important;background-size:auto var(--ih)!important;background-position:50% calc(112px - 0.368 * var(--ih))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
+</style>
+<noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -1782,8 +1812,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- NAV -->
 <nav class="nav" id="siteNav" aria-label="Site">
   <a href="#home" class="nav-logo" aria-label="M Aurora home">
-    <img class="lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
-    <img class="ms" src="_mahsing.png" alt="by Mah Sing" width="461" height="146">
+    <img class="lk" src="_logo-white.webp" alt="M Aurora" width="162" height="267">
+    <img class="ms" src="_mahsing.webp" alt="by Mah Sing" width="461" height="146">
   </a>
   <div class="nav-rail" aria-label="Sections">
     <a href="#layouts" data-rail>Layouts</a>
@@ -1821,7 +1851,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div class="mm-backdrop" id="mmBackdrop" aria-hidden="true"></div>
 <aside class="mm" id="mm" aria-label="Site navigation" aria-hidden="true">
   <div class="mm-head">
-    <img src="_logo-white.png" alt="M Aurora">
+    <img src="_logo-white.webp" alt="M Aurora">
     <button class="mm-close" aria-label="Close menu">&times;</button>
   </div>
   <nav class="mm-nav">
@@ -1854,7 +1884,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-body">
       <div class="hero-inner">
-        <img class="h-lk" src="_logo-white.png" alt="M Aurora" width="162" height="267">
+        <img class="h-lk" src="_logo-white.webp" alt="M Aurora" width="162" height="267">
         <!-- Round 4 (16 Oct 2026, Justin): the place leads the hero copy in place of the "Open for Sale" eyebrow, larger so it reads at a glance -->
         <div class="h-place">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
@@ -2632,7 +2662,9 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
   var hm=$('heroMedia');if(!hm)return;
   var arts=[hm.querySelector('.hs-1'),hm.querySelector('.hs-2'),hm.querySelector('.hs-3'),hm.querySelector('.hs-4')];
   var dots=Array.prototype.slice.call(hm.querySelectorAll('.h-dot'));
-  window.addEventListener('load',function(){setTimeout(function(){document.documentElement.classList.add('hero-more');},300);});
+  /* 26 Oct 2026 (speed pass): slide 2 first shows at 6 s, so slides 2 to 4 (359 KB) wait 2.5 s after load instead of 300 ms;
+     go() still adds hero-more itself, so a dot tap or an early autoplay loads them at once. */
+  window.addEventListener('load',function(){setTimeout(function(){document.documentElement.classList.add('hero-more');},2500);});
   var caps={1:'The Towers',2:'Grand Entrance',3:'50m Lap Pool',4:'Show Unit Type A'};
   var cur=1,timer=null,reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   function go(n){
@@ -2651,6 +2683,13 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
   document.addEventListener('visibilitychange',function(){if(document.hidden)stop();else start();});
   if(_q.get('slide'))go(+_q.get('slide'));
   start();
+})();
+/* 26 Oct 2026 (speed pass): #dawn's backdrop image loads when it comes within 800 px of the screen, not on every visit. */
+(function(){var b=document.querySelector('.dawn-bg');if(!b)return;
+  function on(){b.classList.add('in');}
+  if(!('IntersectionObserver' in window)){on();return;}
+  var io=new IntersectionObserver(function(es){for(var i=0;i<es.length;i++){if(es[i].isIntersecting){on();io.disconnect();return;}}},{rootMargin:'800px 0px'});
+  io.observe(b);
 })();
 
 /* ============ Units + calculator: one controller, price locked to type ============
@@ -3500,34 +3539,5 @@ Array.prototype.forEach.call(
 render();
 })();
 </script>
-<style>
-/* 20 Oct 2026 (Justin: "increase and zoom in the first hero image, the tower, so it looks the same as M Amaya").
-   Phones: the towers photo is drawn at 160% of the hero's height, so the two towers fill the frame with their crowns
-   just under the menu, as the facade does on M Amaya. */
-@media(max-width:767px){.hero .hero-art.hs-1{background-size:auto 160%!important;background-position:50% 45%!important}}
-/* 20 Oct 2026 (Justin: can we adjust the image so it holds up zoomed in?): phones get a tuned copy of the towers render,
-   _hero-vertical-phone.webp: 1.5x Lanczos resize with contrast +18%, brightness +8%, colour +10% and an unsharp mask;
-   the building is not altered. 279 KB against 137 KB, about M Amaya's 266 KB hero. */
-@media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-vertical-phone.webp')!important}}
-</style>
-<style>
-/* 20 Oct 2026 (Justin: the zoomed tower still looked weird; research a better banner). Phones use a crop of the towers
-   from Mah Sing's own M Aurora flyer (310326_M-Aurora-Flyer_preview.pdf, page 1, 2480 x 3508: the same dusk render at
-   about 2.3x the tower pixels of the web file). The flyer's printed Freehold ribbon over the right tower's crown was
-   replaced with the same area of Mah Sing's 2560 x 1440 M Aurora banner (the same render, aligned by feature matching);
-   the printed AURORA / Old Klang Road lettering in the sky above was filled from the surrounding sky. The building is
-   otherwise untouched. Crop 1126 x 1760, drawn to cover the hero from the top: the towers fill the frame as the facade
-   does on M Amaya, at about 1.5x on a 3x screen (the zoomed web file was about 2.8x). */
-@media(max-width:767px){.hero .hero-art.hs-1{background-image:url('_hero-towers-phone.webp')!important;background-size:cover!important;background-position:50% 0!important}}
-</style>
-<style>
-/* Tower banner (22 Oct 2026, Justin: "this looks much nicer ... push all to live"). Phones only (tablet and desktop
-   unchanged): slide 1 is Mah Sing's new 1290 x 2800 tower banner, supplied 22 Oct, drawn at the height that puts
-   the crown about 20 px under the menu bar and the building's base just above the place line (never narrower than
-   the screen; on tall screens the strip under the banner's foot sits under the shade in the banner's own ground
-   colour). The big lockup is off on phones (the menu bar keeps the project mark), so the shade is cut back to the
-   copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
-@media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone.webp')!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:#192c1a!important;background-size:auto var(--ih)!important;background-position:50% calc(112px - 0.368 * var(--ih))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
-</style>
 </body>
 </html>
