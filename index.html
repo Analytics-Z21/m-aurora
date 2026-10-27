@@ -1789,7 +1789,7 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
    the screen; on tall screens the strip under the banner's foot sits under the shade in the banner's own ground
    colour). The big lockup is off on phones (the menu bar keeps the project mark), so the shade is cut back to the
    copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
-@media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone-wide-1080.webp')!important;background-image:image-set(url('_hero-banner-tower-phone-wide-860.webp') 1x,url('_hero-banner-tower-phone-wide-860.webp') 2x,url('_hero-banner-tower-phone-wide-1080.webp') 3x)!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:rgb(22,31,62)!important;background-size:auto var(--ihb, var(--ih))!important;background-position:50% calc(112px - 0.368 * var(--ihb, var(--ih)))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
+@media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone-wide-1080.webp')!important;background-image:image-set(url('_hero-banner-tower-phone-wide-860.webp') 1x,url('_hero-banner-tower-phone-wide-860.webp') 2x,url('_hero-banner-tower-phone-wide-1080.webp') 3x)!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:rgb(22,31,62)!important;background-size:auto var(--ihb, var(--ih))!important;background-position:50% calc(var(--hct,112px) - 0.368 * var(--ihb, var(--ih)))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
 </style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
@@ -1919,21 +1919,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 /* 26 Oct 2026 (iPhone hero fit): on short phone screens (iPhone Safari with its bars) draw the tower banner so the
    whole building (podium included) ends above the place line; the banner's sides are a widened copy of the same render. Without JS the fit
    stays as before. */
+/* 27 Oct 2026 (sharp sides): the banner's sides are a plain mirror of the render, cropped so it never reaches the
+   building; the crown sits 70 px under the banner top so the photo shrinks less. */
 (function(){
   var art=document.querySelector('.hero .hero-media .hero-art.hs-1'),place=document.querySelector('.h-place');
   if(!art||!place||!window.matchMedia)return;
-  var mq=window.matchMedia('(max-width:767px)'),CROWN=0.368,CLEAR=0.75,ASPECT=0.8982;
+  var mq=window.matchMedia('(max-width:767px)'),CROWN=0.368,CLEAR=0.75,ASPECT=0.6964;
   function fit(){
-    if(!mq.matches){art.style.removeProperty('--ihb');return;}
+    if(!mq.matches){art.style.removeProperty('--ihb');art.style.removeProperty('--hct');return;}
     var op=art.offsetParent||document.body,at=op.getBoundingClientRect().top+op.clientTop+art.offsetTop,p=place.getBoundingClientRect(),vw=document.documentElement.clientWidth;
-    var room=p.top-at-14-112;                                  /* towers end 14 px above the place line; at = the banner's layout top (its 7.5 s drift transform is ignored) */
+    var room=p.top-at-14-70;                                  /* towers end 14 px above the place line; at = the banner's layout top (its 7.5 s drift transform is ignored) */
     if(room<=0)return;
     var ih=Math.min(2.17054*vw,room/(CLEAR-CROWN));            /* never larger than today's fit */
     ih=Math.max(ih,vw/ASPECT+1);                               /* the widened banner always covers the screen */
-    art.style.setProperty('--ihb',ih.toFixed(1)+'px');
+    art.style.setProperty('--ihb',ih.toFixed(1)+'px');art.style.setProperty('--hct','70px');
   }
   fit();
-  window.addEventListener('resize',fit);
+  window.addEventListener('resize',fit);if(mq.addEventListener)mq.addEventListener('change',fit);
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
 })();
 </script>
