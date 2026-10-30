@@ -527,10 +527,6 @@ html.js .more-btn{display:inline-flex;align-items:center;gap:7px;margin-top:14px
 @media(min-width:1024px){.unit-plan img{max-height:500px}}
 .unit-badge{position:absolute;top:12px;left:12px;background:var(--deep);color:#fff;
   font:700 12px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;padding:8px 12px;border-radius:4px}
-.unit-zoom{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:6px;
-  background:rgba(22,80,99,.92);border-radius:999px;padding:7px 12px;
-  font:600 12px/1.4 var(--fb);color:#fff;pointer-events:none}
-.unit-zoom svg{flex:none;color:#8FE0D0}
 .unit-info{padding:24px 22px 26px}
 @media(min-width:1024px){.unit-info{padding:40px;align-self:center}}
 .unit-info h3{font-size:clamp(26px,3vw,34px)}
@@ -1328,16 +1324,6 @@ html.js [data-stagger].rv.in>*{opacity:1;transform:none}
 #layouts .cout .l,#layouts .cout .d{color:var(--ink-m)}
 #layouts .cout .v{color:var(--ink-d)}
 @media(max-width:1023px){#layouts .unit{border-radius:0}#layouts .calc{border-radius:0}}
-/* Round 3 (16 Oct 2026, Justin): the 360 tour link (#uVt) is a pill at the foot of the plan box, as on M Aria, in the
-   ink of the selected tab. The box gains a bottom band so the pill never covers the drawing. #planWrap in the
-   selector so it outranks #layouts .u-link and the base .u-link link style the element still carries. */
-#planWrap{padding-bottom:72px}
-@media(min-width:1024px){#planWrap{padding-bottom:84px}}
-#planWrap .plan-vt{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:rgba(21,27,59,.92);color:var(--cream);opacity:1;font:600 13px/1.2 var(--fb);letter-spacing:.02em;text-decoration:none;white-space:nowrap;cursor:pointer;box-shadow:0 12px 24px -12px rgba(21,27,59,.7);transition:background .15s}
-@media(min-width:1024px){#planWrap .plan-vt{bottom:20px}}
-#planWrap .plan-vt svg{flex:none;color:var(--cream2)}
-@media(hover:hover) and (pointer:fine){#planWrap .plan-vt:hover{background:var(--ink-d)}}
-
 /* fast-track form: cinematic, over the grand entrance render (loads after the page) */
 #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.74) 45%,rgba(12,18,48,.94) 100%)}
 html.hero-more #register{background:linear-gradient(180deg,rgba(12,18,48,.94) 0%,rgba(12,18,48,.72) 45%,rgba(12,18,48,.94) 100%),url('_gal-entrance.webp') center 40%/cover no-repeat}
@@ -1716,60 +1702,6 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 @media(max-width:767px){.nav{margin-bottom:-88px!important}.nav.is-scrolled{margin-bottom:-79px!important}}
 </style>
 <style>
-/* 19 Oct 2026 (Justin): the plan box carries a "Floor plan | Unit photos" toggle, as on M Grand Minori. A control band at
-   the top (the toggle left, the zoom hint right) and one at the foot ("Open for Sale" or the photo count left, the 360
-   pill right), so no control sits on the drawing. Pills, in the ink of the selected type tab. */
-#planWrap{padding-top:62px}
-@media(min-width:1024px){#planWrap{padding-top:70px}}
-.plan-tog{position:absolute;top:12px;left:12px;z-index:3;display:inline-flex;padding:3px;border-radius:999px;background:#fff;border:1px solid rgba(21,27,59,.18)}
-.plan-tog[hidden]{display:none}
-@media(min-width:1024px){.plan-tog{top:16px;left:16px}}
-.plan-tog-b{min-height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;font:600 12.5px/1.2 var(--fb);color:var(--ink-d);
-  white-space:nowrap;cursor:pointer;touch-action:manipulation;transition:background .15s,color .15s}
-.plan-tog-b[aria-pressed="true"]{background:var(--ink-d);color:var(--cream)}
-@media(hover:hover) and (pointer:fine){.plan-tog-b:not([aria-pressed="true"]):hover{background:rgba(21,27,59,.07)}}
-.plan-tog-b:focus-visible,.ushot:focus-visible,.ushot-nav:focus-visible{outline:2px solid var(--ink-d);outline-offset:2px}
-/* the zoom hint sits level with the toggle; the status badge moves to the foot band, level with the 360 pill, which
-   moves to the right */
-#planWrap .unit-zoom{top:19px}
-#planWrap .unit-badge{top:auto;bottom:24px;left:12px}
-#planWrap .plan-vt{left:auto;right:12px;transform:none}
-@media(min-width:1024px){#planWrap .unit-zoom{top:23px}#planWrap .unit-badge{bottom:28px;left:16px}#planWrap .plan-vt{right:16px}}
-/* phones and tablets: the 360 pill reads "360° tour" (as on M Grand Minori) so it shares the foot band with the status
-   badge or the photo count; the full label stays on desktop and as the link's accessible name */
-@media(max-width:1023px){#planWrap .plan-vt .vt-x{display:none}}
-/* narrow phones (under 375 px): the toggle and the zoom hint share the top band, so both lose a little padding */
-@media(max-width:374px){.plan-tog-b{padding:0 10px}#planWrap .unit-zoom{padding:7px 10px}}
-/* the photos view: the floor plan keeps its place (visibility only); the strip fills the box between the two bands, one
-   photo and the edge of the next in view, snapping photo by photo */
-#planWrap[data-view="photos"]{cursor:default;touch-action:auto}
-#planWrap[data-view="photos"] #planImg,#planWrap[data-view="photos"] .unit-badge{visibility:hidden}
-#planWrap #uShots{display:none}
-#planWrap[data-view="photos"] #uShots{position:absolute;top:62px;left:0;right:0;bottom:72px;z-index:2;display:block}
-.ushot-row{display:flex;gap:10px;height:100%;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
-  padding:0 12px;scroll-padding:0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.ushot-row::-webkit-scrollbar{display:none}
-.ushot{flex:0 0 84%;height:100%;padding:0;border:0;border-radius:4px;overflow:hidden;background:#EEF0F5;scroll-snap-align:start;cursor:zoom-in}
-#planWrap .ushot img{display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover}
-.ushot-note{position:absolute;left:12px;bottom:-42px;font:600 12px/1.4 var(--fb);color:var(--ink-m);pointer-events:none;white-space:nowrap}
-@media(min-width:1024px){
-  #planWrap[data-view="photos"] #uShots{top:70px;bottom:84px}
-  .ushot-row{gap:12px;padding:0 30px;scroll-padding:0 30px}
-  .ushot{flex-basis:80%}
-  .ushot-note{left:16px;bottom:-50px}
-}
-.ushot-nav{display:none}
-@media(hover:hover) and (pointer:fine){
-  #planWrap[data-view="photos"] .ushot-nav{position:absolute;top:calc(50% - 7px);transform:translateY(-50%);z-index:3;display:inline-flex;
-    align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:999px;background:rgba(21,27,59,.78);
-    color:var(--cream);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.6);transition:background .2s,opacity .2s}
-  #planWrap[data-view="photos"] .ushot-nav:hover{background:var(--ink-d)}
-  #planWrap .ushot-prev{left:12px}
-  #planWrap .ushot-next{right:12px}
-  #planWrap[data-view="photos"] .ushot-nav[disabled]{opacity:0;pointer-events:none}
-}
-</style>
-<style>
 /* 20 Oct 2026 (Justin: "increase and zoom in the first hero image, the tower, so it looks the same as M Amaya").
    Phones: the towers photo is drawn at 160% of the hero's height, so the two towers fill the frame with their crowns
    just under the menu, as the facade does on M Amaya. */
@@ -1790,6 +1722,79 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
    colour). The big lockup is off on phones (the menu bar keeps the project mark), so the shade is cut back to the
    copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
 @media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone-wide-1080.webp')!important;background-image:image-set(url('_hero-banner-tower-phone-wide-860.webp') 1x,url('_hero-banner-tower-phone-wide-860.webp') 2x,url('_hero-banner-tower-phone-wide-1080.webp') 3x)!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:rgb(22,31,62)!important;background-size:auto var(--ihb, var(--ih))!important;background-position:50% calc(var(--hct,112px) - 0.368 * var(--ihb, var(--ih)))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
+</style>
+<style>
+/* Fix pack (30 Oct 2026): F1 the unit card, F2 the hero cues. Spec: projects/mahsing/html/2026-10-31_aurora-card-redesign/change-spec.md.
+   F1: the card ends in one action, in the Original's order: header with price and badge, specs, the plan with a grey hint,
+   the price button with the developer line under it, then two plain text links. No switch, no pills over the plan, no badge
+   inside it. Phones and tablets: the info column's children are re-ordered around the plan (display:contents); desktop keeps
+   the plan left and the info column right. */
+.unit-plan{flex-direction:column;gap:8px;padding:24px 16px 16px;min-height:0}
+@media(min-width:1024px){.unit-plan{padding:40px 30px 22px;min-height:560px}}
+.plan-hint{display:block;text-align:center;font:500 12.5px/1.4 var(--fb);color:var(--ink-m);opacity:.85}
+.unit-from{display:flex;align-items:center;gap:6px 8px;flex-wrap:wrap}
+.unit-from sup{margin-left:-4px;align-self:flex-start}
+.unit-badge{position:static;flex:none;margin-left:2px;padding:6px 9px;font-size:10.5px;letter-spacing:.07em;border-radius:3px}
+@media(max-width:1023px){
+  .unit-info{display:contents}
+  .unit-head{order:1;padding:20px 22px 0}
+  .unit-cfg{order:2;margin:2px 22px 14px}
+  .specs{order:3;margin:0 22px 18px}
+  .unit-plan{order:4;padding:20px 12px 6px;border-top:1px solid rgba(21,27,59,.08)}
+  .unit-acts{order:5;margin:0;padding:10px 22px 14px}
+}
+.unit-acts{display:block;margin-top:18px}
+.unit-acts .btn{width:100%}
+.u-dev{margin:10px 0 0;text-align:center;font:500 12.5px/1.45 var(--fb);color:var(--ink-m);text-wrap:balance}
+.u-links{display:flex;justify-content:center;gap:28px;margin-top:2px}
+.u-txt{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;border:0;background:none;font:500 13px/1.4 var(--fb);color:var(--ink-m);
+  text-decoration:underline;text-underline-offset:3px;cursor:pointer;touch-action:manipulation}
+@media(hover:hover) and (pointer:fine){.u-txt:hover{color:var(--ink-d)}}
+.u-txt:focus-visible,.ushot:focus-visible,.ushot-nav:focus-visible{outline:2px solid var(--ink-d);outline-offset:2px}
+.u-txt[hidden]{display:none}
+/* the show-unit strip opens under the links: one photo and the edge of the next in view, snapping photo by photo */
+.u-photos{position:relative;margin-top:6px}
+.u-photos[hidden]{display:none}
+.ushot-row{display:flex;gap:10px;height:190px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.ushot-row::-webkit-scrollbar{display:none}
+.ushot{flex:0 0 84%;height:100%;padding:0;border:0;border-radius:4px;overflow:hidden;background:#EEF0F5;scroll-snap-align:start;cursor:zoom-in}
+.ushot img{display:block;width:100%;height:100%;object-fit:cover}
+.ushot-note{display:block;margin-top:8px;font:600 12px/1.4 var(--fb);color:var(--ink-m)}
+.ushot-nav{display:none}
+@media(min-width:1024px){.ushot{flex-basis:80%}}
+@media(hover:hover) and (pointer:fine){
+  .u-photos .ushot-nav{position:absolute;top:95px;transform:translateY(-50%);z-index:3;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:999px;
+    background:rgba(21,27,59,.78);color:var(--cream);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.6);transition:background .2s,opacity .2s}
+  .u-photos .ushot-nav:hover{background:var(--ink-d)}
+  .u-photos .ushot-prev{left:8px}
+  .u-photos .ushot-next{right:8px}
+  .u-photos .ushot-nav[disabled]{opacity:0;pointer-events:none}
+}
+/* F2 (30 Oct 2026): the round-one cues are back. The eyebrow sits above the headline, under the pin line; the trust line sits
+   under the ask on tablet and desktop, and just under the hero (below the fold) on phones, so the stack above the ask and the
+   facade fit do not move. */
+.h-trust-fold{display:none}
+@media(max-width:767px){
+  .hero .h-trust{display:none}
+  /* the eyebrow is a compact line under the pin line and the stack gives its height back from the gaps below it, so the pin
+     line (the 27 Oct facade fit reads its position) and the building stay where they are on the live page */
+  .hero .h-eyebrow{text-align:center;font-size:10.5px;line-height:12px;letter-spacing:.24em;padding-left:.24em;margin:0 0 6px}
+  .hero .h-place{margin-bottom:3px}
+  .hero h1{margin-bottom:8px}
+  .hero .h-fact{margin-bottom:8px}
+  .hero .h-beds{margin-bottom:9px}
+  .h-trust-fold{display:block;margin:0;padding:10px var(--pad) 16px;text-align:center;white-space:nowrap;color:var(--cream2);
+    font:500 12.5px/1.5 var(--fb);font-size:min(12.5px,calc((100vw - 32px) / 31))}
+}
+@media(max-width:767px) and (max-height:700px){
+  .hero .h-place{margin-bottom:2px}
+  .hero .h-eyebrow{margin-bottom:5px}
+  .hero h1{margin-bottom:6px}
+  .hero .h-fact{margin-bottom:6px}
+  .hero .h-beds{margin-bottom:7px}
+}
+@media(max-width:359px){.hero .h-eyebrow{font-size:10px;letter-spacing:.14em;padding-left:.14em}}
+@media(max-width:359px){.h-trust-fold{white-space:normal;text-wrap:balance;font-size:11.5px}}
 </style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
@@ -1890,6 +1895,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
           <span>Old Klang Road, Kuala Lumpur</span>
         </div>
+        <!-- 30 Oct 2026 (fix pack F2): the round-one eyebrow is back above the headline; the pin line stays as the location line -->
+        <span class="h-eyebrow">Open for Sale &middot; Old Klang Road</span>
         <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
         <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
         <div class="h-beds" role="group" aria-label="See layouts by bedrooms">
@@ -1901,7 +1908,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-ctas">
           <button type="button" class="btn btn-p" data-open-lead="hero" data-cta-id="hero_register">Get Price List Now</button>
         </div>
-        <!-- 20 Oct 2026 (Justin): the hero trust line removed -->
+        <!-- 30 Oct 2026 (fix pack F2): the trust line is back under the ask (tablet and desktop); on phones the same line sits
+             just under the hero (below the fold), so the facade fit and the stack above the ask are untouched -->
+        <p class="h-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
       </div>
     </div>
     <div class="h-slides">
@@ -1915,6 +1924,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </section>
+<p class="h-trust-fold">Sold directly by Mah Sing Group, over 79 completed projects</p>
 <script>
 /* 26 Oct 2026 (iPhone hero fit): on short phone screens (iPhone Safari with its bars) draw the tower banner so the
    whole building (podium included) ends above the place line; the banner's sides are a widened copy of the same render. Without JS the fit
@@ -2024,30 +2034,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="unit rv">
-      <div class="unit-plan" id="planWrap" data-view="plan">
-        <span class="unit-badge">Open for Sale</span>
-        <!-- 19 Oct 2026 (Justin): a "Floor plan | Unit photos" toggle inside the plan box, as on M Grand Minori. The
-             photos view is the type's show-unit photography (Mah Sing's own gallery, m-aurora.com.my/images-gallery/)
-             as a swipeable strip, rebuilt per type by render(); a photo opens the lightbox with the type's price ask.
-             Type D has no show-unit photos (its show unit is the 360 tour), so its card keeps the floor plan alone and
-             the toggle hides; switching type always opens on the floor plan. -->
-        <div class="plan-tog" role="group" aria-label="Plan view">
-          <button type="button" class="plan-tog-b" data-view="plan" aria-pressed="true">Floor plan</button>
-          <button type="button" class="plan-tog-b" data-view="photos" aria-pressed="false">Unit photos</button>
-        </div>
-        <div class="unit-shots" id="uShots"></div>
-        <button type="button" class="ushot-nav ushot-prev" id="uShotPrev" aria-controls="uShots" aria-label="Previous photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button type="button" class="ushot-nav ushot-next" id="uShotNext" aria-controls="uShots" aria-label="Next photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
-        <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
+      <!-- 30 Oct 2026 (fix pack F1): one action, in the Original's order. Header with price and badge, specs, the plan with a
+           grey hint, the one price button with the developer line under it, then two plain text links. The plan box
+           no longer carries a switch, pills or a badge; the plan itself opens the zoom (its ask is unchanged). -->
+      <div class="unit-plan" id="planWrap">
         <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
-        <!-- Round 3 (16 Oct 2026): the 360 tour link moved here from under the ask, as a pill at the foot of the plan
-             box (same id, href, data-tour-source and modal binding); the card keeps #uCta as its one filled ask -->
-        <a class="u-link plan-vt" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card" aria-label="Take the 360&deg; virtual tour"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span class="vt-x">Take the </span>360&deg; <span class="vt-x">virtual </span>tour</a>
+        <span class="plan-hint">Tap the plan to enlarge</span>
       </div>
       <div class="unit-info">
         <div class="unit-head">
           <h3>Type <span id="uName">A</span></h3>
-          <p class="unit-from">From <b class="num" id="uFrom">RM 339,000</b><sup>*</sup></p>
+          <p class="unit-from">From <b class="num" id="uFrom">RM 339,000</b><sup>*</sup><span class="unit-badge">Open for Sale</span></p>
         </div>
         <p class="unit-cfg" id="uCfg">1+1 bedroom, for urban professionals</p>
         <div class="specs">
@@ -2058,6 +2055,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="unit-acts">
           <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A" data-cta-id="units_get_price">Get the Type A price list</button>
+          <p class="u-dev">Sold directly by Mah Sing Group, over 79 completed projects</p>
+          <div class="u-links">
+            <button type="button" class="u-txt" id="uPhotosBtn" aria-expanded="false" aria-controls="uPhotos">Unit photos</button>
+            <a class="u-txt" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card" aria-label="Take the 360&deg; virtual tour">360&deg; tour</a>
+          </div>
+          <!-- the type's show-unit photography (Mah Sing's own gallery, m-aurora.com.my/images-gallery/) as the swipeable
+               strip, rebuilt per type by render(); a photo opens the lightbox with the type's price ask. Type D has no
+               show-unit photos (its show unit is the 360 tour), so its card keeps the tour link alone. -->
+          <div class="u-photos" id="uPhotos" hidden>
+            <div class="unit-shots" id="uShots"></div>
+            <button type="button" class="ushot-nav ushot-prev" id="uShotPrev" aria-controls="uShots" aria-label="Previous photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+            <button type="button" class="ushot-nav ushot-next" id="uShotNext" aria-controls="uShots" aria-label="Next photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          </div>
         </div>
       </div>
     </div>
@@ -2639,14 +2649,15 @@ document.addEventListener('click',function(e){try{
   if(el){var shots=Array.prototype.slice.call(document.querySelectorAll('#uShots .ushot')),si=el.querySelector('img');
     track({event:'gallery_open',gallery:'unit_photos',item_index:shots.indexOf(el)+1,item_label:clip(si?si.alt:'',60)});
     return;}
-  el=t.closest('#planWrap .plan-tog-b');
-  if(el){if(el.getAttribute('data-view')==='photos'&&el.getAttribute('aria-pressed')!=='true')
+  /* 30 Oct 2026: the "Unit photos" text link counts as the open the plan box's toggle used to (this capture listener runs
+     before the link's handler, so aria-expanded still reads the old state); closing it again is not an open */
+  el=t.closest('#uPhotosBtn');
+  if(el){if(el.getAttribute('aria-expanded')!=='true')
       track({event:'gallery_open',gallery:'unit_photos',item_index:ORDER.indexOf(cur)+1,item_label:'Type '+cur+' unit photos'});
     return;}
-  if(t.closest('#planWrap .ushot-nav'))return;
+  if(t.closest('#uPhotos .ushot-nav'))return;
   el=t.closest('#planWrap');
   if(el){if(window._swiped)return;   /* a swipe changes the type, it does not open the plan */
-    if(el.getAttribute('data-view')==='photos'||t.closest('#uShots'))return;
     track({event:'gallery_open',gallery:'floorplan',item_index:ORDER.indexOf(cur)+1,
       item_label:'Type '+cur+' floor plan'});
     return;}
@@ -2763,15 +2774,15 @@ function render(){
   renderShots(u);
   calc();
 }
-/* 19 Oct 2026: the plan box view, 'plan' (the floor plan, the default) or 'photos' (the type's show-unit strip). The
-   floor plan keeps its place (visibility only), so the box never changes height when the view switches. On a phone
-   each frame is about 330 px wide, so a 2x or 3x screen takes the 1000 px file, which is also the one the lightbox
-   opens. */
+/* 30 Oct 2026 (fix pack F1): the type's show-unit strip sits under the card's two text links and opens from "Unit photos"
+   (it was the second view of the plan box, behind a switch). Closed by default, closed again on every type change. On a
+   phone each frame is about 330 px wide, so a 2x or 3x screen takes the 1000 px file, which is also the one the lightbox
+   opens. Type D has no show-unit photos, so its link hides. */
 function renderShots(u){
-  var box=$('uShots'),tog=document.querySelector('#planWrap .plan-tog');if(!box)return;
+  var box=$('uShots'),btn=$('uPhotosBtn');if(!box)return;
   var sh=u.shots||[];
-  if(tog)tog.hidden=!sh.length;
-  if(!sh.length){box.innerHTML='';setPlanView('plan');return;}
+  if(btn)btn.hidden=!sh.length;
+  if(!sh.length){box.innerHTML='';setPhotos(false);return;}
   var html='<div class="ushot-row">';
   sh.forEach(function(p){
     html+='<button class="ushot" type="button" data-full="'+p[0]+'.webp">'+
@@ -2780,19 +2791,18 @@ function renderShots(u){
   });
   html+='</div><span class="ushot-note">Type '+cur+' show unit, '+sh.length+' photos</span>';
   box.innerHTML=html;
-  setPlanView('plan');
+  setPhotos(false);
 }
 function syncShotNav(){
   var r=document.querySelector('#uShots .ushot-row'),p=$('uShotPrev'),n=$('uShotNext');if(!p||!n)return;
   if(!r){p.disabled=n.disabled=true;return;}
   var max=r.scrollWidth-r.clientWidth;p.disabled=r.scrollLeft<=2;n.disabled=r.scrollLeft>=max-2;
 }
-function setPlanView(v){
-  var w=$('planWrap');if(!w)return;
-  var ph=v==='photos'&&!!(UNITS[cur].shots&&UNITS[cur].shots.length);
-  w.setAttribute('data-view',ph?'photos':'plan');
-  Array.prototype.forEach.call(w.querySelectorAll('.plan-tog-b'),function(b){
-    b.setAttribute('aria-pressed',String(b.getAttribute('data-view')===(ph?'photos':'plan')));});
+function setPhotos(on){
+  var w=$('uPhotos'),btn=$('uPhotosBtn');if(!w)return;
+  on=!!on&&!!(UNITS[cur].shots&&UNITS[cur].shots.length);
+  w.hidden=!on;
+  if(btn)btn.setAttribute('aria-expanded',String(on));
   var r=document.querySelector('#uShots .ushot-row');if(r)r.scrollLeft=0;
   syncShotNav();
 }
@@ -2847,15 +2857,16 @@ tabsEl.addEventListener('keydown',function(e){
   stage.addEventListener('touchstart',function(e){if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY;tracking=true;window._swiped=false;}},{passive:true});
   stage.addEventListener('touchend',function(e){
     if(!tracking)return;tracking=false;
-    if(stage.getAttribute('data-view')==='photos')return;   /* 19 Oct: the photo strip scrolls itself */
     var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
     if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4){window._swiped=true;step(dx<0?1:-1);}
   },{passive:true});
 })();
-/* 19 Oct 2026: the toggle, the strip's arrows, and a photo tap (the lightbox, captioned with the type, carries the
-   type's price ask) */
-Array.prototype.forEach.call(document.querySelectorAll('#planWrap .plan-tog-b'),function(b){
-  b.addEventListener('click',function(){if(b.getAttribute('aria-pressed')==='true')return;setPlanView(b.getAttribute('data-view'));});});
+/* 19 Oct 2026: the strip's arrows and a photo tap (the lightbox, captioned with the type, carries the type's price ask).
+   30 Oct 2026: the strip opens from the "Unit photos" text link under the card's ask. */
+(function(){var b=$('uPhotosBtn');if(!b)return;
+  b.addEventListener('click',function(){
+    var open=b.getAttribute('aria-expanded')!=='true';setPhotos(open);
+    if(open){var w=$('uPhotos');if(w&&w.scrollIntoView)w.scrollIntoView({block:'nearest',behavior:'smooth'});}});})();
 (function(){
   var p=$('uShotPrev'),n=$('uShotNext'),box=$('uShots');if(!p||!n||!box)return;
   function row(){return box.querySelector('.ushot-row');}
@@ -2938,9 +2949,6 @@ lbStage.addEventListener('touchmove',function(e){
 lbStage.addEventListener('touchend',function(){lbZ.drag=false;lbZ.pd=0;});
 $('planWrap').addEventListener('click',function(e){
   if(window._swiped){window._swiped=false;return;}
-  /* Round 3 (16 Oct 2026): the 360 pill sits inside the plan box; its own handler opens the tour, so it is not an enlarge */
-  if(e&&e.target&&e.target.closest&&e.target.closest('#uVt, .plan-tog, #uShots, .ushot-nav'))return;
-  if(this.getAttribute('data-view')==='photos')return;   /* 19 Oct: nothing in the photos view enlarges the hidden plan */
   var i=$('planImg');openLb(i.src,i.alt,'Type '+cur+' floor plan');});
 ['facPlanMain','facPlanSky'].forEach(function(id){
   var el=$(id);if(!el)return;
@@ -3384,18 +3392,23 @@ var heroAskInView=(function(){if(!heroAsk)return false;var r=heroAsk.getBounding
    Round 5 (17 Oct 2026, Justin: "when there is CTA for price hide the sticky"): widened to every in-page price ask,
    each [data-open-lead] and each price or register [data-cta-id] outside the nav, the mobile menu, the rail, the bar,
    the lead drawer and the footer: the hero ask, the unit card, the calculator, the FAQ's "register below" link (only
-   while its answer is open, as a closed answer clips it) and the zoom and 360 asks in their overlays. The bottom 72 px
-   the bar covers does not count, so an ask still under the bar keeps the bar until it clears. An ask in a closed
-   overlay never counts: IntersectionObserver ignores opacity and visibility, so checkVisibility decides when the bar
-   updates. The form rule stays, now judged against the screen rather than the section's own height (a tall form
-   section could be 130 px or more into view before it reached 18% of itself), and the footer (#contact: the phone,
-   email and permit lines, right under the full form) joins it. The nav ask still follows the hero ask alone. */
+   while its answer is open, as a closed answer clips it) and the zoom and 360 asks in their overlays. An ask in a closed
+   overlay never counts (checkVisibility). The form rule stays, judged against the screen rather than the section's own
+   height, and the footer (#contact) joins it. The nav ask still follows the hero ask alone.
+   Fix pack F3 (30 Oct 2026): the bar hides while a price ask is fully on screen with 24 px clear below it, and while an ask
+   reaches into the bottom 24 px of the screen or is entering from under it, so the bar never sits over an ask (it did: an
+   ask 7 to 70 px off the foot was covered, because only the part above the bar's 72 px counted). Any other time the bar
+   shows. An ask cut off at the top of the screen leaves the bar showing: the bar sits at the foot, nothing is covered. */
 var asks=Array.prototype.filter.call(document.querySelectorAll('[data-open-lead],[data-cta-id]'),function(el){
   return !el.closest('#siteNav,#mm,#rail,#sticky,#ld,footer')&&(el.hasAttribute('data-open-lead')||/price|register/.test(el.getAttribute('data-cta-id')||''));});
-var askSeen=asks.map(function(a){var r=a.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<window.innerHeight-72;}),
+var ASK_CLEAR=24,
   formSecs=[regQuick,regFull,document.getElementById('contact')].filter(Boolean);
 function shown(el){return typeof el.checkVisibility!=='function'||el.checkVisibility({opacityProperty:true,visibilityProperty:true,checkOpacity:true,checkVisibilityCSS:true});}
-function askOnScreen(){for(var i=0;i<asks.length;i++){if(askSeen[i]&&shown(asks[i]))return true;}return false;}
+function askOnScreen(){var vh=window.innerHeight;
+  for(var i=0;i<asks.length;i++){var r=asks[i].getBoundingClientRect();
+    if(!(r.height>0)||r.top>=vh||r.bottom<=0)continue;                       /* off screen: above, below or not drawn */
+    if((r.top>=0&&r.bottom<=vh-ASK_CLEAR)||r.bottom>vh-ASK_CLEAR){if(shown(asks[i]))return true;}}
+  return false;}
 function formOnScreen(){var vh=window.innerHeight;return formSecs.some(function(el){var r=el.getBoundingClientRect(),v=Math.min(r.bottom,vh)-Math.max(r.top,0);
   return v>0&&v>=.18*Math.min(r.height,vh);});}
 function stickyState(){var s=window.scrollY>420;
@@ -3405,9 +3418,10 @@ function stickyState(){var s=window.scrollY>420;
   if(navAsk)navAsk.classList.toggle('quiet',!askOff);
   toTop.classList.toggle('on',s);}
 window.addEventListener('scroll',stickyState,{passive:true});
+window.addEventListener('resize',stickyState);
 if(hasIO&&heroAsk){new IntersectionObserver(function(es){heroAskInView=es[0].isIntersecting;stickyState();},{threshold:.6}).observe(heroAsk);}
-if(hasIO&&asks.length){var aio=new IntersectionObserver(function(es){es.forEach(function(e){askSeen[asks.indexOf(e.target)]=e.isIntersecting;});stickyState();},
-  {rootMargin:'0px 0px -72px 0px',threshold:0});
+/* an ask can move without a scroll (fonts, show more, the card's type change): re-check when one crosses the screen edge */
+if(hasIO&&asks.length){var aio=new IntersectionObserver(function(){stickyState();},{threshold:[0,1]});
   asks.forEach(function(a){aio.observe(a);});}
 /* the form sections' observer only re-checks the bar when layout moves without a scroll (fonts, show more) */
 if(hasIO){var fio=new IntersectionObserver(function(){stickyState();},{threshold:[0,.18,.5,1]});
