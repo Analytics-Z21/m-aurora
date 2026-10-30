@@ -1812,6 +1812,9 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
   #layouts .specs{margin-bottom:12px}
   #layouts .unit-acts{margin-top:0;padding-top:8px}
 }
+/* the round back-to-top arrow steps aside while a price ask is on screen (the same askOnScreen() state that hides the bar),
+   so it never sits over the card button's corner; phones and tablets only, the 24 px desktop corner is unchanged */
+@media(max-width:1023px){.to-top.on.ask-on{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .12s,transform .12s,visibility 0s .12s}}
 </style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
@@ -3437,7 +3440,8 @@ function stickyState(){var s=window.scrollY>420;
   formInView=formOnScreen();
   sticky.classList.toggle('on',(hasIO?!askOnScreen():askOff)&&!formInView);
   if(navAsk)navAsk.classList.toggle('quiet',!askOff);
-  toTop.classList.toggle('on',s);}
+  toTop.classList.toggle('on',s);
+  toTop.classList.toggle('ask-on',askOnScreen());}
 window.addEventListener('scroll',stickyState,{passive:true});
 window.addEventListener('resize',stickyState);
 if(hasIO&&heroAsk){new IntersectionObserver(function(es){heroAskInView=es[0].isIntersecting;stickyState();},{threshold:.6}).observe(heroAsk);}
