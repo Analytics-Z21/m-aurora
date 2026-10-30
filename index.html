@@ -1796,6 +1796,23 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 @media(max-width:359px){.hero .h-eyebrow{font-size:10px;letter-spacing:.14em;padding-left:.14em}}
 @media(max-width:359px){.h-trust-fold{white-space:normal;text-wrap:balance;font-size:11.5px}}
 </style>
+<style>
+/* Compact card, variant B (31 Oct 2026). Spec: projects/mahsing/html/2026-10-31_aurora-card-redesign/change-spec-compact.md.
+   Phones and tablets only: the plan becomes a 96 px thumbnail row (same #planWrap node, so the zoom tap handler, the swipe
+   and the floor-plan tracking stay on it) with a "View floor plan" link and a caption, so the price button sits with the
+   type tabs. From 1024 px the card is exactly the fix pack's. */
+.plan-side{display:none}
+@media(max-width:1023px){
+  #layouts .unit-plan{flex-direction:row;justify-content:flex-start;align-items:center;gap:16px;min-height:100px;padding:0 22px;border-top:none;border-bottom:none}
+  #layouts .unit-plan img{flex:none;box-sizing:border-box;width:96px;height:96px;max-width:none;max-height:none;object-fit:contain;padding:6px;background:#fff;border:1px solid rgba(21,27,59,.12);border-radius:4px}
+  #layouts .plan-hint{display:none}
+  #layouts .plan-side{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:0}
+  #layouts .plan-link{padding:0;color:var(--ink-d);text-align:left}
+  #layouts .plan-cap{display:block;margin-top:-6px;text-align:left;font:500 12.5px/1.4 var(--fb);color:var(--ink-m);opacity:.85}
+  #layouts .specs{margin-bottom:12px}
+  #layouts .unit-acts{margin-top:0;padding-top:8px}
+}
+</style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
 <body>
@@ -1896,7 +1913,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span>Old Klang Road, Kuala Lumpur</span>
         </div>
         <!-- 30 Oct 2026 (fix pack F2): the round-one eyebrow is back above the headline; the pin line stays as the location line -->
-        <span class="h-eyebrow">Open for Sale &middot; Old Klang Road</span>
+        <span class="h-eyebrow">Open for Sale</span>
         <h1>Freehold from <em class="num">RM339K<sup>*</sup></em></h1>
         <p class="h-fact">Two 46-storey towers, 556 to 1,019 sq ft</p>
         <div class="h-beds" role="group" aria-label="See layouts by bedrooms">
@@ -2040,6 +2057,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="unit-plan" id="planWrap">
         <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
         <span class="plan-hint">Tap the plan to enlarge</span>
+        <!-- 31 Oct 2026 (variant B): on phones and tablets the plan is a 96 px thumbnail with a text link and a caption; this
+             side block is hidden from 1024 px up, where the full plan and its hint stay as in the fix pack. -->
+        <span class="plan-side"><button type="button" class="u-txt plan-link" id="planLink">View floor plan</button><span class="plan-cap" id="planCap">Type A, 556 sq ft</span></span>
       </div>
       <div class="unit-info">
         <div class="unit-head">
@@ -2759,6 +2779,7 @@ function monthly(p,pct,y){var L=p*(pct/100),r=RATE/12,n=y*12;
 function render(){
   var u=UNITS[cur];
   $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
+  var pc=$('planCap');if(pc)pc.textContent='Type '+cur+', '+u.size+' sq ft';
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
