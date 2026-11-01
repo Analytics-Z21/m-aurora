@@ -742,7 +742,7 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
 .visit-l .copy{color:var(--ink2)}
 .visit-r{padding:28px 24px}
 @media(min-width:1024px){.visit-r{padding:40px 42px;align-self:center}}
-.visit-r .f-headline{font:600 19px/1.4 var(--fd);color:var(--deep);margin-bottom:16px}
+.visit-r .f-headline{font:500 clamp(24px,2.6vw,28px)/1.2 var(--fd);color:var(--deep);margin-bottom:14px}
 .visit-r .f-headline b{color:#0E7A8A}
 
 /* ===== CONTACT + FOOTER ===== */
@@ -1818,9 +1818,10 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 .o9f-done{display:none;background:#fff;border:1px solid #E3DCCD;padding:10px 14px;gap:8px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:2px}
 .o9-finder[data-state="done"] .o9f-done{display:flex}
 .o9-finder[data-state="done"] .o9f-idle{display:none}
-.o9f-chips{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font:400 13px/1.3 var(--fb);color:var(--ink-d)}
+.o9f-chips{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font:400 13px/1.3 var(--fb);color:var(--ink-d)}
 .o9f-chips b{font-weight:700;margin-right:4px;font-size:14px}
-.o9f-chips i{display:inline-block;white-space:nowrap;font:600 11px/1.3 var(--fb);font-style:normal;padding:6px 9px;background:#EDE7DA;border-radius:2px}
+.o9f-chips i{display:inline-block;white-space:nowrap;font:600 12px/1.3 var(--fb);font-style:normal;padding:7px 10px;background:#EDE7DA;border-radius:2px}
+@media(max-width:1023px){.o9f-chips b{flex-basis:100%;margin:0 0 2px}.o9f-chips .o9-tlink{flex-basis:100%;margin-top:2px}.o9f-done{padding:12px 14px 6px}}
 .o9-tlink{background:none;border:0;padding:0;min-height:44px;font:600 13px/1.4 var(--fb);color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left}
 .o9-olink{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border:1.5px solid var(--ink-d);font:700 13px/1 var(--fb);color:var(--ink-d);background:#fff;border-radius:2px;white-space:nowrap}
 @media(max-width:1023px){.o9f-done .o9-olink{display:none}}
@@ -1875,6 +1876,8 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 .o9-form{background:var(--ink-d);color:var(--cream);padding:22px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 60px rgba(21,27,59,.25);border-radius:2px}
 @media(min-width:1024px){.o9-form{padding:36px;gap:18px}}
 .o9k{font:600 11px/1.4 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:#C9CEE6}
+#layouts .o9-form .o9-ft{font:500 26px/1.15 var(--fd);color:var(--cream);margin:0}  /* outranks #layouts h3{color:ink} */
+@media(min-width:1024px){#layouts .o9-form .o9-ft{font-size:30px}}
 .o9-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);padding:12px 0;text-align:center}
 .o9-specs>div+div{border-left:1px solid rgba(255,255,255,.18)}
 .o9-specs b{display:block;font:500 26px/1.1 var(--fd);color:var(--cream)}
@@ -2074,8 +2077,8 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 .fq-alt .fq-cr img{width:56px;height:62px}
 .fq-alt .fq-ct{font-size:22px}
 .fq-form{background:var(--ink-d);color:var(--cream);padding:18px 20px calc(22px + var(--safe));display:flex;flex-direction:column;gap:10px;flex:1}
-.fq-fh{font:700 18px/1.3 var(--fb);color:var(--cream)}
-.fq-fs{font:400 12px/1.5 var(--fb);color:#C9CEE6;margin:0}
+.fq-fh{font:500 26px/1.15 var(--fd);color:var(--cream);margin:0}
+.fq-fs{font:400 13px/1.5 var(--fb);color:#C9CEE6;margin:0}
 .fq-form form{display:flex;flex-direction:column;gap:10px}
 .fq-form .field{margin:0}
 .fq-form .f-label{color:#fff;font-size:11px;margin-bottom:5px}
@@ -2131,7 +2134,7 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
   .fq-alt .fq-cr img{width:72px;height:80px}
   .fq-alt .fq-ct{font-size:28px}
   .fq-form{padding:22px 26px}
-  .fq-fh{font-size:19px}
+  .fq-fh{font-size:28px}
   .fq-form .f-input{min-height:44px}
   .fq-form .btn{min-height:52px}
   .fq-row{grid-template-columns:1fr 1fr}
@@ -2189,8 +2192,11 @@ html.o9-lock .sticky,html.o9-lock .to-top,html.o9-lock .ct{display:none!importan
 .sticky-m b{font:700 15px/1.1 var(--fb)}
 /* drawer: plan tags when two units are asked for */
 .ld-pair{display:flex;gap:8px;margin:0 0 14px}
+.ld h2{font:500 clamp(26px,3.4vw,32px)/1.12 var(--fd);margin-bottom:8px}
+.ld-sub{font:400 14px/1.55 var(--fb);margin-bottom:16px}
 .ld-pair span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E3DCCD;padding:6px 10px 6px 6px;font:700 14px/1 var(--fb);color:var(--deep);border-radius:2px}
 .ld-pair img{width:36px;height:40px;object-fit:contain}
+.fq-o,.o9c-add,.o9b-t,.o9-view,.ct-s,.ct-go,.fq-go,.fq-backb,.o9f-idle{touch-action:manipulation}
 html.clean .fq,html.clean .cs,html.clean .ct{display:none!important}
 </style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
@@ -2472,14 +2478,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <!-- the form panel: the ask sits beside the plan (Option 6 layout), prefilled with the type on view -->
       <div class="o9-form" id="layoutPanel">
-        <span class="o9k">You're viewing Type <span class="uNameX">A</span></span>
+        <h3 class="o9-ft">Get Type <span class="uNameX">A</span> pricing on WhatsApp</h3>
         <div class="o9-specs">
           <div><b class="num" id="uBed">1+1</b><span>Bedroom</span></div>
           <div><b class="num" id="uBath">1</b><span>Bathroom</span></div>
           <div><b class="num" id="uSize">556</b><span>Sq ft</span></div>
         </div>
         <ul class="o9-ticks">
-          <li>Your Type <span class="uNameX">A</span> price after current rebates</li>
+          <li>Price after current rebates</li>
           <li>Which floors and facings are still open</li>
           <li>Payment schedule and loan guidance</li>
         </ul>
@@ -2888,8 +2894,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ld-unit" id="ldUnit"><span class="k">Enquiring about</span><span class="v" id="ldUnitVal"></span></div>
     <div class="ld-pair" id="ldPair" hidden></div>
     <h2 id="ldTitle">Get your price list</h2>
-    <p class="ld-sub" id="ldSub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
-    <p class="ld-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
+    <p class="ld-sub" id="ldSub">We will WhatsApp you the floor plans, pricing after rebates and current availability. No obligation.</p>
     <div class="rlabel">You'll receive:</div>
     <div class="receive">
       <span class="r"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 13 4 4L19 7"/></svg>Floor Plans</span>
@@ -2990,8 +2995,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
           <div class="fq-form">
-            <b class="fq-fh">Still deciding? Let our team help you choose.</b>
-            <p class="fq-fs" id="fqFormSub">A sales advisor will WhatsApp you pricing after rebates, show you which units are still open, and answer your questions. No obligation.</p>
+            <h3 class="fq-fh" id="fqFormTitle">Get pricing on WhatsApp</h3>
+            <p class="fq-fs" id="fqFormSub">A sales advisor sends the price after rebates for both, which units are still open, and loan guidance. No obligation.</p>
             <form class="js-form" data-form="quiz" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
               <input type="hidden" name="oid" value="00D0o0000015t7i">
               <input type="hidden" name="retURL" value="https://ver2.m-aurora.com.my/thank-you">
@@ -3681,7 +3686,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.more-wrap'),function(w)
    Option 9 (2 Nov 2026): data-unit may carry two units ("Type D,Type C") for the compare and quiz asks; the drawer
    then takes the pair heading, the plan tags and the pair button label. data-open-lead stays the CTA source. */
 var ld=$('ld'),ldBack=$('ldBackdrop'),lastFocus=null;
-var LD_SUB='Fill in your details and we will WhatsApp you the floor plans, pricing and availability.';
+function ldSub(unit){return 'We will WhatsApp you the '+(unit?unit+' floor plan':'floor plans')+', pricing after rebates and current availability. No obligation.';}
 function openLead(e){
   if(e)e.preventDefault();
   lastFocus=document.activeElement;
@@ -3689,16 +3694,16 @@ function openLead(e){
   var units=(srcEl?(srcEl.getAttribute('data-unit')||''):'').split(',').map(function(x){return x.trim();}).filter(Boolean);
   var ids=units.map(function(x){return x.replace(/^Type /,'');});
   var uWrap=$('ldUnit'),uVal=$('ldUnitVal'),title=$('ldTitle'),sub=$('ldSub'),pair=$('ldPair'),btn=$('ldSubmit');
+  /* the plan tag(s) name the unit(s); the old "Enquiring about" chip stays in the markup but no longer shows */
+  uWrap.classList.remove('on');uVal.textContent=units.join(' & ');
+  pair.innerHTML=ids.map(function(k){return '<span><img src="_plan-'+k+'.jpg" alt="" width="36" height="40">Type '+k+'</span>';}).join('');pair.hidden=!ids.length;
   if(units.length===2){
-    uVal.textContent=units[0]+' & '+units[1];uWrap.classList.add('on');
-    title.textContent='Comparing '+units[0]+' and '+units[1]+'? Let us help.';
-    sub.textContent='A sales advisor will WhatsApp you pricing after rebates for both layouts, show you which units are still open, and answer your questions.';
-    pair.innerHTML=ids.map(function(k){return '<span><img src="_plan-'+k+'.jpg" alt="" width="36" height="40">Type '+k+'</span>';}).join('');pair.hidden=false;
+    title.textContent='Comparing '+units[0]+' and '+units[1]+'?';
+    sub.textContent='We will WhatsApp you both prices after rebates, which units are still open, and help you decide. No obligation.';
     btn.textContent='Get Type '+ids[0]+' & '+ids[1]+' pricing';
   }else{
-    if(units.length){uVal.textContent=units[0];uWrap.classList.add('on');title.textContent='Get the '+units[0]+' price list';}
-    else{uWrap.classList.remove('on');title.textContent='Get your price list';}
-    sub.textContent=LD_SUB;pair.hidden=true;pair.innerHTML='';btn.textContent='Get my price list now';
+    title.textContent=units.length?'Get the '+units[0]+' price list':'Get your price list';
+    sub.textContent=ldSub(units[0]);btn.textContent='Get my price list now';
   }
   setLeadFields(ld.querySelector('form'),units.join('; '),source,'');
   ld.classList.add('open');ldBack.classList.add('open');
@@ -4213,7 +4218,9 @@ Array.prototype.forEach.call(
     if(FQ.phase==='loading')setPhase(FQ.res?'result':'idle');
     fq.classList.remove('on');fq.setAttribute('aria-hidden','true');lock(false);
     if(FQ.lastFocus&&FQ.lastFocus.focus){try{FQ.lastFocus.focus({preventScroll:true});}catch(e){}}
-    var a=FQ.after;FQ.after=null;if(a)a();
+    /* after a back navigation the browser restores the entry's scroll position right after popstate, so a scroll
+       requested inside the handler would be undone: run the follow-up once that restore has happened */
+    var a=FQ.after;FQ.after=null;if(a)setTimeout(a,120);
     renderTray();
   }
   function fqRun(){
@@ -4246,7 +4253,7 @@ Array.prototype.forEach.call(
     $('fqAltT').textContent='Type '+o.id;$('fqAltS').textContent=o.bed+' bed · '+o.bath+' bath · '+fmt(o.sqft)+' sq ft';
     $('fqAltM').textContent='≈ RM '+fmt(o.monthly)+'/mo';
     $('fqAltDiff').textContent=MF.diffLine(b,o)+'.';
-    $('fqFormSub').textContent='A sales advisor will WhatsApp you pricing after rebates for Type '+b.id+' and Type '+o.id+', show you which units are still open, and answer your questions. No obligation.';
+    $('fqFormTitle').textContent='Get Type '+b.id+' & '+o.id+' pricing on WhatsApp';
     $('fqSubmit').textContent='Get Type '+b.id+' & '+o.id+' pricing';
     setLeadFields(fq.querySelector('form.js-form'),'Type '+b.id+'; Type '+o.id,'quiz_result',MF.finderString(FQ.resAns));
     setPhase('result');setStep('result');syncUi();
@@ -4404,7 +4411,7 @@ Array.prototype.forEach.call(
     if(!FQ.res)return;
     track({event:'finder_compare_click',best:'Type '+FQ.res.best.id,alternative:'Type '+FQ.res.runner.id});
     CMP.sel=[FQ.res.best.id,FQ.res.runner.id];CMP.bracket=FQ.resAns.bracket;renderCompare();
-    FQ.after=phone()?function(){csOpen();}:function(){scrollToEl(ca,0);};
+    FQ.after=function(){scrollToEl(ca,0);};
     fqClose();
   });
   $('stMatchBtn').addEventListener('click',function(){fqOpen('sticky','result');});
