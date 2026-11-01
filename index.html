@@ -1791,6 +1791,403 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
    copy band in the site's own colour: a short fade under the menu, dense behind the copy, clear above it. */
 @media(max-width:767px){.hero .hero-media .hero-art.hs-1{background-image:url('_hero-banner-tower-phone-wide-1080.webp')!important;background-image:image-set(url('_hero-banner-tower-phone-wide-860.webp') 1x,url('_hero-banner-tower-phone-wide-860.webp') 2x,url('_hero-banner-tower-phone-wide-1080.webp') 3x)!important;--ih:max(217.054vw, calc((100svh - 475px) * 2.618));background-color:rgb(22,31,62)!important;background-size:auto var(--ihb, var(--ih))!important;background-position:50% calc(var(--hct,112px) - 0.368 * var(--ihb, var(--ih)))!important;background-repeat:no-repeat!important}.hero .h-lk,.hero .hero-inner .h-lk{display:none!important}.hero .hero-scrim{background:linear-gradient(180deg,rgba(14,22,62,0.38) 0,rgba(14,22,62,0.23) 64px,rgba(14,22,62,0) 128px),linear-gradient(0deg,rgba(14,22,62,.9) 0,rgba(14,22,62,.84) 180px,rgba(14,22,62,.8) 284px,rgba(14,22,62,.76) 324px,rgba(14,22,62,.46) 364px,rgba(14,22,62,.18) 409px,rgba(14,22,62,0) 454px)!important}}
 </style>
+<style>
+/* ===== OPTION 9 (2 Nov 2026): layout finder, plan + form panel, Compare all 5, quiz, compare sheet and tray =====
+   Spec: projects/mahsing/html/2026-11-02_aurora-option9/change-spec.md. Fonts stay the page's own (Boska display,
+   Montserrat body); the layout and flow follow the design canvas prototypes. Mobile first, 390 px reference. */
+#layouts .sec-head{margin-bottom:24px}
+@media(min-width:1024px){#layouts .sec-head{margin-bottom:36px}}
+#layouts .sec-head h2,#compare-all .sec-head h2{font-size:clamp(30px,3.6vw,50px);line-height:1.08}
+
+/* finder bar */
+.o9-finder{margin-bottom:16px}
+.o9f-idle{display:flex;align-items:center;gap:12px;width:100%;background:#fff;border:1.5px solid var(--ink-d);padding:12px 14px;min-height:64px;text-align:left;color:var(--ink-d);font-family:var(--fb);border-radius:2px}
+.o9f-ico{flex:none;width:40px;height:40px;background:#FFF4EC;display:flex;align-items:center;justify-content:center;color:#C2551A}
+.o9f-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.o9f-txt b{font:700 15px/1.3 var(--fb)}
+.o9f-sub{display:none;font:400 14px/1.45 var(--fb);color:var(--ink-m)}
+.o9f-cta{font:600 13px/1.3 var(--fb);color:#A9440F}
+.o9f-cta-d{display:none}
+@media(min-width:1024px){
+  .o9f-idle{gap:20px;padding:16px 20px;min-height:84px}
+  .o9f-ico{width:44px;height:44px}
+  .o9f-txt{gap:2px}.o9f-txt b{font-size:17px}.o9f-sub{display:block}.o9f-cta-m{display:none}
+  .o9f-cta-d{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:52px;padding:0 26px;background:var(--sun-deep);color:#0B102A;font:700 15px/1 var(--fb);transition:background .18s}
+  .o9f-idle:hover .o9f-cta-d{background:#F27A33}
+}
+.o9f-done{display:none;background:#fff;border:1px solid #E3DCCD;padding:10px 14px;gap:8px 16px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-radius:2px}
+.o9-finder[data-state="done"] .o9f-done{display:flex}
+.o9-finder[data-state="done"] .o9f-idle{display:none}
+.o9f-chips{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font:400 13px/1.3 var(--fb);color:var(--ink-d)}
+.o9f-chips b{font-weight:700;margin-right:4px;font-size:14px}
+.o9f-chips i{display:inline-block;white-space:nowrap;font:600 11px/1.3 var(--fb);font-style:normal;padding:6px 9px;background:#EDE7DA;border-radius:2px}
+.o9-tlink{background:none;border:0;padding:0;min-height:44px;font:600 13px/1.4 var(--fb);color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;text-align:left}
+.o9-olink{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 16px;border:1.5px solid var(--ink-d);font:700 13px/1 var(--fb);color:var(--ink-d);background:#fff;border-radius:2px;white-space:nowrap}
+@media(max-width:1023px){.o9f-done .o9-olink{display:none}}
+
+/* type tabs: no prices; one scrolling row on phones, five equal columns on desktop */
+#layouts .tabs{display:flex;flex-wrap:nowrap;gap:8px;padding:0 var(--pad) 16px;margin:0 calc(var(--pad) * -1);overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding:0 var(--pad)}
+#layouts .tabs::-webkit-scrollbar{display:none}
+#layouts .tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:52px;padding:10px 14px;text-align:left;border-radius:2px;border:1px solid rgba(21,27,59,.22);font:700 14px/1.2 var(--fb);color:var(--ink-d);background:#fff}
+#layouts .tab em{display:block;font:500 11px/1.3 var(--fb);font-style:normal;opacity:.85;margin:0}
+#layouts .tab-k{display:inline-flex;align-items:center;gap:6px}
+#layouts .tab-badge{display:none;font:700 11px/1 var(--fb);font-style:normal;letter-spacing:.08em;text-transform:uppercase;background:var(--dawn-sky);color:#fff;padding:3px 5px;border-radius:2px}
+#layouts .tab-badge.on{display:inline-block}
+@media(min-width:1024px){
+  #layouts .tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0;padding:0 0 22px;overflow:visible}
+  #layouts .tab{min-height:44px;padding:14px 18px;gap:4px;font-size:16px}
+  #layouts .tab-k{width:100%;justify-content:space-between}
+  #layouts .tab em{font-size:13px}
+  #layouts .tab-badge{padding:3px 6px}
+}
+
+/* plan panel + form panel */
+.o9-grid{display:grid;gap:16px}
+@media(min-width:1024px){.o9-grid{grid-template-columns:7fr 5fr;gap:24px;align-items:stretch}}
+.o9-plan{background:#fff;border:1px solid #E3DCCD;padding:16px;display:flex;flex-direction:column;gap:12px;border-radius:2px}
+@media(min-width:1024px){.o9-plan{padding:28px;gap:18px}}
+.o9p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.o9p-ttl{min-width:0}
+.o9p-ttl h3{font:500 28px/1 var(--fd);color:var(--ink-d);margin:0}
+@media(min-width:1024px){.o9p-ttl h3{font-size:36px}}
+.o9p-line{font:400 12px/1.5 var(--fb);color:var(--ink-m);margin-top:6px}
+@media(min-width:1024px){.o9p-line{font-size:14px;margin-top:4px}}
+.o9-badge{display:inline-block;margin-top:8px;background:var(--ink-d);color:var(--cream);font:700 11px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px}
+.o9p-acts{display:flex;gap:8px;flex:none}
+.o9-pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D9D2C3;background:#fff;color:var(--ink-d);font:600 13px/1 var(--fb);text-decoration:none;opacity:1;white-space:nowrap}
+.o9-pill-dark{background:var(--ink-d);border-color:var(--ink-d);color:var(--cream)}
+.o9-pill svg{flex:none}
+@media(hover:hover) and (pointer:fine){.o9-pill:hover{border-color:var(--ink-d)}.o9-pill-dark:hover{background:#0C1230}}
+#layouts .o9-plan .unit-zoom{display:none}
+#layouts .o9-plan .unit-plan{border:0;border-radius:0;margin:0 -16px;padding:54px 12px 10px;min-height:340px;background:#fff}
+@media(min-width:1024px){#layouts .o9-plan .unit-plan{margin:0;min-height:480px;padding:62px 16px 14px}}
+#layouts .o9-plan .unit-plan img{max-height:56vh}
+@media(min-width:1024px){#layouts .o9-plan .unit-plan img{max-height:460px}}
+#layouts .o9-plan #planWrap[data-view="photos"] #uShots{bottom:44px}
+#layouts .o9-plan .ushot-note{bottom:-30px}
+@media(min-width:1024px){#layouts .o9-plan #planWrap[data-view="photos"] #uShots{bottom:56px}#layouts .o9-plan .ushot-note{bottom:-36px}}
+
+.o9-form{background:var(--ink-d);color:var(--cream);padding:22px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 60px rgba(21,27,59,.25);border-radius:2px}
+@media(min-width:1024px){.o9-form{padding:36px;gap:18px}}
+.o9k{font:600 11px/1.4 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:#C9CEE6}
+.o9-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);padding:12px 0;text-align:center}
+.o9-specs>div+div{border-left:1px solid rgba(255,255,255,.18)}
+.o9-specs b{display:block;font:500 26px/1.1 var(--fd);color:var(--cream)}
+.o9-specs span{display:block;margin-top:4px;font:600 11px/1.3 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:#C9CEE6}
+@media(min-width:1024px){.o9-specs b{font-size:28px}.o9-specs span{font-size:11px}}
+.o9-ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font:400 13px/1.5 var(--fb);color:var(--cream)}
+.o9-ticks li{position:relative;padding-left:22px}
+.o9-ticks li::before{content:'\2713';position:absolute;left:0;top:0;color:#FFB37F;font-weight:700}
+@media(min-width:1024px){.o9-ticks{font-size:14px;gap:8px}}
+.o9-lf .field{margin-bottom:10px}
+.o9-lf .f-label{color:var(--cream);font-size:11px;margin-bottom:5px}
+.o9-lf .f-input{border:0;border-radius:2px;min-height:48px;padding:12px 14px}
+.o9-lf .f-input:focus{outline:2px solid #FFB37F;outline-offset:1px}
+.o9-lf .btn{width:100%;min-height:52px;margin-top:2px}
+.o9-lf .f-consent{color:#C9CEE6;font-size:11px;margin-top:10px}
+.o9-lf .f-consent a{color:#fff}
+.o9-lf .form-err{color:#FFB3A6}
+.o9-notsure{border-top:1px solid rgba(255,255,255,.18);padding-top:14px;color:#fff;text-decoration:none}
+.o9-notsure:hover{text-decoration:underline}
+.o9-finder[data-state="done"] ~ .o9-grid .o9-notsure{display:none}
+
+/* ===== Compare all 5 ===== */
+#compare-all{background:var(--paper);color:var(--ink-d);border-top:1px solid #DCD4C4;padding-top:clamp(48px,6vw,88px)}
+#compare-all h2{color:var(--ink-d)}
+#compare-all .em{color:var(--dawn-sky)}
+#compare-all .eyebrow,#compare-all .copy{color:var(--ink-m)}
+#compare-all .sec-head{margin-bottom:20px}
+#compare-all .o9c-note{font-size:14px;line-height:1.5;max-width:46ch}
+@media(min-width:1024px){#compare-all .sec-head{margin-bottom:26px}}
+#compare-all .btn-p,.fq .btn-p,.cs .btn-p,.ct .btn-p{background:var(--sun-deep);color:#0B102A}
+#compare-all .btn-p:hover,.fq .btn-p:hover,.cs .btn-p:hover,.ct .btn-p:hover{background:#F27A33;color:#0B102A}
+.o9-budget{background:var(--ink-d);color:var(--cream);padding:14px;display:flex;flex-direction:column;gap:10px;margin-bottom:14px;border-radius:2px}
+.o9b-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font:600 13px/1.4 var(--fb)}
+.o9b-fit{color:#FFB37F;font-weight:600;text-align:right}
+.o9b-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.o9b-t{min-height:44px;padding:0 10px;border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;font:600 12px/1 var(--fb);border-radius:2px;transition:background .15s}
+.o9b-t[aria-pressed="true"]{background:#fff;color:var(--ink-d);border-color:#fff}
+@media(hover:hover){.o9b-t:not([aria-pressed="true"]):hover{background:rgba(255,255,255,.12)}}
+@media(min-width:1024px){
+  .o9-budget{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px;padding:14px 20px;margin-bottom:22px}
+  .o9b-top{display:contents}
+  .o9b-l{order:1;font:600 14px/1 var(--fb)}
+  .o9b-tabs{order:2}
+  .o9b-fit{order:3;margin-left:auto;font-size:13px}
+  .o9b-t{padding:0 14px;font-size:13px}
+}
+.o9-hint{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #E3DCCD;padding:12px 14px;margin-bottom:12px;font:400 13px/1.45 var(--fb);border-radius:2px}
+.o9h-ico{display:flex;gap:4px;flex:none}
+.o9h-ico i{display:block;width:22px;height:28px;border:1.5px solid var(--ink-d);background:#EDE7DA}
+.o9h-ico i+i{border-style:dashed;background:none}
+.o9-pb{display:inline-block;font:700 11px/1.3 var(--fb);padding:4px 7px;border-radius:2px;max-width:100%}
+.o9-pb.ok{background:#E3F1EA;color:#1C5E47}
+.o9-pb.over{background:#FBEBDD;color:#8A3F0C}
+.o9-pb.best{background:var(--dawn-sky);color:#fff}
+.o9-pb.fit{background:#E8ECF8;color:#23409A}
+.o9-pb.no{background:#F1EEE7;color:var(--ink-m)}
+.o9-pb.hintp{background:none;padding:0;font-weight:400;font-size:12px;color:var(--ink-m)}
+.o9-view{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 12px;font:700 13px/1 var(--fb);border:1.5px solid var(--ink-d);background:#fff;color:var(--ink-d);border-radius:2px;transition:background .15s}
+.o9-view.best{background:var(--sun-deep);border-color:var(--sun-deep);color:#0B102A}
+@media(hover:hover){.o9-view:not(.best):hover{background:rgba(21,27,59,.06)}.o9-view.best:hover{background:#F27A33}}
+/* phone cards */
+.o9-cards{display:flex;flex-direction:column;gap:12px}
+.o9c{background:#fff;border:1px solid #E3DCCD;padding:14px;display:flex;flex-direction:column;gap:10px;border-radius:2px}
+.o9c.is-on{border:1.5px solid var(--ink-d)}
+.o9c.is-best{border:2px solid var(--dawn-sky)}
+.o9c-top{display:flex;gap:12px;align-items:flex-start}
+.o9c-top img{width:72px;height:76px;object-fit:contain;background:#FBF9F4;flex:none}
+.o9c-ty{flex:1;min-width:0}
+.o9c-ty b{display:block;font:500 22px/1.1 var(--fd);color:var(--ink-d)}
+.o9c-ty span{display:block;font:400 12px/1.4 var(--fb);color:var(--ink-m);margin-top:3px}
+.o9c-add{flex:none;min-height:44px;padding:0 12px;border:1.5px solid var(--ink-d);background:#fff;color:var(--ink-d);font:700 12px/1 var(--fb);border-radius:2px;white-space:nowrap}
+.o9c-add[aria-pressed="true"]{background:var(--ink-d);color:#fff}
+.o9c-nums{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:1px solid #EFE9DC;padding-top:10px}
+.o9c-nums span{display:block;font:600 11px/1.3 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-m)}
+.o9c-nums b{display:block;font:700 14px/1.3 var(--fb);color:var(--ink-d)}
+.o9c-pills{display:flex;flex-wrap:wrap;gap:6px}
+.o9c-pills:empty{display:none}
+.o9c .o9-view{width:100%}
+/* desktop table */
+.o9-table{display:none}
+@media(min-width:1024px){
+  .o9-hint,.o9-cards{display:none}
+  .o9-table{display:block;background:#fff;border:1px solid #E3DCCD;border-radius:2px}
+  .o9t-h,.o9t-r{display:grid;grid-template-columns:56px 92px 1.4fr 1fr 1fr 1.5fr 140px;gap:16px;align-items:center;padding:12px 20px}
+  .o9t-h{font:600 11px/1.4 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-m);border-bottom:1px solid #E3DCCD}
+  .o9t-r{border-bottom:1px solid #EFE9DC}
+  .o9t-r:last-child{border-bottom:0}
+  .o9t-r.is-best{background:#F4F6FC;box-shadow:inset 4px 0 0 var(--dawn-sky)}
+  .o9t-r.is-on:not(.is-best){background:#FFFCF6}
+  .o9t-chk{display:flex;align-items:center;justify-content:center;min-height:44px;cursor:pointer}
+  .o9t-chk input{width:20px;height:20px;accent-color:var(--ink-d);margin:0;cursor:pointer}
+  .o9t-r img{width:92px;height:76px;object-fit:contain;background:#FBF9F4}
+  .o9t-ty b{display:block;font:500 24px/1.1 var(--fd);color:var(--ink-d)}
+  .o9t-ty span{display:block;font:400 13px/1.4 var(--fb);color:var(--ink-m);margin-top:3px}
+  .o9t-from{font:600 16px/1.3 var(--fb)}
+  .o9t-mo{font:700 17px/1.3 var(--fb)}
+  .o9t-pills{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+  .o9-pb{font-size:12px;padding:4px 8px}
+}
+/* desktop compare panel */
+.o9-cpanel{display:none;background:#fff;border:2px solid var(--ink-d);margin-top:22px}
+.o9-dash{display:none;border:1.5px dashed #C9C2B2;padding:18px 20px;font:400 14px/1.4 var(--fb);color:var(--ink-m);margin-top:22px}
+@media(min-width:1024px){
+  .o9-cpanel:not([hidden]){display:block}
+  .o9-dash:not([hidden]){display:block}
+  .o9cp-head{display:grid;grid-template-columns:220px repeat(2,minmax(0,1fr))}
+  .o9cp-lab{padding:20px 24px;border-right:1px solid #E3DCCD;display:flex;align-items:flex-end;font:400 13px/1.4 var(--fb);color:var(--ink-m)}
+  .o9cp-col{padding:18px 24px;display:flex;flex-direction:column;gap:10px;border-right:1px solid #E3DCCD}
+  .o9cp-col:last-child{border-right:0}
+  .o9cp-col.first{background:#F4F6FC}
+  .o9cp-col .t{display:flex;justify-content:space-between;align-items:center;font:500 30px/1 var(--fd);color:var(--ink-d)}
+  .o9cp-col img{height:180px;width:100%;object-fit:contain}
+  .o9cp-r{display:grid;grid-template-columns:220px repeat(2,minmax(0,1fr));border-top:1px solid #EFE9DC}
+  .o9cp-r.diff{background:#FFFCF6}
+  .o9cp-r .l{padding:12px 24px;border-right:1px solid #E3DCCD;font:600 13px/1.4 var(--fb);color:var(--ink-m);display:flex;align-items:center}
+  .o9cp-r .c{padding:12px 24px;border-right:1px solid #E3DCCD;font:400 15px/1.4 var(--fb);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .o9cp-r .c.first{background:#F4F6FC}
+  .o9cp-r .c:last-child{border-right:0}
+  .o9cp-r.diff .c{font-weight:700}
+  .o9cp-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;background:var(--ink-d);color:var(--cream);padding:20px 24px}
+  .o9cp-foot b{display:block;font:700 18px/1.3 var(--fb)}
+  .o9cp-foot span{display:block;font:400 13px/1.4 var(--fb);color:#C9CEE6;margin-top:4px}
+  .o9cp-foot .btn{flex:none;min-height:54px;padding:0 28px;font-size:16px}
+}
+.o9-delta{display:inline-block;font:700 12px/1.3 var(--fb);color:#1C5E47;background:#E3F1EA;padding:3px 8px;border-radius:2px}
+.o9-tag{display:inline-block;background:var(--dawn-sky);color:#fff;font:700 11px/1 var(--fb);letter-spacing:.12em;padding:5px 8px;text-transform:uppercase;border-radius:2px}
+.o9-foot{font:400 11px/1.5 var(--fb);color:var(--ink-m);margin-top:16px}
+
+/* ===== The quiz: phone sheet and desktop modal ===== */
+.fq{position:fixed;inset:0;z-index:1100;display:none}
+.fq.on{display:block}
+.fq-back{position:absolute;inset:0;background:rgba(12,18,48,.74)}
+.fq-box{position:absolute;inset:0;background:#fff;display:flex;flex-direction:column;color:var(--ink-d)}
+.fq-head{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #E3DCCD;flex:none;padding-top:max(12px,env(safe-area-inset-top,0px))}
+.fq-hl{flex:1;display:flex;flex-direction:column;gap:8px;min-width:0}
+.fq-lab{color:var(--ink-m)}
+.fq-ttl{display:none;font:500 36px/1.1 var(--fd);color:var(--ink-d);margin:0}
+.fq-ttl .em{font-style:italic;color:var(--dawn-sky)}
+.fq-prog{display:flex;gap:4px}
+.fq-prog i{flex:1;height:4px;background:#E3DCCD}
+.fq-prog i.on{background:var(--ink-d)}
+.fq-x{flex:none;width:44px;height:44px;border:1px solid #D9D2C3;background:#fff;color:var(--ink-d);font:600 16px/1 var(--fb);display:flex;align-items:center;justify-content:center;border-radius:2px}
+.fq-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.fq-q{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.fq-prog-d{display:none}
+.fq-f{border:0;margin:0;padding:24px 20px 12px;display:none;flex-direction:column;gap:10px;min-width:0}
+.fq-f legend{padding:0;font:500 30px/1.15 var(--fd);color:var(--ink-d);margin-bottom:4px;float:left;width:100%}
+.fq-f legend .fq-n,.fq-lg-d{display:none}
+.fq-sub{font:400 13px/1.4 var(--fb);color:var(--ink-m);margin:0 0 6px;clear:both}
+.fq-opts{display:flex;flex-direction:column;gap:10px}
+.fq-o{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:58px;padding:0 18px;border:1.5px solid #D9D2C3;background:#fff;color:var(--ink-d);font:600 16px/1.3 var(--fb);text-align:left;border-radius:2px;transition:background .15s,border-color .15s}
+.fq-o[aria-pressed="true"]{background:var(--ink-d);color:#fff;border-color:var(--ink-d)}
+.fq-o i{font-style:normal;opacity:.75;flex:none}
+.fq-act{flex:none;display:flex;gap:10px;align-items:center;padding:12px 16px calc(12px + var(--safe));border-top:1px solid #E3DCCD;background:#fff;flex-wrap:wrap}
+.fq-backb{min-height:52px;padding:0 18px;border:1.5px solid var(--ink-d);background:#fff;color:var(--ink-d);font:600 14px/1 var(--fb);box-shadow:none}
+.fq-go{flex:1;min-height:52px}
+.fq-go[disabled]{background:#E8E4DA!important;color:#6B6F82!important;box-shadow:none;cursor:default;transform:none}
+.fq-hint{display:none;flex-basis:100%;font:400 12px/1.5 var(--fb);color:var(--ink-m);margin:0}
+.fq-tap{flex:1;text-align:right;font:400 12px/1.4 var(--fb);color:var(--ink-m);min-height:44px;display:flex;align-items:center;justify-content:flex-end}
+.fq[data-step="q1"] .fq-f[data-q="1"],.fq[data-step="q2"] .fq-f[data-q="2"],.fq[data-step="q3"] .fq-f[data-q="3"]{display:flex}
+.fq[data-step="q1"] .fq-backb,.fq[data-step="q1"] .fq-go,.fq[data-step="q2"] .fq-go{display:none}
+.fq[data-step="q3"] .fq-tap{display:none}
+.fq-r{display:none;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.fq[data-step="loading"] .fq-q,.fq[data-step="result"] .fq-q{display:none}
+.fq[data-step="loading"] .fq-r,.fq[data-step="result"] .fq-r{display:flex;flex-direction:column}
+.fq-idle{display:none}
+.fq-load{display:none;flex:1;background:var(--ink-d);color:var(--cream);flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:28px 20px;text-align:center}
+.fq[data-phase="loading"] .fq-load{display:flex}
+.fq-lplans{display:flex;gap:6px}
+.fq-lplans i{display:block;width:56px;height:62px;background:#fff;padding:4px;opacity:.35;transition:opacity .25s}
+.fq-lplans i.on{opacity:1;outline:2px solid var(--sun-deep)}
+.fq-lplans img{width:100%;height:100%;object-fit:contain}
+.fq-load b{font:500 28px/1.15 var(--fd);color:var(--cream)}
+.fq-lsteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;width:100%;max-width:420px;text-align:left}
+.fq-lsteps li{display:flex;align-items:center;gap:12px;font:400 14px/1.4 var(--fb);color:rgba(255,255,255,.45)}
+.fq-lsteps li i{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font:700 12px/1 var(--fb);font-style:normal}
+.fq-lsteps li.on{color:#fff;font-weight:600}
+.fq-lsteps li.on i{border-color:var(--sun-deep);color:var(--sun-deep)}
+.fq-lsteps li.is-done{color:#fff}
+.fq-lsteps li.is-done i{background:var(--sun-deep);border-color:var(--sun-deep);color:#0B102A}
+.fq-lbar{width:100%;max-width:420px;height:4px;background:rgba(255,255,255,.15)}
+.fq-lbar i{display:block;height:100%;background:var(--sun-deep);width:0;transition:width .5s linear}
+.fq-res{display:none;flex-direction:column;position:relative;background:#fff}
+.fq[data-phase="result"] .fq-res{display:flex}
+.fq-cards{padding:18px 20px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.fq-tag{align-self:flex-start;background:var(--dawn-sky);color:#fff;font:700 11px/1 var(--fb);letter-spacing:.12em;padding:5px 8px;text-transform:uppercase;border-radius:2px}
+.fq-tag2{align-self:flex-start;border:1px solid var(--ink-d);font:700 11px/1 var(--fb);letter-spacing:.12em;padding:4px 7px;text-transform:uppercase;color:var(--ink-m);border-radius:2px}
+.fq-best,.fq-alt{display:flex;flex-direction:column;gap:8px;min-width:0}
+.fq-cr{display:flex;gap:12px;align-items:center}
+.fq-cr img{width:88px;height:96px;object-fit:contain;background:#FBF9F4;flex:none}
+.fq-cr>div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.fq-ct{font:500 34px/1 var(--fd);color:var(--ink-d)}
+.fq-cr span{font:400 12px/1.4 var(--fb);color:var(--ink-m)}
+.fq-cr strong{font:700 14px/1.3 var(--fb);color:var(--ink-d)}
+.fq-best p,.fq-alt p{font:400 12px/1.45 var(--fb);margin:0;color:var(--ink-d)}
+.fq-alt{border:1.5px solid #D9D2C3;padding:10px 12px;border-radius:2px}
+.fq-alt .fq-cr img{width:56px;height:62px}
+.fq-alt .fq-ct{font-size:22px}
+.fq-form{background:var(--ink-d);color:var(--cream);padding:18px 20px calc(22px + var(--safe));display:flex;flex-direction:column;gap:10px;flex:1}
+.fq-fh{font:700 18px/1.3 var(--fb);color:var(--cream)}
+.fq-fs{font:400 12px/1.5 var(--fb);color:#C9CEE6;margin:0}
+.fq-form form{display:flex;flex-direction:column;gap:10px}
+.fq-form .field{margin:0}
+.fq-form .f-label{color:#fff;font-size:11px;margin-bottom:5px}
+.fq-form .f-input{border:0;border-radius:2px;min-height:48px}
+.fq-form .f-input:focus{outline:2px solid #FFB37F;outline-offset:1px}
+.fq-form .btn{width:100%;min-height:54px;font-size:16px}
+.fq-form .form-err{color:#FFB3A6}
+.fq-row{display:grid;gap:10px}
+.fq-ff{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.fq-ff .f-consent{color:#C9CEE6;font-size:11px;margin:0}
+.fq-ff .f-consent a{color:#fff}
+.fq-ff .o9-tlink{color:#fff}
+.fq-stale{display:flex;justify-content:space-between;align-items:center;gap:16px;background:var(--ink-d);color:#fff;padding:14px 20px;font:600 14px/1.3 var(--fb)}
+.fq-stale .btn{min-height:44px;padding:0 18px;font-size:14px;flex:none}
+.fq.stale .fq-cards,.fq.stale .fq-form{opacity:.4;pointer-events:none}
+@media(min-width:1024px){
+  .fq{align-items:flex-start;justify-content:center;padding:48px 24px;overflow-y:auto}
+  .fq.on{display:flex}
+  .fq-box{position:relative;inset:auto;width:min(1200px,100%);background:var(--paper);box-shadow:0 40px 100px rgba(0,0,0,.35)}
+  .fq-head{padding:20px 28px 0;border:0;gap:20px}
+  .fq-lab,.fq-hl>.fq-prog{display:none}
+  .fq-ttl{display:block}
+  .fq-x{font-size:20px}
+  .fq-body{display:grid;grid-template-columns:5fr 7fr;gap:20px;padding:20px 28px 28px;overflow:visible;min-height:640px;align-items:stretch}
+  .fq-q{background:#fff;border:1px solid #E3DCCD;padding:26px;gap:22px;overflow:visible}
+  .fq-prog-d{display:flex;gap:6px}
+  .fq-f{display:flex!important;padding:0}
+  .fq-f legend{font:700 15px/1.4 var(--fb);margin-bottom:10px;float:none}
+  .fq-f legend .fq-n,.fq-lg-d{display:inline}
+  .fq-lg-m,.fq-sub{display:none}
+  .fq-opts{flex-direction:row;flex-wrap:wrap;gap:8px}
+  .fq-o{min-height:44px;padding:0 14px;font:600 14px/1 var(--fb);justify-content:flex-start;gap:6px}
+  .fq-o i{display:none}
+  .fq-o[aria-pressed="true"]::after{content:'\2713';font-size:12px}
+  .fq-act{margin-top:auto;padding:0;border:0;flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:10px;background:none}
+  .fq-backb,.fq-tap{display:none!important}
+  .fq-go{display:inline-flex!important;min-height:56px;font-size:16px}
+  .fq-hint{display:block}
+  .fq[data-step="loading"] .fq-q,.fq[data-step="result"] .fq-q{display:flex}
+  .fq-r{display:flex!important;flex-direction:column;overflow:visible}
+  .fq-idle{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:40px;text-align:center;border:1.5px dashed #C9C2B2;background:rgba(255,255,255,.5);color:var(--ink-m)}
+  .fq[data-phase="loading"] .fq-idle,.fq[data-phase="result"] .fq-idle{display:none}
+  .fq-idle b{font:500 32px/1.15 var(--fd);color:var(--ink-d)}
+  .fq-idle span{font:400 15px/1.4 var(--fb)}
+  .fq-load{padding:44px;gap:28px}
+  .fq-load b{font-size:36px}
+  .fq-lplans i{width:64px;height:72px}
+  .fq-res{flex:1;border:2px solid var(--ink-d);box-shadow:0 24px 60px rgba(21,27,59,.12)}
+  .fq-cards{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;padding:20px 22px}
+  .fq-best{border:2px solid var(--dawn-sky);padding:14px}
+  .fq-alt{padding:14px}
+  .fq-cr img{width:84px;height:92px}
+  .fq-alt .fq-cr img{width:72px;height:80px}
+  .fq-alt .fq-ct{font-size:28px}
+  .fq-form{padding:22px 26px}
+  .fq-fh{font-size:19px}
+  .fq-form .f-input{min-height:44px}
+  .fq-form .btn{min-height:52px}
+  .fq-row{grid-template-columns:1fr 1fr}
+  .fq-ff{flex-direction:row;justify-content:space-between;align-items:center;gap:12px}
+  .fq-stale{position:absolute;left:0;right:0;top:0;z-index:2}
+}
+
+/* ===== compare sheet (phone) ===== */
+.cs{position:fixed;inset:0;z-index:1100;background:var(--paper);color:var(--ink-d);display:none;flex-direction:column}
+.cs.on{display:flex}
+.cs-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top,0px));background:#fff;border-bottom:1px solid #E3DCCD;flex:none}
+.cs-head>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cs-head .o9k{color:var(--ink-m)}
+.cs-ttl{font:500 24px/1.1 var(--fd);color:var(--ink-d)}
+.cs-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px}
+.cs-note{font:400 12px/1.4 var(--fb);color:var(--ink-m);margin:0}
+.cs-grid{background:#fff;border:2px solid var(--ink-d)}
+.cs-cols{display:grid;grid-template-columns:1fr 1fr}
+.cs-col{padding:12px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-width:0}
+.cs-col.first{background:#F4F6FC;border-right:1px solid #E3DCCD}
+.cs-col b{font:500 24px/1.1 var(--fd);color:var(--ink-d)}
+.cs-col .o9-tag{padding:4px 6px}
+.cs-col img{width:100%;height:110px;object-fit:contain}
+.cs-r{border-top:1px solid #EFE9DC}
+.cs-r.diff{background:#FFFCF6}
+.cs-r .l{font:600 11px/1.4 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-m);padding:8px 12px 0}
+.cs-r .cc{display:grid;grid-template-columns:1fr 1fr}
+.cs-r .c{padding:4px 12px 10px;font:400 14px/1.4 var(--fb);min-width:0;overflow-wrap:anywhere}
+.cs-r .c.first{border-right:1px solid #E3DCCD}
+.cs-r.diff .c{font-weight:700}
+.cs-r .o9-delta{font-size:11px;padding:2px 5px;margin-left:4px}
+.cs-back{align-self:center;min-height:48px;font-size:14px}
+.cs-foot{flex:none;background:var(--ink-d);color:#fff;padding:12px 16px calc(16px + var(--safe));display:flex;flex-direction:column;gap:8px}
+.cs-foot p{font:400 13px/1.4 var(--fb);margin:0;color:#fff}
+.cs-foot p span{color:#C9CEE6}
+.cs-foot .btn{width:100%;min-height:52px}
+/* compare tray (phone) */
+.ct{position:fixed;left:0;right:0;bottom:0;z-index:999;display:none;align-items:center;gap:8px;background:#fff;border-top:1px solid #E3DCCD;box-shadow:0 -8px 24px rgba(21,27,59,.14);padding:10px 12px calc(10px + var(--safe))}
+.ct.on{display:flex}
+@media(min-width:1024px){.ct{display:none!important}}
+.ct-slots{flex:1;display:flex;gap:8px;min-width:0}
+.ct-s{flex:1;min-height:52px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;padding:0 10px;text-align:left;background:#EDE7DA;color:var(--ink-d);border:1.5px solid var(--ink-d);font-family:var(--fb);min-width:0;border-radius:2px}
+.ct-s b{font:700 13px/1.2 var(--fb)}
+.ct-s span{font:400 11px/1.2 var(--fb)}
+.ct-s.empty{background:#fff;color:var(--ink-m);border:1.5px dashed #8A8FA8}
+.ct-go{flex:none;min-height:52px;padding:0 14px;font-size:14px}
+.ct-go[disabled]{background:#E8E4DA!important;color:#6B6F82!important;box-shadow:none;cursor:default;transform:none}
+.sticky.hold,.to-top.hold{opacity:0!important;pointer-events:none!important}
+html.o9-lock .sticky,html.o9-lock .to-top,html.o9-lock .ct{display:none!important}
+/* sticky bar after a match */
+.sticky .sticky-m{display:none}
+.sticky.matched>:not(.sticky-m){display:none}
+.sticky.matched .sticky-p.sticky-m{display:flex}
+.sticky.matched .btn.sticky-m{display:inline-flex}
+.sticky-m b{font:700 15px/1.1 var(--fb)}
+/* drawer: plan tags when two units are asked for */
+.ld-pair{display:flex;gap:8px;margin:0 0 14px}
+.ld-pair span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E3DCCD;padding:6px 10px 6px 6px;font:700 14px/1 var(--fb);color:var(--deep);border-radius:2px}
+.ld-pair img{width:36px;height:40px;object-fit:contain}
+html.clean .fq,html.clean .cs,html.clean .ct{display:none!important}
+</style>
 <noscript><style>.dawn-bg:not(.in){background-image:url('_view.webp')!important}</style></noscript>
 </head>
 <body>
@@ -1969,6 +2366,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website">
           <input type="hidden" name="00N2j000000e0hp" value="Website">
           <input type="hidden" name="00N2j000000e0hR" value="1">
+          <!-- Option 9 (2 Nov 2026): what the lead asked for. unit_interest / lead_cta / finder_answers are unknown to
+               Salesforce (ignored, like submission_id) and reach n8n with the FormData. description is the standard SF Lead
+               field, used as the stopgap carrier until Mah Sing's SF admin supplies custom field IDs (section 6 of the spec).
+               TODO (SF admin): replace description with the custom fields, e.g. name="00N..." for Unit interest, Lead CTA
+               source and Finder answers, and keep the values set by setLeadFields(). -->
+          <input type="hidden" name="unit_interest" value="" data-lead-unit>
+          <input type="hidden" name="lead_cta" value="" data-lead-cta>
+          <input type="hidden" name="finder_answers" value="" data-lead-finder>
+          <input type="hidden" name="description" value="" data-lead-desc>
           <div class="field"><label class="f-label" for="q-name">Full name</label>
             <input class="f-input" id="q-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
           <div class="field"><label class="f-label" for="q-phone">WhatsApp number</label>
@@ -2002,95 +2408,130 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">Layouts</span>
-      <h2>A Freehold Old Klang Road Serviced Apartment Designed for <span class="em">Every Lifestyle</span></h2>
-      <p class="copy">At M Aurora, space is more than just square footage. It is about finding the right fit for your way of life.</p>
-      <div class="more-wrap" data-collapsed="true">
-        <div class="more-body">
-          <p class="copy">With built-up sizes ranging from 556 to 1,019 sq ft, units come in 1+1 to 4-bedroom layouts to suit a wide range of needs: 1+1-bedroom units for urban professionals, 2-bedroom units for couples, 3-bedroom units for growing families, and 4-bedroom units ideal for multi-generational living.</p>
-          <p class="copy">This consideration extends to every aspect of the development. The speed ramp parking system enhances daily convenience by improving traffic flow, reducing bottlenecks and making arrivals and departures smoother. Thoughtful details like these have been carefully considered to provide a comfortable and practical living environment from the moment you step inside.</p>
-        </div>
-        <button type="button" class="more-btn" aria-expanded="false">Show more
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
+      <h2>Pick a layout. <span class="em">Get your best price</span> on WhatsApp.</h2>
+    </div>
+
+    <!-- Option 9 (2 Nov 2026): the layout finder. Idle = the invitation; done = the match with the answers as chips.
+         Never auto-opens. Spec: projects/mahsing/html/2026-11-02_aurora-option9/change-spec.md -->
+    <div class="o9-finder rv" id="finderBar" data-state="idle">
+      <button type="button" class="o9f-idle" data-fq-open="bar" data-cta-id="finder_open_bar">
+        <span class="o9f-ico" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+        <span class="o9f-txt"><b>Not sure which of the 5 fits you?</b><span class="o9f-sub">Answer 3 quick questions and we'll match you to a layout and budget.</span><span class="o9f-cta o9f-cta-m">Find my match in 3 taps &rarr;</span></span>
+        <span class="o9f-cta o9f-cta-d">Find my match &rarr;</span>
+      </button>
+      <div class="o9f-done">
+        <div class="o9f-chips"><b id="fbMatch">Your match: Type D</b><span id="fbChips"></span><button type="button" class="o9-tlink" data-fq-open="bar">Edit answers</button></div>
+        <a class="o9-olink" href="#compare-all" id="fbCompare">Compare all 5 <span aria-hidden="true">&darr;</span></a>
       </div>
     </div>
 
     <div class="tabs rv" id="tabs" role="tablist" aria-label="Unit layouts">
-      <button class="tab" role="tab" data-type="A" aria-selected="true">Type A<em>1+1 Bed</em></button>
-      <button class="tab" role="tab" data-type="B" aria-selected="false">Type B<em>2 Bed</em></button>
-      <button class="tab" role="tab" data-type="C" aria-selected="false">Type C<em>3 Bed</em></button>
-      <button class="tab" role="tab" data-type="D" aria-selected="false">Type D<em>3 Bed</em></button>
-      <button class="tab" role="tab" data-type="E" aria-selected="false">Type E<em>4 Bed</em></button>
+      <button class="tab" role="tab" data-type="A" aria-selected="true"><span class="tab-k">Type A<i class="tab-badge">Your match</i></span><em>1+1 bed &middot; 556 sq ft</em></button>
+      <button class="tab" role="tab" data-type="B" aria-selected="false"><span class="tab-k">Type B<i class="tab-badge">Your match</i></span><em>2 bed &middot; 737 sq ft</em></button>
+      <button class="tab" role="tab" data-type="C" aria-selected="false"><span class="tab-k">Type C<i class="tab-badge">Your match</i></span><em>3 bed &middot; 858 sq ft</em></button>
+      <button class="tab" role="tab" data-type="D" aria-selected="false"><span class="tab-k">Type D<i class="tab-badge">Your match</i></span><em>3 bed &middot; 916 sq ft</em></button>
+      <button class="tab" role="tab" data-type="E" aria-selected="false"><span class="tab-k">Type E<i class="tab-badge">Your match</i></span><em>4 bed &middot; 1,019 sq ft</em></button>
     </div>
 
-    <div class="unit rv">
-      <div class="unit-plan" id="planWrap" data-view="plan">
-        <span class="unit-badge">Open for Sale</span>
-        <!-- 19 Oct 2026 (Justin): a "Floor plan | Unit photos" toggle inside the plan box, as on M Grand Minori. The
-             photos view is the type's show-unit photography (Mah Sing's own gallery, m-aurora.com.my/images-gallery/)
-             as a swipeable strip, rebuilt per type by render(); a photo opens the lightbox with the type's price ask.
-             Type D has no show-unit photos (its show unit is the 360 tour), so its card keeps the floor plan alone and
-             the toggle hides; switching type always opens on the floor plan. -->
-        <div class="plan-tog" role="group" aria-label="Plan view">
-          <button type="button" class="plan-tog-b" data-view="plan" aria-pressed="true">Floor plan</button>
-          <button type="button" class="plan-tog-b" data-view="photos" aria-pressed="false">Unit photos</button>
+    <div class="o9-grid rv">
+      <div class="o9-plan">
+        <div class="o9p-head">
+          <div class="o9p-ttl">
+            <h3>Type <span id="uName">A</span></h3>
+            <p class="o9p-line"><span id="uLine">1+1 bed &middot; 1 bath &middot; 556 sq ft</span> &middot; Freehold</p>
+            <span class="o9-badge">Open for Sale</span>
+          </div>
+          <div class="o9p-acts">
+            <button type="button" class="o9-pill o9-pill-enl" id="uEnlarge" aria-label="Enlarge the floor plan"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Enlarge</button>
+            <!-- Round 3 (16 Oct 2026) 360 pill, now in the panel header; same id, href, data-tour-source and modal binding -->
+            <a class="o9-pill o9-pill-dark" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card" aria-label="Take the 360&deg; virtual tour"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>360&deg; tour</a>
+          </div>
         </div>
-        <div class="unit-shots" id="uShots"></div>
-        <button type="button" class="ushot-nav ushot-prev" id="uShotPrev" aria-controls="uShots" aria-label="Previous photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button type="button" class="ushot-nav ushot-next" id="uShotNext" aria-controls="uShots" aria-label="Next photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
-        <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
-        <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
-        <!-- Round 3 (16 Oct 2026): the 360 tour link moved here from under the ask, as a pill at the foot of the plan
-             box (same id, href, data-tour-source and modal binding); the card keeps #uCta as its one filled ask -->
-        <a class="u-link plan-vt" id="uVt" href="https://m-aurora.com.my/360-vr/#typeA" target="_blank" rel="noopener" data-tour-source="unit_card" aria-label="Take the 360&deg; virtual tour"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span class="vt-x">Take the </span>360&deg; <span class="vt-x">virtual </span>tour</a>
-      </div>
-      <div class="unit-info">
-        <div class="unit-head">
-          <h3>Type <span id="uName">A</span></h3>
-          <p class="unit-from">From <b class="num" id="uFrom">RM 339,000</b><sup>*</sup></p>
-        </div>
-        <p class="unit-cfg" id="uCfg">1+1 bedroom, for urban professionals</p>
-        <div class="specs">
-          <div><div class="n" id="uBed">1+1</div><div class="l">Bedroom</div></div>
-          <div><div class="n" id="uBath">1</div><div class="l">Bathroom</div></div>
-          <div><div class="n num" id="uSize">556</div><div class="l">Sq Ft</div></div>
-          <div><div class="n">Freehold</div><div class="l">Tenure</div></div>
-        </div>
-        <div class="unit-acts">
-          <button class="btn btn-p" id="uCta" data-open-lead="unit_card" data-unit="Type A" data-cta-id="units_get_price">Get the Type A price list</button>
+        <div class="unit-plan" id="planWrap" data-view="plan">
+          <!-- 19 Oct 2026 (Justin): a "Floor plan | Unit photos" toggle inside the plan box, as on M Grand Minori. The
+               photos view is the type's show-unit photography (Mah Sing's own gallery, m-aurora.com.my/images-gallery/)
+               as a swipeable strip, rebuilt per type by render(); a photo opens the lightbox with the type's price ask.
+               Type D has no show-unit photos (its show unit is the 360 tour), so its card keeps the floor plan alone and
+               the toggle hides; switching type always opens on the floor plan. -->
+          <div class="plan-tog" role="group" aria-label="Plan view">
+            <button type="button" class="plan-tog-b" data-view="plan" aria-pressed="true">Floor plan</button>
+            <button type="button" class="plan-tog-b" data-view="photos" aria-pressed="false">Unit photos</button>
+          </div>
+          <div class="unit-shots" id="uShots"></div>
+          <button type="button" class="ushot-nav ushot-prev" id="uShotPrev" aria-controls="uShots" aria-label="Previous photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button type="button" class="ushot-nav ushot-next" id="uShotNext" aria-controls="uShots" aria-label="Next photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+          <span class="unit-zoom"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5M11 8v6M8 11h6"/></svg>Tap to enlarge</span>
+          <img loading="lazy" decoding="async" id="planImg" src="_plan-A.jpg" alt="Type A floor plan, 556 sq ft, 1+1 bedroom" width="900" height="900">
         </div>
       </div>
-    </div>
 
-    <div class="calc rv" id="calc">
-      <h3>Estimate your monthly instalment</h3>
-      <div class="cprice">
-        <span class="l">Property price</span>
-        <button class="cp-pick" id="cpPick" type="button" aria-haspopup="listbox" aria-expanded="false">
-          <b class="num" id="cPrice">RM 339,000</b>
-          <span class="cp-pick-t">Type <span id="cType">A</span></span>
-          <svg class="cp-pick-c" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <div class="cp-menu" id="cpMenu" role="listbox" aria-label="Unit type" hidden></div>
-      </div>
-      <div class="cfield">
-        <label for="cLoan">Loan amount <output id="cLoanOut" for="cLoan" class="num">RM 305,100 &middot; 90%</output></label>
-        <input type="range" id="cLoan" min="50" max="90" step="1" value="90">
-      </div>
-      <div class="cfield">
-        <label for="cTen">Loan tenure <output id="cTenOut" for="cTen">35 years</output></label>
-        <input type="range" id="cTen" min="10" max="35" step="1" value="35">
-      </div>
-      <div class="cout">
-        <div class="l">Estimated monthly from</div>
-        <div class="v num" id="cMy">RM 1,279</div>
-        <div class="d">Based on 3.6% p.a. interest rate</div>
-        <button type="button" class="btn btn-p calc-cta" id="cCta" data-open-lead="calculator" data-unit="Type A" data-cta-id="calc_get_price">Send me the Type A price list</button>
+      <!-- the form panel: the ask sits beside the plan (Option 6 layout), prefilled with the type on view -->
+      <div class="o9-form" id="layoutPanel">
+        <span class="o9k">You're viewing Type <span class="uNameX">A</span></span>
+        <div class="o9-specs">
+          <div><b class="num" id="uBed">1+1</b><span>Bedroom</span></div>
+          <div><b class="num" id="uBath">1</b><span>Bathroom</span></div>
+          <div><b class="num" id="uSize">556</b><span>Sq ft</span></div>
+        </div>
+        <ul class="o9-ticks">
+          <li>Your Type <span class="uNameX">A</span> price after current rebates</li>
+          <li>Which floors and facings are still open</li>
+          <li>Payment schedule and loan guidance</li>
+        </ul>
+        <form class="js-form o9-lf" data-form="layout" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
+          <input type="hidden" name="oid" value="00D0o0000015t7i">
+          <input type="hidden" name="retURL" value="https://ver2.m-aurora.com.my/thank-you">
+          <input type="hidden" name="00N2j000000e0hv" value="M Aurora Microsite (Clone)">
+          <input type="hidden" name="00N2j000000e0hw" value="M Aurora">
+          <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website">
+          <input type="hidden" name="00N2j000000e0hp" value="Website">
+          <input type="hidden" name="00N2j000000e0hR" value="1">
+          <!-- Option 9 (2 Nov 2026): what the lead asked for. unit_interest / lead_cta / finder_answers are unknown to
+               Salesforce (ignored, like submission_id) and reach n8n with the FormData. description is the standard SF Lead
+               field, used as the stopgap carrier until Mah Sing's SF admin supplies custom field IDs (section 6 of the spec).
+               TODO (SF admin): replace description with the custom fields, e.g. name="00N..." for Unit interest, Lead CTA
+               source and Finder answers, and keep the values set by setLeadFields(). -->
+          <input type="hidden" name="unit_interest" value="" data-lead-unit>
+          <input type="hidden" name="lead_cta" value="" data-lead-cta>
+          <input type="hidden" name="finder_answers" value="" data-lead-finder>
+          <input type="hidden" name="description" value="" data-lead-desc>
+          <div class="field"><label class="f-label" for="l-name">Full name</label>
+            <input class="f-input" id="l-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+          <div class="field"><label class="f-label" for="l-phone">Phone (WhatsApp)</label>
+            <input class="f-input" id="l-phone" name="mobile" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+          <div class="field"><label class="f-label" for="l-email">Email</label>
+            <input class="f-input" id="l-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+          <p class="form-err" data-form-error></p>
+          <button class="btn btn-p" type="submit"><span>Send me Type <span class="uNameX">A</span> pricing</span></button>
+          <p class="f-consent">No obligation &middot; We reply by WhatsApp &middot; By submitting you agree to the <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a>.</p>
+        </form>
+        <button type="button" class="o9-tlink o9-notsure" data-fq-open="panel_link">Not sure Type <span class="uNameX">A</span> is right? Find your match in 3 taps &rarr;</button>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Option 9 (2 Nov 2026): Compare all 5, in place of the instalment calculator. Rows, pills and the compare
+     panel are rendered by the controller from _finder.js (MAFinder), so prices and instalments live in one file. -->
+<section class="sec sec-alt" id="compare-all">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Compare all 5</span>
+      <h2>Five layouts, <span class="em">side by side.</span></h2>
+      <p class="copy o9c-note">Starting prices and indicative instalments. Your price after rebates comes with the price list.</p>
+    </div>
+    <div class="o9-budget rv" id="budgetBar">
+      <div class="o9b-top"><span class="o9b-l">Monthly budget:</span><span class="o9b-fit" id="budgetFit">Choose a budget to see what fits</span></div>
+      <div class="o9b-tabs" id="budgetTabs" role="group" aria-label="Monthly budget"></div>
+    </div>
+    <div class="o9-hint rv" id="cmpHint"><span class="o9h-ico" aria-hidden="true"><i></i><i></i></span><span>Tap <b>+ Compare</b> on any 2 layouts to see them side by side.</span></div>
+    <div class="o9-table rv" id="cmpTable" role="table" aria-label="The five layouts"></div>
+    <div class="o9-cards rv" id="cmpCards"></div>
+    <div class="o9-cpanel" id="cmpPanel" hidden></div>
+    <p class="o9-dash" id="cmpEmpty">Tick any two layouts to compare them side by side.</p>
+    <p class="o9-foot">*Starting prices. Instalments are estimates at 90% loan, 35 years, 3.6% p.a.; not a loan offer, financing subject to bank approval.</p>
+  </div>
+</section>
 
 <!-- DAWN STORY: live H2 block 1 verbatim (Welcome...) + brand intro. Split layout. -->
 <section class="sec" id="dawn">
@@ -2385,6 +2826,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website">
           <input type="hidden" name="00N2j000000e0hp" value="Website">
           <input type="hidden" name="00N2j000000e0hR" value="1">
+          <!-- Option 9 (2 Nov 2026): what the lead asked for. unit_interest / lead_cta / finder_answers are unknown to
+               Salesforce (ignored, like submission_id) and reach n8n with the FormData. description is the standard SF Lead
+               field, used as the stopgap carrier until Mah Sing's SF admin supplies custom field IDs (section 6 of the spec).
+               TODO (SF admin): replace description with the custom fields, e.g. name="00N..." for Unit interest, Lead CTA
+               source and Finder answers, and keep the values set by setLeadFields(). -->
+          <input type="hidden" name="unit_interest" value="" data-lead-unit>
+          <input type="hidden" name="lead_cta" value="" data-lead-cta>
+          <input type="hidden" name="finder_answers" value="" data-lead-finder>
+          <input type="hidden" name="description" value="" data-lead-desc>
           <div class="field"><label class="f-label" for="m-name">Full name</label>
             <input class="f-input" id="m-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
           <div class="field"><label class="f-label" for="m-phone">WhatsApp number</label>
@@ -2431,8 +2881,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="ld-inner">
     <div class="ld-grab" aria-hidden="true"></div>
     <div class="ld-unit" id="ldUnit"><span class="k">Enquiring about</span><span class="v" id="ldUnitVal"></span></div>
+    <div class="ld-pair" id="ldPair" hidden></div>
     <h2 id="ldTitle">Get your price list</h2>
-    <p class="ld-sub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
+    <p class="ld-sub" id="ldSub">Fill in your details and we will WhatsApp you the floor plans, pricing and availability.</p>
     <p class="ld-trust">Sold directly by Mah Sing Group, over 79 completed projects</p>
     <div class="rlabel">You'll receive:</div>
     <div class="receive">
@@ -2448,6 +2899,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website">
           <input type="hidden" name="00N2j000000e0hp" value="Website">
           <input type="hidden" name="00N2j000000e0hR" value="1">
+          <!-- Option 9 (2 Nov 2026): what the lead asked for. unit_interest / lead_cta / finder_answers are unknown to
+               Salesforce (ignored, like submission_id) and reach n8n with the FormData. description is the standard SF Lead
+               field, used as the stopgap carrier until Mah Sing's SF admin supplies custom field IDs (section 6 of the spec).
+               TODO (SF admin): replace description with the custom fields, e.g. name="00N..." for Unit interest, Lead CTA
+               source and Finder answers, and keep the values set by setLeadFields(). -->
+          <input type="hidden" name="unit_interest" value="" data-lead-unit>
+          <input type="hidden" name="lead_cta" value="" data-lead-cta>
+          <input type="hidden" name="finder_answers" value="" data-lead-finder>
+          <input type="hidden" name="description" value="" data-lead-desc>
       <div class="field"><label class="f-label" for="d-name">Full name</label>
         <input class="f-input" id="d-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
       <div class="field"><label class="f-label" for="d-phone">WhatsApp number</label>
@@ -2455,19 +2915,135 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="field"><label class="f-label" for="d-email">Email</label>
         <input class="f-input" id="d-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
       <p class="form-err" data-form-error></p>
-      <button class="btn btn-p" type="submit" style="width:100%">Get my price list now</button>
+      <button class="btn btn-p" type="submit" style="width:100%" id="ldSubmit">Get my price list now</button>
       <p class="f-consent">By submitting this form, I have read and agreed to the <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a>.</p>
       <div class="micro"><span>No spam</span><span>We reply by WhatsApp</span><span>Unsubscribe anytime</span></div>
     </form>
   </div>
 </aside>
 
-<!-- STICKY BAR (mobile) + FLOATS -->
+<!-- STICKY BAR (mobile) + FLOATS. Option 9 (2 Nov 2026): after a quiz match the bar reads "YOUR MATCH Type D |
+     Get Type D & C pricing" (.matched) and opens the quiz result form; the compare tray replaces it inside #compare-all. -->
 <div class="sticky" id="sticky">
   <div class="sticky-p" aria-hidden="true"><span>From</span><b class="num">RM339K<sup>*</sup></b></div>
   <button type="button" class="btn btn-p" data-open-lead="sticky" data-cta-id="sticky_register">Get Price List Now</button>
+  <div class="sticky-p sticky-m" aria-hidden="true"><span>Your match</span><b id="stMatch">Type D</b></div>
+  <button type="button" class="btn btn-p sticky-m" id="stMatchBtn" data-cta-id="sticky_match_get_price">Get Type D &amp; C pricing</button>
 </div>
 <button class="to-top" id="toTop" aria-label="Scroll to top"><svg viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg></button>
+
+<!-- Option 9 (2 Nov 2026): the layout finder. One DOM for both shapes: a two-column modal on desktop (all three
+     questions on the left, idle / loading / result on the right) and a one-question-per-screen sheet on phones
+     (data-step drives which part shows). Browser back closes it; the answers stay. -->
+<div class="fq" id="fq" role="dialog" aria-modal="true" aria-label="Find your layout" aria-hidden="true" data-step="q1" data-phase="idle">
+  <div class="fq-back" data-fq-close></div>
+  <div class="fq-box">
+    <div class="fq-head">
+      <div class="fq-hl">
+        <span class="o9k fq-lab" id="fqLab">Question 1 of 3</span>
+        <h3 class="fq-ttl">Not sure which of the 5 layouts? <span class="em">Answer 3 questions.</span></h3>
+        <div class="fq-prog" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <button type="button" class="fq-x" data-fq-close aria-label="Close">&#10005;</button>
+    </div>
+    <div class="fq-body">
+      <div class="fq-q" id="fqQ">
+        <div class="fq-prog fq-prog-d" aria-hidden="true"><i></i><i></i><i></i></div>
+        <fieldset class="fq-f" data-q="1"><legend><span class="fq-n">1. </span>Who is moving in?</legend><p class="fq-sub">Tap one.</p><div class="fq-opts" data-q="household"></div></fieldset>
+        <fieldset class="fq-f" data-q="2"><legend><span class="fq-n">2. </span><span class="fq-lg-m">What monthly instalment feels comfortable?</span><span class="fq-lg-d">Comfortable monthly instalment</span></legend><p class="fq-sub">Indicative, at 90% loan over 35 years.</p><div class="fq-opts" data-q="bracket"></div></fieldset>
+        <fieldset class="fq-f" data-q="3"><legend><span class="fq-n">3. </span><span class="fq-lg-m">Any must-haves?</span><span class="fq-lg-d">Must-haves (pick any)</span></legend><p class="fq-sub">Pick any, or skip.</p><div class="fq-opts" data-q="must"></div></fieldset>
+        <div class="fq-act">
+          <button type="button" class="btn fq-backb" id="fqBack">&larr; Back</button>
+          <button type="button" class="btn btn-p fq-go" id="fqGo" disabled>Find my best match &rarr;</button>
+          <span class="fq-tap" id="fqTap">Tap an answer to continue</span>
+          <p class="fq-hint" id="fqHint">Answer questions 1 and 2 to continue. Must-haves are optional.</p>
+        </div>
+      </div>
+      <div class="fq-r">
+        <div class="fq-idle" id="fqIdle">
+          <svg aria-hidden="true" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#B9B1A0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+          <b>Your best match appears here</b><span id="fqIdleHint">Answer the questions on the left, about 20 seconds.</span>
+        </div>
+        <div class="fq-load" id="fqLoad" role="status" aria-live="polite">
+          <div class="fq-lplans" id="fqLPlans" aria-hidden="true"></div>
+          <b>Finding your best match&hellip;</b>
+          <ol class="fq-lsteps" id="fqLSteps"></ol>
+          <div class="fq-lbar" aria-hidden="true"><i id="fqLBar"></i></div>
+        </div>
+        <div class="fq-res" id="fqRes">
+          <div class="fq-stale" id="fqStale" hidden><span>You changed your answers.</span><button type="button" class="btn btn-p" id="fqUpdate">Update my match</button></div>
+          <div class="fq-cards">
+            <div class="fq-best">
+              <span class="fq-tag" id="fqBestTag">Your best match</span>
+              <div class="fq-cr"><img id="fqBestImg" src="_plan-D.jpg" alt="" width="88" height="96"><div><b class="fq-ct" id="fqBestT">Type D</b><span id="fqBestS"></span><strong class="num" id="fqBestM"></strong></div></div>
+              <p id="fqBestWhy"></p>
+            </div>
+            <div class="fq-alt">
+              <span class="fq-tag2" id="fqAltTag">Also fits you</span>
+              <div class="fq-cr"><img id="fqAltImg" src="_plan-C.jpg" alt="" width="56" height="62"><div><b class="fq-ct" id="fqAltT">Type C</b><span id="fqAltS"></span><strong class="num" id="fqAltM"></strong></div></div>
+              <p id="fqAltDiff"></p>
+            </div>
+          </div>
+          <div class="fq-form">
+            <b class="fq-fh">Still deciding? Let our team help you choose.</b>
+            <p class="fq-fs" id="fqFormSub">A sales advisor will WhatsApp you pricing after rebates, show you which units are still open, and answer your questions. No obligation.</p>
+            <form class="js-form" data-form="quiz" method="POST" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&amp;orgId=00D0o0000015t7i" novalidate>
+              <input type="hidden" name="oid" value="00D0o0000015t7i">
+              <input type="hidden" name="retURL" value="https://ver2.m-aurora.com.my/thank-you">
+              <input type="hidden" name="00N2j000000e0hv" value="M Aurora Microsite (Clone)">
+              <input type="hidden" name="00N2j000000e0hw" value="M Aurora">
+              <input type="hidden" name="00N2j000000e0ho" value="M Aurora Website">
+              <input type="hidden" name="00N2j000000e0hp" value="Website">
+              <input type="hidden" name="00N2j000000e0hR" value="1">
+          <!-- Option 9 (2 Nov 2026): what the lead asked for. unit_interest / lead_cta / finder_answers are unknown to
+               Salesforce (ignored, like submission_id) and reach n8n with the FormData. description is the standard SF Lead
+               field, used as the stopgap carrier until Mah Sing's SF admin supplies custom field IDs (section 6 of the spec).
+               TODO (SF admin): replace description with the custom fields, e.g. name="00N..." for Unit interest, Lead CTA
+               source and Finder answers, and keep the values set by setLeadFields(). -->
+          <input type="hidden" name="unit_interest" value="" data-lead-unit>
+          <input type="hidden" name="lead_cta" value="" data-lead-cta>
+          <input type="hidden" name="finder_answers" value="" data-lead-finder>
+          <input type="hidden" name="description" value="" data-lead-desc>
+              <div class="field"><label class="f-label" for="fq-name">Full name</label>
+                <input class="f-input" id="fq-name" name="last_name" type="text" maxlength="80" placeholder="Your full name" required autocomplete="name"></div>
+              <div class="fq-row">
+                <div class="field"><label class="f-label" for="fq-phone">Phone (WhatsApp)</label>
+                  <input class="f-input" id="fq-phone" name="mobile" type="tel" maxlength="20" placeholder="012-345 6789" required autocomplete="tel" inputmode="tel" data-my-phone></div>
+                <div class="field"><label class="f-label" for="fq-email">Email</label>
+                  <input class="f-input" id="fq-email" name="email" type="email" maxlength="80" placeholder="you@example.com" required autocomplete="email"></div>
+              </div>
+              <p class="form-err" data-form-error></p>
+              <button class="btn btn-p" type="submit" id="fqSubmit">Get pricing</button>
+            </form>
+            <div class="fq-ff">
+              <p class="f-consent">No obligation &middot; We reply by WhatsApp &middot; <a href="https://m-aurora.com.my/terms-and-conditions/" target="_blank" rel="noopener">T&amp;C</a> &middot; <a href="https://m-aurora.com.my/privacy-policy/" target="_blank" rel="noopener">PDPA Notice</a></p>
+              <button type="button" class="o9-tlink" id="fqToCompare">Not quite right? Compare all 5 &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Option 9: the phone compare sheet (two ticked layouts, full screen) and the compare tray -->
+<div class="cs" id="cmpSheet" role="dialog" aria-modal="true" aria-label="Compare layouts" aria-hidden="true">
+  <div class="cs-head"><div><span class="o9k">Compare</span><b class="cs-ttl" id="csTitle">Type A vs Type B</b></div><button type="button" class="fq-x" data-cs-close aria-label="Close compare">&#10005;</button></div>
+  <div class="cs-body">
+    <p class="cs-note">Differences are highlighted.</p>
+    <div class="cs-grid" id="csGrid"></div>
+    <button type="button" class="o9-tlink cs-back" data-cs-close>&larr; Back to all 5 layouts</button>
+  </div>
+  <div class="cs-foot">
+    <p id="csFootT">Still weighing Type A &amp; B? <span>Our team can help.</span></p>
+    <button type="button" class="btn btn-p" id="csCta" data-open-lead="compare" data-unit="Type A,Type B" data-cta-id="compare_sheet_get_price">Get Type A &amp; B pricing</button>
+  </div>
+</div>
+<div class="ct" id="cmpTray" role="region" aria-label="Compare tray" aria-hidden="true">
+  <div class="ct-slots" id="ctSlots"></div>
+  <button type="button" class="btn btn-p ct-go" id="ctGo" disabled>Compare 1/2</button>
+</div>
+
 
 <!-- LIGHTBOX (zoom: wheel / pinch / drag / buttons) -->
 <div class="lb" id="lb" aria-hidden="true">
@@ -2506,6 +3082,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 
+<script src="_finder.js"></script>
 <script>
 (function(){
 'use strict';
@@ -2577,7 +3154,7 @@ function captureDiagnostic(form,formId){
    section = nearest data-section attribute, else the landmark id mapped here.
    CTAs carry data-cta-id in the markup; form submit buttons deliberately don't. */
 var SECTION_BY_ID={siteNav:'nav',rail:'nav',mm:'mobile_menu',home:'hero',calc:'calculator',lb:'lightbox',
-  layouts:'units',register:'form',dawn:'overview',usp:'overview',facilities:'facilities',
+  layouts:'units','compare-all':'compare',cmpSheet:'compare',cmpTray:'compare',fq:'finder',register:'form',dawn:'overview',usp:'overview',facilities:'facilities',
   gallery:'gallery',location:'location',faq:'faq','register-full':'form',contact:'footer',
   ld:'form',sticky:'sticky',vrLb:'virtual_tour'};
 /* rail = the mobile section rail under the nav (below 1024px); header = desktop nav */
@@ -2601,9 +3178,7 @@ function contactType(h){
   if(/google\.[a-z.]+\/maps|maps\.google\.|goo\.gl\/maps|maps\.app\.goo\.gl/i.test(h))return 'map';
   return '';
 }
-var faqSent=[],calcSent={};
-function calcOnce(input){if(calcSent[input])return;calcSent[input]=true;
-  track({event:'calculator_interact',calc_input:input});}
+var faqSent=[];
 document.addEventListener('click',function(e){try{
   if(!e.isTrusted)return;
   var t=e.target;if(!t||!t.closest)return;
@@ -2666,15 +3241,6 @@ document.addEventListener('click',function(e){try{
     if(item&&!item.classList.contains('on')&&faqSent.indexOf(item)===-1){
       faqSent.push(item);track({event:'faq_open',faq_question:clip(el.textContent,80)});}
     return;}
-  /* calculator: the unit / price picker */
-  if(t.closest('#cpPick'))calcOnce('unit');
-}catch(err){}},true);
-/* calculator sliders: first trusted change of each per page view.
-   cLoan is the loan-margin slider (50 to 90%), i.e. the downpayment control. */
-document.addEventListener('input',function(e){try{
-  if(!e.isTrusted||!e.target)return;
-  if(e.target.id==='cLoan')calcOnce('downpayment');
-  else if(e.target.id==='cTen')calcOnce('tenure');
 }catch(err){}},true);
 
 /* R4: the Boska italics (accent words only, none on the first screen) are registered after the page loads, so they
@@ -2718,20 +3284,16 @@ window.addEventListener('load',function(){if(!window.FontFace||!document.fonts)r
   io.observe(b);
 })();
 
-/* ============ Units + calculator: one controller, price locked to type ============
-   Sizes/bed/bath published on m-aurora.com.my/floor-plans/ (verified 2026-08-21).
-   Per-type prices from the client price list dated 2026-08-21. */
+/* ============ Units: one controller, the plan panel and the form panel follow the type ============
+   Sizes/bed/bath published on m-aurora.com.my/floor-plans/ (verified 2026-08-21). Prices and instalments live in
+   _finder.js (MAFinder) since Option 9 (2 Nov 2026); the card no longer shows a From price (the Compare all 5
+   table does). The instalment calculator was retired with Option 9. */
 var UNITS={
-  A:{bed:'1+1',bath:'1',size:'556',price:339000,published:true,
-     cfg:'1+1 bedroom, for urban professionals',plan:'_plan-A.jpg',vt:'https://m-aurora.com.my/360-vr/#typeA'},
-  B:{bed:'2',bath:'2',size:'737',price:516000,published:true,
-     cfg:'2 bedrooms, for couples',plan:'_plan-B.jpg',vt:'https://m-aurora.com.my/360-vr/#typeB'},
-  C:{bed:'3',bath:'2',size:'858',price:601000,published:true,
-     cfg:'3 bedrooms with balcony, for growing families',plan:'_plan-C.jpg',vt:'https://m-aurora.com.my/360-vr/#typeC'},
-  D:{bed:'3',bath:'3',size:'916',price:616000,published:true,
-     cfg:'3 bedrooms with balcony, 3 bathrooms, for growing families',plan:'_plan-D.jpg',vt:'https://m-aurora.com.my/360-vr/#typeD'},
-  E:{bed:'4',bath:'3',size:'1,019',price:682000,published:true,
-     cfg:'4 bedrooms with balcony, ideal for multi-generational living',plan:'_plan-E.jpg',vt:'https://m-aurora.com.my/360-vr/#typeE'}
+  A:{bed:'1+1',bath:'1',size:'556',plan:'_plan-A.jpg',vt:'https://m-aurora.com.my/360-vr/#typeA'},
+  B:{bed:'2',bath:'2',size:'737',plan:'_plan-B.jpg',vt:'https://m-aurora.com.my/360-vr/#typeB'},
+  C:{bed:'3',bath:'2',size:'858',plan:'_plan-C.jpg',vt:'https://m-aurora.com.my/360-vr/#typeC'},
+  D:{bed:'3',bath:'3',size:'916',plan:'_plan-D.jpg',vt:'https://m-aurora.com.my/360-vr/#typeD'},
+  E:{bed:'4',bath:'3',size:'1,019',plan:'_plan-E.jpg',vt:'https://m-aurora.com.my/360-vr/#typeE'}
 };
 /* 19 Oct 2026 (Justin): show-unit photography per type, from Mah Sing's gallery (m-aurora.com.my/images-gallery/,
    1000 px originals): a 480 px thumb and the 1000 px file as WebP (tools/optimise_photos.py, never upscaled). Type D
@@ -2741,27 +3303,20 @@ UNITS.B.shots=[["_unit-B-1", "Type B show unit, living area, with the dining are
 UNITS.C.shots=[["_unit-C-1", "Type C show unit, living and dining area by the balcony window"], ["_unit-C-2", "Type C show unit, kitchen"], ["_unit-C-3", "Type C show unit, bedroom with its wardrobe"], ["_unit-C-4", "Type C show unit, children's bedroom with a study desk"]];
 UNITS.E.shots=[["_unit-E-1", "Type E show unit, living area"], ["_unit-E-2", "Type E show unit, dining area and kitchen"], ["_unit-E-3", "Type E show unit, dining area with the island counter"], ["_unit-E-4", "Type E show unit, study with bookshelves"], ["_unit-E-5", "Type E show unit, master bedroom"]];
 UNITS.D.shots=[];
-var ORDER=['A','B','C','D','E'],cur='A',RATE=0.036;
-var fmt=function(n){return Math.round(n).toLocaleString('en-MY');};
-function monthly(p,pct,y){var L=p*(pct/100),r=RATE/12,n=y*12;
-  return L*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);}
+var ORDER=['A','B','C','D','E'],cur='A';
 function render(){
   var u=UNITS[cur];
-  $('uName').textContent=cur;$('uCfg').textContent=u.cfg;
+  $('uName').textContent=cur;
+  Array.prototype.forEach.call(document.querySelectorAll('.uNameX'),function(el){el.textContent=cur;});
+  $('uLine').textContent=u.bed+' bed \u00b7 '+u.bath+' bath \u00b7 '+u.size+' sq ft';
   $('uBed').textContent=u.bed;$('uBath').textContent=u.bath;$('uSize').textContent=u.size;
   var img=$('planImg');img.src=u.plan;
   img.alt='Type '+cur+' floor plan, '+u.size+' sq ft, '+u.bed+' bedroom';
-  var cta=$('uCta');cta.setAttribute('data-unit','Type '+cur);
-  cta.textContent='Get the Type '+cur+' price list';
-  var uf=$('uFrom');if(uf&&u.price){uf.textContent='RM '+fmt(u.price);}
-  var cc=$('cCta');if(cc){cc.setAttribute('data-unit','Type '+cur);cc.textContent='Send me the Type '+cur+' price list';}
   $('uVt').href=u.vt;
   Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){
     t.setAttribute('aria-selected',String(t.getAttribute('data-type')===cur));});
-  Array.prototype.forEach.call(document.querySelectorAll('#cpMenu .cp-opt'),function(o){
-    o.setAttribute('aria-selected',String(o.getAttribute('data-type')===cur));});
+  setLeadFields(document.querySelector('form[data-form="layout"]'),'Type '+cur,'layout_panel','');
   renderShots(u);
-  calc();
 }
 /* 19 Oct 2026: the plan box view, 'plan' (the floor plan, the default) or 'photos' (the type's show-unit strip). The
    floor plan keeps its place (visibility only), so the box never changes height when the view switches. On a phone
@@ -2796,42 +3351,10 @@ function setPlanView(v){
   var r=document.querySelector('#uShots .ushot-row');if(r)r.scrollLeft=0;
   syncShotNav();
 }
-function calc(){
-  var u=UNITS[cur],pct=+$('cLoan').value,yrs=+$('cTen').value,m=monthly(u.price,pct,yrs);
-  $('cPrice').textContent='RM '+fmt(u.price);$('cType').textContent=cur;
-  $('cLoanOut').innerHTML='RM '+fmt(u.price*pct/100)+' &middot; '+pct+'%';
-  $('cTenOut').textContent=yrs+' years';
-  $('cMy').textContent='RM '+fmt(m);
-}
 window.setType=function(t,src){if(UNITS[t]){cur=t;render();
   track({event:'unit_select',unit_interest:'Type '+t,select_source:src||'tab'});}};
 Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(tab){
   tab.addEventListener('click',function(){window.setType(tab.getAttribute('data-type'),'tab');});});
-['cLoan','cTen'].forEach(function(id){$(id).addEventListener('input',calc);});
-/* price picker: selecting a type drives the card and the calculator together */
-var cpPick=$('cpPick'),cpMenu=$('cpMenu');
-if(cpPick&&cpMenu){
-  cpMenu.innerHTML=ORDER.map(function(k){
-    var u=UNITS[k];
-    return '<button type="button" role="option" class="cp-opt" data-type="'+k+'" aria-selected="'+(k===cur)+'">'+
-      '<span class="cp-opt-k">Type '+k+'</span>'+
-      '<span class="cp-opt-d">'+u.bed+' bed &middot; '+u.size+' sq ft</span>'+
-      '<b class="cp-opt-p num">RM '+fmt(u.price)+'</b></button>';
-  }).join('');
-  function cpClose(){cpMenu.hidden=true;cpPick.setAttribute('aria-expanded','false');}
-  cpPick.addEventListener('click',function(e){
-    e.stopPropagation();
-    var open=cpMenu.hidden;cpMenu.hidden=!open;cpPick.setAttribute('aria-expanded',String(open));
-  });
-  cpMenu.addEventListener('click',function(e){
-    var o=e.target.closest('.cp-opt');if(!o)return;
-    window.setType(o.getAttribute('data-type'),'calc_dropdown');cpClose();
-  });
-  document.addEventListener('click',function(e){
-    if(!cpMenu.hidden&&!cpMenu.contains(e.target)&&e.target!==cpPick)cpClose();
-  });
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cpMenu.hidden)cpClose();});
-}
 var tabsEl=$('tabs');
 tabsEl.addEventListener('keydown',function(e){
   if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
@@ -3149,29 +3672,56 @@ Array.prototype.forEach.call(document.querySelectorAll('.more-wrap'),function(w)
   });
 });
 
-/* ============ Lead drawer with unit context ============ */
+/* ============ Lead drawer with unit context ============
+   Option 9 (2 Nov 2026): data-unit may carry two units ("Type D,Type C") for the compare and quiz asks; the drawer
+   then takes the pair heading, the plan tags and the pair button label. data-open-lead stays the CTA source. */
 var ld=$('ld'),ldBack=$('ldBackdrop'),lastFocus=null;
+var LD_SUB='Fill in your details and we will WhatsApp you the floor plans, pricing and availability.';
 function openLead(e){
   if(e)e.preventDefault();
   lastFocus=document.activeElement;
   var srcEl=e&&e.currentTarget,source=srcEl?(srcEl.getAttribute('data-open-lead')||'page'):'page';
-  var unit=srcEl?(srcEl.getAttribute('data-unit')||''):'';
-  var uWrap=$('ldUnit'),uVal=$('ldUnitVal'),title=$('ldTitle');
-  if(unit){uVal.textContent=unit;uWrap.classList.add('on');
-    title.textContent='Get the '+unit+' price list';}
-  else{uWrap.classList.remove('on');title.textContent='Get your price list';}
+  var units=(srcEl?(srcEl.getAttribute('data-unit')||''):'').split(',').map(function(x){return x.trim();}).filter(Boolean);
+  var ids=units.map(function(x){return x.replace(/^Type /,'');});
+  var uWrap=$('ldUnit'),uVal=$('ldUnitVal'),title=$('ldTitle'),sub=$('ldSub'),pair=$('ldPair'),btn=$('ldSubmit');
+  if(units.length===2){
+    uVal.textContent=units[0]+' & '+units[1];uWrap.classList.add('on');
+    title.textContent='Comparing '+units[0]+' and '+units[1]+'? Let us help.';
+    sub.textContent='A sales advisor will WhatsApp you pricing after rebates for both layouts, show you which units are still open, and answer your questions.';
+    pair.innerHTML=ids.map(function(k){return '<span><img src="_plan-'+k+'.jpg" alt="" width="36" height="40">Type '+k+'</span>';}).join('');pair.hidden=false;
+    btn.textContent='Get Type '+ids[0]+' & '+ids[1]+' pricing';
+  }else{
+    if(units.length){uVal.textContent=units[0];uWrap.classList.add('on');title.textContent='Get the '+units[0]+' price list';}
+    else{uWrap.classList.remove('on');title.textContent='Get your price list';}
+    sub.textContent=LD_SUB;pair.hidden=true;pair.innerHTML='';btn.textContent='Get my price list now';
+  }
+  setLeadFields(ld.querySelector('form'),units.join('; '),source,'');
   ld.classList.add('open');ldBack.classList.add('open');
   ld.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
   window._drawerSource=source;
-  track({event:'lead_drawer_open',trigger_source:source,unit_interest:unit||'not specified'});
+  track({event:'lead_drawer_open',trigger_source:source,unit_interest:units.join('; ')||'not specified'});
   var first=ld.querySelector('input[name="name"]');
   if(first)setTimeout(function(){first.focus();},240);
 }
 function closeLead(){
   ld.classList.remove('open');ldBack.classList.remove('open');
-  ld.setAttribute('aria-hidden','true');document.body.style.overflow='';
+  ld.setAttribute('aria-hidden','true');
+  /* keep the page locked while the quiz sheet or the compare sheet is still open under the drawer */
+  document.body.style.overflow=(window.__o9Open&&window.__o9Open())?'hidden':'';
   if(lastFocus&&lastFocus.focus)lastFocus.focus();
 }
+/* Option 9: the hidden lead fields on every form, and the description stopgap string (see the form markup) */
+function setLeadFields(form,units,cta,finder){
+  if(!form)return;
+  var u=form.querySelector('[data-lead-unit]'),c=form.querySelector('[data-lead-cta]'),f=form.querySelector('[data-lead-finder]'),d=form.querySelector('[data-lead-desc]');
+  if(u&&units!=null)u.value=units;if(c&&cta!=null)c.value=cta;if(f&&finder!=null)f.value=finder;
+  var parts=[];
+  if(u&&u.value)parts.push('Unit interest: '+u.value);
+  if(c&&c.value)parts.push('CTA: '+c.value);
+  if(f&&f.value)parts.push('Finder: '+f.value);
+  if(d)d.value=parts.join(' | ');
+}
+window.setLeadFields=setLeadFields;
 Array.prototype.forEach.call(document.querySelectorAll('[data-open-lead]'),function(el){
   el.addEventListener('click',openLead);});
 if(_q.get('drawer')==='1')window.addEventListener('load',function(){setTimeout(openLead,400);});
@@ -3294,11 +3844,17 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
     var fid=form.getAttribute('data-form')||'form';
     /* Standardised n8n form_id across all ver2 projects (2026-08-24), matching
        M Legasi: quickRegisterForm / mainRegisterForm / leadFormDrawer. */
-    var FORM_IDS={quick:'quickRegisterForm',main:'mainRegisterForm',drawer:'leadFormDrawer'};
+    var FORM_IDS={quick:'quickRegisterForm',main:'mainRegisterForm',drawer:'leadFormDrawer',layout:'layoutPanelForm',quiz:'finderResultForm'};
+    /* Option 9: lead_source names the CTA; the drawer keeps its trigger (hero, sticky, compare, ...) */
+    var LEAD_SRC={layout:'layout_panel',quiz:'quiz_result'};
+    var leadSrc=(fid==='drawer'?(window._drawerSource||'drawer'):(LEAD_SRC[fid]||fid));
+    setLeadFields(form,null,leadSrc,null);
+    var uiEl=form.querySelector('[data-lead-unit]'),unitInterest=(uiEl&&uiEl.value)||'not specified';
     var sid=captureDiagnostic(form,FORM_IDS[fid]||fid);
     track({event:'generate_lead',lead_type:'form_submission',
       form_name:'M Aurora ver2 - '+fid,
-      lead_source:(fid==='drawer'?(window._drawerSource||'drawer'):fid),
+      lead_source:leadSrc,
+      unit_interest:unitInterest,
       experiment_arm:armValue(),
       submission_id:sid});
     var btn=form.querySelector('button[type="submit"]');
@@ -3393,7 +3949,7 @@ var heroAskInView=(function(){if(!heroAsk)return false;var r=heroAsk.getBounding
 var asks=Array.prototype.filter.call(document.querySelectorAll('[data-open-lead],[data-cta-id]'),function(el){
   return !el.closest('#siteNav,#mm,#rail,#sticky,#ld,footer')&&(el.hasAttribute('data-open-lead')||/price|register/.test(el.getAttribute('data-cta-id')||''));});
 var askSeen=asks.map(function(a){var r=a.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<window.innerHeight-72;}),
-  formSecs=[regQuick,regFull,document.getElementById('contact')].filter(Boolean);
+  formSecs=[regQuick,regFull,document.getElementById('contact'),document.getElementById('layoutPanel')].filter(Boolean);
 function shown(el){return typeof el.checkVisibility!=='function'||el.checkVisibility({opacityProperty:true,visibilityProperty:true,checkOpacity:true,checkVisibilityCSS:true});}
 function askOnScreen(){for(var i=0;i<asks.length;i++){if(askSeen[i]&&shown(asks[i]))return true;}return false;}
 function formOnScreen(){var vh=window.innerHeight;return formSecs.some(function(el){var r=el.getBoundingClientRect(),v=Math.min(r.bottom,vh)-Math.max(r.top,0);
@@ -3561,6 +4117,305 @@ Array.prototype.forEach.call(
       e.preventDefault();openVr(key,src,specific);
     });
   });
+
+
+/* ============ Option 9 (2 Nov 2026): layout finder, Compare all 5, contextual sticky bar ============
+   Design handoff: projects/mahsing/html/2026-11-02_aurora-option9/handoff/IMPLEMENTATION.md (Convx repo).
+   Unit data, instalment maths, brackets and matching live in _finder.js (window.MAFinder); this block only
+   renders and wires. Every lead CTA goes through the page's one lead path (.js-form submit, openLead for the
+   drawer); nothing here posts on its own. Forms land on thank-you.html as before: there is no "sent" state. */
+(function(){
+  var MF=window.MAFinder;if(!MF)return;
+  var fq=$('fq'),cs=$('cmpSheet'),ct=$('cmpTray'),ca=$('compare-all');if(!fq||!cs||!ct||!ca)return;
+  var fmt=MF.fmt;
+  var FQ={household:null,bracket:null,must:{},phase:'idle',step:'q1',res:null,resAns:null,snap:null,open:false,pushed:false,timers:[],after:null,lastFocus:null};
+  var CMP={sel:[],bracket:null,open:false,pushed:false,inView:false};
+  function phone(){return window.innerWidth<1024;}
+  function navH(){var n=$('siteNav');return n?n.offsetHeight:0;}
+  function scrollToEl(el,extra){if(!el)return;var y=el.getBoundingClientRect().top+window.scrollY-navH()-(extra==null?24:extra);window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function copyMust(m){var o={};for(var k in m)if(m.hasOwnProperty(k)&&m[k])o[k]=true;return o;}
+  function answers(){return {household:FQ.household,bracket:FQ.bracket,must:FQ.must};}
+  function keyOf(){return [FQ.household,FQ.bracket,Object.keys(FQ.must).filter(function(k){return FQ.must[k];}).sort().join('+')].join('|');}
+  function ready(){return !!FQ.household&&!!FQ.bracket;}
+  function anyMust(){return MF.MUST.some(function(m){return FQ.must[m.key];});}
+  function pairLabel(a,b){return 'Type '+a+' & '+b;}
+  function lock(on){document.documentElement.classList.toggle('o9-lock',on);document.body.style.overflow=on?'hidden':'';}
+  window.__o9Open=function(){return FQ.open||CMP.open;};
+
+  /* ---- quiz: options, steps, phases ---- */
+  function opt(q,v,label,on){return '<button type="button" class="fq-o" data-q="'+q+'" data-v="'+v+'" aria-pressed="'+on+'"><span>'+esc(label)+'</span><i aria-hidden="true">'+(on?'✓':(q==='must'?'+':'›'))+'</i></button>';}
+  function renderOpts(){
+    fq.querySelector('.fq-opts[data-q="household"]').innerHTML=MF.HOUSEHOLD.map(function(o){return opt('household',o.key,o.label,FQ.household===o.key);}).join('');
+    fq.querySelector('.fq-opts[data-q="bracket"]').innerHTML=MF.BRACKETS.map(function(o){return opt('bracket',o.key,o.label,FQ.bracket===o.key);}).join('');
+    fq.querySelector('.fq-opts[data-q="must"]').innerHTML=MF.MUST.map(function(o){return opt('must',o.key,o.label,!!FQ.must[o.key]);}).join('');
+  }
+  function syncOpts(){
+    Array.prototype.forEach.call(fq.querySelectorAll('.fq-o'),function(b){
+      var q=b.getAttribute('data-q'),v=b.getAttribute('data-v'),on=q==='must'?!!FQ.must[v]:FQ[q]===v;
+      b.setAttribute('aria-pressed',String(on));b.querySelector('i').textContent=on?'✓':(q==='must'?'+':'›');
+    });
+  }
+  var LABELS={q1:'Question 1 of 3',q2:'Question 2 of 3',q3:'Question 3 of 3',loading:'Matching',result:'Your match'};
+  function setStep(s){
+    FQ.step=s;fq.setAttribute('data-step',s);$('fqLab').textContent=LABELS[s]||'';
+    var idx={q1:0,q2:1,q3:2,loading:3,result:3}[s]||0;
+    Array.prototype.forEach.call(fq.querySelectorAll('.fq-hl .fq-prog i'),function(i,n){i.classList.toggle('on',n<=idx);});
+    var r=fq.querySelector('.fq-r'),q=fq.querySelector('.fq-q');if(r)r.scrollTop=0;if(q)q.scrollTop=0;
+  }
+  function setPhase(p){FQ.phase=p;fq.setAttribute('data-phase',p);}
+  function syncUi(){
+    syncOpts();
+    var stale=FQ.phase==='result'&&FQ.snap!==keyOf(),loading=FQ.phase==='loading';
+    fq.classList.toggle('stale',stale);$('fqStale').hidden=!stale;
+    var go=$('fqGo'),on;
+    if(phone()){on=ready()&&!loading;go.textContent=loading?'Finding your match…':(anyMust()?'Find my best match →':'Skip & find my match →');}
+    else{on=ready()&&!loading&&(FQ.phase!=='result'||stale);
+      go.textContent=loading?'Finding your match…':(FQ.phase==='result'&&!stale?'Match found ✓':(stale?'Update my match →':'Find my best match →'));}
+    go.disabled=!on;
+    $('fqHint').textContent=ready()?'Must-haves are optional. Your answers go with your enquiry so sales can shortlist units for you.':'Answer questions 1 and 2 to continue. Must-haves are optional.';
+    var n=(FQ.household?1:0)+(FQ.bracket?1:0);
+    $('fqIdleHint').textContent=n===0?'Answer the questions on the left, about 20 seconds.':(ready()?'Ready. Tap “Find my best match”.':n+' of 2 required questions answered.');
+    var pd=fq.querySelectorAll('.fq-prog-d i');
+    if(pd.length===3){pd[0].classList.toggle('on',!!FQ.household);pd[1].classList.toggle('on',!!FQ.bracket);pd[2].classList.toggle('on',anyMust()||FQ.phase!=='idle');}
+  }
+  fq.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.fq-o');if(!b)return;
+    var q=b.getAttribute('data-q'),v=b.getAttribute('data-v');
+    if(q==='must'){FQ.must[v]=!FQ.must[v];}else{FQ[q]=v;}
+    track({event:'finder_answer',question:q,answer:q==='must'?(v+(FQ.must[v]?':on':':off')):v});
+    syncUi();
+    if(phone()&&q!=='must'){setTimeout(function(){if(!FQ.open)return;setStep(q==='household'?'q2':'q3');syncUi();},180);}
+  });
+
+  function fqOpen(entry,view){
+    if(FQ.open)return;
+    FQ.open=true;FQ.lastFocus=document.activeElement;
+    try{history.pushState({o9:'fq'},'');FQ.pushed=true;}catch(e){FQ.pushed=false;}
+    fq.classList.add('on');fq.setAttribute('aria-hidden','false');lock(true);
+    if(FQ.phase==='loading')setPhase(FQ.res?'result':'idle');
+    if(view==='result'&&FQ.res){setPhase('result');setStep('result');}
+    else setStep('q1');
+    syncUi();
+    track({event:'finder_open',entry:entry||'bar'});
+    setTimeout(function(){var x=fq.querySelector('.fq-x');if(x&&!phone())x.focus();},60);
+  }
+  function fqClose(fromPop){
+    if(!FQ.open)return;
+    if(!fromPop&&FQ.pushed){history.back();return;}   /* popstate finishes the close */
+    FQ.open=false;FQ.pushed=false;
+    FQ.timers.forEach(clearTimeout);FQ.timers=[];
+    if(FQ.phase==='loading')setPhase(FQ.res?'result':'idle');
+    fq.classList.remove('on');fq.setAttribute('aria-hidden','true');lock(false);
+    if(FQ.lastFocus&&FQ.lastFocus.focus){try{FQ.lastFocus.focus({preventScroll:true});}catch(e){}}
+    var a=FQ.after;FQ.after=null;if(a)a();
+    renderTray();
+  }
+  function fqRun(){
+    if(!ready())return;
+    FQ.timers.forEach(clearTimeout);FQ.timers=[];
+    setPhase('loading');setStep('loading');syncUi();
+    var a=MF.answerLabels(answers());
+    var steps=['Checking all 5 layouts for '+(a.household?a.household.toLowerCase():'your household'),'Matching your '+(a.bracket||'budget')+' range',anyMust()?'Applying your must-haves':'Ranking by space and value'];
+    $('fqLSteps').innerHTML=steps.map(function(s){return '<li><i></i><span>'+esc(s)+'</span></li>';}).join('');
+    $('fqLPlans').innerHTML=MF.UNITS.map(function(u){return '<i><img src="'+u.plan+'" alt=""></i>';}).join('');
+    function tick(n){var lis=$('fqLSteps').children,ps=$('fqLPlans').children;
+      Array.prototype.forEach.call(lis,function(li,i){li.classList.toggle('is-done',i<n);li.classList.toggle('on',i===n);li.querySelector('i').textContent=i<n?'✓':(i===n?'•':'');});
+      Array.prototype.forEach.call(ps,function(p,i){p.classList.toggle('on',i===n+1);});
+      $('fqLBar').style.width=Math.min(100,Math.round((n+1)/4*100))+'%';}
+    tick(0);
+    [1,2,3].forEach(function(i){FQ.timers.push(setTimeout(function(){tick(i);},i*550));});
+    FQ.timers.push(setTimeout(fqResult,1900));
+  }
+  function fqResult(){
+    var r=MF.match(answers());
+    FQ.res=r;FQ.resAns={household:FQ.household,bracket:FQ.bracket,must:copyMust(FQ.must)};FQ.snap=keyOf();
+    var b=r.best,o=r.runner;
+    $('fqBestTag').textContent=MF.bestBadge(r.bestTag);
+    $('fqBestImg').src=b.plan;$('fqBestImg').alt='Type '+b.id+' floor plan';
+    $('fqBestT').textContent='Type '+b.id;$('fqBestS').textContent=b.bed+' bed · '+b.bath+' bath · '+fmt(b.sqft)+' sq ft';
+    $('fqBestM').textContent='≈ RM '+fmt(b.monthly)+'/mo · '+(b.within?'within':'above')+' your range';
+    $('fqBestWhy').textContent=MF.bestReason(b,FQ.resAns);
+    $('fqAltTag').textContent=MF.runnerBadge(o);
+    $('fqAltImg').src=o.plan;$('fqAltImg').alt='Type '+o.id+' floor plan';
+    $('fqAltT').textContent='Type '+o.id;$('fqAltS').textContent=o.bed+' bed · '+o.bath+' bath · '+fmt(o.sqft)+' sq ft';
+    $('fqAltM').textContent='≈ RM '+fmt(o.monthly)+'/mo';
+    $('fqAltDiff').textContent=MF.diffLine(b,o)+'.';
+    $('fqFormSub').textContent='A sales advisor will WhatsApp you pricing after rebates for Type '+b.id+' and Type '+o.id+', show you which units are still open, and answer your questions. No obligation.';
+    $('fqSubmit').textContent='Get Type '+b.id+' & '+o.id+' pricing';
+    setLeadFields(fq.querySelector('form.js-form'),'Type '+b.id+'; Type '+o.id,'quiz_result',MF.finderString(FQ.resAns));
+    setPhase('result');setStep('result');syncUi();
+    /* the rest of the page follows the match */
+    renderBar();renderTabBadges();
+    CMP.bracket=FQ.resAns.bracket;CMP.sel=[b.id,o.id];renderCompare();
+    stickyMatched();
+    track({event:'finder_result',best:'Type '+b.id,alternative:'Type '+o.id,best_tag:r.bestTag});
+  }
+  function renderBar(){
+    var bar=$('finderBar');if(!bar)return;
+    if(!FQ.res){bar.setAttribute('data-state','idle');return;}
+    bar.setAttribute('data-state','done');
+    $('fbMatch').textContent='Your match: Type '+FQ.res.best.id;
+    $('fbChips').innerHTML=MF.answerLabels(FQ.resAns).chips.map(function(c){return '<i>'+esc(c)+'</i>';}).join('');
+  }
+  function renderTabBadges(){var best=FQ.res?FQ.res.best.id:null;
+    Array.prototype.forEach.call(document.querySelectorAll('#tabs .tab'),function(t){var b=t.querySelector('.tab-badge');if(b)b.classList.toggle('on',t.getAttribute('data-type')===best);});}
+  function stickyMatched(){
+    if(!FQ.res)return;
+    sticky.classList.add('matched');
+    $('stMatch').textContent='Type '+FQ.res.best.id;
+    $('stMatchBtn').textContent='Get Type '+FQ.res.best.id+' & '+FQ.res.runner.id+' pricing';
+  }
+
+  /* ---- compare all 5 ---- */
+  function evalRows(){var a=FQ.resAns||{};return MF.evaluate({household:FQ.res?a.household:null,bracket:CMP.bracket,must:FQ.res?a.must:{}});}
+  function unitRow(id){return evalRows().filter(function(u){return u.id===id;})[0];}
+  function rowsData(){
+    var ev=evalRows(),best=FQ.res?FQ.res.best.id:null;
+    if(best)ev=ev.filter(function(u){return u.id===best;}).concat(ev.filter(function(u){return u.id!==best;}));
+    return ev.map(function(u){return {u:u,isBest:u.id===best,on:CMP.sel.indexOf(u.id)>=0,hasBracket:!!CMP.bracket};});
+  }
+  function pillsHtml(r){
+    var h='';
+    if(r.hasBracket)h+='<span class="o9-pb '+(r.u.within?'ok':'over')+'">'+(r.u.within?'Within your budget':'+RM '+fmt(r.u.over)+'/mo above')+'</span>';
+    if(FQ.res)h+='<span class="o9-pb '+(r.isBest?'best':(r.u.fits?'fit':'no'))+'">'+(r.isBest?'★ Your best match':(r.u.fits?'Fits your needs':esc(r.u.issue)))+'</span>';
+    return h;
+  }
+  function renderCompare(){
+    var rows=rowsData(),br=MF.find(MF.BRACKETS,CMP.bracket);
+    var bt=$('budgetTabs');
+    bt.innerHTML=[{key:'',label:'Any'}].concat(MF.BRACKETS).map(function(b){return '<button type="button" class="o9b-t" data-b="'+b.key+'" aria-pressed="'+((CMP.bracket||'')===b.key)+'">'+esc(b.label)+'</button>';}).join('');
+    $('budgetFit').textContent=br?(rows.filter(function(r){return r.u.within;}).length+' of 5 within budget'):(phone()?'Pick one':'Choose a budget to see what fits');
+    $('cmpTable').innerHTML='<div class="o9t-h" role="row"><div>Compare</div><div>Plan</div><div>Layout</div><div>From*</div><div>Monthly</div><div>For you</div><div></div></div>'+rows.map(function(r){var u=r.u;
+      return '<div class="o9t-r'+(r.isBest?' is-best':'')+(r.on?' is-on':'')+'" role="row">'+
+        '<label class="o9t-chk"><input type="checkbox" data-cmp="'+u.id+'"'+(r.on?' checked':'')+' aria-label="Compare Type '+u.id+'"></label>'+
+        '<img src="'+u.plan+'" alt="Type '+u.id+' floor plan" loading="lazy" width="92" height="76">'+
+        '<div class="o9t-ty"><b>Type '+u.id+'</b><span>'+u.bed+' bed · '+u.bath+' bath · '+fmt(u.sqft)+' sq ft</span></div>'+
+        '<div class="o9t-from num">RM '+fmt(u.price)+'</div><div class="o9t-mo num">≈ RM '+fmt(u.monthly)+'</div>'+
+        '<div class="o9t-pills">'+(pillsHtml(r)||'<span class="o9-pb hintp">Pick a budget above</span>')+'</div>'+
+        '<button type="button" class="o9-view'+(r.isBest?' best':'')+'" data-view-type="'+u.id+'" data-cta-id="compare_view_layout">View layout ↑</button></div>';}).join('');
+    $('cmpCards').innerHTML=rows.map(function(r){var u=r.u;
+      return '<div class="o9c'+(r.isBest?' is-best':'')+(r.on?' is-on':'')+'">'+
+        '<div class="o9c-top"><img src="'+u.plan+'" alt="Type '+u.id+' floor plan" loading="lazy" width="72" height="76"><div class="o9c-ty"><b>Type '+u.id+'</b><span>'+u.bed+' bed · '+u.bath+' bath · '+fmt(u.sqft)+' sq ft</span></div>'+
+        '<button type="button" class="o9c-add" data-cmp="'+u.id+'" aria-pressed="'+r.on+'">'+(r.on?'✓ Added':'+ Compare')+'</button></div>'+
+        '<div class="o9c-nums"><div><span>From*</span><b class="num">RM '+fmt(u.price)+'</b></div><div><span>Monthly</span><b class="num">≈ RM '+fmt(u.monthly)+'</b></div></div>'+
+        '<div class="o9c-pills">'+pillsHtml(r)+'</div>'+
+        '<button type="button" class="o9-view'+(r.isBest?' best':'')+'" data-view-type="'+u.id+'" data-cta-id="compare_view_layout">View Type '+u.id+' layout ↑</button></div>';}).join('');
+    renderPanel();renderTray();
+  }
+  function cmpRows(A,B){
+    function more(x,y,u){return x>y?'+'+fmt(x-y)+u:'';}
+    function less(x,y,u){return x<y?'RM '+fmt(y-x)+u+' less':'';}
+    var rows=[
+      ['Bedrooms',A.bed,B.bed,more(A.beds,B.beds,''),more(B.beds,A.beds,'')],
+      ['Bathrooms',String(A.bath),String(B.bath),more(A.bath,B.bath,''),more(B.bath,A.bath,'')],
+      ['Built-up',fmt(A.sqft)+' sq ft',fmt(B.sqft)+' sq ft',more(A.sqft,B.sqft,' sq ft'),more(B.sqft,A.sqft,' sq ft')],
+      ['From*','RM '+fmt(A.price),'RM '+fmt(B.price),less(A.price,B.price,''),less(B.price,A.price,'')],
+      ['Est. monthly','≈ RM '+fmt(A.monthly),'≈ RM '+fmt(B.monthly),less(A.monthly,B.monthly,'/mo'),less(B.monthly,A.monthly,'/mo')]];
+    if(FQ.res)rows.push(['Your needs',A.fits?'✓ Fits':'✗ '+A.issue,B.fits?'✓ Fits':'✗ '+B.issue,'','']);
+    return rows;
+  }
+  function renderPanel(){
+    var p=$('cmpPanel'),empty=$('cmpEmpty'),two=CMP.sel.length===2;
+    if(!two){p.hidden=true;p.innerHTML='';empty.hidden=false;empty.textContent=CMP.sel.length===1?'Tick one more layout to compare side by side.':'Tick any two layouts to compare them side by side.';return;}
+    empty.hidden=true;
+    var A=unitRow(CMP.sel[0]),B=unitRow(CMP.sel[1]),best=FQ.res?FQ.res.best.id:null,pl=pairLabel(A.id,B.id);
+    var cols=[A,B].map(function(u,i){return '<div class="o9cp-col'+(i===0?' first':'')+'"><div class="t"><span>Type '+u.id+'</span>'+(u.id===best?'<span class="o9-tag">Your match</span>':'')+'</div><img src="'+u.plan+'" alt="Type '+u.id+' floor plan" loading="lazy"></div>';}).join('');
+    var rws=cmpRows(A,B).map(function(r){var d=r[1]!==r[2];return '<div class="o9cp-r'+(d?' diff':'')+'"><div class="l">'+esc(r[0])+'</div><div class="c first"><span>'+esc(r[1])+'</span>'+(r[3]?'<span class="o9-delta">'+esc(r[3])+'</span>':'')+'</div><div class="c"><span>'+esc(r[2])+'</span>'+(r[4]?'<span class="o9-delta">'+esc(r[4])+'</span>':'')+'</div></div>';}).join('');
+    p.innerHTML='<div class="o9cp-head"><div class="o9cp-lab">Differences highlighted</div>'+cols+'</div>'+rws+
+      '<div class="o9cp-foot"><div><b>Still weighing '+pl+'? Let our team help.</b><span>One form: we will WhatsApp pricing after rebates for both, plus which units are still open.</span></div>'+
+      '<button type="button" class="btn btn-p o9-pair" data-open-lead="compare" data-unit="Type '+A.id+',Type '+B.id+'" data-cta-id="compare_get_price">Get '+pl+' pricing</button></div>';
+    p.hidden=false;
+  }
+  function renderSheet(){
+    if(CMP.sel.length!==2)return;
+    var A=unitRow(CMP.sel[0]),B=unitRow(CMP.sel[1]),best=FQ.res?FQ.res.best.id:null,pl=pairLabel(A.id,B.id);
+    $('csTitle').textContent='Type '+A.id+' vs Type '+B.id;
+    var cols=[A,B].map(function(u,i){return '<div class="cs-col'+(i===0?' first':'')+'"><b>Type '+u.id+'</b>'+(u.id===best?'<span class="o9-tag">Your match</span>':'')+'<img src="'+u.plan+'" alt="Type '+u.id+' floor plan"></div>';}).join('');
+    var rws=cmpRows(A,B).map(function(r){var d=r[1]!==r[2];return '<div class="cs-r'+(d?' diff':'')+'"><div class="l">'+esc(r[0])+'</div><div class="cc"><div class="c first">'+esc(r[1])+(r[3]?'<span class="o9-delta">'+esc(r[3])+'</span>':'')+'</div><div class="c">'+esc(r[2])+(r[4]?'<span class="o9-delta">'+esc(r[4])+'</span>':'')+'</div></div></div>';}).join('');
+    $('csGrid').innerHTML='<div class="cs-cols">'+cols+'</div>'+rws;
+    $('csFootT').innerHTML='Still weighing '+pl+'? <span>Our team can help.</span>';
+    var cta=$('csCta');cta.textContent='Get '+pl+' pricing';cta.setAttribute('data-unit','Type '+A.id+',Type '+B.id);
+  }
+  function csOpen(){
+    if(CMP.sel.length!==2||CMP.open)return;
+    renderSheet();CMP.open=true;
+    try{history.pushState({o9:'cs'},'');CMP.pushed=true;}catch(e){CMP.pushed=false;}
+    cs.classList.add('on');cs.setAttribute('aria-hidden','false');lock(true);cs.querySelector('.cs-body').scrollTop=0;
+    renderTray();
+    track({event:'compare_open',pair:'Type '+CMP.sel[0]+' & '+CMP.sel[1]});
+  }
+  function csClose(fromPop){
+    if(!CMP.open)return;
+    if(!fromPop&&CMP.pushed){history.back();return;}
+    CMP.open=false;CMP.pushed=false;
+    cs.classList.remove('on');cs.setAttribute('aria-hidden','true');lock(false);renderTray();
+  }
+  function renderTray(){
+    CMP.inView=compareInView();
+    var show=phone()&&CMP.sel.length>=1&&CMP.inView&&!FQ.open&&!CMP.open;
+    ct.classList.toggle('on',show);ct.setAttribute('aria-hidden',String(!show));
+    sticky.classList.toggle('hold',show);toTop.classList.toggle('hold',show);
+    if(!show)return;
+    $('ctSlots').innerHTML=[0,1].map(function(i){var id=CMP.sel[i];
+      return id?'<button type="button" class="ct-s" data-cmp="'+id+'" aria-label="Remove Type '+id+' from the comparison"><b>Type '+id+'</b><span>✕ remove</span></button>'
+        :'<button type="button" class="ct-s empty" data-ct-add><b>+ Add 1 more</b><span>tap + Compare</span></button>';}).join('');
+    var go=$('ctGo'),two=CMP.sel.length===2;go.disabled=!two;go.textContent=two?'Compare →':'Compare 1/2';
+  }
+  function cmpToggle(id){
+    var i=CMP.sel.indexOf(id);
+    if(i>=0)CMP.sel.splice(i,1);else{CMP.sel.push(id);if(CMP.sel.length>2)CMP.sel.shift();}
+    track({event:'compare_toggle',unit:'Type '+id,selected_count:CMP.sel.length});
+    renderCompare();
+  }
+  ca.addEventListener('click',function(e){
+    var t=e.target;if(!t.closest)return;
+    var b=t.closest('.o9b-t');if(b){CMP.bracket=b.getAttribute('data-b')||null;renderCompare();return;}
+    var add=t.closest('.o9c-add');if(add){cmpToggle(add.getAttribute('data-cmp'));return;}
+    var v=t.closest('[data-view-type]');if(v){var id=v.getAttribute('data-view-type');if(window.setType)window.setType(id,'compare');scrollToEl($('tabs'),64);return;}
+    var pair=t.closest('.o9-pair');if(pair){openLead({preventDefault:function(){},currentTarget:pair});return;}
+  });
+  ca.addEventListener('change',function(e){var c=e.target.closest&&e.target.closest('input[data-cmp]');if(c)cmpToggle(c.getAttribute('data-cmp'));});
+  ct.addEventListener('click',function(e){
+    var t=e.target;if(!t.closest)return;
+    var s=t.closest('.ct-s[data-cmp]');if(s){cmpToggle(s.getAttribute('data-cmp'));return;}
+    if(t.closest('[data-ct-add]')){scrollToEl($('cmpCards'),12);return;}
+    if(t.closest('#ctGo')&&!$('ctGo').disabled)csOpen();
+  });
+  Array.prototype.forEach.call(cs.querySelectorAll('[data-cs-close]'),function(el){el.addEventListener('click',function(){csClose();});});
+  /* the tray shows only while the Compare section fills the middle of the screen, judged on each scroll frame
+     (not by an IntersectionObserver, whose last report can go stale when the viewport is resized or restored) */
+  function compareInView(){var r=ca.getBoundingClientRect(),vh=window.innerHeight;return r.top<vh*.8&&r.bottom>vh*.2;}
+  var trayTick=false;
+  window.addEventListener('scroll',function(){if(trayTick)return;trayTick=true;requestAnimationFrame(function(){trayTick=false;renderTray();});},{passive:true});
+
+  /* ---- quiz bindings ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-fq-open]'),function(el){el.addEventListener('click',function(){fqOpen(el.getAttribute('data-fq-open')||'bar','questions');});});
+  Array.prototype.forEach.call(fq.querySelectorAll('[data-fq-close]'),function(el){el.addEventListener('click',function(){fqClose();});});
+  $('fqGo').addEventListener('click',function(){if(!$('fqGo').disabled)fqRun();});
+  $('fqUpdate').addEventListener('click',fqRun);
+  $('fqBack').addEventListener('click',function(){setStep(FQ.step==='q3'?'q2':'q1');syncUi();});
+  $('fqToCompare').addEventListener('click',function(){
+    if(!FQ.res)return;
+    track({event:'finder_compare_click',best:'Type '+FQ.res.best.id,alternative:'Type '+FQ.res.runner.id});
+    CMP.sel=[FQ.res.best.id,FQ.res.runner.id];CMP.bracket=FQ.resAns.bracket;renderCompare();
+    FQ.after=phone()?function(){csOpen();}:function(){scrollToEl(ca,0);};
+    fqClose();
+  });
+  $('stMatchBtn').addEventListener('click',function(){fqOpen('sticky','result');});
+  window.addEventListener('popstate',function(){if(FQ.open)fqClose(true);else if(CMP.open)csClose(true);});
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape'||(ld&&ld.classList.contains('open'))||(lbEl&&lbEl.classList.contains('on')))return;
+    if(FQ.open)fqClose();else if(CMP.open)csClose();});
+  window.addEventListener('resize',function(){syncUi();renderTray();});
+  var enl=$('uEnlarge');
+  if(enl)enl.addEventListener('click',function(){var i=$('planImg');
+    track({event:'gallery_open',gallery:'floorplan',item_index:ORDER.indexOf(cur)+1,item_label:'Type '+cur+' floor plan'});
+    openLb(i.src,i.alt,'Type '+cur+' floor plan');});
+
+  renderOpts();setPhase('idle');setStep('q1');syncUi();renderCompare();renderBar();
+  window.__o9=function(){return {FQ:FQ,CMP:CMP,fqOpen:fqOpen,fqRun:fqRun,csOpen:csOpen,cmpToggle:cmpToggle};};
+})();
 
 render();
 })();
