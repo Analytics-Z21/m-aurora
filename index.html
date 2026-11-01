@@ -1852,13 +1852,18 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 @media(min-width:1024px){.o9p-ttl h3{font-size:36px}}
 .o9p-line{font:400 12px/1.5 var(--fb);color:var(--ink-m);margin-top:6px}
 @media(min-width:1024px){.o9p-line{font-size:14px;margin-top:4px}}
-.o9-badge{display:inline-block;margin-top:8px;background:var(--ink-d);color:var(--cream);font:700 11px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px}
+.o9-badge{display:inline-block;white-space:nowrap;margin-top:8px;background:var(--ink-d);color:var(--cream);font:700 11px/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:2px}
 .o9p-acts{display:flex;gap:8px;flex:none}
 .o9-pill{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #D9D2C3;background:#fff;color:var(--ink-d);font:600 13px/1 var(--fb);text-decoration:none;opacity:1;white-space:nowrap}
 .o9-pill-dark{background:var(--ink-d);border-color:var(--ink-d);color:var(--cream)}
 .o9-pill svg{flex:none}
 @media(hover:hover) and (pointer:fine){.o9-pill:hover{border-color:var(--ink-d)}.o9-pill-dark:hover{background:#0C1230}}
-#layouts .o9-plan .unit-zoom{display:none}
+/* desktop: the Enlarge pill in the header is the one enlarge affordance. Phones: the header holds the title and the
+   360 pill only (two pills squeeze the title), so the box keeps an icon-only zoom hint beside the view toggle. */
+@media(min-width:1024px){#layouts .o9-plan .unit-zoom{display:none}}
+@media(max-width:1023px){.o9p-acts .o9-pill-enl{display:none}
+  #layouts .o9-plan .unit-zoom{top:12px;right:12px;font-size:0;gap:0;padding:9px;background:rgba(21,27,59,.9)}
+  #layouts .o9-plan .unit-zoom svg{width:16px;height:16px;color:#fff}}
 #layouts .o9-plan .unit-plan{border:0;border-radius:0;margin:0 -16px;padding:54px 12px 10px;min-height:340px;background:#fff}
 @media(min-width:1024px){#layouts .o9-plan .unit-plan{margin:0;min-height:480px;padding:62px 16px 14px}}
 #layouts .o9-plan .unit-plan img{max-height:56vh}
