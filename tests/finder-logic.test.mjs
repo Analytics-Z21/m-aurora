@@ -27,12 +27,33 @@ test('family, RM 2,200-2,500, 3 bathrooms -> best D, alt C (RM 57/mo less, 1 few
   assert.equal(F.bestReason(r.best, { bracket: 'b3', must: { bath3: true } }), 'Most space within your RM 2,200–2,500 range, with the 3 bathrooms you asked for.');
 });
 
-test('couple, RM 1,500-2,200 -> best B, alt C above budget (WORTH A STRETCH)', () => {
+// 2 Nov 2026 (Justin): a couple counts the +1 study, so Type A fits a couple (the handoff had B with C as a stretch here)
+test('couple, RM 1,500-2,200 -> best B, alt A (ALSO FITS YOU)', () => {
   const r = F.match({ household: 'couple', bracket: 'b2', must: {} });
   assert.equal(r.best.id, 'B');
-  assert.equal(r.runner.id, 'C');
-  assert.equal(r.runner.within, false);
+  assert.equal(r.bestTag, 'best');
+  assert.equal(r.runner.id, 'A');
+  assert.equal(F.runnerBadge(r.runner), 'ALSO FITS YOU');
+  assert.equal(F.diffLine(r.best, r.runner), 'RM 667/mo less, 1 fewer bathroom');
+});
+
+test('couple, under RM 1,500 -> best A within budget, alt B (WORTH A STRETCH)', () => {
+  const r = F.match({ household: 'couple', bracket: 'b1', must: {} });
+  assert.equal(r.best.id, 'A');
+  assert.equal(r.bestTag, 'best');
+  assert.equal(r.runner.id, 'B');
   assert.equal(F.runnerBadge(r.runner), 'WORTH A STRETCH');
+});
+
+test('the study counts for a couple only', () => {
+  const a = h => F.evaluate({ household: h }).find(x => x.id === 'A');
+  assert.equal(a('couple').fits, true);
+  assert.equal(a('couple').issue, '');
+  assert.equal(a('family').issue, 'Too small for family with kids');
+  assert.equal(a('multi').issue, 'Too small for 3 generations');
+  assert.equal(a('me').fits, true);
+  // a couple asking for a home-office corner: the study is the office, A still fits
+  assert.equal(F.evaluate({ household: 'couple', must: { office: true } }).find(x => x.id === 'A').fits, true);
 });
 
 test('just me, under RM 1,500 -> best A, alt B', () => {

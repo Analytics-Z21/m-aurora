@@ -3,6 +3,8 @@
  * Framework-free. The ONE source of unit data, instalment maths, budget brackets and matching for the
  * quiz, the Compare all 5 section and the sticky bar. Nothing else on the page carries these numbers.
  * From the design handoff's finder-logic.js; plan paths and the alternative badge rule adjusted here.
+ * 2 Nov 2026 (Justin): a couple counts Type A's +1 study as their second room, so a 1+1 fits a couple. The handoff
+ * flagged it "Too small for couple", which steered budget couples away from the only layout in their range.
  *
  *   var r = MAFinder.match({ household: 'family', bracket: 'b3', must: { bath3: true } });
  *   r.best.id -> 'D'   r.runner.id -> 'C'   r.bestTag -> 'best'
@@ -35,7 +37,7 @@
   // ---- Quiz options ----
   var HOUSEHOLD = [
     { key: 'me',     label: 'Just me',            minBeds: 1 },
-    { key: 'couple', label: 'Couple',             minBeds: 2 },
+    { key: 'couple', label: 'Couple',             minBeds: 2, studyCounts: true },  // the +1 study is their 2nd room
     { key: 'family', label: 'Family with kids',   minBeds: 3 },
     { key: 'multi',  label: '3 generations',      minBeds: 4 },
     { key: 'invest', label: 'Buying to rent out', minBeds: 1 }
@@ -56,6 +58,8 @@
   ];
 
   function find(list, key) { for (var i = 0; i < list.length; i++) if (list[i].key === key) return list[i]; return null; }
+  // rooms a household can use: bedrooms, plus the +1 study where that household counts it (couple only)
+  function rooms(u, hh) { return u.beds + (hh && hh.studyCounts && u.study ? 1 : 0); }
   function unit(id) { for (var i = 0; i < UNITS.length; i++) if (UNITS[i].id === id) return UNITS[i]; return null; }
 
   function evaluate(answers) {
@@ -67,7 +71,7 @@
     var max = br ? br.max : Infinity;
     return UNITS.map(function (u) {
       var m = monthly(u.price), issues = [];
-      if (u.beds < need) issues.push(answers.household === 'multi' ? 'Too small for 3 generations' : 'Too small for ' + (hh ? hh.label.toLowerCase() : 'you'));
+      if (rooms(u, hh) < need) issues.push(answers.household === 'multi' ? 'Too small for 3 generations' : 'Too small for ' + (hh ? hh.label.toLowerCase() : 'you'));
       else {
         if (must.bath3 && u.bath < 3) issues.push('No 3rd bathroom');
         if (must.office && !(u.study || u.beds > need)) issues.push('No spare room for a home office');
@@ -82,7 +86,7 @@
 
   function match(answers) {
     var units = evaluate(answers);
-    var need = (find(HOUSEHOLD, answers.household) || { minBeds: 1 }).minBeds;
+    var hh = find(HOUSEHOLD, answers.household), need = (hh || { minBeds: 1 }).minBeds;
     var bySqDesc = function (a, b) { return b.sqft - a.sqft; };
     var byMonthlyAsc = function (a, b) { return a.monthly - b.monthly; };
 
@@ -95,7 +99,7 @@
 
     var pool = units.filter(function (u) { return u.id !== best.id; });
     var runner = pool.filter(function (u) { return u.fits && u.within; }).sort(bySqDesc)[0]
-      || pool.filter(function (u) { return u.within && u.beds >= need; }).sort(bySqDesc)[0]
+      || pool.filter(function (u) { return u.within && rooms(u, hh) >= need; }).sort(bySqDesc)[0]
       || pool.filter(function (u) { return u.fits; }).sort(byMonthlyAsc)[0]
       || pool.filter(function (u) { return u.within; }).sort(bySqDesc)[0]
       || pool[0];
