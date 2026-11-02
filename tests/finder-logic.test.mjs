@@ -77,6 +77,20 @@ test('budget evaluation without a quiz: bracket only', () => {
   assert.equal(u[2].over, 67);
 });
 
+test('balcony counts: only C, D and E have one (2 Nov 2026)', () => {
+  // a couple on RM 1,500-2,200 who want a balcony: A and B have none, so the cheapest that fits is C, just above the range
+  const r = F.match({ household: 'couple', bracket: 'b2', must: { balcony: true } });
+  assert.equal(r.best.id, 'C');
+  assert.equal(r.bestTag, 'closest_above_budget');
+  assert.equal(r.units.find(u => u.id === 'B').issue, 'No balcony');
+  // a family on RM 2,200-2,500 with a balcony: D and C both have one, so the match is unchanged
+  const f = F.match({ household: 'family', bracket: 'b3', must: { balcony: true } });
+  assert.equal(f.best.id, 'D');
+  assert.equal(f.runner.id, 'C');
+  assert.equal(F.runnerBadge(f.runner), 'ALSO FITS YOU');
+  assert.equal(F.bestReason(f.best, { bracket: 'b3', must: { balcony: true, bath3: true } }), 'Most space within your RM 2,200–2,500 range, with the 3 bathrooms and a balcony you asked for.');
+});
+
 test('finder string and chips for the lead', () => {
   const a = { household: 'family', bracket: 'b3', must: { balcony: true, bath3: true } };
   assert.equal(F.finderString(a), 'Family with kids | RM 2,200–2,500 | Balcony, 3 bathrooms');

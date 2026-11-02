@@ -5,6 +5,7 @@
  * From the design handoff's finder-logic.js; plan paths and the alternative badge rule adjusted here.
  * 2 Nov 2026 (Justin): a couple counts Type A's +1 study as their second room, so a 1+1 fits a couple. The handoff
  * flagged it "Too small for couple", which steered budget couples away from the only layout in their range.
+ * 2 Nov 2026 (Justin): only Types C, D and E have a balcony (as the page's FAQ says), so 'Balcony' now counts in the match.
  *
  *   var r = MAFinder.match({ household: 'family', bracket: 'b3', must: { bath3: true } });
  *   r.best.id -> 'D'   r.runner.id -> 'C'   r.bestTag -> 'best'
@@ -16,11 +17,11 @@
 
   // ---- Unit data (m-aurora.com.my/floor-plans and the client price list of 2026-08-21) ----
   var UNITS = [
-    { id: 'A', bed: '1+1', beds: 1, bath: 1, sqft: 556,  price: 339000, study: true,  plan: '_plan-A.jpg' },
-    { id: 'B', bed: '2',   beds: 2, bath: 2, sqft: 737,  price: 516000, study: false, plan: '_plan-B.jpg' },
-    { id: 'C', bed: '3',   beds: 3, bath: 2, sqft: 858,  price: 601000, study: false, plan: '_plan-C.jpg' },
-    { id: 'D', bed: '3',   beds: 3, bath: 3, sqft: 916,  price: 616000, study: false, plan: '_plan-D.jpg' },
-    { id: 'E', bed: '4',   beds: 4, bath: 3, sqft: 1019, price: 682000, study: false, plan: '_plan-E.jpg' }
+    { id: 'A', bed: '1+1', beds: 1, bath: 1, sqft: 556,  price: 339000, study: true,  balcony: false, plan: '_plan-A.jpg' },
+    { id: 'B', bed: '2',   beds: 2, bath: 2, sqft: 737,  price: 516000, study: false, balcony: false, plan: '_plan-B.jpg' },
+    { id: 'C', bed: '3',   beds: 3, bath: 2, sqft: 858,  price: 601000, study: false, balcony: true,  plan: '_plan-C.jpg' },
+    { id: 'D', bed: '3',   beds: 3, bath: 3, sqft: 916,  price: 616000, study: false, balcony: true,  plan: '_plan-D.jpg' },
+    { id: 'E', bed: '4',   beds: 4, bath: 3, sqft: 1019, price: 682000, study: false, balcony: true,  plan: '_plan-E.jpg' }
   ];
 
   // ---- Loan assumptions: the same as the calculator this section replaced ----
@@ -49,9 +50,9 @@
     { key: 'b3', label: 'RM 2,200–2,500',  max: 2500 },
     { key: 'b4', label: 'Above RM 2,500',  max: Infinity }
   ];
-  // balcony + high are passed to sales only; they do not change the match.
+  // high floor is passed to sales only; it does not change the match.
   var MUST = [
-    { key: 'balcony', label: 'Balcony',            affectsMatch: false },
+    { key: 'balcony', label: 'Balcony',            affectsMatch: true },
     { key: 'bath3',   label: '3 bathrooms',        affectsMatch: true },
     { key: 'office',  label: 'Home-office corner', affectsMatch: true },
     { key: 'high',    label: 'High floor',         affectsMatch: false }
@@ -73,6 +74,7 @@
       var m = monthly(u.price), issues = [];
       if (rooms(u, hh) < need) issues.push(answers.household === 'multi' ? 'Too small for 3 generations' : 'Too small for ' + (hh ? hh.label.toLowerCase() : 'you'));
       else {
+        if (must.balcony && !u.balcony) issues.push('No balcony');
         if (must.bath3 && u.bath < 3) issues.push('No 3rd bathroom');
         if (must.office && !(u.study || u.beds > need)) issues.push('No spare room for a home office');
       }
@@ -129,7 +131,10 @@
   function bestReason(best, answers) {
     var br = find(BRACKETS, (answers || {}).bracket), must = (answers || {}).must || {};
     var s = best.within ? 'Most space within your ' + (br ? br.label : 'budget') + ' range' : 'Most affordable layout that fits your needs';
-    return s + (must.bath3 && best.bath >= 3 ? ', with the 3 bathrooms you asked for.' : '.');
+    var asked = [];
+    if (must.bath3 && best.bath >= 3) asked.push('the 3 bathrooms');
+    if (must.balcony && best.balcony) asked.push('a balcony');
+    return s + (asked.length ? ', with ' + asked.join(' and ') + ' you asked for.' : '.');
   }
   // answer chips for the finder bar, and the string that goes with the lead
   function answerLabels(answers) {

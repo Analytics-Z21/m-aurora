@@ -3098,7 +3098,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 
-<script src="_finder.js?v=2026-11-02b"></script>
+<script src="_finder.js?v=20261102c"></script>
 <script>
 (function(){
 'use strict';
@@ -3805,13 +3805,20 @@ function isEmail(v){return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test((v||'').trim()
    9-digit strings, and the formatter cut +60 input at 11 digits while the visitor was typing.
    Still no auto +60 and no auto 0 (standing rule 2026-08-02): the visitor's own prefix is kept while
    typing; on submit the number is normalised to 0xx-xxx xxxx so Salesforce gets one format. */
-var PHONE_MSG='Please enter a Malaysian mobile number (e.g. 012-345 6789).';
+var PHONE_MSG='Please enter a Malaysian or Singapore mobile number (e.g. 012-345 6789 or +65 9123 4567).';
 /* PREVIEW GUARD (2026-10-07): on a preview host the forms never post, so client reviewers can try the
    whole flow without creating a Salesforce lead, an n8n capture, a GA4 generate_lead or a Google Ads
    conversion (the client's GTM fires one on the live thank-you page). Inert on ver2.m-aurora.com.my. */
 var IS_PREVIEW=/\.pages\.dev$|^localhost$|^127\./.test(location.hostname);
 function myNsn(v){var d=String(v||'').replace(/\D/g,'');if(d.indexOf('60')===0)d=d.slice(2);if(d.charAt(0)==='0')d=d.slice(1);return d;}
 function isMyPhone(v){return /^1[02346789]\d{7}$|^1[15]\d{8}$/.test(myNsn(v));}
+/* 2 Nov 2026 (Justin): Singapore mobiles are accepted too: +65 or 65 then 8 digits starting 8 or 9, or the bare 8 digits
+   (a Malaysian number is typed with its 0 or 60, and its national number starts with 1, so these do not collide).
+   They keep their country code: on blur and on submit they read +65 9123 4567. */
+function sgNsn(v){var d=String(v||'').replace(/\D/g,'');if(d.length===10&&d.indexOf('65')===0)d=d.slice(2);return /^[89]\d{7}$/.test(d)?d:'';}
+function isSgPhone(v){return !!sgNsn(v);}
+function fmtSg(v){var n=sgNsn(v);return n?'+65 '+n.slice(0,4)+' '+n.slice(4):String(v||'');}
+function isPhoneOk(v){return isMyPhone(v)||isSgPhone(v);}
 function fmtNsn(n){
   if(n.length<=2)return n;
   var rest=n.slice(2),cut=n.length>=10?4:3;
@@ -3820,6 +3827,7 @@ function fmtNsn(n){
 function fmtPhone(input){
   var raw=input.value||'',d=raw.replace(/\D/g,'');
   if(!d)return;
+  if(isSgPhone(raw)){input.value=fmtSg(raw);return;}
   /* only Malaysian-mobile shapes are reformatted; anything else (+65, an 03 landline) is left exactly
      as typed, and the blur/submit message explains what is needed */
   if(/^\s*\+/.test(raw)&&!/^6(0|$)/.test(d))return;
@@ -3834,7 +3842,7 @@ Array.prototype.forEach.call(document.querySelectorAll('input[data-my-phone]'),f
   input.addEventListener('input',function(){input.setCustomValidity('');clearFieldErr(input);});
   input.addEventListener('blur',function(){
     fmtPhone(input);
-    if(input.value&&!isMyPhone(input.value))input.setCustomValidity(PHONE_MSG);
+    if(input.value&&!isPhoneOk(input.value))input.setCustomValidity(PHONE_MSG);
     else input.setCustomValidity('');
   });
 });
@@ -3862,7 +3870,7 @@ function fieldErrs(form){
   Array.prototype.forEach.call(form.querySelectorAll('[name="last_name"],[name="mobile"],[name="email"]'),function(input){
     clearFieldErr(input);
     var v=(input.value||'').trim(),r=null;
-    if(!v)r='empty';else if(input.name==='email'&&!isEmail(v))r='format';else if(input.name==='mobile'&&!isMyPhone(v))r='format';
+    if(!v)r='empty';else if(input.name==='email'&&!isEmail(v))r='format';else if(input.name==='mobile'&&!isPhoneOk(v))r='format';
     if(r)out.push({input:input,field:input.name,reason:r});
   });
   return out;
@@ -3898,11 +3906,11 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
       var msg=null;
       if(!name.trim()||!phone.trim()||!email.trim())msg='Please fill in your name, phone number and email.';
       else if(!isEmail(email))msg='Please enter a valid email address (e.g. name@example.com).';
-      else if(!isMyPhone(phone))msg=PHONE_MSG;
+      else if(!isPhoneOk(phone))msg=PHONE_MSG;
       if(msg){e.preventDefault();form.classList.add('has-error');if(err)err.textContent=msg;return;}
     }
     form.classList.remove('has-error');
-    var phEl=form.querySelector('[name="mobile"]');if(phEl)phEl.value='0'+fmtNsn(myNsn(phone));
+    var phEl=form.querySelector('[name="mobile"]');if(phEl)phEl.value=isSgPhone(phone)?fmtSg(phone):'0'+fmtNsn(myNsn(phone));
     if(IS_PREVIEW){e.preventDefault();form.classList.add('has-error');
       if(err)err.textContent='Preview link: the form is switched off here, so nothing was sent. On the live site this sends your details to Mah Sing’s sales team.';
       return;}
