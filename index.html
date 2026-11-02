@@ -742,7 +742,7 @@ html:not(.js) .faq-a,.faq-item.on .faq-a{grid-template-rows:1fr}
 .visit-l .copy{color:var(--ink2)}
 .visit-r{padding:28px 24px}
 @media(min-width:1024px){.visit-r{padding:40px 42px;align-self:center}}
-.visit-r .f-headline{font:500 clamp(24px,2.6vw,28px)/1.2 var(--fd);color:var(--deep);margin-bottom:14px}
+.visit-r .f-headline{font:700 clamp(24px,2.6vw,28px)/1.2 var(--fd);color:var(--deep);margin-bottom:14px}
 .visit-r .f-headline b{color:#0E7A8A}
 
 /* ===== CONTACT + FOOTER ===== */
@@ -1876,7 +1876,7 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 .o9-form{background:var(--ink-d);color:var(--cream);padding:22px 18px;display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 60px rgba(21,27,59,.25);border-radius:2px}
 @media(min-width:1024px){.o9-form{padding:36px;gap:18px}}
 .o9k{font:600 11px/1.4 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:#C9CEE6}
-#layouts .o9-form .o9-ft{font:500 26px/1.15 var(--fd);color:var(--cream);margin:0}  /* outranks #layouts h3{color:ink} */
+#layouts .o9-form .o9-ft{font:700 26px/1.15 var(--fd);color:var(--cream);margin:0}  /* outranks #layouts h3{color:ink} */
 @media(min-width:1024px){#layouts .o9-form .o9-ft{font-size:30px}}
 .o9-specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);padding:12px 0;text-align:center}
 .o9-specs>div+div{border-left:1px solid rgba(255,255,255,.18)}
@@ -2077,7 +2077,7 @@ form input.f-invalid{border-color:#b3261e!important;box-shadow:0 0 0 1px #b3261e
 .fq-alt .fq-cr img{width:56px;height:62px}
 .fq-alt .fq-ct{font-size:22px}
 .fq-form{background:var(--ink-d);color:var(--cream);padding:18px 20px calc(22px + var(--safe));display:flex;flex-direction:column;gap:10px;flex:1}
-.fq-fh{font:500 26px/1.15 var(--fd);color:var(--cream);margin:0}
+.fq-fh{font:700 26px/1.15 var(--fd);color:var(--cream);margin:0}
 .fq-fs{font:400 13px/1.5 var(--fb);color:#C9CEE6;margin:0}
 .fq-form form{display:flex;flex-direction:column;gap:10px}
 .fq-form .field{margin:0}
@@ -2192,7 +2192,8 @@ html.o9-lock .sticky,html.o9-lock .to-top,html.o9-lock .ct{display:none!importan
 .sticky-m b{font:700 15px/1.1 var(--fb)}
 /* drawer: plan tags when two units are asked for */
 .ld-pair{display:flex;gap:8px;margin:0 0 14px}
-.ld h2{font:500 clamp(26px,3.4vw,32px)/1.12 var(--fd);margin-bottom:8px}
+/* round 2 (2 Nov, Justin: drawer title not clear enough): form titles in Boska Bold, section h2s stay Medium */
+.ld h2{font:700 clamp(26px,3.4vw,32px)/1.12 var(--fd);margin-bottom:8px}
 .ld-sub{font:400 14px/1.55 var(--fb);margin-bottom:16px}
 .ld-pair span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #E3DCCD;padding:6px 10px 6px 6px;font:700 14px/1 var(--fb);color:var(--deep);border-radius:2px}
 .ld-pair img{width:36px;height:40px;object-fit:contain}
@@ -3960,6 +3961,13 @@ var asks=Array.prototype.filter.call(document.querySelectorAll('[data-open-lead]
   return !el.closest('#siteNav,#mm,#rail,#sticky,#ld,footer')&&(el.hasAttribute('data-open-lead')||/price|register/.test(el.getAttribute('data-cta-id')||''));});
 var askSeen=asks.map(function(a){var r=a.getBoundingClientRect();return r.height>0&&r.bottom>0&&r.top<window.innerHeight-72;}),
   formSecs=[regQuick,regFull,document.getElementById('contact'),document.getElementById('layoutPanel')].filter(Boolean);
+/* Option 9 round 2 (2 Nov 2026, Justin: the bar should not block the layouts): the bar and the to-top arrow step aside
+   while the plan + inline form block fills a quarter of the screen or more: the inline form under the plan (phones) or
+   beside it (desktop) is the ask there, and the arrow would otherwise sit on the plan and on that form's submit button.
+   Both return once the block has scrolled past. */
+var planBox=document.querySelector('#layouts .o9-grid');
+function planOnScreen(){if(!planBox)return false;var vh=window.innerHeight,r=planBox.getBoundingClientRect(),v=Math.min(r.bottom,vh)-Math.max(r.top,0);
+  return v>=.25*vh;}
 function shown(el){return typeof el.checkVisibility!=='function'||el.checkVisibility({opacityProperty:true,visibilityProperty:true,checkOpacity:true,checkVisibilityCSS:true});}
 function askOnScreen(){for(var i=0;i<asks.length;i++){if(askSeen[i]&&shown(asks[i]))return true;}return false;}
 function formOnScreen(){var vh=window.innerHeight;return formSecs.some(function(el){var r=el.getBoundingClientRect(),v=Math.min(r.bottom,vh)-Math.max(r.top,0);
@@ -3967,9 +3975,10 @@ function formOnScreen(){var vh=window.innerHeight;return formSecs.some(function(
 function stickyState(){var s=window.scrollY>420;
   var askOff=hasIO?!heroAskInView:s;
   formInView=formOnScreen();
-  sticky.classList.toggle('on',(hasIO?!askOnScreen():askOff)&&!formInView);
+  var planIn=planOnScreen();
+  sticky.classList.toggle('on',(hasIO?!askOnScreen():askOff)&&!formInView&&!planIn);
   if(navAsk)navAsk.classList.toggle('quiet',!askOff);
-  toTop.classList.toggle('on',s);}
+  toTop.classList.toggle('on',s&&!planIn);}
 window.addEventListener('scroll',stickyState,{passive:true});
 if(hasIO&&heroAsk){new IntersectionObserver(function(es){heroAskInView=es[0].isIntersecting;stickyState();},{threshold:.6}).observe(heroAsk);}
 if(hasIO&&asks.length){var aio=new IntersectionObserver(function(es){es.forEach(function(e){askSeen[asks.indexOf(e.target)]=e.isIntersecting;});stickyState();},
@@ -3977,7 +3986,7 @@ if(hasIO&&asks.length){var aio=new IntersectionObserver(function(es){es.forEach(
   asks.forEach(function(a){aio.observe(a);});}
 /* the form sections' observer only re-checks the bar when layout moves without a scroll (fonts, show more) */
 if(hasIO){var fio=new IntersectionObserver(function(){stickyState();},{threshold:[0,.18,.5,1]});
-  formSecs.forEach(function(el){fio.observe(el);});}
+  formSecs.forEach(function(el){fio.observe(el);});if(planBox)fio.observe(planBox);}
 stickyState();
 toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
