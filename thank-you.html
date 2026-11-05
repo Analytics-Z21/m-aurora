@@ -180,9 +180,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var arm=armValue();
   /* send_to: see track() in index.html (2026-10-08). Without it the client's combined Ads tag swallows this event. */
   var params={ lead_type:'form_submission', page_location:location.href, experiment_arm:arm, send_to:'G-YDYWK8B8S5' };
+  /* 5 Nov 2026: the source the landing page stored on submit (index.html, 'z21_lead'). Read once and cleared, so a
+     refresh of this page still counts lead_confirmed but never re-credits a source; older than 30 min is ignored. */
+  var lead=null;
+  try{ lead=JSON.parse(sessionStorage.getItem('z21_lead')||'null'); sessionStorage.removeItem('z21_lead'); }catch(e){ lead=null; }
+  if(lead&&lead.t&&Date.now()-lead.t>1800000) lead=null;
+  var dl={ event:'lead_confirmed', lead_type:'form_submission', experiment_arm:arm };
+  if(lead){
+    ['lead_source','form_name','unit_interest','submission_id'].forEach(function(k){
+      if(lead[k]){ params[k]=lead[k]; dl[k]=lead[k]; } });
+  } else { params.lead_source='unknown'; dl.lead_source='unknown'; }
   try{
     window.dataLayer=window.dataLayer||[];
-    window.dataLayer.push({ event:'lead_confirmed', lead_type:'form_submission', experiment_arm:arm });
+    window.dataLayer.push(dl);
   }catch(e){}
 
   function fire(){

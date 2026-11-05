@@ -3930,6 +3930,10 @@ Array.prototype.forEach.call(document.querySelectorAll('.js-form'),function(form
       unit_interest:unitInterest,
       experiment_arm:armValue(),
       submission_id:sid});
+    /* 5 Nov 2026: hand the lead's source to thank-you.html (same tab, same origin after the Salesforce retURL), so
+       lead_confirmed, the navigation-proof count, carries lead_source / form_name / unit_interest too. */
+    try{sessionStorage.setItem('z21_lead',JSON.stringify({lead_source:leadSrc,form_name:'M Aurora ver2 - '+fid,
+      unit_interest:unitInterest,submission_id:sid||'',t:Date.now()}));}catch(eS){}
     var btn=form.querySelector('button[type="submit"]');
     if(btn){btn.disabled=true;btn.textContent='Sending...';}
     return true;
